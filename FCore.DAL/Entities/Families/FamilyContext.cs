@@ -1,9 +1,13 @@
-namespace FCore.DAL
+using FCore.DAL.Entities.Albums;
+using FCore.DAL.Entities.ChatGroups;
+using FCore.DAL.Entities.Contacts;
+using FCore.DAL.Entities.Members;
+using FCore.DAL.Entities.Videos;
+using System.Data.Entity;
+
+namespace FCore.DAL.Entities.Families
 {
-    using Entities;
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
+    
 
     public class FamilyContext : DbContext
     {
@@ -20,5 +24,7 @@ namespace FCore.DAL
         public virtual DbSet<VideoEntity> Videos { get; set; }
         public virtual DbSet<ChatGroupEntity> ChatGroups { get; set; }
         public virtual DbSet<MessageEntity> Messages { get; set; }
+        public virtual DbSet<MemberPermissions<FamilyMemberEntity>> Permissions { get; set; }
+        public virtual DbSet<MemberRelationships<FamilyMemberEntity, FamilyMemberEntity>> Relationships { get; set; }
     }
 }

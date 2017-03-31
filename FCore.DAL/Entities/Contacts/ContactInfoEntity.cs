@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.DAL.Entities
+namespace FCore.DAL.Entities.Contacts
 {
     [Table("ContactInfoes", Schema = "dbf"), ComplexType]
     public class ContactInfoEntity

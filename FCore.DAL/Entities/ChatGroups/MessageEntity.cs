@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.DAL.Entities
+namespace FCore.DAL.Entities.ChatGroups
 {
     [Table("Messages", Schema = "dbf"), ComplexType]
     public class MessageEntity

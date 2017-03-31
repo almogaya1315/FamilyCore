@@ -1,4 +1,8 @@
-﻿using System;
+﻿using FCore.DAL.Entities.Albums;
+using FCore.DAL.Entities.ChatGroups;
+using FCore.DAL.Entities.Contacts;
+using FCore.DAL.Entities.Videos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.DAL.Entities
+namespace FCore.DAL.Entities.Families
 {
     [Table("Families", Schema = "dbf"), ComplexType]
     public class FamilyEntity
@@ -17,6 +21,7 @@ namespace FCore.DAL.Entities
             ContactBooks = new List<ContactBookEntity>();
             Albums = new List<AlbumEntity>();
             VideoLibraries = new List<VideoLibraryEntity>();
+            ChatGroups = new List<ChatGroupEntity>();
         }
 
         [Key]
@@ -34,5 +39,7 @@ namespace FCore.DAL.Entities
         public virtual ICollection<AlbumEntity> Albums { get; set; }
 
         public virtual ICollection<VideoLibraryEntity> VideoLibraries { get; set; }
+
+        public virtual ICollection<ChatGroupEntity> ChatGroups { get; set; }
     }
 }

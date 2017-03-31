@@ -51,17 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\AlbumEntity.cs" />
-    <Compile Include="Entities\ChatGroupEntity.cs" />
-    <Compile Include="Entities\ContactBookEntity.cs" />
-    <Compile Include="Entities\ContactInfoEntity.cs" />
-    <Compile Include="Entities\FamilyEntity.cs" />
-    <Compile Include="Entities\FamilyMemberEntity.cs" />
-    <Compile Include="Entities\ImageEntity.cs" />
-    <Compile Include="Entities\MessageEntity.cs" />
-    <Compile Include="Entities\VideoEntity.cs" />
-    <Compile Include="Entities\VideoLibraryEntity.cs" />
-    <Compile Include="FamilyContext.cs" />
+    <Compile Include="Entities\Albums\AlbumEntity.cs" />
+    <Compile Include="Entities\ChatGroups\ChatGroupEntity.cs" />
+    <Compile Include="Entities\Contacts\ContactBookEntity.cs" />
+    <Compile Include="Entities\Contacts\ContactInfoEntity.cs" />
+    <Compile Include="Entities\Families\FamilyEntity.cs" />
+    <Compile Include="Entities\Members\FamilyMemberEntity.cs" />
+    <Compile Include="Entities\Albums\ImageEntity.cs" />
+    <Compile Include="Entities\Members\MemberPermissions.cs" />
+    <Compile Include="Entities\Members\MemberRelationships.cs" />
+    <Compile Include="Entities\ChatGroups\MessageEntity.cs" />
+    <Compile Include="Entities\Videos\VideoEntity.cs" />
+    <Compile Include="Entities\Videos\VideoLibraryEntity.cs" />
+    <Compile Include="Entities\Families\FamilyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +76,7 @@
       <Name>FCore.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

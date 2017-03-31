@@ -1,4 +1,6 @@
-﻿using FCore.Common.Enums;
+﻿using FCore.DAL.Entities.Contacts;
+using FCore.DAL.Entities.Families;
+using FCore.DAL.Entities.Members;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +16,8 @@ namespace FCore.DAL.Entities
     {
         public FamilyMemberEntity()
         {
-            Relatives = new Dictionary<FamilyMemberEntity, RelationshipType>();
+            Permissions = new MemberPermissions<FamilyMemberEntity>(this);
+            Relationships = new MemberRelationships<FamilyMemberEntity, FamilyMemberEntity>();
         }
 
         [Key]
@@ -58,6 +61,8 @@ namespace FCore.DAL.Entities
         [Required(AllowEmptyStrings = true), StringLength(400)]
         public string ProfileImagePath { get; set; }
 
-        public virtual Dictionary<FamilyMemberEntity, RelationshipType> Relatives { get; set; }
+        public MemberRelationships<FamilyMemberEntity, FamilyMemberEntity> Relationships { get; set; }
+
+        public MemberPermissions<FamilyMemberEntity> Permissions { get; set; }
     }
 }
