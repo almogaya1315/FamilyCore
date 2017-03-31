@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities
 {
-    [Table("ContactInfoes", Schema = "dbf")]
+    [Table("ContactInfoes", Schema = "dbf"), ComplexType]
     public class ContactInfoEntity
     {
         [Key]

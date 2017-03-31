@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities
 {
-    [Table("Families", Schema = "dbf")]
+    [Table("Families", Schema = "dbf"), ComplexType]
     public class FamilyEntity
     {
         public FamilyEntity()
         {
             FamilyMembers = new List<FamilyMemberEntity>();
+            ContactBooks = new List<ContactBookEntity>();
+            Albums = new List<AlbumEntity>();
+            VideoLibraries = new List<VideoLibraryEntity>();
         }
 
         [Key]

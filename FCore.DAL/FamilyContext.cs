@@ -1,5 +1,6 @@
 namespace FCore.DAL
 {
+    using Entities;
     using System;
     using System.Data.Entity;
     using System.Linq;
@@ -9,6 +10,13 @@ namespace FCore.DAL
         public FamilyContext()
             : base("name=FamilyContext") { }
 
-        public virtual DbSet<MyEntity> MyEntities { get; set; }
+        public virtual DbSet<FamilyEntity> Families { get; set; }
+        public virtual DbSet<FamilyMemberEntity> FamilyMembers { get; set; }
+        public virtual DbSet<ContactBookEntity> ContactBooks { get; set; }
+        public virtual DbSet<ContactInfoEntity> ContactInfoes { get; set; }
+        public virtual DbSet<AlbumEntity> Albums { get; set; }
+        public virtual DbSet<ImageEntity> Images { get; set; }
+        public virtual DbSet<VideoLibraryEntity> VideoLibraries { get; set; }
+        public virtual DbSet<VideoEntity> Videos { get; set; }
     }
 }
