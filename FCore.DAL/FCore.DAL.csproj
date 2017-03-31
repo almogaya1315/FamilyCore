@@ -64,9 +64,9 @@
     <Compile Include="Entities\Videos\VideoEntity.cs" />
     <Compile Include="Entities\Videos\VideoLibraryEntity.cs" />
     <Compile Include="Entities\Families\FamilyContext.cs" />
-    <Compile Include="Migrations\201703312059546_initial.cs" />
-    <Compile Include="Migrations\201703312059546_initial.Designer.cs">
-      <DependentUpon>201703312059546_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201703312145104_initial.cs" />
+    <Compile Include="Migrations\201703312145104_initial.Designer.cs">
+      <DependentUpon>201703312145104_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,8 +82,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703312059546_initial.resx">
-      <DependentUpon>201703312059546_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703312145104_initial.resx">
+      <DependentUpon>201703312145104_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

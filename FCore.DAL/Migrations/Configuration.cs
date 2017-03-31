@@ -50,7 +50,7 @@
             //context.ContactInfoes.Add(info);
             //context.SaveChanges();
 
-            //FamilyMemberEntity member = new FamilyMemberEntity()
+            //FamilyMemberEntity member1 = new FamilyMemberEntity()
             //{
             //    BirthDate = new DateTime(1985, 5, 23),
             //    BirthPlace = "Beilinson hospital, Petah-Tikva",
@@ -61,7 +61,7 @@
             //    Permissions = new MemberPermissions(),
             //    ProfileImagePath = string.Empty
             //};
-            //context.FamilyMembers.Add(member);
+            //context.FamilyMembers.Add(member1);
             //context.SaveChanges();
 
             //AlbumEntity album = new AlbumEntity()
@@ -76,7 +76,7 @@
             //{
             //    Album = context.Albums.FirstOrDefault(),
             //    Description = "Test",
-            //    Path = string.Empty, 
+            //    Path = string.Empty,
             //};
             //context.Images.Add(img);
             //context.SaveChanges();

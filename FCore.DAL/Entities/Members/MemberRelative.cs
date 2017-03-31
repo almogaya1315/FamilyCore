@@ -12,11 +12,14 @@ namespace FCore.DAL.Entities.Members
     [Table("Relatives", Schema = "dbf")]
     public class MemberRelative
     {
-        public MemberRelative(FamilyMemberEntity member, FamilyMemberEntity relative, RelationshipType relType)
+        public MemberRelative() { }
+
+        public MemberRelative(FamilyMemberEntity member, FamilyMemberEntity relative, RelationshipType relType) 
+            : this()
         {
             Member = member;
             Relative = relative;
-            RelationshipType = relType;
+            Relationship = relType.ToString();
         }
 
         [Key]
@@ -32,10 +35,7 @@ namespace FCore.DAL.Entities.Members
         [ForeignKey("RelativeId")]
         public FamilyMemberEntity Relative { get; set; }
 
-        [NotMapped]
-        public RelationshipType RelationshipType { get; set; }
-
         [Required]
-        public string Relationship { get { return RelationshipType.ToString(); } }
+        public string Relationship { get; set; }
     }
 }
