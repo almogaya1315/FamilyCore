@@ -18,5 +18,7 @@ namespace FCore.DAL
         public virtual DbSet<ImageEntity> Images { get; set; }
         public virtual DbSet<VideoLibraryEntity> VideoLibraries { get; set; }
         public virtual DbSet<VideoEntity> Videos { get; set; }
+        public virtual DbSet<ChatGroupEntity> ChatGroups { get; set; }
+        public virtual DbSet<MessageEntity> Messages { get; set; }
     }
 }

@@ -52,11 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AlbumEntity.cs" />
+    <Compile Include="Entities\ChatGroupEntity.cs" />
     <Compile Include="Entities\ContactBookEntity.cs" />
     <Compile Include="Entities\ContactInfoEntity.cs" />
     <Compile Include="Entities\FamilyEntity.cs" />
     <Compile Include="Entities\FamilyMemberEntity.cs" />
     <Compile Include="Entities\ImageEntity.cs" />
+    <Compile Include="Entities\MessageEntity.cs" />
     <Compile Include="Entities\VideoEntity.cs" />
     <Compile Include="Entities\VideoLibraryEntity.cs" />
     <Compile Include="FamilyContext.cs" />
