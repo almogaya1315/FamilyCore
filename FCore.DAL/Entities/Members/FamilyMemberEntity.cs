@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities
 {
-    [Table("FamilyMembers", Schema = "dbf"), ComplexType]
+    [Table("FamilyMembers", Schema = "dbf")]
     public class FamilyMemberEntity
     {
         public FamilyMemberEntity()
         {
-            Permissions = new MemberPermissions<FamilyMemberEntity>(this);
-            Relationships = new MemberRelationships<FamilyMemberEntity, FamilyMemberEntity>();
+            Permissions = new MemberPermissions();
+            Relatives = new List<MemberRelative>();
         }
 
         [Key]
@@ -27,6 +27,11 @@ namespace FCore.DAL.Entities
         public int FamilyId { get; set; }
         [ForeignKey("FamilyId")]
         public FamilyEntity Family { get; set; }
+
+        [Required]
+        public int PermissionId { get; set; }
+        [ForeignKey("PermissionId")]
+        public MemberPermissions Permissions { get; set; }
 
         [Required]
         public int ContactInfoId { get; set; }
@@ -61,8 +66,6 @@ namespace FCore.DAL.Entities
         [Required(AllowEmptyStrings = true), StringLength(400)]
         public string ProfileImagePath { get; set; }
 
-        public MemberRelationships<FamilyMemberEntity, FamilyMemberEntity> Relationships { get; set; }
-
-        public MemberPermissions<FamilyMemberEntity> Permissions { get; set; }
+        public virtual ICollection<MemberRelative> Relatives { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.ChatGroups
 {
-    [Table("Messages", Schema = "dbf"), ComplexType]
+    [Table("Messages", Schema = "dbf")]
     public class MessageEntity
     {
         [Key]

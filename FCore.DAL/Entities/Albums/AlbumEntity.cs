@@ -9,9 +9,14 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Albums
 {
-    [Table("Albums", Schema = "dbf"), ComplexType]
+    [Table("Albums", Schema = "dbf")]
     public class AlbumEntity
     {
+        public AlbumEntity()
+        {
+            Images = new List<ImageEntity>();
+        }
+
         [Key]
         public int Id { get; set; }
 

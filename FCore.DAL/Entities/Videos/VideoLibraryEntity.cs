@@ -9,9 +9,14 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Videos
 {
-    [Table("VideoLibraries", Schema = "dbf"), ComplexType]
+    [Table("VideoLibraries", Schema = "dbf")]
     public class VideoLibraryEntity
     {
+        public VideoLibraryEntity()
+        {
+            Videos = new List<VideoEntity>();
+        }
+
         [Key]
         public int Id { get; set; }
 

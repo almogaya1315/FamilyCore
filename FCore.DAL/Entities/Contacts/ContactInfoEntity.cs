@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Contacts
 {
-    [Table("ContactInfoes", Schema = "dbf"), ComplexType]
+    [Table("ContactInfoes", Schema = "dbf")]
     public class ContactInfoEntity
     {
         [Key]
@@ -20,12 +20,6 @@ namespace FCore.DAL.Entities.Contacts
 
         [Required, StringLength(30)]
         public string MemberName { get; set; }
-
-        [Required]
-        public int MemberId { get; set; }
-
-        [ForeignKey("MemberId")]
-        public FamilyMemberEntity FamilyMember { get; set; }
 
         [StringLength(40), Required(AllowEmptyStrings = true)]
         public string Country { get; set; }

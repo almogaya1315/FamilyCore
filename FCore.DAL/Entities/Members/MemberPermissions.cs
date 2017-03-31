@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Members
 {
-    [Table("Permissions", Schema = "dbf"), ComplexType]
-    public class MemberPermissions<Member>
+    [Table("Permissions", Schema = "dbf")]
+    public class MemberPermissions
     {
-        public MemberPermissions(Member member)
+        public MemberPermissions()
         {
-            CurrentMember = member;
             Create = false;
             Edit = false;
             ManageChat = false;
@@ -21,11 +20,6 @@ namespace FCore.DAL.Entities.Members
 
         [Key]
         public int Id { get; set; }
-
-        [Required]
-        public int MemberId { get; set; }
-        [ForeignKey("MemberId")]
-        public Member CurrentMember { get; set; }
 
         public bool Create { get; set; }
 

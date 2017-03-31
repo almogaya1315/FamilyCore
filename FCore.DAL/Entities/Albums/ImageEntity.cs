@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Albums
 {
-    [Table("images", Schema = "dbf"), ComplexType]
+    [Table("images", Schema = "dbf")]
     public class ImageEntity
     {
         [Key]
@@ -22,7 +22,7 @@ namespace FCore.DAL.Entities.Albums
         [StringLength(50), Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
 
-        [StringLength(100), Required]
+        [StringLength(100), Required(AllowEmptyStrings = true)]
         public string Path { get; set; }
     }
 }

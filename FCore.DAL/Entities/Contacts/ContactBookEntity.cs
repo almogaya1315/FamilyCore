@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Contacts
 {
-    [Table("ContactBooks", Schema = "dbf"), ComplexType]
+    [Table("ContactBooks", Schema = "dbf")]
     public class ContactBookEntity
     {
         public ContactBookEntity()

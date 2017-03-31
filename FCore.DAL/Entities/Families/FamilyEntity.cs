@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Families
 {
-    [Table("Families", Schema = "dbf"), ComplexType]
+    [Table("Families", Schema = "dbf")]
     public class FamilyEntity
     {
         public FamilyEntity()

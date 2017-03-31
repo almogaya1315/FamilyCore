@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Entities.Videos
 {
-    [Table("Videos",Schema = "dbf"), ComplexType]
+    [Table("Videos",Schema = "dbf")]
     public class VideoEntity
     {
         [Key]

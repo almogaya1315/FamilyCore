@@ -59,11 +59,16 @@
     <Compile Include="Entities\Members\FamilyMemberEntity.cs" />
     <Compile Include="Entities\Albums\ImageEntity.cs" />
     <Compile Include="Entities\Members\MemberPermissions.cs" />
-    <Compile Include="Entities\Members\MemberRelationships.cs" />
+    <Compile Include="Entities\Members\MemberRelative.cs" />
     <Compile Include="Entities\ChatGroups\MessageEntity.cs" />
     <Compile Include="Entities\Videos\VideoEntity.cs" />
     <Compile Include="Entities\Videos\VideoLibraryEntity.cs" />
     <Compile Include="Entities\Families\FamilyContext.cs" />
+    <Compile Include="Migrations\201703312059546_initial.cs" />
+    <Compile Include="Migrations\201703312059546_initial.Designer.cs">
+      <DependentUpon>201703312059546_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +81,11 @@
       <Name>FCore.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703312059546_initial.resx">
+      <DependentUpon>201703312059546_initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
