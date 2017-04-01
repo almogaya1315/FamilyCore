@@ -20,6 +20,9 @@ namespace FCore.DAL.Entities.Albums
         [Key]
         public int Id { get; set; }
 
+        [StringLength(30)]
+        public string Name { get; set; }
+
         [Required]
         public int FamilyId { get; set; }
         [ForeignKey("FamilyId")]

@@ -22,7 +22,7 @@ namespace FCore.DAL.Entities.Videos
         [StringLength(50), Required(AllowEmptyStrings = true)]
         public string Description { get; set; }
 
-        [StringLength(100), Required]
+        [StringLength(100), Required(AllowEmptyStrings = true)]
         public string Path { get; set; }
     }
 }

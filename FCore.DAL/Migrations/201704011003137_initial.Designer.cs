@@ -13,7 +13,7 @@ namespace FCore.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704010655427_initial"; }
+            get { return "201704011003137_initial"; }
         }
         
         string IMigrationMetadata.Source

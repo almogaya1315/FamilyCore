@@ -12,6 +12,7 @@ namespace FCore.DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(maxLength: 30),
                         FamilyId = c.Int(nullable: false),
                         FamilyName = c.String(nullable: false, maxLength: 40),
                     })
@@ -34,15 +35,14 @@ namespace FCore.DAL.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 20),
-                        MemberCount = c.Int(nullable: false),
+                        FamilyId = c.Int(nullable: false),
                         ManagerId = c.Int(nullable: false),
-                        FamilyEntity_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbf.Families", t => t.FamilyId)
                 .ForeignKey("dbf.FamilyMembers", t => t.ManagerId)
-                .ForeignKey("dbf.Families", t => t.FamilyEntity_Id)
-                .Index(t => t.ManagerId)
-                .Index(t => t.FamilyEntity_Id);
+                .Index(t => t.FamilyId)
+                .Index(t => t.ManagerId);
             
             CreateTable(
                 "dbf.FamilyMembers",
@@ -143,6 +143,7 @@ namespace FCore.DAL.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 30),
                         FamilyId = c.Int(nullable: false),
                         FamilyName = c.String(nullable: false, maxLength: 40),
                     })
@@ -183,7 +184,6 @@ namespace FCore.DAL.Migrations
             DropForeignKey("dbf.images", "AlbumId", "dbf.Albums");
             DropForeignKey("dbf.Videos", "Libraryid", "dbf.VideoLibraries");
             DropForeignKey("dbf.VideoLibraries", "FamilyId", "dbf.Families");
-            DropForeignKey("dbf.ChatGroups", "FamilyEntity_Id", "dbf.Families");
             DropForeignKey("dbf.Messages", "SenderId", "dbf.FamilyMembers");
             DropForeignKey("dbf.Messages", "RecieverId", "dbf.FamilyMembers");
             DropForeignKey("dbf.Messages", "GroupId", "dbf.ChatGroups");
@@ -194,6 +194,7 @@ namespace FCore.DAL.Migrations
             DropForeignKey("dbf.FamilyMembers", "ContactInfoId", "dbf.ContactInfoes");
             DropForeignKey("dbf.ContactBooks", "FamilyId", "dbf.Families");
             DropForeignKey("dbf.ContactInfoes", "ContactBookId", "dbf.ContactBooks");
+            DropForeignKey("dbf.ChatGroups", "FamilyId", "dbf.Families");
             DropForeignKey("dbf.Albums", "FamilyId", "dbf.Families");
             DropIndex("dbf.images", new[] { "AlbumId" });
             DropIndex("dbf.Videos", new[] { "Libraryid" });
@@ -207,8 +208,8 @@ namespace FCore.DAL.Migrations
             DropIndex("dbf.FamilyMembers", new[] { "ContactInfoId" });
             DropIndex("dbf.FamilyMembers", new[] { "PermissionId" });
             DropIndex("dbf.FamilyMembers", new[] { "FamilyId" });
-            DropIndex("dbf.ChatGroups", new[] { "FamilyEntity_Id" });
             DropIndex("dbf.ChatGroups", new[] { "ManagerId" });
+            DropIndex("dbf.ChatGroups", new[] { "FamilyId" });
             DropIndex("dbf.Albums", new[] { "FamilyId" });
             DropTable("dbf.images");
             DropTable("dbf.Videos");

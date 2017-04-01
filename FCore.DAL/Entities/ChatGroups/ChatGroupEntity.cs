@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FCore.DAL.Entities.Families;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,7 +23,12 @@ namespace FCore.DAL.Entities.ChatGroups
         [Required, StringLength(20)]
         public string Name { get; set; }
 
-        public int MemberCount { get; set; }
+        public int MemberCount { get { return Messages.Count; } }
+
+        [Required]
+        public int FamilyId { get; set; }
+        [ForeignKey("FamilyId")]
+        public FamilyEntity Family { get; set; }
 
         [Required]
         public int ManagerId { get; set; }
