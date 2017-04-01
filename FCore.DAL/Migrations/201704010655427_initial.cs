@@ -106,21 +106,19 @@ namespace FCore.DAL.Migrations
                         ManageChat = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbf.Relatives",
                 c => new
-                {
-                    Id = c.Int(nullable: false, identity: true),
-                    MemberId = c.Int(nullable: false),
-                    RelativeId = c.Int(nullable: false),
-                    Relationship = c.String(nullable: false)
-                })
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        MemberId = c.Int(nullable: false),
+                        RelativeId = c.Int(nullable: false),
+                        Relationship = c.String(nullable: false, maxLength: 20),
+                    })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbf.FamilyMembers", t => t.MemberId)
-                .ForeignKey("dbf.FamilyMembers", t => t.RelativeId)
-                .Index(t => t.MemberId)
-                .Index(t => t.RelativeId);
+                .Index(t => t.MemberId);
             
             CreateTable(
                 "dbf.Messages",
@@ -190,8 +188,6 @@ namespace FCore.DAL.Migrations
             DropForeignKey("dbf.Messages", "RecieverId", "dbf.FamilyMembers");
             DropForeignKey("dbf.Messages", "GroupId", "dbf.ChatGroups");
             DropForeignKey("dbf.ChatGroups", "ManagerId", "dbf.FamilyMembers");
-            DropForeignKey("dbf.Relatives", "FamilyMemberEntity_Id", "dbf.FamilyMembers");
-            DropForeignKey("dbf.Relatives", "RelativeId", "dbf.FamilyMembers");
             DropForeignKey("dbf.Relatives", "MemberId", "dbf.FamilyMembers");
             DropForeignKey("dbf.FamilyMembers", "PermissionId", "dbf.Permissions");
             DropForeignKey("dbf.FamilyMembers", "FamilyId", "dbf.Families");
@@ -205,8 +201,6 @@ namespace FCore.DAL.Migrations
             DropIndex("dbf.Messages", new[] { "RecieverId" });
             DropIndex("dbf.Messages", new[] { "SenderId" });
             DropIndex("dbf.Messages", new[] { "GroupId" });
-            DropIndex("dbf.Relatives", new[] { "FamilyMemberEntity_Id" });
-            DropIndex("dbf.Relatives", new[] { "RelativeId" });
             DropIndex("dbf.Relatives", new[] { "MemberId" });
             DropIndex("dbf.ContactBooks", new[] { "FamilyId" });
             DropIndex("dbf.ContactInfoes", new[] { "ContactBookId" });

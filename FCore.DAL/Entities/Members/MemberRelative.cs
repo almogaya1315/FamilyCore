@@ -19,6 +19,7 @@ namespace FCore.DAL.Entities.Members
         {
             Member = member;
             Relative = relative;
+            RelativeId = relative.Id;
             Relationship = relType.ToString();
         }
 
@@ -28,14 +29,14 @@ namespace FCore.DAL.Entities.Members
         [Required]
         public int MemberId { get; set; }
         [ForeignKey("MemberId")]
-        public FamilyMemberEntity Member { get; private set; }
+        public FamilyMemberEntity Member { get; set; }
 
-        [Required]
         public int RelativeId { get; set; }
-        [ForeignKey("RelativeId")]
+
+        [NotMapped]
         public FamilyMemberEntity Relative { get; set; }
 
-        [Required]
+        [Required, StringLength(20)]
         public string Relationship { get; set; }
     }
 }

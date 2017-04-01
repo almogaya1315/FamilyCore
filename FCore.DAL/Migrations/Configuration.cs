@@ -86,7 +86,7 @@
             //    City = "Petah-Tikva",
             //    ContactBook = context.ContactBooks.FirstOrDefault(),
             //    Country = "Israel",
-            //    Email = "KreshQueen@gmail.com",
+            //    Email = "kreshqueen@gmail.com",
             //    HouseNo = 16,
             //    MemberName = "Keren Matsliah",
             //    PhoneNo = "0526758751",
@@ -98,7 +98,7 @@
             //FamilyMemberEntity member2 = new FamilyMemberEntity()
             //{
             //    BirthDate = new DateTime(1984, 2, 5),
-            //    BirthPlace = "Afula",
+            //    BirthPlace = "Ha-Emek hospital, Afula",
             //    ContactInfo = context.ContactInfoes.FirstOrDefault(c => c.MemberName.Contains("Keren")),
             //    Family = context.Families.FirstOrDefault(),
             //    FirstName = "Keren",
@@ -109,28 +109,31 @@
             //context.FamilyMembers.Add(member2);
             //context.SaveChanges();
 
-            var member = context.FamilyMembers.FirstOrDefault(m => m.FirstName == "Lior");
-            var relative = context.FamilyMembers.FirstOrDefault(m => m.FirstName == "keren");
-            member.Relatives.Add(new MemberRelative(member, relative, RelationshipType.אישה));
+            //var member = context.FamilyMembers.FirstOrDefault(m => m.FirstName == "Lior");
+            //var relative = context.FamilyMembers.FirstOrDefault(m => m.FirstName == "keren");
+            //member.Relatives.Add(new MemberRelative(member, relative, RelationshipType.אישה));
+            //context.SaveChanges();
+
+            //relative.Relatives.Add(new MemberRelative(relative, member, RelationshipType.בעל));
+            //context.SaveChanges();
+
+            ChatGroupEntity group = new ChatGroupEntity()
+            {
+                Manager = context.FamilyMembers.FirstOrDefault(),
+                Name = "Test"
+            };
+            context.ChatGroups.Add(group);
             context.SaveChanges();
 
-            //ChatGroupEntity group = new ChatGroupEntity()
-            //{
-            //    Manager = context.FamilyMembers.FirstOrDefault(),
-            //    Name = "Test"
-            //};
-            //context.ChatGroups.Add(group);
-            //context.SaveChanges();
-
-            //MessageEntity msg = new MessageEntity()
-            //{
-            //    Content = "Test Message",
-            //    Group = context.ChatGroups.FirstOrDefault(),
-            //    Sender = context.FamilyMembers.FirstOrDefault(),
-            //    Reciever = context.FamilyMembers.FirstOrDefault(m => m.FirstName == "Keren")
-            //};
-            //context.Messages.Add(msg);
-            //context.SaveChanges();
+            MessageEntity msg = new MessageEntity()
+            {
+                Content = "Test Message",
+                Group = context.ChatGroups.FirstOrDefault(),
+                Sender = context.FamilyMembers.FirstOrDefault(),
+                Reciever = context.FamilyMembers.FirstOrDefault(m => m.FirstName == "Keren")
+            };
+            context.Messages.Add(msg);
+            context.SaveChanges();
         }
     }
 }
