@@ -16,6 +16,12 @@ namespace FCore.UI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Default", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "MainPage",
+                url: "{controller}/{action}/{id}",
                 defaults: new { controller = "FamilyCore", action = "Main", id = UrlParameter.Optional }
             );
         }
