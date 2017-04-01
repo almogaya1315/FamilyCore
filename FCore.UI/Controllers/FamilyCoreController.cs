@@ -15,7 +15,7 @@ namespace FCore.UI.Controllers
         {
             if (repo == null) repo = new FCoreRepository();
 
-            return View(repo.);
+            return View();
         }
     }
 }

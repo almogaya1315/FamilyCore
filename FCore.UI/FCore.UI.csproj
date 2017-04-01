@@ -137,6 +137,10 @@
       <Project>{158CD7EF-238F-4A8E-9216-F3940778C5F2}</Project>
       <Name>FCore.BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FCore.Common\FCore.Common.csproj">
+      <Project>{c5f887d0-8107-44a9-97e0-3a3a0613aa54}</Project>
+      <Name>FCore.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
