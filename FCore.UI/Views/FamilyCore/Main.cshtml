@@ -6,3 +6,28 @@
 
 <h2>Main</h2>
 
+<div>
+    <div>
+        <table>
+            @foreach (var family in Model)
+            {
+                <tr>
+                    <td>@family.Id</td>
+                    <td>@family.Name</td>
+                </tr>
+
+                <text>-------------------</text>
+
+                @foreach (var member in family.FamilyMembers)
+                {
+                    <tr>
+                        <td>@member.FirstName</td>
+                        <td>@member.LastName</td>
+                        <td>@member.Id</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+

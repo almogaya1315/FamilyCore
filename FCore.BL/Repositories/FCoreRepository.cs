@@ -12,16 +12,21 @@ using FCore.Common.Models.Albums;
 using FCore.Common.Models.Videos;
 using FCore.Common.Models.ChatGroups;
 using FCore.DAL.Entities;
+using FCore.DAL.Entities.Contacts;
+using FCore.DAL.Entities.Members;
+using FCore.Common.Enums;
 
 namespace FCore.BL.Repositories
 {
     public class FCoreRepository : ICoreRepository, 
                                    IRepositoryConverter<FamilyModel, FamilyEntity>,
-                                   IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>
+                                   IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
+                                   IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
+                                   IRepositoryConverter<PermissionsModel, MemberPermissions>,
+                                   IRepositoryConverter<RelativeModel, MemberRelative>,
+                                   IRepositoryConverter<ContactBookModel, ContactBookEntity>
     {
         protected FamilyContext CoreDB { get; private set; }
-
-        
 
         public ICollection<FamilyModel> GetFamilies()
         {
@@ -35,19 +40,14 @@ namespace FCore.BL.Repositories
 
         public FamilyModel GetFamily(string name)
         {
-            throw new NotImplementedException();
+            return ConvertToModel(CoreDB.GetFamily(name));
         }
-
         public FamilyModel GetFamily(int id)
         {
-            throw new NotImplementedException();
+            return ConvertToModel(CoreDB.GetFamily(id));
         }
 
         #region converter methods
-        public FamilyEntity ConvertToEntity(FamilyModel model)
-        {
-            throw new NotImplementedException();
-        }
         public FamilyModel ConvertToModel(FamilyEntity entity)
         {
             return new FamilyModel()
@@ -55,11 +55,15 @@ namespace FCore.BL.Repositories
                 Id = entity.Id,
                 Name = entity.Name,
                 FamilyMembers = entity.FamilyMembers.Select(e => ConvertToModel(e)).ToList(),
-                ContactBooks = new List<ContactBookModel>(),
+                ContactBooks = entity.ContactBooks.Select(e => ConvertToModel(e)).ToList(),
                 Albums = new List<AlbumModel>(),
                 VideoLibraries = new List<VideoLibraryModel>(),
                 ChatGroups = new List<ChatGroupModel>()
             };
+        }
+        public FamilyEntity ConvertToEntity(FamilyModel model)
+        {
+            throw new NotImplementedException();
         }
 
         public FamilyMemberModel ConvertToModel(FamilyMemberEntity entity)
@@ -70,7 +74,7 @@ namespace FCore.BL.Repositories
                 BirthPlace = entity.BirthPlace,
                 ContactInfo = ConvertToModel(entity.ContactInfo),
                 ContactInfoId = entity.ContactInfoId,
-                Family = ConvertToModel(entity.Family), // possible infinite loop 
+                Family = ConvertToModel(entity.Family), 
                 FamilyId = entity.FamilyId,
                 FirstName = entity.FirstName,
                 Id = entity.Id,
@@ -78,10 +82,73 @@ namespace FCore.BL.Repositories
                 PermissionId = entity.PermissionId,
                 Permissions = ConvertToModel(entity.Permissions),
                 ProfileImagePath = entity.ProfileImagePath,
-                Relatives = entity.Relatives.Select(e => ConvertToModel(e))
+                Relatives = entity.Relatives.Select(e => ConvertToModel(e)).ToList()
             };
         }
         public FamilyMemberEntity ConvertToEntity(FamilyMemberModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContactInfoModel ConvertToModel(ContactInfoEntity entity)
+        {
+            return new ContactInfoModel()
+            {
+                City = entity.City,
+                ContactBook = ConvertToModel(entity.ContactBook),
+                ContactBookId = entity.ContactBookId,
+                Country = entity.Country,
+                Email = entity.Email,
+                HouseNo = entity.HouseNo,
+                Id = entity.Id,
+                MemberName = entity.MemberName,
+                PhoneNo = entity.PhoneNo,
+                Street = entity.Street
+            };
+        }
+        public ContactInfoEntity ConvertToEntity(ContactInfoModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PermissionsModel ConvertToModel(MemberPermissions entity)
+        {
+            return new PermissionsModel()
+            {
+                Create = entity.Create,
+                Edit = entity.Edit,
+                Id = entity.Id,
+                ManageChat = entity.ManageChat
+            };
+        }
+        public MemberPermissions ConvertToEntity(PermissionsModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RelativeModel ConvertToModel(MemberRelative entity)
+        {
+            return new RelativeModel(ConvertToModel(entity.Member), 
+                                     ConvertToModel(entity.Relative),
+                                     (RelationshipType)Enum.Parse(typeof(RelationshipType), entity.Relationship));
+        }
+        public MemberRelative ConvertToEntity(RelativeModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContactBookModel ConvertToModel(ContactBookEntity entity)
+        {
+            return new ContactBookModel()
+            {
+                ContactInfoes = entity.ContactInfoes.Select(e => ConvertToModel(e)).ToList(),
+                Family = ConvertToModel(entity.Family),
+                FamilyId = entity.FamilyId,
+                FamilyName = entity.FamilyName,
+                Id = entity.Id
+            };
+        }
+        public ContactBookEntity ConvertToEntity(ContactBookModel model)
         {
             throw new NotImplementedException();
         }

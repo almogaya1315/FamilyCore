@@ -52,5 +52,22 @@ namespace FCore.DAL.Entities.Families
                 families.Add(family);
             return families;
         }
+
+        public FamilyEntity GetFamily(string name)
+        {
+            foreach (FamilyEntity family in Families)
+            {
+                if (family.Name == name) return family;
+            }
+            return null;
+        }
+        public FamilyEntity GetFamily(int id)
+        {
+            foreach (FamilyEntity family in Families)
+            {
+                if (family.Id == id) return family;
+            }
+            return null;
+        }
     }
 }
