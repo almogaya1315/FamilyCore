@@ -28,6 +28,11 @@ namespace FCore.BL.Repositories
     {
         protected FamilyContext CoreDB { get; private set; }
 
+        public FCoreRepository()
+        {
+            CoreDB = new FamilyContext();
+        }
+
         public ICollection<FamilyModel> GetFamilies()
         {
             ICollection<FamilyModel> families = new List<FamilyModel>();
