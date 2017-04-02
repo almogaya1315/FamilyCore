@@ -1,4 +1,5 @@
-﻿using FCore.Common.Models.Families;
+﻿using FCore.Common.Models.Contacts;
+using FCore.Common.Models.Families;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,16 +25,19 @@ namespace FCore.Common.Models.Members
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int FamilyId { get; set; }
 
+        [DisplayName("משפחה")]
         public FamilyModel Family { get; set; }
 
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int PermissionId { get; set; }
 
+        [DisplayName("הרשאות")]
         public PermissionsModel Permissions { get; set; }
 
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int ContactInfoId { get; set; }
 
+        [DisplayName("פרטי התקשרות")]
         public ContactInfoModel ContactInfo { get; set; }
 
         [Required(ErrorMessage = "Required"), StringLength(30), DisplayName("שם פרטי")]
@@ -48,10 +52,10 @@ namespace FCore.Common.Models.Members
         [Required(AllowEmptyStrings = true), StringLength(100), DisplayName("מקום לידה")]
         public string BirthPlace { get; set; }
 
-        [Range(0, int.MaxValue)]
+        [Range(0, int.MaxValue), DisplayName("גיל")]
         public int? Age { get { return DateTime.Now.Year - BirthDate.Value.Year; } }
 
-        [DisplayName("Is Adult?")]
+        [DisplayName("?האם בגיר")]
         public bool? IsAdult
         {
             get
@@ -65,6 +69,7 @@ namespace FCore.Common.Models.Members
         [Required(AllowEmptyStrings = true), DisplayName("תמונת פרופיל"), StringLength(400)]
         public string ProfileImagePath { get; set; }
 
+        [DisplayName("קרובי משפחה")]
         public virtual ICollection<RelativeModel> Relatives { get; set; }
     }
 }

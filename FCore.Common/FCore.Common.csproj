@@ -44,14 +44,16 @@
   <ItemGroup>
     <Compile Include="Enums\RelationshipType.cs" />
     <Compile Include="Interfaces\ICoreRepository.cs" />
+    <Compile Include="Models\Contacts\ContactInfoModel.cs" />
     <Compile Include="Models\Families\FamilyModel.cs" />
     <Compile Include="Models\Members\FamilyMemberModel.cs" />
+    <Compile Include="Models\Members\PermissionsModel.cs" />
+    <Compile Include="Models\Members\RelativeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Albums\" />
     <Folder Include="Models\ChatGroups\" />
-    <Folder Include="Models\Contacts\" />
     <Folder Include="Models\Videos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
