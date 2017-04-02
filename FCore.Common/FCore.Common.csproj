@@ -44,18 +44,21 @@
   <ItemGroup>
     <Compile Include="Enums\RelationshipType.cs" />
     <Compile Include="Interfaces\ICoreRepository.cs" />
+    <Compile Include="Models\Albums\AlbumModel.cs" />
+    <Compile Include="Models\Albums\ImageModel.cs" />
+    <Compile Include="Models\ChatGroups\ChatGroupModel.cs" />
+    <Compile Include="Models\ChatGroups\MessageModel.cs" />
+    <Compile Include="Models\Contacts\ContactBookModel.cs" />
     <Compile Include="Models\Contacts\ContactInfoModel.cs" />
     <Compile Include="Models\Families\FamilyModel.cs" />
     <Compile Include="Models\Members\FamilyMemberModel.cs" />
     <Compile Include="Models\Members\PermissionsModel.cs" />
     <Compile Include="Models\Members\RelativeModel.cs" />
+    <Compile Include="Models\Videos\VideoLibraryModel.cs" />
+    <Compile Include="Models\Videos\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Albums\" />
-    <Folder Include="Models\ChatGroups\" />
-    <Folder Include="Models\Videos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

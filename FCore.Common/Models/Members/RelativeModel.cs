@@ -33,7 +33,7 @@ namespace FCore.Common.Models.Members
 
         public FamilyMemberModel Relative { get; set; }
 
-        [Required(ErrorMessage = "Required"), DisplayName("קרבה משפחתית")]
+        [Required(ErrorMessage = "שדה חובה"), DisplayName("קרבה משפחתית")]
         public string Relationship { get; set; }
     }
 }

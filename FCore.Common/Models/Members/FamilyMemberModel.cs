@@ -40,10 +40,10 @@ namespace FCore.Common.Models.Members
         [DisplayName("פרטי התקשרות")]
         public ContactInfoModel ContactInfo { get; set; }
 
-        [Required(ErrorMessage = "Required"), StringLength(30), DisplayName("שם פרטי")]
+        [Required(ErrorMessage = "שדה חובה"), StringLength(30), DisplayName("שם פרטי")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Required"), StringLength(40), DisplayName("שם משפחה")]
+        [Required(ErrorMessage = "שדה חובה"), StringLength(40), DisplayName("שם משפחה")]
         public string LastName { get; set; }
 
         [DataType(DataType.Date), DisplayName("תאריך לידה")]

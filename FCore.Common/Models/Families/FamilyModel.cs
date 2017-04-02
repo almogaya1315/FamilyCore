@@ -1,4 +1,8 @@
-﻿using FCore.Common.Models.Members;
+﻿using FCore.Common.Models.Albums;
+using FCore.Common.Models.ChatGroups;
+using FCore.Common.Models.Contacts;
+using FCore.Common.Models.Members;
+using FCore.Common.Models.Videos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +18,11 @@ namespace FCore.Common.Models.Families
     {
         public FamilyModel()
         {
-            //FamilyMembers = new List<FamilyMemberModel>();
-            //ContactBooks = new List<ContactBookModel>();
-            //Albums = new List<AlbumModel>();
-            //VideoLibraries = new List<VideoLibraryModel>();
-            //ChatGroups = new List<ChatGroupModel>();
+            FamilyMembers = new List<FamilyMemberModel>();
+            ContactBooks = new List<ContactBookModel>();
+            Albums = new List<AlbumModel>();
+            VideoLibraries = new List<VideoLibraryModel>();
+            ChatGroups = new List<ChatGroupModel>();
         }
 
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
@@ -33,16 +37,16 @@ namespace FCore.Common.Models.Families
         [DisplayName("סך חברי משפחה"), Range(0, int.MaxValue)]
         public int? MembersCount { get { return FamilyMembers.Count; } }
 
-        //[DisplayName("ספרי התקשרות")]
-        //public ICollection<ContactBookModel> ContactBooks { get; set; }
+        [DisplayName("ספרי התקשרות")]
+        public ICollection<ContactBookModel> ContactBooks { get; set; }
 
-        //[DisplayName("אלבומי תמונות")]
-        //public ICollection<AlbumModel> Albums { get; set; }
+        [DisplayName("אלבומי תמונות")]
+        public ICollection<AlbumModel> Albums { get; set; }
 
-        //[DisplayName("ספריות וידאו")]
-        //public ICollection<VideoLibraryModel> VideoLibraries { get; set; }
+        [DisplayName("ספריות וידאו")]
+        public ICollection<VideoLibraryModel> VideoLibraries { get; set; }
 
-        //[DisplayName("קבוצות צ'ט")]
-        //public ICollection<ChatGroupModel> ChatGroups { get; set; }
+        [DisplayName("קבוצות צ'ט")]
+        public ICollection<ChatGroupModel> ChatGroups { get; set; }
     }
 }
