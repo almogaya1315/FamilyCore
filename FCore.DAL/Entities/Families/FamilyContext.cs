@@ -3,6 +3,7 @@ using FCore.DAL.Entities.ChatGroups;
 using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Members;
 using FCore.DAL.Entities.Videos;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -43,5 +44,13 @@ namespace FCore.DAL.Entities.Families
         public virtual DbSet<MessageEntity> Messages { get; set; }
         public virtual DbSet<MemberPermissions> Permissions { get; set; }
         public virtual DbSet<MemberRelative> Relationships { get; set; }
+
+        public ICollection<FamilyEntity> GetFamilies()
+        {
+            ICollection<FamilyEntity> families = new List<FamilyEntity>();
+            foreach (FamilyEntity family in Families)
+                families.Add(family);
+            return families;
+        }
     }
 }
