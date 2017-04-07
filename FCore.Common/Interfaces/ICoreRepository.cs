@@ -1,4 +1,5 @@
-﻿using FCore.Common.Models.Families;
+﻿using FCore.Common.Models.Contacts;
+using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,7 @@ namespace FCore.Common.Interfaces
 
         FamilyModel GetFamily(int id);
         FamilyModel GetFamily(string name);
+
+        ContactInfoModel GetContactInfo(int id);
     }
 }

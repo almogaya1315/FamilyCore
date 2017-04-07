@@ -52,6 +52,10 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetFamily(id));
         }
 
+        public ContactInfoModel GetContactInfo(int id)
+        {
+            return ConvertToModel(CoreDB.GetContactInfo(id));
+        }
         #region converter methods
         public FamilyModel ConvertToModel(FamilyEntity entity)
         {
@@ -77,7 +81,7 @@ namespace FCore.BL.Repositories
             {
                 BirthDate = entity.BirthDate,
                 BirthPlace = entity.BirthPlace,
-                ContactInfo = ConvertToModel(entity.ContactInfo),
+                ContactInfo = ConvertToModel(CoreDB.GetContactInfo(entity.ContactInfoId)),
                 ContactInfoId = entity.ContactInfoId,
                 Family = ConvertToModel(entity.Family), 
                 FamilyId = entity.FamilyId,

@@ -69,5 +69,14 @@ namespace FCore.DAL.Entities.Families
             }
             return null;
         }
+
+        public ContactInfoEntity GetContactInfo(int id)
+        {
+            foreach (ContactInfoEntity contact in ContactInfoes)
+            {
+                if (contact.Id == id) return contact;
+            }
+            return null;
+        }
     }
 }
