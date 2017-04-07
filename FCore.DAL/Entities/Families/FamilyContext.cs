@@ -6,6 +6,10 @@ using FCore.DAL.Entities.Videos;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using System;
+using System.Collections;
+using System.Linq.Expressions;
 
 namespace FCore.DAL.Entities.Families
 {
@@ -77,6 +81,11 @@ namespace FCore.DAL.Entities.Families
                 if (contact.Id == id) return contact;
             }
             return null;
+        }
+
+        public ContactBookEntity GetContactBook(int id)
+        {
+            return ContactBooks.FirstOrDefault(b => b.Id == id);
         }
     }
 }

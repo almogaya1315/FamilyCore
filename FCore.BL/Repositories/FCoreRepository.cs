@@ -27,12 +27,13 @@ namespace FCore.BL.Repositories
                                    IRepositoryConverter<ContactBookModel, ContactBookEntity>
     {
         protected FamilyContext CoreDB { get; private set; }
-
+        
         public FCoreRepository()
         {
             CoreDB = new FamilyContext();
         }
 
+        #region IRepository
         public ICollection<FamilyModel> GetFamilies()
         {
             ICollection<FamilyModel> families = new List<FamilyModel>();
@@ -56,7 +57,9 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetContactInfo(id));
         }
-        #region converter methods
+        #endregion
+
+        #region IConverter
         public FamilyModel ConvertToModel(FamilyEntity entity)
         {
             return new FamilyModel()
@@ -83,7 +86,7 @@ namespace FCore.BL.Repositories
                 BirthPlace = entity.BirthPlace,
                 ContactInfo = ConvertToModel(CoreDB.GetContactInfo(entity.ContactInfoId)),
                 ContactInfoId = entity.ContactInfoId,
-                Family = ConvertToModel(entity.Family), 
+                //Family = ConvertToModel(entity.Family), 
                 FamilyId = entity.FamilyId,
                 FirstName = entity.FirstName,
                 Id = entity.Id,
@@ -104,7 +107,7 @@ namespace FCore.BL.Repositories
             return new ContactInfoModel()
             {
                 City = entity.City,
-                ContactBook = ConvertToModel(entity.ContactBook),
+                //ContactBook = ConvertToModel(CoreDB.GetContactBook(entity.ContactBookId)),
                 ContactBookId = entity.ContactBookId,
                 Country = entity.Country,
                 Email = entity.Email,
@@ -137,8 +140,7 @@ namespace FCore.BL.Repositories
 
         public RelativeModel ConvertToModel(MemberRelative entity)
         {
-            return new RelativeModel(ConvertToModel(entity.Member), 
-                                     ConvertToModel(entity.Relative),
+            return new RelativeModel(entity.MemberId, entity.RelativeId,
                                      (RelationshipType)Enum.Parse(typeof(RelationshipType), entity.Relationship));
         }
         public MemberRelative ConvertToEntity(RelativeModel model)
@@ -151,7 +153,7 @@ namespace FCore.BL.Repositories
             return new ContactBookModel()
             {
                 ContactInfoes = entity.ContactInfoes.Select(e => ConvertToModel(e)).ToList(),
-                Family = ConvertToModel(entity.Family),
+                //Family = ConvertToModel(entity.Family),
                 FamilyId = entity.FamilyId,
                 FamilyName = entity.FamilyName,
                 Id = entity.Id

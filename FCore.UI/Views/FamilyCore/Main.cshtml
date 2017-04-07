@@ -9,25 +9,32 @@
 <div>
     <div>
         <table>
-            @foreach (var family in Model)
-            {
-                <tr>
-                    <td>@family.Id</td>
-                    <td>@family.Name</td>
-                </tr>
-
-                <text>-------------------</text>
-
-                @foreach (var member in family.FamilyMembers)
+            @{
+                foreach (var family in Model)
                 {
                     <tr>
-                        <td>@member.FirstName</td>
-                        <td>@member.LastName</td>
-                        <td>@member.Id</td>
+                        <td>
+                            @Html.Label("Id: ")
+                            @family.Id,
+                        </td>
+                        <td>
+                            @Html.LabelFor(Model.FirstOrDefault())
+                            @family.Name
+                        </td>
                     </tr>
+
+                    <text>-------------------</text>
+
+                    foreach (var member in family.FamilyMembers)
+                    {
+                        <tr>
+                            <td>@member.FirstName</td>
+                            <td>@member.LastName</td>
+                            <td>@member.Id</td>
+                        </tr>
+                    }
                 }
             }
         </table>
     </div>
 </div>
-

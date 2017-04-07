@@ -28,6 +28,7 @@ namespace FCore.Common.Models.Families
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int Id { get; set; }
 
+        [DisplayName("משפחה")]
         [Required(ErrorMessage = "שדה חובה"), StringLength(40)]
         public string Name { get; set; }
 

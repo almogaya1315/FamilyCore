@@ -12,11 +12,10 @@ namespace FCore.Common.Models.Members
 {
     public class RelativeModel
     {
-        public RelativeModel(FamilyMemberModel member, FamilyMemberModel relative, RelationshipType relType) 
+        public RelativeModel(int memberId, int relativeId, RelationshipType relType) 
         {
-            Member = member;
-            Relative = relative;
-            RelativeId = relative.Id;
+            MemberId = memberId;
+            RelativeId = relativeId;
             Relationship = relType.ToString();
         }
 

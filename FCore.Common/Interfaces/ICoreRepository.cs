@@ -15,7 +15,5 @@ namespace FCore.Common.Interfaces
 
         FamilyModel GetFamily(int id);
         FamilyModel GetFamily(string name);
-
-        ContactInfoModel GetContactInfo(int id);
     }
 }
