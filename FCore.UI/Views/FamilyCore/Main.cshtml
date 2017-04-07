@@ -1,10 +1,8 @@
 ﻿@model ICollection<FCore.Common.Models.Families.FamilyModel>
 
 @{
-    ViewBag.Title = "Main";
+    Layout = null;
 }
-
-<h2>Main</h2>
 
 <div>
     <div>
@@ -18,7 +16,7 @@
                             @family.Id,
                         </td>
                         <td>
-                            @Html.LabelFor(Model.FirstOrDefault())
+                            @Html.LabelForModel(Model.FirstOrDefault(f => f.Name == family.Name)): 
                             @family.Name
                         </td>
                     </tr>
@@ -38,3 +36,4 @@
         </table>
     </div>
 </div>
+
