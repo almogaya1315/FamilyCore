@@ -12,23 +12,29 @@
                 {
                     <tr>
                         <td>
-                            @Html.Label("Id: ")
-                            @family.Id,
-                        </td>
-                        <td>
-                            @Html.LabelForModel(Model.FirstOrDefault(f => f.Name == family.Name)): 
+                            @Html.DisplayNameFor(f => family.Name):
                             @family.Name
                         </td>
                     </tr>
 
-                    <text>-------------------</text>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(m => family.FamilyMembers.FirstOrDefault().FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(m => family.FamilyMembers.FirstOrDefault().LastName)
+                        </td>
+                    </tr>
 
                     foreach (var member in family.FamilyMembers)
                     {
                         <tr>
-                            <td>@member.FirstName</td>
-                            <td>@member.LastName</td>
-                            <td>@member.Id</td>
+                            <td>
+                                @member.FirstName
+                            </td>
+                            <td>
+                                @member.LastName
+                            </td>
                         </tr>
                     }
                 }
