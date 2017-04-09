@@ -15,6 +15,10 @@ namespace FCore.UI.Controllers
         {
             if (repo == null) repo = new FCoreRepository();
 
+            //ViewBag.LastJoinName = repo.GetLastMemberJoined();
+            //ViewBag.VideoDesc = repo.GetMostViewedVideo();
+            //ViewBag.LastImgDesc = repo.GetLastImage();
+
             return View(repo.GetFamilies());
         }
     }
