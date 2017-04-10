@@ -15,7 +15,7 @@ namespace FCore.UI.Controllers
         {
             if (repo == null) repo = new FCoreRepository();
 
-            //ViewBag.LastJoinName = repo.GetLastMemberJoined();
+            ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
             //ViewBag.VideoDesc = repo.GetMostViewedVideo();
             //ViewBag.LastImgDesc = repo.GetLastImage();
 

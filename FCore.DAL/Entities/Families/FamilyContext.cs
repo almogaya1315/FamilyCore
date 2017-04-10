@@ -74,6 +74,27 @@ namespace FCore.DAL.Entities.Families
             return null;
         }
 
+        public FamilyMemberEntity GetFamilyMember(int id)
+        {
+            foreach (FamilyMemberEntity member in FamilyMembers)
+            {
+                if (member.Id == id) return member;
+            }
+            return null;
+        }
+        public FamilyMemberEntity GetLastMemberJoined()
+        {
+            int highestId = int.MinValue;
+            foreach (FamilyMemberEntity member in FamilyMembers)
+            {
+                if (member.Id > highestId) highestId = member.Id;
+            }
+            return GetFamilyMember(highestId);
+
+            //return FamilyMembers.Last();
+        }
+
+
         public ContactInfoEntity GetContactInfo(int id)
         {
             foreach (ContactInfoEntity contact in ContactInfoes)
@@ -86,6 +107,12 @@ namespace FCore.DAL.Entities.Families
         public ContactBookEntity GetContactBook(int id)
         {
             return ContactBooks.FirstOrDefault(b => b.Id == id);
+
+            //foreach (ContactBookEntity book in ContactBooks)
+            //{
+            //    if (book.Id == id) return book;
+            //}
+            //return null;
         }
     }
 }

@@ -53,9 +53,13 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetFamily(id));
         }
 
-        public ContactInfoModel GetContactInfo(int id)
+        public FamilyMemberModel GetFamilyMember(int id)
         {
-            return ConvertToModel(CoreDB.GetContactInfo(id));
+            return ConvertToModel(CoreDB.get)
+        }
+        public FamilyMemberModel GetLastMemberJoined()
+        {
+            return ConvertToModel(CoreDB.GetLastMemberJoined());
         }
         #endregion
 

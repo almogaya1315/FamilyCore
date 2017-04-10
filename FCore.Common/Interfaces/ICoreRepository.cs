@@ -15,5 +15,8 @@ namespace FCore.Common.Interfaces
 
         FamilyModel GetFamily(int id);
         FamilyModel GetFamily(string name);
+
+        FamilyMemberModel GetFamilyMember(int id);
+        FamilyMemberModel GetLastMemberJoined();
     }
 }
