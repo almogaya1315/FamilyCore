@@ -64,9 +64,9 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetLastMemberJoined());
         }
 
-        public ImageModel GetLastImage()
+        public ImageModel GetLastImageUploaded()
         {
-            return ConvertToModel(CoreDB.GetLastImage());
+            return ConvertToModel(CoreDB.GetLastImageUploaded());
         }
         #endregion
 

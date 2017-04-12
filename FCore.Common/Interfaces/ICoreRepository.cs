@@ -20,6 +20,6 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetFamilyMember(int id);
         FamilyMemberModel GetLastMemberJoined();
 
-        ImageModel GetLastImage();
+        ImageModel GetLastImageUploaded();
     }
 }

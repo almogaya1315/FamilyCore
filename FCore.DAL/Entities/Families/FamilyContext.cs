@@ -64,6 +64,8 @@ namespace FCore.DAL.Entities.Families
                 if (family.Name == name) return family;
             }
             return null;
+
+            //return Families.FirstOrDefault(f => f.Name == name);
         }
         public FamilyEntity GetFamily(int id)
         {
@@ -72,6 +74,8 @@ namespace FCore.DAL.Entities.Families
                 if (family.Id == id) return family;
             }
             return null;
+
+            //return Families.FirstOrDefault(f => f.Id == id);
         }
 
         public FamilyMemberEntity GetFamilyMember(int id)
@@ -81,6 +85,8 @@ namespace FCore.DAL.Entities.Families
                 if (member.Id == id) return member;
             }
             return null;
+
+            //return FamilyMembers.FirstOrDefault(m => m.Id == id);
         }
         public FamilyMemberEntity GetLastMemberJoined()
         {
@@ -93,19 +99,27 @@ namespace FCore.DAL.Entities.Families
 
             //return FamilyMembers.Last();
         }
-        public ImageEntity GetLastImage()
-        {
-
-        }
-        int GetHighestId()
+        public ImageEntity GetLastImageUploaded()
         {
             int highestId = int.MinValue;
-            foreach (FamilyMemberEntity member in FamilyMembers)
+            foreach (ImageEntity image in Images)
             {
-                if (member.Id > highestId) highestId = member.Id;
+                if (image.Id > highestId) highestId = image.Id;
             }
-        }
+            return GetImage(highestId);
 
+            //return Images.Last();
+        }
+        public ImageEntity GetImage(int id)
+        {
+            foreach (ImageEntity image in Images)
+            {
+                if (image.Id == id) return image;
+            }
+            return null;
+
+            //return Images.FirstOrDefault(i => i.Id == id);
+        }
 
         public ContactInfoEntity GetContactInfo(int id)
         {
@@ -114,17 +128,19 @@ namespace FCore.DAL.Entities.Families
                 if (contact.Id == id) return contact;
             }
             return null;
+
+            //return ContactInfoes.FirstOrDefault(i => i.Id == id);
         }
 
         public ContactBookEntity GetContactBook(int id)
         {
-            return ContactBooks.FirstOrDefault(b => b.Id == id);
+            foreach (ContactBookEntity book in ContactBooks)
+            {
+                if (book.Id == id) return book;
+            }
+            return null;
 
-            //foreach (ContactBookEntity book in ContactBooks)
-            //{
-            //    if (book.Id == id) return book;
-            //}
-            //return null;
+            //return ContactBooks.FirstOrDefault(b => b.Id == id);
         }
     }
 }
