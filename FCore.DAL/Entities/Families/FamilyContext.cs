@@ -93,6 +93,18 @@ namespace FCore.DAL.Entities.Families
 
             //return FamilyMembers.Last();
         }
+        public ImageEntity GetLastImage()
+        {
+
+        }
+        int GetHighestId()
+        {
+            int highestId = int.MinValue;
+            foreach (FamilyMemberEntity member in FamilyMembers)
+            {
+                if (member.Id > highestId) highestId = member.Id;
+            }
+        }
 
 
         public ContactInfoEntity GetContactInfo(int id)

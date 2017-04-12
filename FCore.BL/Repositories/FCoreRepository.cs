@@ -15,6 +15,7 @@ using FCore.DAL.Entities;
 using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Members;
 using FCore.Common.Enums;
+using FCore.DAL.Entities.Albums;
 
 namespace FCore.BL.Repositories
 {
@@ -24,7 +25,8 @@ namespace FCore.BL.Repositories
                                    IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
                                    IRepositoryConverter<PermissionsModel, MemberPermissions>,
                                    IRepositoryConverter<RelativeModel, MemberRelative>,
-                                   IRepositoryConverter<ContactBookModel, ContactBookEntity>
+                                   IRepositoryConverter<ContactBookModel, ContactBookEntity>,
+                                   IRepositoryConverter<ImageModel, ImageEntity>
     {
         protected FamilyContext CoreDB { get; private set; }
         
@@ -55,11 +57,16 @@ namespace FCore.BL.Repositories
 
         public FamilyMemberModel GetFamilyMember(int id)
         {
-            return ConvertToModel(CoreDB.get)
+            return ConvertToModel(CoreDB.GetFamilyMember(id));
         }
         public FamilyMemberModel GetLastMemberJoined()
         {
             return ConvertToModel(CoreDB.GetLastMemberJoined());
+        }
+
+        public ImageModel GetLastImage()
+        {
+            return ConvertToModel(CoreDB.GetLastImage());
         }
         #endregion
 
@@ -164,6 +171,21 @@ namespace FCore.BL.Repositories
             };
         }
         public ContactBookEntity ConvertToEntity(ContactBookModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ImageModel ConvertToModel(ImageEntity entity)
+        {
+            return new ImageModel()
+            {
+                AlbumId = entity.AlbumId,
+                Description = entity.Description,
+                Id = entity.Id,
+                Path = entity.Path
+            };
+        }
+        public ImageEntity ConvertToEntity(ImageModel model)
         {
             throw new NotImplementedException();
         }

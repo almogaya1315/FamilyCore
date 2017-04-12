@@ -1,4 +1,5 @@
-﻿using FCore.Common.Models.Contacts;
+﻿using FCore.Common.Models.Albums;
+using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
 using System;
@@ -18,5 +19,7 @@ namespace FCore.Common.Interfaces
 
         FamilyMemberModel GetFamilyMember(int id);
         FamilyMemberModel GetLastMemberJoined();
+
+        ImageModel GetLastImage();
     }
 }
