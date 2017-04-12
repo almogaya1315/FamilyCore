@@ -16,6 +16,7 @@ using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Members;
 using FCore.Common.Enums;
 using FCore.DAL.Entities.Albums;
+using FCore.DAL.Entities.Videos;
 
 namespace FCore.BL.Repositories
 {
@@ -26,7 +27,8 @@ namespace FCore.BL.Repositories
                                    IRepositoryConverter<PermissionsModel, MemberPermissions>,
                                    IRepositoryConverter<RelativeModel, MemberRelative>,
                                    IRepositoryConverter<ContactBookModel, ContactBookEntity>,
-                                   IRepositoryConverter<ImageModel, ImageEntity>
+                                   IRepositoryConverter<ImageModel, ImageEntity>,
+                                   IRepositoryConverter<VideoModel, VideoEntity>
     {
         protected FamilyContext CoreDB { get; private set; }
         
@@ -67,6 +69,10 @@ namespace FCore.BL.Repositories
         public ImageModel GetLastImageUploaded()
         {
             return ConvertToModel(CoreDB.GetLastImageUploaded());
+        }
+        public VideoModel GetMostViewedVideo()
+        {
+            return ConvertToModel(CoreDB.GetMostViewedVideo());
         }
         #endregion
 
@@ -186,6 +192,21 @@ namespace FCore.BL.Repositories
             };
         }
         public ImageEntity ConvertToEntity(ImageModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public VideoModel ConvertToModel(VideoEntity entity)
+        {
+            return new VideoModel()
+            {
+                Description = entity.Description,
+                Id = entity.Id,
+                Libraryid = entity.Libraryid,
+                Path = entity.Path
+            };
+        }
+        public VideoEntity ConvertToEntity(VideoModel model)
         {
             throw new NotImplementedException();
         }

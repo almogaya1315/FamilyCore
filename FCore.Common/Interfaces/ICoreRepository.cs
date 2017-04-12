@@ -2,6 +2,7 @@
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
+using FCore.Common.Models.Videos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,6 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetLastMemberJoined();
 
         ImageModel GetLastImageUploaded();
+        VideoModel GetMostViewedVideo();
     }
 }

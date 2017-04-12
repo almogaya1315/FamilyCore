@@ -120,7 +120,16 @@ namespace FCore.DAL.Entities.Families
 
             //return Images.FirstOrDefault(i => i.Id == id);
         }
+        public VideoEntity GetMostViewedVideo()
+        {
+            foreach (VideoEntity video in Videos)
+            {
+                return video;
+            }
+            return null;
 
+            //return Videos.Last(); // needs to have an 'entries' value in entity
+        }
         public ContactInfoEntity GetContactInfo(int id)
         {
             foreach (ContactInfoEntity contact in ContactInfoes)
@@ -131,7 +140,6 @@ namespace FCore.DAL.Entities.Families
 
             //return ContactInfoes.FirstOrDefault(i => i.Id == id);
         }
-
         public ContactBookEntity GetContactBook(int id)
         {
             foreach (ContactBookEntity book in ContactBooks)

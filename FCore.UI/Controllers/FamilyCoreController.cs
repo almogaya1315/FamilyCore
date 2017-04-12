@@ -1,4 +1,5 @@
 ﻿using FCore.BL.Repositories;
+using FCore.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,16 @@ namespace FCore.UI.Controllers
 {
     public class FamilyCoreController : Controller
     {
-        FCoreRepository repo { get; set; }
+        ICoreRepository repo { get; set; }
 
         public ActionResult Main()
         {
             if (repo == null) repo = new FCoreRepository();
 
+            ViewData["repo"] = repo;
+
             ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
-            //ViewBag.VideoDesc = repo.GetMostViewedVideo();
+            ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;
             ViewBag.LastImgDesc = repo.GetLastImageUploaded().Description;
 
             return View(repo.GetFamilies());
