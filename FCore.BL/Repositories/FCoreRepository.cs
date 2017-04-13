@@ -74,6 +74,15 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetMostViewedVideo());
         }
+
+        public ICollection<VideoLibraryModel> GetVideoLibraries()
+        {
+            ICollection<VideoLibraryModel> libraries = new List<VideoLibraryModel>();
+            foreach (VideoLibraryEntity library in CoreDB.GetVideoLibraries())
+            {
+
+            }
+        }
         #endregion
 
         #region IConverter

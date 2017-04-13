@@ -150,5 +150,13 @@ namespace FCore.DAL.Entities.Families
 
             //return ContactBooks.FirstOrDefault(b => b.Id == id);
         }
+        public ICollection<VideoLibraryEntity> GetVideoLibraries()
+        {
+            ICollection<VideoLibraryEntity> libraries = new List<VideoLibraryEntity>();
+            foreach (VideoLibraryEntity library in vi)
+            {
+
+            }
+        }
     }
 }

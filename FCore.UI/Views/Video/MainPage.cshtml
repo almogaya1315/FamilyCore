@@ -1,3 +1,15 @@
 ﻿@model ICollection<FCore.Common.Models.Videos.VideoLibraryModel>
 
-
+@{ 
+    foreach (var library in Model)
+    {
+        foreach (var video in library.Videos)
+        {
+            <div>
+                <span>
+                    @video.Description
+                </span>
+            </div>            
+        }
+    }
+}

@@ -23,5 +23,6 @@ namespace FCore.Common.Interfaces
 
         ImageModel GetLastImageUploaded();
         VideoModel GetMostViewedVideo();
+        ICollection<VideoLibraryModel> GetVideoLibraries();
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FCore.BL.Repositories;
+using FCore.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,12 @@ namespace FCore.UI.Controllers
 {
     public class VideoController : Controller
     {
+        ICoreRepository repo { get; set; }
         public ActionResult MainPage()
         {
-            return View();
+            repo = new FCoreRepository();
+
+            return View(repo.GetVideoLibraries());
         }
     }
 }
