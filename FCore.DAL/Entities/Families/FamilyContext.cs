@@ -153,10 +153,9 @@ namespace FCore.DAL.Entities.Families
         public ICollection<VideoLibraryEntity> GetVideoLibraries()
         {
             ICollection<VideoLibraryEntity> libraries = new List<VideoLibraryEntity>();
-            foreach (VideoLibraryEntity library in vi)
-            {
-
-            }
+            foreach (VideoLibraryEntity library in VideoLibraries)
+                libraries.Add(library);
+            return libraries;
         }
     }
 }

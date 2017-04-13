@@ -28,7 +28,8 @@ namespace FCore.BL.Repositories
                                    IRepositoryConverter<RelativeModel, MemberRelative>,
                                    IRepositoryConverter<ContactBookModel, ContactBookEntity>,
                                    IRepositoryConverter<ImageModel, ImageEntity>,
-                                   IRepositoryConverter<VideoModel, VideoEntity>
+                                   IRepositoryConverter<VideoModel, VideoEntity>,
+                                   IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>
     {
         protected FamilyContext CoreDB { get; private set; }
         
@@ -80,8 +81,9 @@ namespace FCore.BL.Repositories
             ICollection<VideoLibraryModel> libraries = new List<VideoLibraryModel>();
             foreach (VideoLibraryEntity library in CoreDB.GetVideoLibraries())
             {
-
+                libraries.Add(ConvertToModel(library));
             }
+            return libraries;
         }
         #endregion
 
@@ -216,6 +218,22 @@ namespace FCore.BL.Repositories
             };
         }
         public VideoEntity ConvertToEntity(VideoModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public VideoLibraryModel ConvertToModel(VideoLibraryEntity entity)
+        {
+            return new VideoLibraryModel()
+            {
+                FamilyId = entity.FamilyId,
+                FamilyName = entity.FamilyName,
+                Id = entity.Id,
+                Name = entity.Name,
+                Videos = entity.Videos.Select(v => ConvertToModel(v)).ToList()
+            };
+        }
+        public VideoLibraryEntity ConvertToEntity(VideoLibraryModel model)
         {
             throw new NotImplementedException();
         }
