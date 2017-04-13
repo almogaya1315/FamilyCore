@@ -18,8 +18,14 @@ namespace FCore.UI.Controllers
             return View(repo.GetVideoLibraries());
         }
 
-        public ActionResult GetLibrary(int id)
+        public ActionResult LibraryPage(int id)
         {
             return View(repo.GetVideoLibrary(id));
         }
+
+        public ActionResult VideoPage(int id)
+        {
+            return View();
+        }
+    }
 }

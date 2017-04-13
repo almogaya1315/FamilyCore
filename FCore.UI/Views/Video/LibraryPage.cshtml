@@ -1,4 +1,4 @@
-﻿@model ICollection<FCore.Common.Models.Videos.VideoLibraryModel>
+﻿@model FCore.Common.Models.Videos.VideoLibraryModel
 
 @section section1
 {
@@ -54,7 +54,7 @@
 
         </div> <br />
         <div>
-            The @Model.FirstOrDefault().Name family
+            The @ViewBag.FirstFamily family
         </div>
     </div>
 }
@@ -73,17 +73,19 @@
     </div>
 }
 
+
 <div>
     <table>
         @{
-            foreach (var library in Model)
+            foreach (var video in Model.Videos)
             {
                 <tr>
                     <td>
-                        @Html.ActionLink($"The {library.FamilyName} family video library", "LibraryPage", new { @id = library.Id })
+                        @Html.ActionLink(video.Description, "VideoPage", new { @id = video.Id })
                     </td>
                 </tr>
             }
         }
     </table>
 </div>
+

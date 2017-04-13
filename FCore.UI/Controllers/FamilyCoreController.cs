@@ -19,6 +19,7 @@ namespace FCore.UI.Controllers
             ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
             ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;
             ViewBag.LastImgDesc = repo.GetLastImageUploaded().Description;
+            //ViewBag.FirstFamily = 
 
             return View(repo.GetFamilies());
         }

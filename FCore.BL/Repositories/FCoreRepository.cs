@@ -74,8 +74,7 @@ namespace FCore.BL.Repositories
         
         public VideoLibraryModel GetVideoLibrary(int id)
         {
-            VideoLibraryModel library = 
-            return CoreDB.GetVideoLibrary(ConvertToModel())
+            return ConvertToModel(CoreDB.GetVideoLibrary(id));
         }
         public ICollection<VideoLibraryModel> GetVideoLibraries()
         {

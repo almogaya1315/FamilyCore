@@ -13,7 +13,7 @@ using System.Linq.Expressions;
 
 namespace FCore.DAL.Entities.Families
 {
-    
+
 
     public class FamilyContext : DbContext
     {
@@ -99,6 +99,7 @@ namespace FCore.DAL.Entities.Families
 
             //return FamilyMembers.Last();
         }
+
         public ImageEntity GetLastImageUploaded()
         {
             int highestId = int.MinValue;
@@ -120,16 +121,7 @@ namespace FCore.DAL.Entities.Families
 
             //return Images.FirstOrDefault(i => i.Id == id);
         }
-        public VideoEntity GetMostViewedVideo()
-        {
-            foreach (VideoEntity video in Videos)
-            {
-                return video;
-            }
-            return null;
 
-            //return Videos.Last(); // needs to have an 'entries' value in entity
-        }
         public ContactInfoEntity GetContactInfo(int id)
         {
             foreach (ContactInfoEntity contact in ContactInfoes)
@@ -149,6 +141,25 @@ namespace FCore.DAL.Entities.Families
             return null;
 
             //return ContactBooks.FirstOrDefault(b => b.Id == id);
+        }
+
+        public VideoEntity GetMostViewedVideo()
+        {
+            foreach (VideoEntity video in Videos)
+            {
+                return video; // needs to have an 'entries' value in entity
+            }
+            return null;
+        }
+        public VideoLibraryEntity GetVideoLibrary(int id)
+        {
+            foreach (VideoLibraryEntity library in VideoLibraries)
+            {
+                if (library.Id == id) return library;
+            }
+            return null;
+
+            //return VideoLibraries.FirstOrDefault(l => l.Id == id);
         }
         public ICollection<VideoLibraryEntity> GetVideoLibraries()
         {
