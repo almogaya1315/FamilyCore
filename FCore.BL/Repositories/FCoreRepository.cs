@@ -71,11 +71,12 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetLastImageUploaded());
         }
-        public VideoModel GetMostViewedVideo()
+        
+        public VideoLibraryModel GetVideoLibrary(int id)
         {
-            return ConvertToModel(CoreDB.GetMostViewedVideo());
+            VideoLibraryModel library = 
+            return CoreDB.GetVideoLibrary(ConvertToModel())
         }
-
         public ICollection<VideoLibraryModel> GetVideoLibraries()
         {
             ICollection<VideoLibraryModel> libraries = new List<VideoLibraryModel>();
@@ -84,6 +85,10 @@ namespace FCore.BL.Repositories
                 libraries.Add(ConvertToModel(library));
             }
             return libraries;
+        }
+        public VideoModel GetMostViewedVideo()
+        {
+            return ConvertToModel(CoreDB.GetMostViewedVideo());
         }
         #endregion
 

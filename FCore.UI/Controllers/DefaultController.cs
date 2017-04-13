@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FCore.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,11 @@ namespace FCore.UI.Controllers
 {
     public class DefaultController : Controller
     {
+        ICoreRepository repo { get; set; }
+
         public ActionResult Index()
         {
+            ViewBag.Repo = repo;
             return View();
         }
 

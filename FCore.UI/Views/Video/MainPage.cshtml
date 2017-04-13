@@ -73,16 +73,21 @@
     </div>
 }
 
-@{ 
-    foreach (var library in Model)
-    {
-        foreach (var video in library.Videos)
-        {
-            <div>
-                <span>
-                    @video.Description
-                </span>
-            </div>            
+<div>
+    <table>
+        @{
+            foreach (var library in Model)
+            {
+                foreach (var video in library.Videos)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink($"{video.Description} library", "GetLibrary", new { @id = video.Id })
+                        </td>
+                    </tr>
+                            
+                }
+            }
         }
-    }
-}
+    </table>
+</div>

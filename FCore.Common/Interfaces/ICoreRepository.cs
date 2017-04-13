@@ -22,7 +22,9 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetLastMemberJoined();
 
         ImageModel GetLastImageUploaded();
-        VideoModel GetMostViewedVideo();
+
+        VideoLibraryModel GetVideoLibrary(int id);
         ICollection<VideoLibraryModel> GetVideoLibraries();
+        VideoModel GetMostViewedVideo();
     }
 }
