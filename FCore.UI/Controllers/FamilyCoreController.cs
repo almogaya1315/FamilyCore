@@ -14,14 +14,15 @@ namespace FCore.UI.Controllers
 
         public ActionResult Main()
         {
-            repo = new FCoreRepository();
+            using (repo = new FCoreRepository())
+            {
+                ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
+                ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;
+                ViewBag.LastImgDesc = repo.GetLastImageUploaded().Description;
+                //ViewBag.FirstFamily = 
 
-            ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
-            ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;
-            ViewBag.LastImgDesc = repo.GetLastImageUploaded().Description;
-            //ViewBag.FirstFamily = 
-
-            return View(repo.GetFamilies());
+                return View(repo.GetFamilies());
+            }
         }
     }
 }

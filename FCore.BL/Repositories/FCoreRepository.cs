@@ -247,5 +247,10 @@ namespace FCore.BL.Repositories
             throw new NotImplementedException();
         }
         #endregion
+
+        public void Dispose()
+        {
+            CoreDB.Dispose();
+        }
     }
 }

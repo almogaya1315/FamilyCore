@@ -13,19 +13,26 @@ namespace FCore.UI.Controllers
         ICoreRepository repo { get; set; }
         public ActionResult MainPage()
         {
-            repo = new FCoreRepository();
-
-            return View(repo.GetVideoLibraries());
+            using (repo = new FCoreRepository())
+            {
+                return View(repo.GetVideoLibraries());
+            }
         }
 
         public ActionResult LibraryPage(int id)
         {
-            return View(repo.GetVideoLibrary(id));
+            using (repo = new FCoreRepository())
+            {
+                return View(repo.GetVideoLibrary(id)); 
+            }
         }
 
         public ActionResult VideoPage(int id)
         {
-            return View();
+            using (repo = new FCoreRepository())
+            {
+                return View(); 
+            }
         }
     }
 }

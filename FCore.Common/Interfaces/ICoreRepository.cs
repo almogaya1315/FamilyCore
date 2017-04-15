@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FCore.Common.Interfaces
 {
-    public interface ICoreRepository
+    public interface ICoreRepository : IDisposable
     {
         ICollection<FamilyModel> GetFamilies();
 
