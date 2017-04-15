@@ -12,9 +12,9 @@ namespace FCore.UI.Controllers
     {
         ICoreRepository repo { get; set; }
 
-        public ActionResult Main()
+        public ActionResult Main(ICoreRepository _repo)
         {
-            if (repo == null) repo = ViewBag.Repo;
+            repo = _repo;
 
             ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
             ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;

@@ -14,13 +14,13 @@ namespace FCore.UI.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Repo = repo = new FCoreRepository();
+            repo = new FCoreRepository();
             return View();
         }
 
         public ActionResult GetMain()
         {
-            return RedirectToAction("Main", "FamilyCore");
+            return RedirectToAction("Main", "FamilyCore", repo);
         }
     }
 }
