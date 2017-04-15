@@ -8,22 +8,23 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
-    public class VideoController : Controller
+    public class AlbumController : Controller
     {
         ICoreRepository repo { get; set; }
-        public ActionResult VideoLibrariesPage()
+
+        public ActionResult ImageAlbumsPage()
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetVideoLibraries());
+                return View(repo.GetAlbums());
             }
         }
 
-        public ActionResult LibraryPage(int id)
+        public ActionResult AlbumPage(int id)
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetVideoLibrary(id)); 
+                return View(repo.GetAlbum(id));
             }
         }
     }

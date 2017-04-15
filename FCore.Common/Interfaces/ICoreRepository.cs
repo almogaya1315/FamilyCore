@@ -21,10 +21,12 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetFamilyMember(int id);
         FamilyMemberModel GetLastMemberJoined();
 
+        ICollection<AlbumModel> GetAlbums();
+        AlbumModel GetAlbum(int id);
         ImageModel GetLastImageUploaded();
 
-        VideoLibraryModel GetVideoLibrary(int id);
         ICollection<VideoLibraryModel> GetVideoLibraries();
+        VideoLibraryModel GetVideoLibrary(int id);
         VideoModel GetMostViewedVideo();
     }
 }

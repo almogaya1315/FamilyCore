@@ -56,7 +56,6 @@ namespace FCore.DAL.Entities.Families
                 families.Add(family);
             return families;
         }
-
         public FamilyEntity GetFamily(string name)
         {
             foreach (FamilyEntity family in Families)
@@ -100,6 +99,20 @@ namespace FCore.DAL.Entities.Families
             //return FamilyMembers.Last();
         }
 
+        public ICollection<AlbumEntity> GetAlbums()
+        {
+            return Albums.ToList();
+        }
+        public AlbumEntity GetAlbum(int id)
+        {
+            foreach (AlbumEntity album in Albums)
+            {
+                if (album.Id == id) return album;
+            }
+            return null;
+
+            //return Albums.FirstOrDefault(a => a.Id == id);
+        }
         public ImageEntity GetLastImageUploaded()
         {
             int highestId = int.MinValue;

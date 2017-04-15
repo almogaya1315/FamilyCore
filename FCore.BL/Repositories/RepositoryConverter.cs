@@ -28,6 +28,7 @@ namespace FCore.BL.Repositories
                                                IRepositoryConverter<RelativeModel, MemberRelative>,
                                                IRepositoryConverter<ContactBookModel, ContactBookEntity>,
                                                IRepositoryConverter<ImageModel, ImageEntity>,
+                                               IRepositoryConverter<AlbumModel, AlbumEntity>,
                                                IRepositoryConverter<VideoModel, VideoEntity>,
                                                IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>
     {
@@ -181,6 +182,22 @@ namespace FCore.BL.Repositories
             };
         }
         public VideoLibraryEntity ConvertToEntity(VideoLibraryModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AlbumModel ConvertToModel(AlbumEntity entity)
+        {
+            return new AlbumModel()
+            {
+                FamilyId = entity.Id,
+                FamilyName = entity.FamilyName,
+                Id = entity.Id,
+                Images = entity.Images.Select(i => ConvertToModel(i)).ToList(),
+                Name = entity.Name
+            };
+        }
+        public AlbumEntity ConvertToEntity(AlbumModel model)
         {
             throw new NotImplementedException();
         }

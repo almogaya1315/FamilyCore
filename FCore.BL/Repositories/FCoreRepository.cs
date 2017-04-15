@@ -38,7 +38,6 @@ namespace FCore.BL.Repositories
             }
             return families;
         }
-
         public FamilyModel GetFamily(string name)
         {
             return ConvertToModel(CoreDB.GetFamily(name));
@@ -57,11 +56,6 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetLastMemberJoined());
         }
 
-        public ImageModel GetLastImageUploaded()
-        {
-            return ConvertToModel(CoreDB.GetLastImageUploaded());
-        }
-
         public VideoLibraryModel GetVideoLibrary(int id)
         {
             return ConvertToModel(CoreDB.GetVideoLibrary(id));
@@ -78,6 +72,24 @@ namespace FCore.BL.Repositories
         public VideoModel GetMostViewedVideo()
         {
             return ConvertToModel(CoreDB.GetMostViewedVideo());
+        }
+
+        public ICollection<AlbumModel> GetAlbums()
+        {
+            ICollection<AlbumModel> albums = new List<AlbumModel>();
+            foreach (AlbumEntity album in CoreDB.GetAlbums())
+            {
+                albums.Add(ConvertToModel(album));
+            }
+            return albums;
+        }
+        public AlbumModel GetAlbum(int id)
+        {
+            return ConvertToModel(CoreDB.GetAlbum(id));
+        }
+        public ImageModel GetLastImageUploaded()
+        {
+            return ConvertToModel(CoreDB.GetLastImageUploaded());
         }
         #endregion
 
