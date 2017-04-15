@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace FCore.UI.Controllers
 
         public ActionResult Index()
         {
-            repo = new FCoreRepository();
+            repo = StaticRepository<FCoreRepository>.FamilyCoreRepository;
             return View();
         }
 
