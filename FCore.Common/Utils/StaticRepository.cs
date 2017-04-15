@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace FCore.Common.Utils
 {
     public static class StaticRepository<Repository> where Repository : ICoreRepository, new()
-                                                     
     {
         static ICoreRepository _familyCoreRepository;
         public static ICoreRepository FamilyCoreRepository

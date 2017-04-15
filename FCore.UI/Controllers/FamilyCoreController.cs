@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace FCore.UI.Controllers
     {
         ICoreRepository repo { get; set; }
 
-        public ActionResult Main(ICoreRepository _repo)
+        public ActionResult Main()
         {
-            repo = _repo;
+            repo = StaticRepository<FCoreRepository>.FamilyCoreRepository;
 
             ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
             ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;
