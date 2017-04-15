@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FCoreRepository.cs" />
+    <Compile Include="Repositories\RepositoryConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.Common\FCore.Common.csproj">
