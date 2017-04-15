@@ -1,4 +1,5 @@
 ﻿using FCore.Common.Models.Albums;
+using FCore.Common.Models.ChatGroups;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
@@ -14,7 +15,6 @@ namespace FCore.Common.Interfaces
     public interface ICoreRepository : IDisposable
     {
         ICollection<FamilyModel> GetFamilies();
-
         FamilyModel GetFamily(int id);
         FamilyModel GetFamily(string name);
 
@@ -28,5 +28,9 @@ namespace FCore.Common.Interfaces
         ICollection<VideoLibraryModel> GetVideoLibraries();
         VideoLibraryModel GetVideoLibrary(int id);
         VideoModel GetMostViewedVideo();
+
+        ICollection<ChatGroupModel> GetChatGroups();
+        ChatGroupModel GetChatGroup(int id);
+        MessageModel GetMessage(int id);
     }
 }

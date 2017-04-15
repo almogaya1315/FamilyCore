@@ -17,6 +17,7 @@ using FCore.DAL.Entities.Members;
 using FCore.Common.Enums;
 using FCore.DAL.Entities.Albums;
 using FCore.DAL.Entities.Videos;
+using FCore.DAL.Entities.ChatGroups;
 
 namespace FCore.BL.Repositories
 {
@@ -90,6 +91,24 @@ namespace FCore.BL.Repositories
         public ImageModel GetLastImageUploaded()
         {
             return ConvertToModel(CoreDB.GetLastImageUploaded());
+        }
+
+        public ICollection<ChatGroupModel> GetChatGroups()
+        {
+            ICollection<ChatGroupModel> groups = new List<ChatGroupModel>();
+            foreach (ChatGroupEntity group in CoreDB.GetChatGroups())
+            {
+                groups.Add(ConvertToModel(group));
+            }
+            return groups;
+        }
+        public ChatGroupModel GetChatGroup(int id)
+        {
+            return ConvertToModel(CoreDB.GetChatGroup(id));
+        }
+        public MessageModel GetMessage(int id)
+        {
+            return ConvertToModel(CoreDB.GetMessage(id));
         }
         #endregion
 

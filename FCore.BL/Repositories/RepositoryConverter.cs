@@ -8,6 +8,7 @@ using FCore.Common.Models.Members;
 using FCore.Common.Models.Videos;
 using FCore.DAL.Entities;
 using FCore.DAL.Entities.Albums;
+using FCore.DAL.Entities.ChatGroups;
 using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Families;
 using FCore.DAL.Entities.Members;
@@ -30,7 +31,9 @@ namespace FCore.BL.Repositories
                                                IRepositoryConverter<ImageModel, ImageEntity>,
                                                IRepositoryConverter<AlbumModel, AlbumEntity>,
                                                IRepositoryConverter<VideoModel, VideoEntity>,
-                                               IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>
+                                               IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>,
+                                               IRepositoryConverter<ChatGroupModel, ChatGroupEntity>,
+                                               IRepositoryConverter<MessageModel, MessageEntity>
     {
         FamilyContext CoreDB { get; set; }
 
@@ -198,6 +201,38 @@ namespace FCore.BL.Repositories
             };
         }
         public AlbumEntity ConvertToEntity(AlbumModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ChatGroupModel ConvertToModel(ChatGroupEntity entity)
+        {
+            return new ChatGroupModel()
+            {
+                FamilyId = entity.FamilyId,
+                Id = entity.Id,
+                ManagerId = entity.ManagerId,
+                Messages = entity.Messages.Select(m => ConvertToModel(m)).ToList(),
+                Name = entity.Name
+            };
+        }
+        public ChatGroupEntity ConvertToEntity(ChatGroupModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MessageModel ConvertToModel(MessageEntity entity)
+        {
+            return new MessageModel()
+            {
+                Content = entity.Content,
+                GroupId = entity.GroupId,
+                Id = entity.Id,
+                RecieverId = entity.RecieverId,
+                SenderId = entity.SenderId
+            };
+        }
+        public MessageEntity ConvertToEntity(MessageModel model)
         {
             throw new NotImplementedException();
         }

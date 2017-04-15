@@ -181,5 +181,30 @@ namespace FCore.DAL.Entities.Families
                 libraries.Add(library);
             return libraries;
         }
+
+        public ICollection<ChatGroupEntity> GetChatGroups()
+        {
+            return ChatGroups.ToList();
+        }
+        public ChatGroupEntity GetChatGroup(int id)
+        {
+            foreach (ChatGroupEntity group in ChatGroups)
+            {
+                if (group.Id == id) return group;
+            }
+            return null;
+
+            //return ChatGroups.FirstOrDefault(g => g.Id == id);
+        }
+        public MessageEntity GetMessage(int id)
+        {
+            foreach (MessageEntity msg in Messages)
+            {
+                if (msg.Id == id) return msg;
+            }
+            return null;
+
+            //return Messages.FirstOrDefault(m => m.Id == id);
+        }
     }
 }

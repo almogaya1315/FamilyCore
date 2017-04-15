@@ -127,6 +127,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\FamilyCoreController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -145,6 +146,8 @@
     <Content Include="Views\Video\LibraryPage.cshtml" />
     <Content Include="Views\Album\ImageAlbumsPage.cshtml" />
     <Content Include="Views\Album\AlbumPage.cshtml" />
+    <Content Include="Views\Message\MessageChatsPage.cshtml" />
+    <Content Include="Views\Message\ChatPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

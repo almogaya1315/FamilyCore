@@ -1,4 +1,4 @@
-﻿@model ICollection<FCore.Common.Models.Families.FamilyModel>
+﻿@model FCore.Common.Models.ChatGroups.ChatGroupModel
 
 @section section1
 {
@@ -51,10 +51,10 @@
             <b>The first family</b>
         </div> <br />
         <div style="border:1px solid; height:145px">
-            
+
         </div> <br />
         <div>
-            The @Model.FirstOrDefault().Name family
+            The @ViewBag.FirstFamily family
         </div>
     </div>
 }
@@ -73,37 +73,7 @@
     </div>
 }
 
-<div class="jumbotron">
-    <h1 style="font-size:59px; text-align:center">FAMILY CORE</h1><br />
-    <hr style="height:2px; background-color:#2f74f1" />
-    <p style="text-align:center">
-        ,כמו בכל רשת חברתית, באתר זה ניתן להרשם כחבר
-        <br />.אבל רק אם לפחות בן משפחה אחד שלך כבר נרשם
-    </p>
-    <hr style="height:2px; background-color:#2f74f1" />
-</div>
-<div class="row" style="width:96%; margin-left:2%; height:300px">
-    <div class="col-xs-6 col-lg-4" style="width:32%; height:100%; background-color:#cfd7d8; border-radius:5px; text-align-last:center">
-        <h2>הסיפור השבועי</h2>
-        <p>sdfsdffdsffsfsdf <br /> asdasdasdadsd</p>
-        <p><a class="btn btn-default" href="#" role="button" style="margin-top:50%">View details »</a></p>
-    </div>
-    <div class="col-xs-6 col-lg-4" style="width:32%; height:100%; margin-left:2%; margin-right:2%; background-color:#cfd7d8; border-radius:5px; text-align-last:center">
-        <h2>הבדיחה היומית</h2>
-        <p>adfasdasdasd <br /> asddasdasd</p>
-        <p><a class="btn btn-default" href="#" role="button" style="margin-top:50%">View details »</a></p>
-    </div>
-    <div class="col-xs-6 col-lg-4" style="width:32%; height:100%; background-color:#cfd7d8; border-radius:5px; text-align-last:center">
-        <h2>הודעות</h2>
-        <p>
-            <ul>
-                <li style="text-align-last:right">ljhasd</li>
-                <li style="text-align-last:right">asdkhasd</li>
-                <li style="text-align-last:right">asdasd</li>
-            </ul>
-        </p>
-        <p><a class="btn btn-default" href="#" role="button" style="margin-top:40%">View details »</a></p>
-    </div>
-</div>
+<div>
 
+</div>
 
