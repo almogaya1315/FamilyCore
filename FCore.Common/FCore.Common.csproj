@@ -87,10 +87,10 @@
     <Compile Include="Models\Videos\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRepositoryConverter.cs" />
-    <Compile Include="Utils\StaticRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

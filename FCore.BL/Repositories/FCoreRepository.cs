@@ -40,17 +40,23 @@ namespace FCore.BL.Repositories
         #region IRepository
         public ICollection<FamilyModel> GetFamilies()
         {
-            ICollection<FamilyModel> families = new List<FamilyModel>();
-            foreach (FamilyEntity family in CoreDB.GetFamilies())
+            using (CoreDB)
             {
-                families.Add(ConvertToModel(family));
+                ICollection<FamilyModel> families = new List<FamilyModel>();
+                foreach (FamilyEntity family in CoreDB.GetFamilies())
+                {
+                    families.Add(ConvertToModel(family));
+                }
+                return families;
             }
-            return families;
         }
 
         public FamilyModel GetFamily(string name)
         {
-            return ConvertToModel(CoreDB.GetFamily(name));
+            using (CoreDB)
+            {
+                return ConvertToModel(CoreDB.GetFamily(name)); 
+            }
         }
         public FamilyModel GetFamily(int id)
         {
