@@ -81,8 +81,13 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(video.Description, "VideoPage", new { @id = video.Id })
+                        @video.Description
                     </td>
+                </tr>
+                <tr>
+                    <content>
+                        <video src="@video.Path"/>
+                    </content>
                 </tr>
             }
         }

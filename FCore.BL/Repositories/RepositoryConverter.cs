@@ -14,23 +14,30 @@ using FCore.DAL.Entities.Members;
 using FCore.DAL.Entities.Videos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FCore.BL.Repositories
 {
-    internal abstract class RepositoryConverter<CoreDB> where CoreDB : FamilyContext,
-                                                 IRepositoryConverter<FamilyModel, FamilyEntity>,
-                                                 IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
-                                                 IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
-                                                 IRepositoryConverter<PermissionsModel, MemberPermissions>,
-                                                 IRepositoryConverter<RelativeModel, MemberRelative>,
-                                                 IRepositoryConverter<ContactBookModel, ContactBookEntity>,
-                                                 IRepositoryConverter<ImageModel, ImageEntity>,
-                                                 IRepositoryConverter<VideoModel, VideoEntity>,
-                                                 IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>
+    public abstract class RepositoryConverter :IRepositoryConverter<FamilyModel, FamilyEntity>,
+                                               IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
+                                               IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
+                                               IRepositoryConverter<PermissionsModel, MemberPermissions>,
+                                               IRepositoryConverter<RelativeModel, MemberRelative>,
+                                               IRepositoryConverter<ContactBookModel, ContactBookEntity>,
+                                               IRepositoryConverter<ImageModel, ImageEntity>,
+                                               IRepositoryConverter<VideoModel, VideoEntity>,
+                                               IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>
     {
+        FamilyContext CoreDB { get; set; }
+
+        public RepositoryConverter(DbContext db)
+        {
+            CoreDB = (FamilyContext)db;
+        }
+
         public FamilyModel ConvertToModel(FamilyEntity entity)
         {
             return new FamilyModel()
@@ -57,7 +64,6 @@ namespace FCore.BL.Repositories
                 BirthPlace = entity.BirthPlace,
                 ContactInfo = ConvertToModel(CoreDB.GetContactInfo(entity.ContactInfoId)),
                 ContactInfoId = entity.ContactInfoId,
-                //Family = ConvertToModel(entity.Family), 
                 FamilyId = entity.FamilyId,
                 FirstName = entity.FirstName,
                 Id = entity.Id,
@@ -78,7 +84,6 @@ namespace FCore.BL.Repositories
             return new ContactInfoModel()
             {
                 City = entity.City,
-                //ContactBook = ConvertToModel(CoreDB.GetContactBook(entity.ContactBookId)),
                 ContactBookId = entity.ContactBookId,
                 Country = entity.Country,
                 Email = entity.Email,
@@ -124,7 +129,6 @@ namespace FCore.BL.Repositories
             return new ContactBookModel()
             {
                 ContactInfoes = entity.ContactInfoes.Select(e => ConvertToModel(e)).ToList(),
-                //Family = ConvertToModel(entity.Family),
                 FamilyId = entity.FamilyId,
                 FamilyName = entity.FamilyName,
                 Id = entity.Id

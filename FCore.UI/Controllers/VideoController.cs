@@ -11,7 +11,7 @@ namespace FCore.UI.Controllers
     public class VideoController : Controller
     {
         ICoreRepository repo { get; set; }
-        public ActionResult MainPage()
+        public ActionResult VideoLibrariesPage()
         {
             using (repo = new FCoreRepository())
             {
