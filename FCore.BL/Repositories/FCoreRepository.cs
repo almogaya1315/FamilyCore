@@ -29,6 +29,7 @@ namespace FCore.BL.Repositories
         {
             CoreDB = new FamilyContext();
         }
+
         #region IRepository
         public ICollection<FamilyModel> GetFamilies()
         {
