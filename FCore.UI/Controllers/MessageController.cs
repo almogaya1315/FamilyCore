@@ -31,11 +31,9 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                ICollection<FamilyMemberModel> chatMembers = new List<FamilyMemberModel>();
-                foreach (var member in repo.getFamilyMembers())
-                {
-
-                }
+                ChatGroupModel chat = repo.GetChatGroup(id);
+                ICollection<FamilyMemberModel> chatMembers = repo.getFamilyMembers(chat.FamilyId);
+                ViewBag.ChatMembers = chatMembers;
                 return View(repo.GetChatGroup(id));
             }
         }
