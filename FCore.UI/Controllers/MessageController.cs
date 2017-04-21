@@ -34,6 +34,7 @@ namespace FCore.UI.Controllers
                 ChatGroupModel chat = repo.GetChatGroup(id);
                 ICollection<FamilyMemberModel> chatMembers = repo.GetFamily(chat.FamilyId).FamilyMembers;
                 ViewBag.ChatMembers = chatMembers;
+                ViewData["cm"] = chatMembers;
                 return View(repo.GetChatGroup(id));
             }
         }
