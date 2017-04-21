@@ -1,6 +1,7 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.ChatGroups;
+using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                ICollection<FamilyMemberModel> chatMembers = new List<FamilyMemberModel>();
+                foreach (var member in repo.getFamilyMembers())
+                {
+
+                }
                 return View(repo.GetChatGroup(id));
             }
         }
