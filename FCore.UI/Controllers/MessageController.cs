@@ -32,7 +32,7 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 ChatGroupModel chat = repo.GetChatGroup(id);
-                ICollection<FamilyMemberModel> chatMembers = repo.getFamilyMembers(chat.FamilyId);
+                ICollection<FamilyMemberModel> chatMembers = repo.GetFamily(chat.FamilyId).FamilyMembers;
                 ViewBag.ChatMembers = chatMembers;
                 return View(repo.GetChatGroup(id));
             }

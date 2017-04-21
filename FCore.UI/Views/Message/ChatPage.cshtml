@@ -87,30 +87,30 @@
                             </button>
                         </div>
                     </div>
-                    <div class="dropdown all_conversation">
-                        <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-weixin" aria-hidden="true"></i>
-                            All Conversations
-                            <span class="caret pull-right"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li>
-                                <a href="#"> All Conversation </a>  <ul class="sub_menu_ list-unstyled">
-                                    <li><a href="#"> All Conversation </a> </li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                    <div class="member_list">
+                    @*<div class="dropdown all_conversation">
+                            <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-weixin" aria-hidden="true"></i>
+                                All Conversations
+                                <span class="caret pull-right"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li>
+                                    <a href="#"> All Conversation </a>  <ul class="sub_menu_ list-unstyled">
+                                        <li><a href="#"> All Conversation </a> </li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>*@
+                    <div class="member_list" style="height:auto">
                         <ul class="list-unstyled">
                             @{
-                                foreach (var member in ViewBag.chatMembers)
+                                foreach (var member in ViewBag.ChatMembers)
                                 {
                                     <li class="left clearfix">
                                         <span class="chat-img pull-left">
@@ -118,10 +118,11 @@
                                         </span>
                                         <div class="chat-body clearfix">
                                             <div class="header_sec">
-                                                <strong class="primary-font">@member.FirstName @member.LastName</strong> <strong class="pull-right"/>
+                                                <strong class="primary-font">@member.FirstName @member.LastName</strong> 
                                             </div>
                                             <div class="contact_sec">
-                                                <strong class="primary-font">@member.Id</strong> <span class="badge pull-right">@member.FamilyId</span>
+                                                <strong class="primary-font" style="display:inline; margin-left:5%">ID: @member.Id</strong> 
+                                                <span class="badge pull-right"> F_ID: @member.FamilyId</span>
                                             </div>
                                         </div>
                                     </li>
@@ -134,7 +135,7 @@
             <!--chat_sidebar-->
 
 
-            <div class="col-sm-9 message_section">
+            <div class="col-lg-6 message_section">
                 <div class="row">
                     <div class="new_message_head">
                         <div class="pull-left"><button><i class="fa fa-plus-square-o" aria-hidden="true"></i> New Message</button></div><div class="pull-right">
@@ -205,18 +206,11 @@
 
                         </ul>
                     </div><!--chat_area-->
-                    <div class="message_write">
-                        <textarea class="form-control" placeholder="type a message"></textarea>
-                        <div class="clearfix"></div>
-                        <div class="chat_bottom">
-                            <a href="#" class="pull-left upload_btn">
-                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                Add Files
-                            </a>
-                            <a href="#" class="pull-right btn btn-success">
-                                Send
-                            </a>
-                        </div>
+                    <div class="message_write" style="height:10%">
+                        <textarea style="display:inline; resize:none; width:50%" placeholder=" type a message"></textarea>
+                        <a href="#" class="pull-right btn btn-success">
+                            Send
+                        </a>
                     </div>
                 </div>
             </div> <!--message_section-->
