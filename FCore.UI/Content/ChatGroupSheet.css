@@ -35,7 +35,7 @@
 	}
 	.event-list > li > time > .day {
 		display: block;
-		font-size: 56pt;
+		font-size: 20px;
 		font-weight: 100;
 		line-height: 1;
 	}
@@ -160,8 +160,8 @@
 			text-align: left;
 			padding-right: 40px;
 		}	
-		.event-list > li > .info > .title, 
-		.event-list > li > .info > .desc {
+		.event-list > li > .info > .family, 
+		.event-list > li > .info > .count {
 			padding: 0px 10px;
 		}
 		.event-list > li > .info > ul {

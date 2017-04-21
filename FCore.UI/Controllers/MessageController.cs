@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.ChatGroups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                ICollection<ChatGroupModel> chatGroups = repo.GetChatGroups();
+                IDictionary<int, string> familyIdName = new Dictionary<int, string>();
+                foreach (var group in chatGroups)
+                    familyIdName[group.FamilyId] = repo.GetFamily(group.FamilyId).Name;
+                ViewBag.FamilyIdName = familyIdName;
                 return View(repo.GetChatGroups());
             }
         }
