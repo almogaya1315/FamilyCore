@@ -12,7 +12,7 @@ namespace FCore.UI.Controllers
     {
         ICoreRepository repo { get; set; }
 
-        public ActionResult ImageAlbumsPage()
+        public ActionResult AlbumsPage()
         {
             using (repo = new FCoreRepository())
             {

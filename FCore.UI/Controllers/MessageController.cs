@@ -14,7 +14,7 @@ namespace FCore.UI.Controllers
     {
         ICoreRepository repo { get; set; }
 
-        public ActionResult MessageChatsPage()
+        public ActionResult ChatsPage()
         {
             using (repo = new FCoreRepository())
             {

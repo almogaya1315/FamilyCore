@@ -104,6 +104,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\ChatGroupSheet.css" />
     <Content Include="Content\ChatPageSheet.css" />
+    <Content Include="Content\ConfigPageSheet.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -119,6 +121,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ChatPageScript.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -128,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\FamilyCoreController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
@@ -145,12 +149,13 @@
     <Content Include="Views\FamilyCore\Main.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\Video\VideoLibrariesPage.cshtml" />
+    <Content Include="Views\Video\LibrariesPage.cshtml" />
     <Content Include="Views\Video\LibraryPage.cshtml" />
-    <Content Include="Views\Album\ImageAlbumsPage.cshtml" />
+    <Content Include="Views\Album\AlbumsPage.cshtml" />
     <Content Include="Views\Album\AlbumPage.cshtml" />
-    <Content Include="Views\Message\MessageChatsPage.cshtml" />
+    <Content Include="Views\Message\ChatsPage.cshtml" />
     <Content Include="Views\Message\ChatPage.cshtml" />
+    <Content Include="Views\Config\ConfigPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -160,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">
