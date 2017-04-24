@@ -74,63 +74,54 @@
 
 <div class="jumbotron">
     <div class="container text-center">
-        <h1 class="page-header">PRICING PLANS</h1>
-        <p class="lead">choose from our simple and clear plans</p>
+        <h1 class="page-header">Configurations</h1>
+        <p class="lead">Manage your family core.</p>
     </div>
 
 </div>
 
 <div class="container ">
     <div class="row">
-
         <div class="col-md-4 well pricing-table">
             <div class="pricing-table-holder">
                 <center>
-                    <img src="http://www.placehold.it/100X100" class="img-responsive img-circle" alt="">
-                    <h3>PLAN A</h3>
+                    <h3>Administrator</h3>
                     <p class="caption">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Personal security & settings
                     </p>
                 </center>
-
-
             </div>
-
             <div class="custom-button-group" style="">
-
                 <div class="col-md-8 col-sm-9" style="padding:0;">
-                    <button type="button" class="btn btn-royal-blue btn-block dropdown-toggle" style="border-radius:0;" data-toggle="dropdown" aria-expanded="false">
+                    @*<button type="button" class="btn btn-royal-blue btn-block dropdown-toggle" style="border-radius:0;" data-toggle="dropdown" aria-expanded="false">
                         Select Bundle
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Dropdown link</a></li>
                         <li><a href="#">Dropdown link</a></li>
-                    </ul>
+                    </ul>*@
                 </div>
                 <div class="col-md-4 col-sm-3" style="padding:0;">
-                    <button class="btn btn-primary  btn-block" style="border-radius:0;">
+                    @*<button class="btn btn-primary  btn-block" style="border-radius:0;">
                         Get It
-                    </button>
+                    </button>*@
                 </div>
             </div>
-
             <div class="pricing-feature-list">
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item">@Html.ActionLink("Personal details", "PersonalPage", "Config")</li>
+                    <li class="list-group-item">@Html.ActionLink("Security", "SecurityPage", "Config")</li>
+                    <li class="list-group-item">@Html.ActionLink("Theme editor", "ThemeEditorPage", "Config")</li>
                 </ul>
             </div>
-
             <div class="price-table-button-holder">
                 <button class="btn btn-info btn-block">
-                    GET NOW
+                    @Html.ActionLink("Go to admin page", "MainConfigPage", "Config")
                 </button>
             </div>
         </div>
+
         <div class="col-md-4 well pricing-table">
             <div class="pricing-table-holder">
                 <center>
@@ -140,12 +131,8 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     </p>
                 </center>
-
-
             </div>
-
             <div class="custom-button-group" style="">
-
                 <div class="col-md-8 col-sm-9" style="padding:0;">
                     <button type="button" class="btn btn-royal-blue btn-block dropdown-toggle" style="border-radius:0;" data-toggle="dropdown" aria-expanded="false">
                         Select Bundle
