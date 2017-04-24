@@ -72,7 +72,7 @@
     </div>
 }
 
-<div class="jumbotron">
+<div class="jumbotron" style="width:92%">
     <div class="container text-center">
         <h1 class="page-header">Configurations</h1>
         <p class="lead">Manage your family core.</p>
@@ -93,130 +93,57 @@
             </div>
             <div class="custom-button-group" style="">
                 <div class="col-md-8 col-sm-9" style="padding:0;">
-                    @*<button type="button" class="btn btn-royal-blue btn-block dropdown-toggle" style="border-radius:0;" data-toggle="dropdown" aria-expanded="false">
-                        Select Bundle
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Dropdown link</a></li>
-                        <li><a href="#">Dropdown link</a></li>
-                    </ul>*@
                 </div>
                 <div class="col-md-4 col-sm-3" style="padding:0;">
-                    @*<button class="btn btn-primary  btn-block" style="border-radius:0;">
-                        Get It
-                    </button>*@
                 </div>
             </div>
-            <div class="pricing-feature-list" style="background-color:#82caf3; border-radius:5px"> @*ddf2f5*@
-                <ul class="list-group">
+            <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
+                <ul class="list-group" style="margin:-8%">
                     <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
                         @Html.ActionLink("Personal details", "PersonalPage", "Config", new { @style= "color:white" })</li>
                     <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
                         @Html.ActionLink("Security", "SecurityPage", "Config", new { @style = "color:white" })</li>
+                </ul>
+            </div>
+            <div class="price-table-button-holder">
+                <button class="btn btn-info btn-block" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#4386f1; border-color:#4386f1">
+                    @Html.ActionLink("Go to admin page", "MainConfigPage", "Config", new { @style= "color:white" })
+                </button>
+            </div>
+        </div>
+        
+        <div class="col-md-4 well pricing-table">
+            <div class="pricing-table-holder">
+                <center>
+                    <h3>Members customizations</h3>
+                    <p class="caption">
+                        Edit yourself & your relatives
+                    </p>
+                </center>
+            </div>
+            <div class="custom-button-group" style="">
+                <div class="col-md-8 col-sm-9" style="padding:0;">
+                </div>
+                <div class="col-md-4 col-sm-3" style="padding:0;">
+                </div>
+            </div>
+            <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
+                <ul class="list-group" style="margin:-8%">
                     <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Theme editor", "ThemeEditorPage", "Config", new { @style = "color:white" })</li>
+                        @Html.ActionLink("Add child", "AddChild", "Config", new { @style = "color:white" })
+                    </li>
+                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
+                        @Html.ActionLink("Remove member", "RemoveMember", "Config", new { @style = "color:white" })
+                    </li>
                 </ul>
             </div>
             <div class="price-table-button-holder">
-                @*<button class="btn btn-info btn-block">
-                    @Html.ActionLink("Go to admin page", "MainConfigPage", "Config")
-                </button>*@
-            </div>
-        </div>
-
-        <div class="col-md-4 well pricing-table">
-            <div class="pricing-table-holder">
-                <center>
-                    <img src="http://www.placehold.it/100X100" class="img-responsive img-circle" alt="">
-                    <h3>PLAN B</h3>
-                    <p class="caption">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                </center>
-            </div>
-            <div class="custom-button-group" style="">
-                <div class="col-md-8 col-sm-9" style="padding:0;">
-                    <button type="button" class="btn btn-royal-blue btn-block dropdown-toggle" style="border-radius:0;" data-toggle="dropdown" aria-expanded="false">
-                        Select Bundle
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Dropdown link</a></li>
-                        <li><a href="#">Dropdown link</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 col-sm-3" style="padding:0;">
-                    <button class="btn btn-primary  btn-block" style="border-radius:0;">
-                        Get It
-                    </button>
-                </div>
-            </div>
-
-            <div class="pricing-feature-list">
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-
-            <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block">
-                    GET NOW
+                <button class="btn btn-info btn-block" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#4386f1; border-color:#4386f1">
+                    @Html.ActionLink("Go to Editor page", "MainEditorPage", "Config", new { @style = "color:white" })
                 </button>
             </div>
         </div>
-        <div class="col-md-4 well pricing-table">
-            <div class="pricing-table-holder">
-                <center>
-                    <img src="http://www.placehold.it/100X100" class="img-responsive img-circle" alt="">
-                    <h3>PLAN C</h3>
-                    <p class="caption">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                </center>
-
-
-            </div>
-
-            <div class="custom-button-group" style="">
-
-                <div class="col-md-8 col-sm-9" style="padding:0;">
-                    <button type="button" class="btn btn-royal-blue btn-block dropdown-toggle" style="border-radius:0;" data-toggle="dropdown" aria-expanded="false">
-                        Select Bundle
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Dropdown link</a></li>
-                        <li><a href="#">Dropdown link</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 col-sm-3" style="padding:0;">
-                    <button class="btn btn-primary  btn-block" style="border-radius:0;">
-                        Get It
-                    </button>
-                </div>
-            </div>
-
-            <div class="pricing-feature-list">
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-
-            <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block">
-                    GET NOW
-                </button>
-            </div>
-        </div>
+        
     </div>
 </div>
 

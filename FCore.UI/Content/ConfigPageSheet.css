@@ -51,8 +51,8 @@ border-bottom: 1px solid #595353;
         }
         .btn-info{
             color: #fff;
-background-color: #F95353;
-border-color: #F95353;
+background-color: #4386f1;
+border-color: #4386f1;
 /* border-radius: 0; */
 padding: 3%;
 transition: all 0.6s ease-in;
@@ -64,8 +64,8 @@ padding: 0%;
         }
         .btn-royal-blue{
             color: #FFF;
-background-color: #23A4F2;
-border-color: #23A4F2;
+background-color: #82caf3;
+border-color: #82caf3;
                         transition: all 0.4s ease-in;
         }
         .btn-royal-blue:hover{
