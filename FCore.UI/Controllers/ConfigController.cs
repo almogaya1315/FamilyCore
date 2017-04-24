@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +15,31 @@ namespace FCore.UI.Controllers
 
         public ActionResult ConfigPage()
         {
-            return View();
+            using (repo = new FCoreRepository())
+            {
+                return View(repo.GetFamilyMember(1));
+            }
         }
 
-        [HttpGet]
-        public ActionResult PersonalPage(int id)
+        public ActionResult PersonalPage(FamilyMemberModel member)
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetFamilyMember(id));
+                return View(member);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditPersonalDetails(FamilyMemberModel member)
+        {
+            using (repo = new FCoreRepository())
+            {
+                return View(member);
             }
         }
 
         [HttpPost]
-        public ActionResult PersonalPage()
+        public ActionResult EditPersonalDetails(FamilyMemberModel member, HttpPostedFileBase file)
         {
             using (repo = new FCoreRepository())
             {
@@ -35,9 +47,9 @@ namespace FCore.UI.Controllers
                 {
 
                 }
-                return View();
+                else return View(new { @from = "Get" });
+                return RedirectToAction("PersonalPage", member);
             }
-                
         }
     }
 }
