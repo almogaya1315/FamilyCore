@@ -108,11 +108,14 @@
                     </button>*@
                 </div>
             </div>
-            <div class="pricing-feature-list">
+            <div class="pricing-feature-list" style="background-color:#82caf3; border-radius:5px"> @*ddf2f5*@
                 <ul class="list-group">
-                    <li class="list-group-item">@Html.ActionLink("Personal details", "PersonalPage", "Config", new { @style="color:white"})</li>
-                    <li class="list-group-item">@Html.ActionLink("Security", "SecurityPage", "Config", new { @style = "color:white" })</li>
-                    <li class="list-group-item">@Html.ActionLink("Theme editor", "ThemeEditorPage", "Config", new { @style = "color:white" })</li>
+                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
+                        @Html.ActionLink("Personal details", "PersonalPage", "Config", new { @style= "color:white" })</li>
+                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
+                        @Html.ActionLink("Security", "SecurityPage", "Config", new { @style = "color:white" })</li>
+                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
+                        @Html.ActionLink("Theme editor", "ThemeEditorPage", "Config", new { @style = "color:white" })</li>
                 </ul>
             </div>
             <div class="price-table-button-holder">
