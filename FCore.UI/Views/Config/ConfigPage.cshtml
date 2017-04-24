@@ -110,15 +110,15 @@
             </div>
             <div class="pricing-feature-list">
                 <ul class="list-group">
-                    <li class="list-group-item">@Html.ActionLink("Personal details", "PersonalPage", "Config")</li>
-                    <li class="list-group-item">@Html.ActionLink("Security", "SecurityPage", "Config")</li>
-                    <li class="list-group-item">@Html.ActionLink("Theme editor", "ThemeEditorPage", "Config")</li>
+                    <li class="list-group-item">@Html.ActionLink("Personal details", "PersonalPage", "Config", new { @style="color:white"})</li>
+                    <li class="list-group-item">@Html.ActionLink("Security", "SecurityPage", "Config", new { @style = "color:white" })</li>
+                    <li class="list-group-item">@Html.ActionLink("Theme editor", "ThemeEditorPage", "Config", new { @style = "color:white" })</li>
                 </ul>
             </div>
             <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block">
+                @*<button class="btn btn-info btn-block">
                     @Html.ActionLink("Go to admin page", "MainConfigPage", "Config")
-                </button>
+                </button>*@
             </div>
         </div>
 
