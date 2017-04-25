@@ -17,8 +17,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                FamilyMemberModel member = repo.GetFamilyMember(1);
-                return View(member);
+                return View(repo.GetFamilyMember(1));
             }
         }
 
@@ -26,21 +25,21 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                return View(member);
+                return View(repo.GetFamilyMember(member.Id));
             }
         }
 
         [HttpGet]
-        public PartialViewResult EditAbout(FamilyMemberModel member)
+        public ActionResult EditAbout(int id)
         {
             using (repo = new FCoreRepository())
             {
-                return PartialView(member);
+                return PartialView("EditAbout", repo.GetFamilyMember(id));
             }
         }
 
         [HttpPost]
-        public ActionResult EditAbout(FamilyMemberModel member, string about)
+        public ActionResult EditAbout(FamilyMemberModel member, string About)
         {
             using (repo = new FCoreRepository())
             {
@@ -49,7 +48,7 @@ namespace FCore.UI.Controllers
 
                 }
                 else return View(new { @from = "Get" });
-                return RedirectToAction("PersonalPage", member);
+                return RedirectToAction("PersonalPage", repo.GetFamilyMember(member.Id));
             }
         }
     }

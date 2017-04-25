@@ -52,15 +52,15 @@
             </div>
             <div class="list-group col-xs-6 col-sm-3 sidebar-offcanvas" style="background-color:#98d4e8; border-radius:5px">
                 <marquee style="margin-left:5%" id="sidebar" height="900px" behavior="scroll" direction="down" scrollamount="7" onmouseover="scrollAmount = 0;" onmouseout="scrollAmount = 7;">
-                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section1")</div>
+                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section1", false)</div>
                     <hr style="height:1px; background-color:#2f74f1; width:250px" />
-                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section2")</div>
+                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section2", false)</div>
                     <hr style="height:1px; background-color:#2f74f1; width:250px" />
-                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section3")</div>
+                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section3", false)</div>
                     <hr style="height:1px; background-color:#2f74f1; width:250px" />
-                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section4")</div>
+                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section4", false)</div>
                     <hr style="height:1px; background-color:#2f74f1; width:250px" />
-                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section5")</div>
+                    <div style="background-color:#98d4e8; border:none" class="list-group-item">@RenderSection("section5", false)</div>
                 </marquee>
             </div>
         </div>
@@ -74,6 +74,6 @@
     </div>
 
     <script src="~/Scripts/ChatPageScript.js"></script>
-
+    <script src="~/Scripts/UserAboutScript.js"></script>
 </body>
 </html>

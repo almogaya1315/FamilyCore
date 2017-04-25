@@ -1,12 +1,14 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-@using (Html.BeginForm("EditAbout", "Config"))
+@using (Ajax.BeginForm(new AjaxOptions() { UpdateTargetId = "_userabout", InsertionMode = InsertionMode.Replace }))
 {
     <textarea style="border:none; resize:none; width:100%; margin-bottom:5%">@Model.About</textarea>
 
     <div class="price-table-button-holder" style="display:inline">
         <button class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-            @Html.ActionLink("Save", "EditAbout", "Config", Model, new { @from = "Post", @style = "color:white", @type = "submit" })
+            @Ajax.ActionLink("Save", "EditAbout", "Config", new { id = Model.Id },
+           new AjaxOptions() { UpdateTargetId = "_userabout" },
+           new { @style = "color:white", @type = "submit", @from = "Post" })
         </button>
     </div>
 }
