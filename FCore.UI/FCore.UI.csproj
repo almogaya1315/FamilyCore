@@ -157,6 +157,8 @@
     <Content Include="Views\Message\ChatPage.cshtml" />
     <Content Include="Views\Config\ConfigPage.cshtml" />
     <Content Include="Views\Config\PersonalPage.cshtml" />
+    <Content Include="Views\Shared\UserAbout.cshtml" />
+    <Content Include="Views\Shared\EditAbout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

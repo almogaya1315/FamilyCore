@@ -31,11 +31,11 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditAbout(FamilyMemberModel member)
+        public PartialViewResult EditAbout(FamilyMemberModel member)
         {
             using (repo = new FCoreRepository())
             {
-                return View(member);
+                return PartialView(member);
             }
         }
 
