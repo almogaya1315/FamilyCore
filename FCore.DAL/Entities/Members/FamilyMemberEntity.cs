@@ -44,6 +44,9 @@ namespace FCore.DAL.Entities
         [Required, StringLength(40)]
         public string LastName { get; set; }
 
+        [StringLength(150)]
+        public string About { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }
 

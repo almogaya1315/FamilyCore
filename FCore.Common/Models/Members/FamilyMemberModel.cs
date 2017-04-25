@@ -46,6 +46,9 @@ namespace FCore.Common.Models.Members
         [Required(ErrorMessage = "שדה חובה"), StringLength(40), DisplayName("שם משפחה")]
         public string LastName { get; set; }
 
+        [StringLength(150), DisplayName("על עצמי")]
+        public string About { get; set; }
+
         [DataType(DataType.Date), DisplayName("תאריך לידה")]
         public DateTime? BirthDate { get; set; }
 

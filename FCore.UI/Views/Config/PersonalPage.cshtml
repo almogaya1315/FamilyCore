@@ -96,7 +96,14 @@
                             </div>
                             <div class="col-sm-6" style="margin-top:2%">
                                 <h4 style="color:#00b1b1;">@Model.FirstName @Model.LastName</h4>
-                                <span>'The founder of 'Family-Core</span> @*@Model.About*@
+                                <textarea style="border:none; resize:none; width:100%; margin-bottom:5%">@Model.About</textarea>
+
+                                <div class="price-table-button-holder" style="display:inline">
+                                    <button class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
+                                        @Html.ActionLink("Edit about", "EditPersonalDetails", "Config", Model, new { @from = "Get", @style = "color:white" })
+                                    </button>
+                                </div>
+
                             </div>
                             <div class="clearfix"></div>
 
@@ -132,14 +139,9 @@
                                 <div class="bot-border"></div>
                             </div>
 
-                            <div style="margin-top:20%">
-                                <div class="price-table-button-holder" style="display:inline; margin-right:1.5%">
-                                    <button class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a">
-                                        @Html.ActionLink("Edit", "EditPersonalDetails", "Config", Model, new { @from = "Get", @style = "color:white" })
-                                    </button>
-                                </div>
+                            <div style="margin-top:15%">
 
-                                <div class="price-table-button-holder" style="display:inline; margin-left:3%; margin-right:33%">
+                                <div class="price-table-button-holder" style="display:inline; margin-left:3%; margin-right:2%">
                                     <button class="btn btn-info" style="width:20%">
                                         @Html.ActionLink("Contact info", "ContactDetails", "Config", new { @id = Model.ContactInfoId, @style = "color:white" })
                                     </button>
