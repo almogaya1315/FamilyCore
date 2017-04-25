@@ -96,11 +96,12 @@
                             </div>
                             <div class="col-sm-6" style="margin-top:2%">
                                 <h4 style="color:#00b1b1;">@Model.FirstName @Model.LastName</h4>
+                                @Html.Partial("userAbout_textArea")
                                 <textarea style="border:none; resize:none; width:100%; margin-bottom:5%">@Model.About</textarea>
 
                                 <div class="price-table-button-holder" style="display:inline">
                                     <button class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-                                        @Html.ActionLink("Edit about", "EditPersonalDetails", "Config", Model, new { @from = "Get", @style = "color:white" })
+                                        @Html.ActionLink("Edit about", "EditAbout", "Config", Model, new { @from = "Get", @style = "color:white" })
                                     </button>
                                 </div>
 

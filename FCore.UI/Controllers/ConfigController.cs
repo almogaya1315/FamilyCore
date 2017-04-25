@@ -31,7 +31,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditPersonalDetails(FamilyMemberModel member)
+        public ActionResult EditAbout(FamilyMemberModel member)
         {
             using (repo = new FCoreRepository())
             {
@@ -40,7 +40,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPersonalDetails(FamilyMemberModel member, HttpPostedFileBase file)
+        public ActionResult EditAbout(FamilyMemberModel member, string about)
         {
             using (repo = new FCoreRepository())
             {
