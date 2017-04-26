@@ -64,6 +64,7 @@ namespace FCore.BL.Repositories
         {
             return new FamilyMemberModel()
             {
+                About = entity.About,
                 BirthDate = entity.BirthDate,
                 BirthPlace = entity.BirthPlace,
                 ContactInfo = ConvertToModel(CoreDB.GetContactInfo(entity.ContactInfoId)),

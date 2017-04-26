@@ -46,6 +46,7 @@ namespace FCore.Common.Models.Members
         [Required(ErrorMessage = "שדה חובה"), StringLength(40), DisplayName("שם משפחה")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage = "שדה חובה", AllowEmptyStrings = false)]
         [StringLength(150), DisplayName("על עצמי")]
         public string About { get; set; }
 

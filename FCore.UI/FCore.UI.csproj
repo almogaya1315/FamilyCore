@@ -160,6 +160,7 @@
     <Content Include="Views\Config\PersonalPage.cshtml" />
     <Content Include="Views\Shared\UserAbout.cshtml" />
     <Content Include="Views\Shared\EditAbout.cshtml" />
+    <Content Include="Views\Config\ContactDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

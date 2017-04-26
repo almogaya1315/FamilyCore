@@ -1,4 +1,4 @@
-﻿@model FCore.Common.Models.Members.FamilyMemberModel
+﻿@model FCore.Common.Models.Contacts.ContactInfoModel
 
 @section section1
 {
@@ -79,7 +79,7 @@
         <div class="col-md-8 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>@Model.FirstName's Profile</h4>
+                    <h4>@(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName's Profile</h4>
                 </div>
                 <div class="panel-body">
 
@@ -180,14 +180,6 @@
                 </div>
             </div>
         </div>
-
-        <script>
-            $(function () {
-                $('#profile-image1').on('click', function () {
-                    $('#profile-image-upload').click();
-                });
-            });
-        </script>
-
     </div>
 </div>
+

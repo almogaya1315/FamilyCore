@@ -32,5 +32,7 @@ namespace FCore.Common.Interfaces
         ICollection<ChatGroupModel> GetChatGroups();
         ChatGroupModel GetChatGroup(int id);
         MessageModel GetMessage(int id);
+
+        void UpdateUserAbout(int memberId, string about);
     }
 }

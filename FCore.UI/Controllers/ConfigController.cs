@@ -29,27 +29,33 @@ namespace FCore.UI.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult EditAbout(int id)
+        //[HttpGet]
+        //public ActionResult EditAbout(int id)
+        //{
+        //    using (repo = new FCoreRepository())
+        //    {
+        //        return PartialView("EditAbout", repo.GetFamilyMember(id));
+        //    }
+        //}
+
+        [HttpPost]
+        public ActionResult EditAbout(int Id, string About)
         {
             using (repo = new FCoreRepository())
             {
-                return PartialView("EditAbout", repo.GetFamilyMember(id));
+                if (ModelState.IsValid && !String.IsNullOrWhiteSpace(About))
+                {
+                    repo.UpdateUserAbout(Id, About);
+                }
+                //else return View("PersonalPage", repo.GetFamilyMember(Id));
+                return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
             }
         }
 
-        [HttpPost]
-        public ActionResult EditAbout(FamilyMemberModel member, string About)
+        public ActionResult ContactDetails(FamilyMemberModel member)
         {
-            using (repo = new FCoreRepository())
-            {
-                if (ModelState.IsValid)
-                {
-
-                }
-                else return View(new { @from = "Get" });
-                return RedirectToAction("PersonalPage", repo.GetFamilyMember(member.Id));
-            }
+            ViewData["member"] = member;
+            return View(member.ContactInfo); 
         }
     }
 }

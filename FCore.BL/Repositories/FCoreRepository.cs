@@ -111,6 +111,11 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetMessage(id));
         }
+
+        public void UpdateUserAbout(int memberId, string about)
+        {
+            CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about);
+        }
         #endregion
 
         public void Dispose()
