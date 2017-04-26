@@ -29,14 +29,14 @@ namespace FCore.UI.Controllers
             }
         }
 
-        //[HttpGet]
-        //public ActionResult EditAbout(int id)
-        //{
-        //    using (repo = new FCoreRepository())
-        //    {
-        //        return PartialView("EditAbout", repo.GetFamilyMember(id));
-        //    }
-        //}
+        [HttpGet]
+        public ActionResult EditAbout(int id)
+        {
+            using (repo = new FCoreRepository())
+            {
+                return PartialView("EditAbout", repo.GetFamilyMember(id));
+            }
+        }
 
         [HttpPost]
         public ActionResult EditAbout(int Id, string About)
