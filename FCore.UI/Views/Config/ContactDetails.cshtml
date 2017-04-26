@@ -1,4 +1,4 @@
-﻿@model FCore.Common.Models.Contacts.ContactInfoModel
+﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
 @section section1
 {
@@ -79,7 +79,7 @@
         <div class="col-md-8 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>@(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName's Profile</h4>
+                    <h4>@Model.FirstName's Profile</h4>
                 </div>
                 <div class="panel-body">
 
@@ -88,23 +88,30 @@
                         <div class="box-body" dir="rtl">
                             <div class="col-sm-6">
                                 <div align="center" style="margin-top:5%">
-                                    
-                                    <img alt="User Pic" src="@(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).ProfileImagePath" id="profile-image1" class="img-circle img-responsive">
 
-                                    <input id="profile-image-upload" class="hidden" type="file">
-                                    <div style="color:#999; margin-top:3%">click avatar to change profile picture</div>
+                                    @{
+                                        if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
+                                        {
+                                            <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                                        }
+                                        else
+                                        {
+                                            <img alt="User Pic" src="@Model.ProfileImagePath" id="profile-image1" class="img-circle img-responsive">
+                                        }
+                                    }
+
                                 </div>
                             </div>
                             <div class="col-sm-6" style="margin-top:2%">
                                 <h4 style="color:#00b1b1;">
-                                    @(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName
-                                    @(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).LastName
+                                    @Model.FirstName
+                                    @Model.LastName
                                 </h4>
 
                                 <div>
                                     <div id="_userabout">
                                         <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">
-                                            @(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).About
+                                            @Model.About
                                         </div>
                                     </div>
                                 </div>
@@ -117,28 +124,28 @@
                                 <div class="bot-border"></div>
 
                                 <div class="col-sm-7">
-                                    @Model.Country
+                                    @Model.ContactInfo.Country
                                 </div>
                                 <div class="col-sm-5 col-xs-6 tital ">
-                                    @Html.LabelFor(m => Model.Country)
+                                    @Html.LabelFor(m => Model.ContactInfo.Country)
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
 
                                 <div class="col-sm-7 col-xs-6 ">
-                                    @Model.City
+                                    @Model.ContactInfo.City
                                 </div>
                                 <div class="col-sm-5 col-xs-6 tital ">
-                                    @Html.LabelFor(m => Model.City)
+                                    @Html.LabelFor(m => Model.ContactInfo.City)
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
 
                                 <div class="col-sm-7">
-                                    @Model.Street
+                                    @Model.ContactInfo.Street
                                 </div>
                                 <div class="col-sm-5 col-xs-6 tital ">
-                                    @Html.LabelFor(m => Model.Street)
+                                    @Html.LabelFor(m => Model.ContactInfo.Street)
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
@@ -148,7 +155,7 @@
 
                                 <div class="price-table-button-holder" style="display:inline; margin-left:3%; margin-right:2%">
                                     <button class="btn btn-info" style="width:20%">
-                                        @Html.ActionLink("Personal info", "PersonalPage", "Config", new { @id = (ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).Id, @style = "color:white" })
+                                        @Html.ActionLink("Personal info", "PersonalPage", "Config", Model, new { @style = "color:white" })
                                     </button>
                                 </div>
 
@@ -158,7 +165,6 @@
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
