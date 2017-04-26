@@ -206,5 +206,23 @@ namespace FCore.DAL.Entities.Families
 
             //return Messages.FirstOrDefault(m => m.Id == id);
         }
+
+        public void UpdateUserAbout(FamilyMemberEntity entity, string about)
+        {
+            FamilyMemberEntity toUpdate = null;
+            foreach (FamilyMemberEntity member in FamilyMembers)
+            {
+                if (member.Id == entity.Id)
+                {
+                    toUpdate = member;
+                    break;
+                }
+            }
+            if (toUpdate != null)
+            {
+                toUpdate.About = about;
+                SaveChanges();
+            }
+        }
     }
 }

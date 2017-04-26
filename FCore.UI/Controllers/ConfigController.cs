@@ -39,16 +39,25 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAbout(FamilyMemberModel member, string About)
+        public ActionResult EditAbout(int Id, string About)
         {
             using (repo = new FCoreRepository())
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && !String.IsNullOrWhiteSpace(About))
                 {
-
+                    repo.UpdateUserAbout(Id, About);
                 }
-                else return View(new { @from = "Get" });
-                return RedirectToAction("PersonalPage", repo.GetFamilyMember(member.Id));
+                //else return View("PersonalPage", repo.GetFamilyMember(Id));
+                return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
+            }
+        }
+
+        public ActionResult ContactDetails(FamilyMemberModel member)
+        {
+            using (repo = new FCoreRepository())
+            {
+                ViewData["member"] = member = repo.GetFamilyMember(member.Id);
+                return View(member.ContactInfo);
             }
         }
     }
