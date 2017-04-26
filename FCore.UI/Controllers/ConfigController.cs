@@ -54,8 +54,11 @@ namespace FCore.UI.Controllers
 
         public ActionResult ContactDetails(FamilyMemberModel member)
         {
-            ViewData["member"] = member;
-            return View(member.ContactInfo); 
+            using (repo = new FCoreRepository())
+            {
+                ViewData["member"] = member = repo.GetFamilyMember(member.Id);
+                return View(member.ContactInfo);
+            }
         }
     }
 }

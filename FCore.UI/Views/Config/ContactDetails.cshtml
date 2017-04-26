@@ -88,41 +88,25 @@
                         <div class="box-body" dir="rtl">
                             <div class="col-sm-6">
                                 <div align="center" style="margin-top:5%">
-                                    <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                                    
+                                    <img alt="User Pic" src="@(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).ProfileImagePath" id="profile-image1" class="img-circle img-responsive">
 
                                     <input id="profile-image-upload" class="hidden" type="file">
                                     <div style="color:#999; margin-top:3%">click avatar to change profile picture</div>
                                 </div>
                             </div>
                             <div class="col-sm-6" style="margin-top:2%">
-                                <h4 style="color:#00b1b1;">@Model.FirstName @Model.LastName</h4>
+                                <h4 style="color:#00b1b1;">
+                                    @(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName
+                                    @(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).LastName
+                                </h4>
 
                                 <div>
                                     <div id="_userabout">
-                                        <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
-                                        @*<div>@Html.ValidationMessageFor(m => Model.About)</div>*@
-
-                                        <div class="price-table-button-holder" style="display:inline; ">
-                                            <button id="userabout_btn" class="btn btn-info" value="Edit about" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-                                                Edit about
-                                            </button>
+                                        <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">
+                                            @(ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).About
                                         </div>
-
-                                    </div> @*@Html.Partial("UserAbout", Model)*@
-                                    <div id="_editabout" style="display:none">
-                                        @using (Html.BeginForm("EditAbout", "Config", FormMethod.Post))
-                                        {
-                                            @Html.HiddenFor(m => Model.Id)
-
-                                            @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
-                                            @*<textarea style="resize:none; width:100%; margin-bottom:5%"> @Model.About </textarea>*@
-                                            @*<div>@Html.ValidationMessageFor(m => Model.About)</div>*@
-
-                                            <div class="price-table-button-holder" style="display:inline">
-                                                <input id="editabout_input" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a" type="submit" value="Save" />
-                                            </div>
-                                        }
-                                    </div> @*@Html.Partial("EditAbout", Model)*@
+                                    </div>
                                 </div>
 
                             </div>
@@ -133,28 +117,28 @@
                                 <div class="bot-border"></div>
 
                                 <div class="col-sm-7">
-                                    @Model.BirthDate.Value.ToShortDateString()
+                                    @Model.Country
                                 </div>
                                 <div class="col-sm-5 col-xs-6 tital ">
-                                    @Html.LabelFor(m => Model.BirthDate)
+                                    @Html.LabelFor(m => Model.Country)
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
 
                                 <div class="col-sm-7 col-xs-6 ">
-                                    @Model.BirthPlace
+                                    @Model.City
                                 </div>
                                 <div class="col-sm-5 col-xs-6 tital ">
-                                    @Html.LabelFor(m => Model.BirthPlace)
+                                    @Html.LabelFor(m => Model.City)
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
 
                                 <div class="col-sm-7">
-                                    @Model.Age
+                                    @Model.Street
                                 </div>
                                 <div class="col-sm-5 col-xs-6 tital ">
-                                    @Html.LabelFor(m => Model.Age)
+                                    @Html.LabelFor(m => Model.Street)
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
@@ -164,7 +148,7 @@
 
                                 <div class="price-table-button-holder" style="display:inline; margin-left:3%; margin-right:2%">
                                     <button class="btn btn-info" style="width:20%">
-                                        @Html.ActionLink("Contact info", "ContactDetails", "Config", new { @id = Model.ContactInfoId, @style = "color:white" })
+                                        @Html.ActionLink("Personal info", "PersonalPage", "Config", new { @id = (ViewData["member"] as FCore.Common.Models.Members.FamilyMemberModel).Id, @style = "color:white" })
                                     </button>
                                 </div>
 
