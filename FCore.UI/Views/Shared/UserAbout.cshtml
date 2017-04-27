@@ -1,18 +1,23 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-@using (Ajax.BeginForm(new AjaxOptions() { UpdateTargetId = "_userabout", InsertionMode = InsertionMode.Replace }))
-{
+<div id="_userabout">
     <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
+    @*<div>@Html.ValidationMessageFor(m => Model.About)</div>*@
 
     <div class="price-table-button-holder" style="display:inline; ">
-        <button id="userabout_btn" value="Edit about" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-            @*@Ajax.ActionLink("Edit about", "EditAbout", "Config", new { id = Model.Id },
-                new AjaxOptions() { UpdateTargetId = "_userabout" },
-                new { @style = "color:white", @from = "Get" })*@
-        </button>
-    </div>
-}
 
-<script src="~/Scripts/UserAboutScript.js" type="text/javascript"></script>
+        @Ajax.ActionLink("Edit about", "EditAbout", new { @id = Model.Id, @class = "btn btn-info",
+                @style = "width:30%; background-color:#43b98a; border-color:#43b98a" },
+                new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "UserAbout_partial" })
+
+        @*<button id="userabout_btn" class="btn btn-info" value="Edit about" style="width:30%; background-color:#43b98a; border-color:#43b98a">
+                Edit about
+            </button>*@
+    </div>
+
+</div>
+
+
+
 
 

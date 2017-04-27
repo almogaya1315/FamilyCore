@@ -1,18 +1,26 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-@using (Ajax.BeginForm(new AjaxOptions() { UpdateTargetId = "_userabout", InsertionMode = InsertionMode.Replace }))
-{
-    <textarea style="border:none; resize:none; width:100%; margin-bottom:5%">@Model.About</textarea>
+<div id="_editabout"> @*style="display:none"*@
+    @using (Ajax.BeginForm("EditAbout", "Config", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnComplete = "OnLoadAbout",
+        UpdateTargetId = "UserAbout_partial",
+        InsertionMode = InsertionMode.Replace
+    }))
+    {
+        @Html.HiddenFor(m => Model.Id)
 
-    <div class="price-table-button-holder" style="display:inline">
-        <button class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-            @Ajax.ActionLink("Save", "EditAbout", "Config", new { id = Model.Id },
-           new AjaxOptions() { UpdateTargetId = "_userabout" },
-           new { @style = "color:white", @type = "submit", @from = "Post" })
-        </button>
-    </div>
-}
+        @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
+        @*<div>@Html.ValidationMessageFor(m => Model.About)</div>*@
 
-<script src="~/Scripts/UserAboutScript.js" type="text/javascript"></script>
+        <div class="price-table-button-holder" style="display:inline">
+            <input id="editabout_input" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a" type="submit" value="Save" />
+        </div>
+    }
+</div>
+
+
+
 
 

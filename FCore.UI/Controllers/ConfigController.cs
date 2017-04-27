@@ -29,14 +29,18 @@ namespace FCore.UI.Controllers
             }
         }
 
-        //[HttpGet]
-        //public ActionResult EditAbout(int id)
-        //{
-        //    using (repo = new FCoreRepository())
-        //    {
-        //        return PartialView("EditAbout", repo.GetFamilyMember(id));
-        //    }
-        //}
+        [HttpGet]
+        public ActionResult EditAbout(int id)
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("EditAbout", repo.GetFamilyMember(id));
+                }
+                else return View("PersonalPage", repo.GetFamilyMember(id));
+            }
+        }
 
         [HttpPost]
         public ActionResult EditAbout(int Id, string About)
@@ -46,9 +50,10 @@ namespace FCore.UI.Controllers
                 if (ModelState.IsValid && !String.IsNullOrWhiteSpace(About))
                 {
                     repo.UpdateUserAbout(Id, About);
+                    return PartialView("UserAbout", repo.GetFamilyMember(Id));
                 }
-                //else return View("PersonalPage", repo.GetFamilyMember(Id));
-                return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
+                else return PartialView("EditAbout", repo.GetFamilyMember(Id));
+                //return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
             }
         }
 
