@@ -34,11 +34,11 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("EditAbout", repo.GetFamilyMember(id));
-                }
-                else return View("PersonalPage", repo.GetFamilyMember(id));
+                //if (Request.IsAjaxRequest())
+                //{
+                return PartialView("EditAbout", repo.GetFamilyMember(id));
+                //}
+                //else return View("PersonalPage", repo.GetFamilyMember(id));
             }
         }
 

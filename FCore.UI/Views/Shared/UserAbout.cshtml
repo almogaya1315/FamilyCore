@@ -6,9 +6,10 @@
 
     <div class="price-table-button-holder" style="display:inline; ">
 
-        @Ajax.ActionLink("Edit about", "EditAbout", new { @id = Model.Id, @class = "btn btn-info",
-                @style = "width:30%; background-color:#43b98a; border-color:#43b98a" },
-                new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "UserAbout_partial" })
+        <div class="btn btn-info" style = "width:30%; background-color:#43b98a; border-color:#43b98a">
+            @Ajax.ActionLink("Edit about", "EditAbout", new { @id = Model.Id },
+                new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "UserAbout_partial" }, new { @style = "color:white" })
+        </div>
 
         @*<button id="userabout_btn" class="btn btn-info" value="Edit about" style="width:30%; background-color:#43b98a; border-color:#43b98a">
                 Edit about
@@ -16,8 +17,3 @@
     </div>
 
 </div>
-
-
-
-
-
