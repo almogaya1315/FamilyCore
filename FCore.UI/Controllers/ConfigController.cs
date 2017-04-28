@@ -34,11 +34,11 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                //if (Request.IsAjaxRequest())
-                //{
-                return PartialView("EditAbout", repo.GetFamilyMember(id));
-                //}
-                //else return View("PersonalPage", repo.GetFamilyMember(id));
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("EditAbout", repo.GetFamilyMember(id));
+                }
+                else return View("PersonalPage", repo.GetFamilyMember(id));
             }
         }
 
@@ -47,13 +47,16 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                if (ModelState.IsValid && !String.IsNullOrWhiteSpace(About))
+                if (ModelState.IsValid && !String.IsNullOrWhiteSpace(About)) 
+                    //need to pass model from 'EditAbout' partial's Ajax.BeginForm 
+                    //for ModelState to display 'About' property's error message 
                 {
-                    repo.UpdateUserAbout(Id, About);
+                    if (repo.GetFamilyMember(Id).About != About)
+                        repo.UpdateUserAbout(Id, About);
                     return PartialView("UserAbout", repo.GetFamilyMember(Id));
+                    //return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
                 }
                 else return PartialView("EditAbout", repo.GetFamilyMember(Id));
-                //return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
             }
         }
 

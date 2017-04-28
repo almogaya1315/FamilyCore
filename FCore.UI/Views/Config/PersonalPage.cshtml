@@ -97,38 +97,38 @@
                             <div class="col-sm-6" style="margin-top:2%">
                                 <h4 style="color:#00b1b1;">@Model.FirstName @Model.LastName</h4>
 
-                                <div id="_userabout">
-                                     @Html.Partial("UserAbout", Model); 
+                                <div id="userabout_div">
+                                    @{ Html.RenderPartial("UserAbout", Model); }
                                 </div>
 
                                 @*
-                                <div>
-                                    <div id="_userabout">
-                                        <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
-                                        <div>@Html.ValidationMessageFor(m => Model.About)</div>
-
-                                        <div class="price-table-button-holder" style="display:inline; ">
-                                            <button id="userabout_btn" class="btn btn-info" value="Edit about" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-                                                Edit about
-                                            </button>
-                                        </div>
-
-                                    </div> @Html.Partial("UserAbout", Model)
-                                    <div id="_editabout" style="display:none">
-                                        @using (Html.BeginForm("EditAbout", "Config", FormMethod.Post))
-                                        {
-                                            @Html.HiddenFor(m => Model.Id)
-
-                                            @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
-                                            <textarea style="resize:none; width:100%; margin-bottom:5%"> @Model.About </textarea>
+                                    <div>
+                                        <div id="_userabout">
+                                            <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
                                             <div>@Html.ValidationMessageFor(m => Model.About)</div>
 
-                                            <div class="price-table-button-holder" style="display:inline">
-                                                <input id="editabout_input" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a" type="submit" value="Save" />
+                                            <div class="price-table-button-holder" style="display:inline; ">
+                                                <button id="userabout_btn" class="btn btn-info" value="Edit about" style="width:30%; background-color:#43b98a; border-color:#43b98a">
+                                                    Edit about
+                                                </button>
                                             </div>
-                                        }
-                                    </div> @Html.Partial("EditAbout", Model)
-                                </div>*@
+
+                                        </div> @Html.Partial("UserAbout", Model)
+                                        <div id="_editabout" style="display:none">
+                                            @using (Html.BeginForm("EditAbout", "Config", FormMethod.Post))
+                                            {
+                                                @Html.HiddenFor(m => Model.Id)
+
+                                                @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
+                                                <textarea style="resize:none; width:100%; margin-bottom:5%"> @Model.About </textarea>
+                                                <div>@Html.ValidationMessageFor(m => Model.About)</div>
+
+                                                <div class="price-table-button-holder" style="display:inline">
+                                                    <input id="editabout_input" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a" type="submit" value="Save" />
+                                                </div>
+                                            }
+                                        </div> @Html.Partial("EditAbout", Model)
+                                    </div>*@
 
 
                             </div>

@@ -4,15 +4,15 @@
     @using (Ajax.BeginForm("EditAbout", "Config", new AjaxOptions
     {
         HttpMethod = "Post",
-        OnComplete = "OnLoadAbout",
-        UpdateTargetId = "UserAbout_partial",
+        //OnComplete = "OnLoadAbout",
+        UpdateTargetId = "userabout_div",
         InsertionMode = InsertionMode.Replace
     }))
     {
         @Html.HiddenFor(m => Model.Id)
 
         @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
-        @*<div>@Html.ValidationMessageFor(m => Model.About)</div>*@
+        <div>@Html.ValidationMessageFor(m => Model.About)</div>
 
         <div class="price-table-button-holder" style="display:inline">
             <input id="editabout_input" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a" type="submit" value="Save" />
