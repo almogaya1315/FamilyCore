@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Images\Defualt\profile_defualt.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -171,7 +172,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Images\" />
+    <Folder Include="App_Data\Images\Dynamic\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">

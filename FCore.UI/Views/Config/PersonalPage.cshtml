@@ -87,25 +87,30 @@
 
                         <div class="box-body" dir="rtl">
 
-                            @using (Html.BeginForm("EditProfileImage", "Config", Model, FormMethod.Post, new { enctype = "multipart/from-data" }))
+                            @using (Html.BeginForm("EditProfileImage", "Config",
+                                Model, FormMethod.Post, new { enctype = "multipart/from-data" }))
                             {
                                 <div class="col-sm-6">
                                     <div align="center" style="margin-top:5%">
                                         @{if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
                                             {
-                                                <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                                                <img src="..//Images/Defualt/profile_defualt.jpg" 
+                                                     id="profile-image-defualt" class="img-circle img-responsive"
+                                                     style="border-radius:50%; cursor:pointer"/>
                                             }
                                             else
                                             {
-                                                <img alt="User Pic" src="@Model.ProfileImagePath" id="profile-image1" class="img-circle img-responsive">
+                                                <img src="@Model.ProfileImagePath" id="profile-image" class="img-circle img-responsive"
+                                                     style="border-radius:50%; cursor:pointer"/>
                                             }
                                         }
 
                                         <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+                                        <input id="profile-image-server" class="hidden" type="submit"/>
                                         <div style="color:#999; margin-top:3%">click avatar to change profile picture</div>
                                     </div>
                                 </div>
-                                            }
+                            }
 
                             <div class="col-sm-6" style="margin-top:2%">
                                 <h4 style="color:#00b1b1;">@Model.FirstName @Model.LastName</h4>
@@ -172,8 +177,20 @@
 
         <script>
             $(function () {
-                $('#profile-image1').on('click', function () {
+                $('#profile-image-defualt').on('click', function () {
                     $('#profile-image-upload').click();
+                });
+            });
+
+            $(function () {
+                $('#profile-image').on('click', function () {
+                    $('#profile-image-upload').click();
+                });
+            });
+
+            $(function () {
+                $('#profile-image-upload').on('click', function () {
+                    $('#profile-image-server').click();
                 });
             });
         </script>
