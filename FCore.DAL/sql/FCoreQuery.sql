@@ -13,6 +13,10 @@ from dbf.ContactInfoes
 select *
 from dbf.FamilyMembers
 
+update dbf.FamilyMembers
+set ProfileImagePath = ''
+where Id = 1
+
 select *
 from dbf.Permissions
 
