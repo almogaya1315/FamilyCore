@@ -3,6 +3,7 @@ using FCore.Common.Interfaces;
 using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -63,12 +64,13 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                if (ModelState.IsValid)
+                if (ProfileImagePath.ContentType.Contains("image"))
                 {
-
+                    if (repo.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
+                        repo.UpdateMemberProfileImage(member.Id, ProfileImagePath);
                 }
             }
-            return null;
+            return View("PersonalPage", repo.GetFamilyMember(member.Id));
         }
 
         public ActionResult ContactDetails(FamilyMemberModel member)

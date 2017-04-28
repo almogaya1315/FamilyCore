@@ -18,6 +18,7 @@ using FCore.Common.Enums;
 using FCore.DAL.Entities.Albums;
 using FCore.DAL.Entities.Videos;
 using FCore.DAL.Entities.ChatGroups;
+using System.Web;
 
 namespace FCore.BL.Repositories
 {
@@ -112,9 +113,18 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetMessage(id));
         }
 
+        public string GetFilePath(HttpPostedFileBase file)
+        {
+            return null;
+        }
+
         public void UpdateUserAbout(int memberId, string about)
         {
             CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about);
+        }
+        public void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file)
+        {
+
         }
         #endregion
 

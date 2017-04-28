@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace FCore.Common.Interfaces
 {
@@ -33,6 +34,9 @@ namespace FCore.Common.Interfaces
         ChatGroupModel GetChatGroup(int id);
         MessageModel GetMessage(int id);
 
+        string GetFilePath(HttpPostedFileBase file);
+
         void UpdateUserAbout(int memberId, string about);
+        void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file);
     }
 }
