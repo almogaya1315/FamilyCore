@@ -86,14 +86,27 @@
                     <div class="box box-info">
 
                         <div class="box-body" dir="rtl">
-                            <div class="col-sm-6">
-                                <div align="center" style="margin-top:5%">
-                                    <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
 
-                                    <input id="profile-image-upload" class="hidden" type="file">
-                                    <div style="color:#999; margin-top:3%">click avatar to change profile picture</div>
+                            @using (Html.BeginForm("EditProfileImage", "Config", Model, FormMethod.Post, new { enctype = "multipart/from-data" }))
+                            {
+                                <div class="col-sm-6">
+                                    <div align="center" style="margin-top:5%">
+                                        @{if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
+                                            {
+                                                <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                                            }
+                                            else
+                                            {
+                                                <img alt="User Pic" src="@Model.ProfileImagePath" id="profile-image1" class="img-circle img-responsive">
+                                            }
+                                        }
+
+                                        <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+                                        <div style="color:#999; margin-top:3%">click avatar to change profile picture</div>
+                                    </div>
                                 </div>
-                            </div>
+                                            }
+
                             <div class="col-sm-6" style="margin-top:2%">
                                 <h4 style="color:#00b1b1;">@Model.FirstName @Model.LastName</h4>
 

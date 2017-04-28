@@ -47,19 +47,28 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                var error = ModelState.Values.Select(e => e.Errors);
+                var errors = ModelState.Values.Select(e => e.Errors);
 
-                if (ModelState.IsValid) // && !String.IsNullOrWhiteSpace(member.About) 
-                //need to pass model from 'EditAbout' partial's Ajax.BeginForm 
-                //for ModelState to display 'About' property's error message 
+                if (ModelState.IsValid) 
                 {
                     if (repo.GetFamilyMember(member.Id).About != member.About)
                         repo.UpdateUserAbout(member.Id, member.About);
                     return PartialView("UserAbout", repo.GetFamilyMember(member.Id));
-                    //return RedirectToAction("PersonalPage", repo.GetFamilyMember(Id));
                 }
                 else return PartialView("EditAbout", repo.GetFamilyMember(member.Id));
             }
+        }
+
+        public ActionResult EditProfileImage(FamilyMemberModel member, HttpPostedFileBase file)
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (ModelState.IsValid)
+                {
+
+                }
+            }
+            return null;
         }
 
         public ActionResult ContactDetails(FamilyMemberModel member)
