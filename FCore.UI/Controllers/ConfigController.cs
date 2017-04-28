@@ -59,7 +59,7 @@ namespace FCore.UI.Controllers
             }
         }
 
-        public ActionResult EditProfileImage(FamilyMemberModel member, HttpPostedFileBase file)
+        public ActionResult EditProfileImage(FamilyMemberModel member, HttpPostedFileBase ProfileImagePath)
         {
             using (repo = new FCoreRepository())
             {
