@@ -1,47 +1,20 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-@*<div id="main_about">*@
-    <div id="_userabout">
-        <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
-        @*<div>@Html.ValidationMessageFor(m => Model.About)</div>*@
+<div id="_userabout">
+    <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
 
-        <div class="price-table-button-holder" style="display:inline; ">
+    <div class="price-table-button-holder" style="display:inline; ">
 
-            <div class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-                @Ajax.ActionLink("Edit about", "EditAbout", new { @id = Model.Id },
+        <div class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
+            @Ajax.ActionLink("Edit about", "EditAbout", new { @id = Model.Id },
                 new AjaxOptions
                 {
                     HttpMethod = "Get",
                     UpdateTargetId = "userabout_div",
-                    //OnComplete = "OnLoadEdit",
                     InsertionMode = InsertionMode.Replace
                 },
                 new { @style = "color:white" })
-            </div>
-
-            @*<button id="userabout_btn" class="btn btn-info" value="Edit about" style="width:30%; background-color:#43b98a; border-color:#43b98a">
-                    Edit about
-                </button>*@
         </div>
     </div>
+</div>
 
-    @*<div id="_editabout" style="display:none">
-        @using (Ajax.BeginForm("EditAbout", "Config", new AjaxOptions
-        {
-            HttpMethod = "Post",
-            OnComplete = "OnLoadAbout",
-            UpdateTargetId = "_userabout",
-            InsertionMode = InsertionMode.Replace
-        }))
-        {
-            @Html.HiddenFor(m => Model.Id)
-
-            @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
-            @*<div>@Html.ValidationMessageFor(m => Model.About)</div>
-
-            <div class="price-table-button-holder" style="display:inline">
-                <input id="editabout_input" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a" type="submit" value="Save" />
-            </div>
-        }
-    </div>*@
-@*</div>*@

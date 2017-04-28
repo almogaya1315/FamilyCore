@@ -1,8 +1,8 @@
 ﻿
-//var userabout_btn = document.getElementById("userabout_btn");
-//userabout_btn.addEventListener("click", OnLoadEdit);
-//var editabout_input = document.getElementById("editabout_input");
-//editabout_input.addEventListener("click", OnLoadAbout);
+var userabout_btn = document.getElementById("userabout_btn");
+userabout_btn.addEventListener("click", OnLoadEdit);
+var editabout_input = document.getElementById("editabout_input");
+editabout_input.addEventListener("click", OnLoadAbout);
 
 function OnLoadEdit() {
 

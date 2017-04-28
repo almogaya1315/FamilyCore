@@ -1,15 +1,14 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-<div id="_editabout"> @*style="display:none"*@
-    @using (Ajax.BeginForm("EditAbout", "Config", new AjaxOptions
+<div id="_editabout">
+    @using (Ajax.BeginForm("EditAbout", "Config", Model, new AjaxOptions
     {
         HttpMethod = "Post",
-        //OnComplete = "OnLoadAbout",
         UpdateTargetId = "userabout_div",
         InsertionMode = InsertionMode.Replace
     }))
     {
-        @Html.HiddenFor(m => Model.Id)
+        @*@Html.HiddenFor(m => Model.Id)*@
 
         @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
         <div>@Html.ValidationMessageFor(m => Model.About)</div>
