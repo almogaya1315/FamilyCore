@@ -95,17 +95,17 @@
                                         @{if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
                                             {
                                                 <img src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                                                     id="profile-image-defualt" class="img-circle img-responsive" />
+                                                     id="profile-image-defualt" class="img-circle img-responsive"/>
                                             }
                                             else
                                             {
-                                                <img src="@Model.ProfileImagePath" id="profile-image" class="img-circle img-responsive"
+                                                <img src="@Url.Content(Model.ProfileImagePath)" id="profile-image" class="img-circle img-responsive"
                                                      style="border-radius:50%; cursor:pointer"/>
                                             }
                                         }
 
                                         <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
-                                        @Html.ValidationMessageFor(m => Model.ProfileImagePath)
+                                        <div style="margin-top:5%">@Html.ValidationMessageFor(m => Model.ProfileImagePath)</div>
                                         <input id="profile-image-server" class="hidden" type="submit"/>
                                         <div style="color:#999; margin-top:3%">click avatar to change profile picture</div>
                                     </div>

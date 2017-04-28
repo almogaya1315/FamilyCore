@@ -115,7 +115,16 @@
                                 {
                                     <li class="left clearfix">
                                         <span class="chat-img pull-left">
-                                            <img src="@member.ProfileImagePath" alt="User Profile" class="img-circle">
+
+                                            @{if (String.IsNullOrWhiteSpace(member.ProfileImagePath))
+                                                {
+                                                    <img src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" alt="User Profile" class="img-circle">
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Url.Content(member.ProfileImagePath)" alt="User Profile" class="img-circle">
+                                                }
+                                            }
                                         </span>
                                         <div class="chat-body clearfix">
                                             <div class="header_sec">
@@ -127,7 +136,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                }
+                                                }
                             }
                         </ul>
                     </div>
@@ -177,4 +186,3 @@
         </div>
     </div>
 </div>
-

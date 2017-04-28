@@ -224,5 +224,22 @@ namespace FCore.DAL.Entities.Families
                 SaveChanges();
             }
         }
+        public void UpdateMemberProfileImage(FamilyMemberEntity entity, string path)
+        {
+            FamilyMemberEntity toUpdate = null;
+            foreach (FamilyMemberEntity member in FamilyMembers)
+            {
+                if (member.Id == entity.Id)
+                {
+                    toUpdate = member;
+                    break;
+                }
+            }
+            if (toUpdate != null)
+            {
+                toUpdate.ProfileImagePath = path;
+                SaveChanges();
+            }
+        }
     }
 }

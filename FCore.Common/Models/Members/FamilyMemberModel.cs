@@ -70,7 +70,7 @@ namespace FCore.Common.Models.Members
             }
         }
 
-        [Required(AllowEmptyStrings = true), DisplayName("תמונת פרופיל"), StringLength(400)]
+        [Required(AllowEmptyStrings = true, ErrorMessage = "שדה חובה"), DisplayName("תמונת פרופיל"), StringLength(400)]
         public string ProfileImagePath { get; set; }
 
         [DisplayName("קרובי משפחה")]

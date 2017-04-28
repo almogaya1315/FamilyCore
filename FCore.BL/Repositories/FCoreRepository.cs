@@ -19,6 +19,7 @@ using FCore.DAL.Entities.Albums;
 using FCore.DAL.Entities.Videos;
 using FCore.DAL.Entities.ChatGroups;
 using System.Web;
+using System.IO;
 
 namespace FCore.BL.Repositories
 {
@@ -115,7 +116,8 @@ namespace FCore.BL.Repositories
 
         public string GetFilePath(HttpPostedFileBase file)
         {
-            return null;
+            string pic = Path.GetFileName(file.FileName);
+            return $"~/Images/Profiles/{pic}";
         }
 
         public void UpdateUserAbout(int memberId, string about)
@@ -124,7 +126,11 @@ namespace FCore.BL.Repositories
         }
         public void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file)
         {
+            string pic = Path.GetFileName(file.FileName);
+            string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/Profiles/"), pic);
+            file.SaveAs(path);
 
+            CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file));
         }
         #endregion
 

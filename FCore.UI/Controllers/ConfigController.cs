@@ -60,17 +60,22 @@ namespace FCore.UI.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult EditProfileImage(FamilyMemberModel member, HttpPostedFileBase ProfileImagePath)
         {
             using (repo = new FCoreRepository())
             {
+                //if (ModelState.IsValid)
+                //{
                 if (ProfileImagePath.ContentType.Contains("image"))
                 {
                     if (repo.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
                         repo.UpdateMemberProfileImage(member.Id, ProfileImagePath);
                 }
+                //else { }
+                //}
+                return View("PersonalPage", repo.GetFamilyMember(member.Id));
             }
-            return View("PersonalPage", repo.GetFamilyMember(member.Id));
         }
 
         public ActionResult ContactDetails(FamilyMemberModel member)
