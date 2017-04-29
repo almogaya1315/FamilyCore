@@ -8,8 +8,6 @@
         InsertionMode = InsertionMode.Replace
     }))
     {
-        @ViewContext.TempData["ci"] = Model.ContactInfo;
-
         @Html.TextAreaFor(m => Model.About, new { @style = "resize:none; width:100%; margin-bottom:5%" })
         <div>@Html.ValidationMessageFor(m => Model.About)</div>
 

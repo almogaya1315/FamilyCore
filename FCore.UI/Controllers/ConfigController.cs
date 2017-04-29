@@ -44,11 +44,11 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditAbout(FamilyMemberModel member)
+        public ActionResult EditAbout([Bind(Exclude = "ContactInfo,Permissions,Relatives")] FamilyMemberModel member)
         {
             using (repo = new FCoreRepository())
             {
-                var errors = ModelState.Values.Select(e => e.Errors);
+                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
 
                 if (ModelState.IsValid) 
                 {

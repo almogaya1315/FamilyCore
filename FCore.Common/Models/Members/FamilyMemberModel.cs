@@ -32,13 +32,13 @@ namespace FCore.Common.Models.Members
         public int PermissionId { get; set; }
 
         [DisplayName("הרשאות")]
-        public PermissionsModel Permissions { get; set; }
+        public virtual PermissionsModel Permissions { get; set; }
 
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int ContactInfoId { get; set; }
 
         [DisplayName("פרטי התקשרות")]
-        public ContactInfoModel ContactInfo { get; set; }
+        public virtual ContactInfoModel ContactInfo { get; set; }
 
         [Required(ErrorMessage = "שדה חובה"), StringLength(30), DisplayName("שם פרטי")]
         public string FirstName { get; set; }
