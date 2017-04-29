@@ -163,6 +163,8 @@
     <Content Include="Views\Shared\UserAbout.cshtml" />
     <Content Include="Views\Shared\EditAbout.cshtml" />
     <Content Include="Views\Config\ContactDetails.cshtml" />
+    <Content Include="Views\Shared\UserDetails.cshtml" />
+    <Content Include="Views\Shared\EditDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

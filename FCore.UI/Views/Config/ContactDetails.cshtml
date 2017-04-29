@@ -117,8 +117,12 @@
                                 </div>
 
                             </div>
-                            <div class="clearfix"></div>
 
+                            <div id="userdetails_div">
+                                @{ Html.RenderPartial("UserDetails", Model); }
+                            </div>
+
+                            @*<div class="clearfix"></div>
                             <div style="margin-top:10%">
 
                                 <div class="bot-border"></div>
@@ -179,9 +183,18 @@
                                 
                             </div>
 
-                            <div>
-                                // todo
-                            </div>
+                            <div class="price-table-button-holder" style="display:inline">
+                                <div class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
+                                    @Ajax.ActionLink("Edit details", "EditDetails", new { @id = Model.Id },
+                                   new AjaxOptions
+                                   {
+                                       HttpMethod = "Get",
+                                       UpdateTargetId = "userdetails_div",
+                                       InsertionMode = InsertionMode.Replace
+                                   },
+                                   new { @style = "color:white" })
+                                </div>
+                            </div>*@
 
                             <div style="margin-top:15%">
 

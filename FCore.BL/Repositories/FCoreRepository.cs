@@ -122,7 +122,7 @@ namespace FCore.BL.Repositories
 
         public void UpdateUserAbout(int memberId, string about)
         {
-            CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about);
+            CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about); // ConvertToEntity
         }
         public void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file)
         {
@@ -130,7 +130,11 @@ namespace FCore.BL.Repositories
             string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/Profiles/"), pic);
             file.SaveAs(path);
 
-            CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file));
+            CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file)); // ConvertToEntity
+        }
+        public void UpdateUserDetails(FamilyMemberModel postedDetails_MemberModel)
+        {
+            CoreDB.UpdateUserDetails(ConvertToEntity(postedDetails_MemberModel));
         }
         #endregion
 

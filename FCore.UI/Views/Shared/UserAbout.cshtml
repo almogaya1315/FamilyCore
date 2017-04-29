@@ -3,8 +3,7 @@
 <div id="_userabout">
     <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">@Model.About</div>
 
-    <div class="price-table-button-holder" style="display:inline; ">
-
+    <div class="price-table-button-holder" style="display:inline">
         <div class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a">
             @Ajax.ActionLink("Edit about", "EditAbout", new { @id = Model.Id },
                 new AjaxOptions

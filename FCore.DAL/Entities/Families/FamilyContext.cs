@@ -241,5 +241,38 @@ namespace FCore.DAL.Entities.Families
                 SaveChanges();
             }
         }
+        public void UpdateUserDetails(FamilyMemberEntity postedDetail_memberEntity)
+        {
+            FamilyMemberEntity toUpdate = null;
+            foreach (FamilyMemberEntity member in FamilyMembers)
+            {
+                if (member.Id == postedDetail_memberEntity.Id)
+                {
+                    toUpdate = member;
+                    break;
+                }
+            }
+            if (toUpdate != null)
+            {
+                toUpdate.ContactInfo.Country = postedDetail_memberEntity.ContactInfo.Country;
+                toUpdate.ContactInfo.City = postedDetail_memberEntity.ContactInfo.City;
+                toUpdate.ContactInfo.Street = postedDetail_memberEntity.ContactInfo.Street;
+                toUpdate.ContactInfo.HouseNo = postedDetail_memberEntity.ContactInfo.HouseNo;
+                toUpdate.ContactInfo.PhoneNo = postedDetail_memberEntity.ContactInfo.PhoneNo;
+                toUpdate.ContactInfo.Email = postedDetail_memberEntity.ContactInfo.Email;
+                try
+                {
+                    SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Unable to update database. {e.Message}");
+                }
+            }
+            else
+            {
+                throw new NullReferenceException($"Member was not found by posted member id #{postedDetail_memberEntity.Id}");
+            }
+        }
     }
 }

@@ -1,0 +1,84 @@
+﻿@model FCore.Common.Models.Members.FamilyMemberModel
+
+@using (Ajax.BeginForm("EditDetails", "Config", Model, new AjaxOptions
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "userdetails_div",
+    InsertionMode = InsertionMode.Replace
+}))
+{
+    <div class="clearfix"></div>
+    <div style="margin-top:10%">
+
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.Country)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.Country)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.Country)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7 col-xs-6 ">
+            @Html.EditorFor(m => Model.ContactInfo.City)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.City)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.City)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.Street)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.Street)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.Street)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.HouseNo)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.HouseNo)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.HouseNo)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.PhoneNo)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.PhoneNo)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.Email)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.Email)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.Email)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+    </div>
+
+    <div class="price-table-button-holder" style="display:inline">
+        <input type="submit" value="Save" class="btn btn-info" style="width:30%; background-color:#43b98a; border-color:#43b98a"/>
+    </div>
+}
+
+    
+
+

@@ -48,7 +48,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                //var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
 
                 if (ModelState.IsValid) 
                 {
@@ -83,6 +83,40 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 return View(repo.GetFamilyMember(member.Id));
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditDetails(int id)
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("EditDetails", repo.GetFamilyMember(id));
+                }
+                else return View("ContactDetails", repo.GetFamilyMember(id));
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditDetails([Bind(Exclude = "ContactInfo,Permissions,Relatives")] FamilyMemberModel member) // int id, ContactInfoModel info
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        repo.UpdateUserDetails(member);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(e.Message);
+                    }
+                    return PartialView("UserDetails", repo.GetFamilyMember(member.Id));
+                }
+                return PartialView("EditDetails", repo.GetFamilyMember(member.Id));
             }
         }
     }

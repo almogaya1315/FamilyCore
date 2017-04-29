@@ -38,5 +38,6 @@ namespace FCore.Common.Interfaces
 
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file);
+        void UpdateUserDetails(FamilyMemberModel postedDetails_MemberModel);
     }
 }

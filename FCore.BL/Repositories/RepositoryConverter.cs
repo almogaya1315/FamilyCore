@@ -81,7 +81,19 @@ namespace FCore.BL.Repositories
         }
         public FamilyMemberEntity ConvertToEntity(FamilyMemberModel model)
         {
-            throw new NotImplementedException();
+            return new FamilyMemberEntity()
+            {
+                About = model.About,
+                BirthDate = model.BirthDate,
+                BirthPlace = model.BirthPlace,
+                ContactInfoId = model.ContactInfoId,
+                FamilyId = model.FamilyId,
+                FirstName = model.FirstName,
+                Id = model.Id,
+                LastName = model.LastName,
+                PermissionId = model.PermissionId,
+                ProfileImagePath = model.ProfileImagePath
+            };
         }
 
         public ContactInfoModel ConvertToModel(ContactInfoEntity entity)
