@@ -241,12 +241,12 @@ namespace FCore.DAL.Entities.Families
                 SaveChanges();
             }
         }
-        public void UpdateUserDetails(int memberId, ContactInfoEntity postedInfoEntity)
+        public void UpdateUserDetails(ContactInfoEntity postedInfoEntity)
         {
             FamilyMemberEntity toUpdate = null;
             foreach (FamilyMemberEntity member in FamilyMembers)
             {
-                if (member.Id == memberId)
+                if (member.Id == postedInfoEntity.MemberId)
                 {
                     toUpdate = member;
                     break;
@@ -276,7 +276,7 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                throw new NullReferenceException($"Member was not found by posted member id #{memberId}");
+                throw new NullReferenceException($"Member was not found by posted member id #{postedInfoEntity.MemberId}");
             }
         }
     }

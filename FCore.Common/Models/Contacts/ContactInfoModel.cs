@@ -20,6 +20,9 @@ namespace FCore.Common.Models.Contacts
         [DisplayName("ספר התקשרות")]
         public ContactBookModel ContactBook { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        public int MemberId { get; set; }
+
         [DisplayName("שם מלא")]
         [Required(ErrorMessage = "שדה חובה"), StringLength(30)]
         public string MemberName { get; set; }
@@ -45,8 +48,8 @@ namespace FCore.Common.Models.Contacts
         public string PhoneNo { get; set; }
 
         [DisplayName("אימייל")]
-        [StringLength(50), Required(AllowEmptyStrings = true)]
         [RegularExpression(".+\\@.+\\..+")]
+        [StringLength(50), Required(AllowEmptyStrings = true, ErrorMessage = "Not a valid e-mail")]
         public string Email { get; set; }
     }
 }

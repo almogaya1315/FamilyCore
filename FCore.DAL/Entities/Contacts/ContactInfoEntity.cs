@@ -18,6 +18,9 @@ namespace FCore.DAL.Entities.Contacts
         [ForeignKey("ContactBookId")]
         public ContactBookEntity ContactBook { get; set; }
 
+        [Required]
+        public int MemberId { get; set; }
+
         [Required, StringLength(30)]
         public string MemberName { get; set; }
 

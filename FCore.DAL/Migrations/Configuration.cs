@@ -22,6 +22,13 @@
 
         protected override void Seed(FamilyContext context)
         {
+            //ContactInfoEntity info1 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 1);
+            //info1.MemberId = 1;
+            //context.SaveChanges();
+            //ContactInfoEntity info2 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 2);
+            //info2.MemberId = 2;
+            //context.SaveChanges();
+
             //FamilyEntity family = new FamilyEntity()
             //{
             //    Name = "Matsliah"

@@ -34,10 +34,12 @@ namespace FCore.Common.Interfaces
         ChatGroupModel GetChatGroup(int id);
         MessageModel GetMessage(int id);
 
+        ContactInfoModel GetContactInfo(int id);
+
         string GetFilePath(HttpPostedFileBase file);
 
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file);
-        void UpdateUserDetails(int memberId, ContactInfoModel postedInfo);
+        void UpdateUserDetails(ContactInfoModel postedInfo);
     }
 }

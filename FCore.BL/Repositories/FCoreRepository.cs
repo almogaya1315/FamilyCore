@@ -114,6 +114,11 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetMessage(id));
         }
 
+        public ContactInfoModel GetContactInfo(int id)
+        {
+            return ConvertToModel(CoreDB.GetContactInfo(id));
+        }
+
         public string GetFilePath(HttpPostedFileBase file)
         {
             string pic = Path.GetFileName(file.FileName);
@@ -132,10 +137,9 @@ namespace FCore.BL.Repositories
 
             CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file)); // ConvertToEntity
         }
-        public void UpdateUserDetails(int memberId, ContactInfoModel postedInfo)
+        public void UpdateUserDetails(ContactInfoModel postedInfo)
         {
-
-            CoreDB.UpdateUserDetails(memberId, ConvertToEntity(postedInfo));
+            CoreDB.UpdateUserDetails(ConvertToEntity(postedInfo));
         }
         #endregion
 

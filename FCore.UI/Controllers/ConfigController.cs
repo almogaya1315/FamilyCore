@@ -88,20 +88,20 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditDetails(int id)
+        public ActionResult EditDetails(int memberId, int contactInfoId)
         {
             using (repo = new FCoreRepository())
             {
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("EditDetails", repo.GetContactInfo(id));
+                    return PartialView("EditDetails", repo.GetContactInfo(contactInfoId));
                 }
-                else return View("ContactDetails", repo.GetFamilyMember(id));
+                else return View("ContactDetails", repo.GetFamilyMember(memberId));
             }
         }
 
         [HttpPost]
-        public ActionResult EditDetails([Bind(Exclude = "ContactBook")] int id, ContactInfoModel postedInfo) 
+        public ActionResult EditDetails([Bind(Exclude = "ContactBook")] ContactInfoModel postedInfo) 
         {
             using (repo = new FCoreRepository())
             {
@@ -109,15 +109,15 @@ namespace FCore.UI.Controllers
                 {
                     try
                     {
-                        repo.UpdateUserDetails(id, postedInfo);
+                        repo.UpdateUserDetails(postedInfo);
                     }
                     catch (Exception e)
                     {
                         throw new Exception(e.Message);
                     }
-                    return PartialView("UserDetails", repo.GetFamilyMember(id));
+                    return PartialView("UserDetails", repo.GetFamilyMember(postedInfo.MemberId));
                 }
-                return PartialView("EditDetails", repo.GetFamilyMember(id));
+                return PartialView("EditDetails", repo.GetContactInfo(postedInfo.Id));
             }
         }
     }

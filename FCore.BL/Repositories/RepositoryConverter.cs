@@ -108,7 +108,8 @@ namespace FCore.BL.Repositories
                 Id = entity.Id,
                 MemberName = entity.MemberName,
                 PhoneNo = entity.PhoneNo,
-                Street = entity.Street
+                Street = entity.Street,
+                MemberId = entity.MemberId
             };
         }
         public ContactInfoEntity ConvertToEntity(ContactInfoModel model)
@@ -123,7 +124,8 @@ namespace FCore.BL.Repositories
                 Id = model.Id,
                 MemberName = model.MemberName,
                 PhoneNo = model.PhoneNo,
-                Street = model.Street
+                Street = model.Street,
+                MemberId = model.MemberId
             };
         }
 
