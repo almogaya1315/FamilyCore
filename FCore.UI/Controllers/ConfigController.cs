@@ -94,7 +94,7 @@ namespace FCore.UI.Controllers
             {
                 if (Request.IsAjaxRequest())
                 {
-                    return PartialView("EditDetails", repo.GetFamilyMember(id));
+                    return PartialView("EditDetails", repo.GetContactInfo(id));
                 }
                 else return View("ContactDetails", repo.GetFamilyMember(id));
             }
