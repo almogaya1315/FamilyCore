@@ -132,9 +132,10 @@ namespace FCore.BL.Repositories
 
             CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file)); // ConvertToEntity
         }
-        public void UpdateUserDetails(FamilyMemberModel postedDetails_MemberModel)
+        public void UpdateUserDetails(int memberId, ContactInfoModel postedInfo)
         {
-            CoreDB.UpdateUserDetails(ConvertToEntity(postedDetails_MemberModel));
+
+            CoreDB.UpdateUserDetails(memberId, ConvertToEntity(postedInfo));
         }
         #endregion
 

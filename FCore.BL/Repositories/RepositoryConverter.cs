@@ -113,7 +113,18 @@ namespace FCore.BL.Repositories
         }
         public ContactInfoEntity ConvertToEntity(ContactInfoModel model)
         {
-            throw new NotImplementedException();
+            return new ContactInfoEntity()
+            {
+                City = model.City,
+                ContactBookId = model.ContactBookId,
+                Country = model.Country,
+                Email = model.Email,
+                HouseNo = model.HouseNo,
+                Id = model.Id,
+                MemberName = model.MemberName,
+                PhoneNo = model.PhoneNo,
+                Street = model.Street
+            };
         }
 
         public PermissionsModel ConvertToModel(MemberPermissions entity)

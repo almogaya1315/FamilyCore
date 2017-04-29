@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
@@ -100,7 +101,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditDetails([Bind(Exclude = "ContactInfo,Permissions,Relatives")] FamilyMemberModel member) // int id, ContactInfoModel info
+        public ActionResult EditDetails([Bind(Exclude = "ContactInfo,Permissions,Relatives")] int id, ContactInfoModel postedInfo) 
         {
             using (repo = new FCoreRepository())
             {
@@ -108,15 +109,15 @@ namespace FCore.UI.Controllers
                 {
                     try
                     {
-                        repo.UpdateUserDetails(member);
+                        repo.UpdateUserDetails(id, postedInfo);
                     }
                     catch (Exception e)
                     {
                         throw new Exception(e.Message);
                     }
-                    return PartialView("UserDetails", repo.GetFamilyMember(member.Id));
+                    return PartialView("UserDetails", repo.GetFamilyMember(id));
                 }
-                return PartialView("EditDetails", repo.GetFamilyMember(member.Id));
+                return PartialView("EditDetails", repo.GetFamilyMember(id));
             }
         }
     }

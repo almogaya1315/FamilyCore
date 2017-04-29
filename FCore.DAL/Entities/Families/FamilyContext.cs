@@ -241,12 +241,12 @@ namespace FCore.DAL.Entities.Families
                 SaveChanges();
             }
         }
-        public void UpdateUserDetails(FamilyMemberEntity postedDetail_memberEntity)
+        public void UpdateUserDetails(int memberId, ContactInfoEntity postedInfoEntity)
         {
             FamilyMemberEntity toUpdate = null;
             foreach (FamilyMemberEntity member in FamilyMembers)
             {
-                if (member.Id == postedDetail_memberEntity.Id)
+                if (member.Id == memberId)
                 {
                     toUpdate = member;
                     break;
@@ -254,12 +254,13 @@ namespace FCore.DAL.Entities.Families
             }
             if (toUpdate != null)
             {
-                toUpdate.ContactInfo.Country = postedDetail_memberEntity.ContactInfo.Country;
-                toUpdate.ContactInfo.City = postedDetail_memberEntity.ContactInfo.City;
-                toUpdate.ContactInfo.Street = postedDetail_memberEntity.ContactInfo.Street;
-                toUpdate.ContactInfo.HouseNo = postedDetail_memberEntity.ContactInfo.HouseNo;
-                toUpdate.ContactInfo.PhoneNo = postedDetail_memberEntity.ContactInfo.PhoneNo;
-                toUpdate.ContactInfo.Email = postedDetail_memberEntity.ContactInfo.Email;
+                toUpdate.ContactInfo.Country = postedInfoEntity.Country;
+                toUpdate.ContactInfo.City = postedInfoEntity.City;
+                toUpdate.ContactInfo.Street = postedInfoEntity.Street;
+                toUpdate.ContactInfo.HouseNo = postedInfoEntity.HouseNo;
+                toUpdate.ContactInfo.PhoneNo = postedInfoEntity.PhoneNo;
+                toUpdate.ContactInfo.Email = postedInfoEntity.Email;
+
                 try
                 {
                     SaveChanges();
@@ -271,7 +272,7 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                throw new NullReferenceException($"Member was not found by posted member id #{postedDetail_memberEntity.Id}");
+                throw new NullReferenceException($"Member was not found by posted member id #{memberId}");
             }
         }
     }
