@@ -120,5 +120,21 @@ namespace FCore.UI.Controllers
                 return PartialView("EditDetails", repo.GetContactInfo(postedInfo.Id));
             }
         }
+
+        public ActionResult RelativesDetails(FamilyMemberModel member)
+        {
+            using (repo = new FCoreRepository())
+            {
+                try
+                {
+                    member.Relatives = repo.GetFamilyMember(member.Id).Relatives;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Unable to retrieve relatives data from db for member id #{member.Id}");
+                }
+                return View("RelativesDetails", member);
+            }
+        }
     }
 }
