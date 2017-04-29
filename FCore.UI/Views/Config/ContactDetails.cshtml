@@ -92,11 +92,11 @@
                                     @{
                                         if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
                                         {
-                                            <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+                                            <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle img-responsive">
                                         }
                                         else
                                         {
-                                            <img alt="User Pic" src="@Model.ProfileImagePath" id="profile-image1" class="img-circle img-responsive">
+                                            <img alt="User Pic" src="@Url.Content(Model.ProfileImagePath)" id="profile-image" class="img-circle img-responsive">
                                         }
                                     }
 
@@ -149,6 +149,38 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="bot-border"></div>
+
+                                <div class="col-sm-7">
+                                    @Model.ContactInfo.HouseNo
+                                </div>
+                                <div class="col-sm-5 col-xs-6 tital ">
+                                    @Html.LabelFor(m => Model.ContactInfo.HouseNo)
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+
+                                <div class="col-sm-7">
+                                    @Model.ContactInfo.PhoneNo
+                                </div>
+                                <div class="col-sm-5 col-xs-6 tital ">
+                                    @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+
+                                <div class="col-sm-7">
+                                    @Model.ContactInfo.Email
+                                </div>
+                                <div class="col-sm-5 col-xs-6 tital ">
+                                    @Html.LabelFor(m => Model.ContactInfo.Email)
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="bot-border"></div>
+                                
+                            </div>
+
+                            <div>
+                                // todo
                             </div>
 
                             <div style="margin-top:15%">

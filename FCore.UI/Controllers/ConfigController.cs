@@ -61,19 +61,19 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProfileImage(FamilyMemberModel member, HttpPostedFileBase ProfileImagePath)
+        public ActionResult EditProfileImage([Bind(Exclude = "ContactInfo,Permissions,Relatives")] FamilyMemberModel member, HttpPostedFileBase ProfileImagePath)
         {
             using (repo = new FCoreRepository())
             {
-                //if (ModelState.IsValid)
-                //{
-                if (ProfileImagePath.ContentType.Contains("image"))
+                if (ModelState.IsValid)
                 {
-                    if (repo.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
-                        repo.UpdateMemberProfileImage(member.Id, ProfileImagePath);
+                    if (ProfileImagePath.ContentType.Contains("image"))
+                    {
+                        if (repo.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
+                            repo.UpdateMemberProfileImage(member.Id, ProfileImagePath);
+                    }
+                    else { } // todo
                 }
-                //else { }
-                //}
                 return View("PersonalPage", repo.GetFamilyMember(member.Id));
             }
         }
