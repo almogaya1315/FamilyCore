@@ -254,6 +254,10 @@ namespace FCore.DAL.Entities.Families
             }
             if (toUpdate != null)
             {
+                toUpdate.Family = GetFamily(toUpdate.FamilyId);
+                toUpdate.ContactInfo = GetContactInfo(toUpdate.ContactInfoId);
+                toUpdate.ContactInfo.ContactBook = GetContactBook(toUpdate.ContactInfo.ContactBookId);
+
                 toUpdate.ContactInfo.Country = postedInfoEntity.Country;
                 toUpdate.ContactInfo.City = postedInfoEntity.City;
                 toUpdate.ContactInfo.Street = postedInfoEntity.Street;

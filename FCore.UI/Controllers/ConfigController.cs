@@ -101,7 +101,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditDetails([Bind(Exclude = "ContactInfo,Permissions,Relatives")] int id, ContactInfoModel postedInfo) 
+        public ActionResult EditDetails([Bind(Exclude = "ContactBook")] int id, ContactInfoModel postedInfo) 
         {
             using (repo = new FCoreRepository())
             {
