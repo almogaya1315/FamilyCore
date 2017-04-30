@@ -141,5 +141,17 @@ namespace FCore.UI.Controllers
                 return View("RelativesDetails", member);
             }
         }
+
+        public ActionResult SecurityPage(FamilyMemberModel member)
+        {
+            using (repo = new FCoreRepository())
+            {
+                member = repo.GetFamilyMember(member.Id);
+                if (member.Permissions.Admin)
+                {
+
+                }
+            }
+        }
     }
 }
