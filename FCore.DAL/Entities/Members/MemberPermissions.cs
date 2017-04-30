@@ -26,5 +26,31 @@ namespace FCore.DAL.Entities.Members
         public bool Edit { get; set; }
 
         public bool ManageChat { get; set; }
+
+        [NotMapped]
+        bool _admin;
+        public bool Admin
+        {
+            get
+            {
+                return _admin;
+            }
+            set
+            {
+                if (value == true)
+                {
+                    Create = true;
+                    Edit = true;
+                    ManageChat = true;
+                }
+                else
+                {
+                    Create = false;
+                    Edit = false;
+                    ManageChat = false;
+                }
+                _admin = value;
+            }
+        }
     }
 }

@@ -29,5 +29,31 @@ namespace FCore.Common.Models.Members
 
         [DisplayName("ניהול צ'ט")]
         public bool ManageChat { get; set; }
+
+        bool _admin;
+        [DisplayName("מנהל")]
+        public bool Admin
+        {
+            get
+            {
+                return _admin;
+            }
+            set
+            {
+                if (value == true)
+                {
+                    Create = true;
+                    Edit = true;
+                    ManageChat = true;
+                }
+                else
+                {
+                    Create = false;
+                    Edit = false;
+                    ManageChat = false;
+                }
+                _admin = value;
+            }
+        }
     }
 }

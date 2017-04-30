@@ -22,6 +22,10 @@
 
         protected override void Seed(FamilyContext context)
         {
+            //FamilyMemberEntity m1 = context.FamilyMembers.FirstOrDefault(m => m.Id == 1);
+            //m1.Permissions.Admin = true;
+            //context.SaveChanges();
+
             //ContactInfoEntity info1 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 1);
             //info1.MemberId = 1;
             //context.SaveChanges();
