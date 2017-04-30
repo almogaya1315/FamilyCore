@@ -22,7 +22,7 @@ from dbf.Permissions
 
 delete 
 from dbf.Permissions
-where id != 1013 and id != 19
+where id != 1015 and id != 19
 
 select *
 from dbf.Albums

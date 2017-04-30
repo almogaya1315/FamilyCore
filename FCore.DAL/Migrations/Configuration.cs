@@ -24,6 +24,7 @@
         {
             //FamilyMemberEntity m1 = context.FamilyMembers.FirstOrDefault(m => m.Id == 1);
             //m1.Permissions.Admin = true;
+            //context.Entry(m1).State = EntityState.Modified;
             //context.SaveChanges();
 
             //ContactInfoEntity info1 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 1);

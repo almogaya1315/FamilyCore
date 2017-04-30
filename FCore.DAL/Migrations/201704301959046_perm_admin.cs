@@ -7,12 +7,10 @@ namespace FCore.DAL.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbf.Permissions", "Admin", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbf.Permissions", "Admin");
         }
     }
 }

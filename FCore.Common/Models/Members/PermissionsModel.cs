@@ -22,21 +22,83 @@ namespace FCore.Common.Models.Members
         public int Id { get; set; }
 
         [DisplayName("יצירה")]
-        public bool Create { get; set; }
+        public bool Create
+        {
+            get
+            {
+                return Create;
+            }
+            set
+            {
+                if (value == false)
+                {
+                    Admin = value;
+                }
+                else
+                {
+                    Create = value;
+                    if (Edit == value && Create == value)
+                    {
+                        Admin = value;
+                    }
+                }
+            }
+        }
 
         [DisplayName("עריכה")]
-        public bool Edit { get; set; }
+        public bool Edit
+        {
+            get
+            {
+                return Edit;
+            }
+            set
+            {
+                if (value == false)
+                {
+                    Admin = value;
+                }
+                else
+                {
+                    Edit = value;
+                    if (ManageChat == value && Create == value)
+                    {
+                        Admin = value;
+                    }
+                }
+            }
+        }
 
         [DisplayName("ניהול צ'ט")]
-        public bool ManageChat { get; set; }
+        public bool ManageChat
+        {
+            get
+            {
+                return ManageChat;
+            }
+            set
+            {
+                if (value == false)
+                {
+                    Admin = value;
+                }
+                else
+                {
+                    ManageChat = value;
+                    if (Edit == value && Create == value)
+                    {
+                        Admin = value;
+                    }
+                }
+            }
+        }
 
-        bool _admin;
         [DisplayName("מנהל")]
         public bool Admin
         {
             get
             {
-                return _admin;
+                return Admin;
             }
             set
             {
@@ -52,7 +114,7 @@ namespace FCore.Common.Models.Members
                     Edit = false;
                     ManageChat = false;
                 }
-                _admin = value;
+                Admin = value;
             }
         }
     }
