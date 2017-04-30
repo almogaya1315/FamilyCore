@@ -20,6 +20,10 @@ where Id = 1
 select *
 from dbf.Permissions
 
+delete 
+from dbf.Permissions
+where id != 1013 and id != 19
+
 select *
 from dbf.Albums
 

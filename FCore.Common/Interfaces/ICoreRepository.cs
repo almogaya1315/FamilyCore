@@ -22,6 +22,8 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetFamilyMember(int id);
         FamilyMemberModel GetLastMemberJoined();
 
+        PermissionsModel GetPermissionsModel(int id);
+
         ICollection<AlbumModel> GetAlbums();
         AlbumModel GetAlbum(int id);
         ImageModel GetLastImageUploaded();
@@ -41,5 +43,6 @@ namespace FCore.Common.Interfaces
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file);
         void UpdateUserDetails(ContactInfoModel postedInfo);
+        void UpdateUserPermissions(int memberId, PermissionsModel postedPerms);
     }
 }

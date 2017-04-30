@@ -60,6 +60,11 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetLastMemberJoined());
         }
 
+        public PermissionsModel GetPermissionsModel(int id)
+        {
+            return ConvertToModel(CoreDB.GetPermissionsEntity(id));
+        }
+
         public VideoLibraryModel GetVideoLibrary(int id)
         {
             return ConvertToModel(CoreDB.GetVideoLibrary(id));
@@ -140,6 +145,10 @@ namespace FCore.BL.Repositories
         public void UpdateUserDetails(ContactInfoModel postedInfo)
         {
             CoreDB.UpdateUserDetails(ConvertToEntity(postedInfo));
+        }
+        public void UpdateUserPermissions(int memberId, PermissionsModel postedPerms)
+        {
+            CoreDB.UpdateUserPermissions(memberId, ConvertToEntity(postedPerms));
         }
         #endregion
 

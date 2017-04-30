@@ -99,6 +99,15 @@ namespace FCore.DAL.Entities.Families
             //return FamilyMembers.Last();
         }
 
+        public MemberPermissions GetPermissionsEntity(int id)
+        {
+            foreach (MemberPermissions perms in Permissions)
+            {
+                if (perms.Id == id) return perms;
+            }
+            return null;
+        }
+
         public ICollection<AlbumEntity> GetAlbums()
         {
             return Albums.ToList();
@@ -277,6 +286,39 @@ namespace FCore.DAL.Entities.Families
             else
             {
                 throw new NullReferenceException($"Member was not found by posted member id #{postedInfoEntity.MemberId}");
+            }
+        }
+        public void UpdateUserPermissions(int memberId, MemberPermissions postedPermsEntity)
+        {
+            MemberPermissions toUpdate = null;
+            foreach (MemberPermissions perms in Permissions)
+            {
+                if (perms.Id == postedPermsEntity.Id)
+                {
+                    toUpdate = perms;
+                    break;
+                }
+            }
+
+            if (toUpdate != null)
+            {
+                toUpdate.Admin = postedPermsEntity.Admin;
+                toUpdate.Create = postedPermsEntity.Create;
+                toUpdate.Edit = postedPermsEntity.Edit;
+                toUpdate.ManageChat = postedPermsEntity.ManageChat;
+
+                try
+                {
+                    SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Unable to update database. {e.Message}");
+                }
+            }
+            else
+            {
+                throw new NullReferenceException($"Member permissions were not found by posted permissions id #{postedPermsEntity.Id}");
             }
         }
     }

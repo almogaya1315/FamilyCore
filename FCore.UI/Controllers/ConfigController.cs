@@ -51,7 +51,7 @@ namespace FCore.UI.Controllers
             {
                 //var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
 
-                if (ModelState.IsValid) 
+                if (ModelState.IsValid)
                 {
                     if (repo.GetFamilyMember(member.Id).About != member.About)
                         repo.UpdateUserAbout(member.Id, member.About);
@@ -101,7 +101,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditDetails([Bind(Exclude = "ContactBook")] ContactInfoModel postedInfo) 
+        public ActionResult EditDetails([Bind(Exclude = "ContactBook")] ContactInfoModel postedInfo)
         {
             using (repo = new FCoreRepository())
             {
@@ -150,9 +150,9 @@ namespace FCore.UI.Controllers
                 if (member.Permissions.Admin)
                 {
                     ViewData["memberId"] = member.Id;
-                    return View(member.Permissions);
+                    return View(member);
                 }
-                return null;
+                return View("ConfigPage", member); // todo -- need to return msg that user is not admin
             }
         }
 
@@ -162,7 +162,7 @@ namespace FCore.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //repo.UpdateUserPermissions(id, postedPerms);
+                    repo.UpdateUserPermissions(id, postedPerms);
                 }
                 return View("SecurityPage", repo.GetFamilyMember(id).Permissions);
             }

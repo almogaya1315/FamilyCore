@@ -74,7 +74,7 @@ namespace FCore.BL.Repositories
                 Id = entity.Id,
                 LastName = entity.LastName,
                 PermissionId = entity.PermissionId,
-                Permissions = ConvertToModel(entity.Permissions),
+                Permissions = ConvertToModel(CoreDB.GetPermissionsEntity(entity.PermissionId)),
                 ProfileImagePath = entity.ProfileImagePath,
                 Relatives = entity.Relatives.Select(e => ConvertToModel(e)).ToList()
             };
@@ -136,12 +136,20 @@ namespace FCore.BL.Repositories
                 Create = entity.Create,
                 Edit = entity.Edit,
                 Id = entity.Id,
-                ManageChat = entity.ManageChat
+                ManageChat = entity.ManageChat,
+                Admin = entity.Admin
             };
         }
         public MemberPermissions ConvertToEntity(PermissionsModel model)
         {
-            throw new NotImplementedException();
+            return new MemberPermissions()
+            {
+                Admin = model.Admin,
+                Create = model.Create,
+                Edit = model.Edit,
+                Id = model.Id,
+                ManageChat = model.ManageChat
+            };
         }
 
         public RelativeModel ConvertToModel(MemberRelative entity)
