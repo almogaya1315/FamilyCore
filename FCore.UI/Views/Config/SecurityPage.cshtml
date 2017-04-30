@@ -73,78 +73,59 @@
     </div>
 }
 
-<div class="jumbotron" style="width:92%">
-    <div class="container text-center">
-        <h1 class="page-header">Configurations</h1>
-        <p class="lead">Manage your family core.</p>
-    </div>
-
-</div>
-
-<div class="container ">
+<div class="container">
     <div class="row">
-        <div class="col-md-4 well pricing-table">
-            <div class="pricing-table-holder">
-                <center>
-                    <h3>Administrator</h3>
-                    <p class="caption">
-                        Personal security & settings
-                    </p>
-                </center>
-            </div>
-            <div class="custom-button-group" style="">
-                <div class="col-md-8 col-sm-9" style="padding:0;">
+
+        <div class="col-md-8 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>@Model.FirstName's Profile</h4>
                 </div>
-                <div class="col-md-4 col-sm-3" style="padding:0;">
+                <div class="panel-body">
+
+                    <div class="box box-info">
+
+                        <div class="box-body" dir="rtl">
+                            <div class="col-sm-6">
+                                <div align="center" style="margin-top:5%">
+
+                                    @{
+                                        if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
+                                        {
+                                            <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle img-responsive">
+                                        }
+                                        else
+                                        {
+                                            <img alt="User Pic" src="@Url.Content(Model.ProfileImagePath)" id="profile-image" class="img-circle img-responsive">
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="margin-top:2%">
+                                <h4 style="color:#00b1b1;">
+                                    @Model.FirstName
+                                    @Model.LastName
+                                </h4>
+
+                                <div>
+                                    <div id="_userabout">
+                                        <div style="position:absolute center;  display:block; height:50px; width:100%; margin-bottom:3%; margin-top:3%">
+                                            @Model.About
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="userperms_div">
+                                @{ Html.RenderPartial("EditPermissions", Model.Permissions, ViewData); }
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
-                <ul class="list-group" style="margin:-8%">
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Personal details", "PersonalPage", "Config", Model, new { @style="color:white" })</li>
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Security", "SecurityPage", "Config", Model, new { @style = "color:white" })</li>
-                </ul>
-            </div>
-            <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#4386f1; border-color:#4386f1">
-                    @Html.ActionLink("Go to admin page", "MainConfigPage", "Config", new { @style= "color:white" })
-                </button>
             </div>
         </div>
-        
-        <div class="col-md-4 well pricing-table">
-            <div class="pricing-table-holder">
-                <center>
-                    <h3>Members customizations</h3>
-                    <p class="caption">
-                        Edit yourself & your relatives
-                    </p>
-                </center>
-            </div>
-            <div class="custom-button-group" style="">
-                <div class="col-md-8 col-sm-9" style="padding:0;">
-                </div>
-                <div class="col-md-4 col-sm-3" style="padding:0;">
-                </div>
-            </div>
-            <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
-                <ul class="list-group" style="margin:-8%">
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Add child", "AddChild", "Config", new { @style = "color:white" })
-                    </li>
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Remove member", "RemoveMember", "Config", new { @style = "color:white" })
-                    </li>
-                </ul>
-            </div>
-            <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#4386f1; border-color:#4386f1">
-                    @Html.ActionLink("Go to Editor page", "MainEditorPage", "Config", new { @style = "color:white" })
-                </button>
-            </div>
-        </div>
-        
     </div>
 </div>
 

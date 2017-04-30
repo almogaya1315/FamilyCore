@@ -1,0 +1,53 @@
+﻿@model FCore.Common.Models.Members.PermissionsModel
+
+@using (@Ajax.BeginForm("EditPermissions", new { @id = (int)ViewData["memberId"] },
+               new AjaxOptions
+               {
+                   UpdateTargetId = "userperms_div",
+                   InsertionMode = InsertionMode.Replace
+               }))
+{
+    <div class="clearfix"></div>
+    <div style="margin-top:10%">
+
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.Admin)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Admin)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7 col-xs-6 ">
+            @Html.EditorFor(m => Model.Create)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Create)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.Edit)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Edit)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ManageChat)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ManageChat)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <input type="submit" style="display:none"/>
+    </div>
+}

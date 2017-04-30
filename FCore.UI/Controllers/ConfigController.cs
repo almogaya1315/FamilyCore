@@ -149,9 +149,22 @@ namespace FCore.UI.Controllers
                 member = repo.GetFamilyMember(member.Id);
                 if (member.Permissions.Admin)
                 {
-
+                    ViewData["memberId"] = member.Id;
+                    return View(member.Permissions);
                 }
                 return null;
+            }
+        }
+
+        public ActionResult EditPermissions(PermissionsModel postedPerms, int id)
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (ModelState.IsValid)
+                {
+                    //repo.UpdateUserPermissions(id, postedPerms);
+                }
+                return View("SecurityPage", repo.GetFamilyMember(id).Permissions);
             }
         }
     }
