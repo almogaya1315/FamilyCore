@@ -127,11 +127,16 @@ namespace FCore.UI.Controllers
             {
                 try
                 {
-                    member.Relatives = repo.GetFamilyMember(member.Id).Relatives;
+                    member = repo.GetFamilyMember(member.Id);
+                    foreach (RelativeModel relationship in member.Relatives)
+                    {
+                        relationship.Member = member;
+                        relationship.Relative = repo.GetFamilyMember(relationship.RelativeId);
+                    }
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"Unable to retrieve relatives data from db for member id #{member.Id}");
+                    throw new Exception($"Unable to retrieve relatives data from db for member id #{member.Id}. {e.Message}");
                 }
                 return View("RelativesDetails", member);
             }

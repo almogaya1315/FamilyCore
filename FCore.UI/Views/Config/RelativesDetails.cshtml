@@ -75,7 +75,6 @@
 
 <div class="container">
     <div class="row">
-        // todo.. this view is unmodified. copied from 'ContactDetails' view
         <div class="col-md-8 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -92,11 +91,11 @@
                                     @{
                                         if (String.IsNullOrWhiteSpace(Model.ProfileImagePath))
                                         {
-                                            <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle img-responsive">
+                                            <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle img-responsive" />
                                         }
                                         else
                                         {
-                                            <img alt="User Pic" src="@Url.Content(Model.ProfileImagePath)" id="profile-image" class="img-circle img-responsive">
+                                            <img alt="User Pic" src="@Url.Content(Model.ProfileImagePath)" id="profile-image" class="img-circle img-responsive" />
                                         }
                                     }
 
@@ -118,22 +117,42 @@
 
                             </div>
 
-                            <div id="userdetails_div">
-                                @{ Html.RenderPartial("UserDetails", Model); }
-                            </div>
+                            <div class="clearfix"></div>
+                            <div style="margin-top:5%">
+                                <div style="display:block; margin-right:2%">Your family relatives</div>
+                                <div style="margin-top:3%">
 
-                            <div style="margin-top:15%">
+                                    @{ foreach (var relationship in Model.Relatives)
+                                        {
+                                            <div class="bot-border"></div>
 
-                                <div class="price-table-button-holder" style="display:inline; margin-left:3%; margin-right:2%">
-                                    <button class="btn btn-info" style="width:20%">
-                                        @Html.ActionLink("Personal info", "PersonalPage", "Config", Model, new { @style = "color:white" })
-                                    </button>
-                                </div>
+                                            <div class="col-sm-5 col-xs-6 tital ">
+                                                @relationship.Relationship
+                                            </div>
+                                            <div class="col-sm-7">
+                                                @relationship.Relative.FirstName @relationship.Relative.LastName
+                                            </div>
 
-                                <div class="price-table-button-holder" style="display:inline">
-                                    <button class="btn btn-info" style="width:20%;">
-                                        @Html.ActionLink("Relatives", "RelativesDetails", "Config", Model, new { @style = "color:white" })
-                                    </button>
+                                            <div class="clearfix"></div>
+                                        }
+
+                                    }
+                                    <div class="bot-border"></div>
+
+                                    <div style="margin-top:15%">
+
+                                        <div class="price-table-button-holder" style="display:inline; margin-left:3%; margin-right:2%">
+                                            <button class="btn btn-info" style="width:20%">
+                                                @Html.ActionLink("Personal info", "PersonalPage", "Config", Model, new { @style = "color:white" })
+                                            </button>
+                                        </div>
+
+                                        <div class="price-table-button-holder" style="display:inline">
+                                            <button class="btn btn-info" style="width:20%;">
+                                                @Html.ActionLink("Contact info", "ContactDetails", "Config", Model, new { @style = "color:white" })
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +162,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
