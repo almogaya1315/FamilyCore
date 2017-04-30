@@ -1,12 +1,14 @@
 ﻿@model FCore.Common.Models.Members.PermissionsModel
 
-@using (@Ajax.BeginForm("EditPermissions", new { @id = (int)ViewData["memberId"] },
+@using (@Ajax.BeginForm("EditPermissions", new { @memberId = (int)ViewData["memberId"], @id = Model.Id },
                new AjaxOptions
                {
                    UpdateTargetId = "userperms_div",
                    InsertionMode = InsertionMode.Replace
                }))
 {
+    @*@Html.HiddenFor(p => Model.Id)*@
+
     <div class="clearfix"></div>
     <div style="margin-top:10%">
 

@@ -1,6 +1,6 @@
 ﻿
 $(function () {
-    $("#Admin, #Create, #Edit, #Chat").on('change', function () {
+    $("#Admin, #Create, #Edit, #ManageChat").on('change', function () {
         $("#form_submit").click();
     })
 })

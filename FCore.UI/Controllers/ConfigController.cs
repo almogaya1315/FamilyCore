@@ -147,24 +147,25 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 member = repo.GetFamilyMember(member.Id);
-                if (member.Permissions.Admin)
-                {
+                //if (member.Permissions.Admin)
+                //{
                     ViewData["memberId"] = member.Id;
                     return View(member);
-                }
-                return View("ConfigPage", member); // todo -- need to return msg that user is not admin
+                //}
+                //return View("ConfigPage", member); // todo -- need to return msg that user is not admin
             }
         }
 
-        public ActionResult EditPermissions(PermissionsModel postedPerms, int id)
+        public ActionResult EditPermissions(PermissionsModel postedPerms, int memberId)
         {
             using (repo = new FCoreRepository())
             {
                 if (ModelState.IsValid)
                 {
-                    repo.UpdateUserPermissions(id, postedPerms);
+                    repo.UpdateUserPermissions(memberId, postedPerms);
                 }
-                return View("SecurityPage", repo.GetFamilyMember(id).Permissions);
+                ViewData["memberId"] = memberId;
+                return View("SecurityPage", repo.GetFamilyMember(memberId));
             }
         }
     }

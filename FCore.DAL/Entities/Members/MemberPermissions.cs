@@ -13,104 +13,106 @@ namespace FCore.DAL.Entities.Members
     {
         public MemberPermissions()
         {
-            Create = false;
-            Edit = false;
-            ManageChat = false;
+            Admin = false;
         }
 
         [Key]
         public int Id { get; set; }
 
+        bool _create;
         public bool Create
         {
             get
             {
-                return Create;
+                return _create;
             }
             set
             {
-                if (value == false)
+                if (value == false && _admin != value)
                 {
-                    Admin = value;
+                    _admin = value;
                 }
                 else
                 {
-                    Create = value;
-                    if (Edit == value && Create == value)
+                    _create = value;
+                    if (_edit == value && _create == value & _admin != value)
                     {
-                        Admin = value;
+                        _admin = value;
                     }
                 }
             }
         }
 
+        bool _edit;
         public bool Edit
         {
             get
             {
-                return Edit;
+                return _edit;
             }
             set
             {
-                if (value == false)
+                if (value == false & _admin != value)
                 {
-                    Admin = value;
+                    _admin = value;
                 }
                 else
                 {
-                    Edit = value;
-                    if (ManageChat == value && Create == value)
+                    _edit = value;
+                    if (_chat == value && _create == value & _admin != value)
                     {
-                        Admin = value;
+                        _admin = value;
                     }
                 }
             }
         }
 
+        bool _chat;
         public bool ManageChat
         {
             get
             {
-                return ManageChat;
+                return _chat;
             }
             set
             {
-                if (value == false)
+                if (value == false & _admin != value)
                 {
-                    Admin = value;
+                    _admin = value;
                 }
                 else
                 {
-                    ManageChat = value;
-                    if (Edit == value && Create == value)
+                    _chat = value;
+                    if (_edit == value && _create == value & _admin != value)
                     {
-                        Admin = value;
+                        _admin = value;
                     }
                 }
             }
         }
 
+        bool _admin;
         public bool Admin
         {
             get
             {
-                return Admin;
+                return _admin;
             }
             set
             {
                 if (value == true)
                 {
-                    Create = true;
-                    Edit = true;
-                    ManageChat = true;
+                    _create = true;
+                    _edit = true;
+                    _chat = true;
                 }
                 else
                 {
-                    Create = false;
-                    Edit = false;
-                    ManageChat = false;
+                    _create = false;
+                    _edit = false;
+                    _chat = false;
                 }
-                Admin = value;
+                _admin = value;
             }
         }
     }
