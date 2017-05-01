@@ -165,7 +165,7 @@ namespace FCore.UI.Controllers
                     repo.UpdateUserPermissions(memberId, postedPerms);
                 }
                 ViewData["memberId"] = memberId;
-                return View("SecurityPage", repo.GetFamilyMember(memberId));
+                return PartialView("EditPermissions", repo.GetFamilyMember(memberId));
             }
         }
     }
