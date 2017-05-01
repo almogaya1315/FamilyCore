@@ -13,7 +13,7 @@ namespace FCore.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704302004215_perm_admin"; }
+            get { return "201705010519106_perm_admin"; }
         }
         
         string IMigrationMetadata.Source
