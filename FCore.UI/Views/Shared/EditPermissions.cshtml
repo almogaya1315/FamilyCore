@@ -7,8 +7,6 @@
                    InsertionMode = InsertionMode.Replace
                }))
 {
-    @*@Html.HiddenFor(p => Model.Id)*@
-
     <div class="clearfix"></div>
     <div style="margin-top:10%">
 
@@ -18,7 +16,11 @@
             @Html.LabelFor(m => Model.Admin)
         </div>
         <div class="col-sm-7" style="width:5%">
-            @Html.EditorFor(m => Model.Admin)
+
+            @*<input class="checkbox" data-val="false" data-val-required="req" id="Admin" type="checkbox" value="false"/>
+            <input name="Admin" type="hidden" value="true"/>*@
+
+             @Html.EditorFor(m => Model.Admin) @*, new { @data-val = "false" }*@
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -50,7 +52,7 @@
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
-        <input id="form_submit" type="submit" />
+        <input id="form_submit" type="submit" value="test"/>
     </div>
 }
 

@@ -10,6 +10,7 @@ using System.Linq;
 using System;
 using System.Collections;
 using System.Linq.Expressions;
+using FCore.Common.Utils;
 
 namespace FCore.DAL.Entities.Families
 {
@@ -302,6 +303,8 @@ namespace FCore.DAL.Entities.Families
 
             if (toUpdate != null)
             {
+                postedPermsEntity = PermissionHandler<MemberPermissions>.VerifyHierarchy(toUpdate, postedPermsEntity);
+
                 toUpdate.Admin = postedPermsEntity.Admin;
                 toUpdate.Create = postedPermsEntity.Create;
                 toUpdate.Edit = postedPermsEntity.Edit;
