@@ -20,9 +20,15 @@ where Id = 1
 select *
 from dbf.Permissions
 
+alter table dbf.permissions
+add Admin bit not null default(0)
+
+alter table dbf.Permissions
+drop column Admin 
+
 delete 
 from dbf.Permissions
-where id != 1017 and id != 19
+where id != 1015 and id != 19
 
 select *
 from dbf.Albums
