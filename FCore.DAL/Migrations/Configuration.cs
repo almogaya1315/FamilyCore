@@ -22,17 +22,17 @@
 
         protected override void Seed(FamilyContext context)
         {
-            FamilyMemberEntity m1 = context.FamilyMembers.FirstOrDefault(m => m.Id == 1);
-            m1.Permissions.Admin = true;
-            context.Entry(m1).State = EntityState.Modified;
+            //FamilyMemberEntity m1 = context.FamilyMembers.FirstOrDefault(m => m.Id == 1);
+            //m1.Permissions.Admin = true;
+            //context.Entry(m1).State = EntityState.Modified;
             //context.SaveChanges();
 
-            ContactInfoEntity info1 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 1);
-            info1.MemberId = 1;
-            context.SaveChanges();
-            ContactInfoEntity info2 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 2);
-            info2.MemberId = 2;
-            context.SaveChanges();
+            //ContactInfoEntity info1 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 1);
+            //info1.MemberId = 1;
+            //context.SaveChanges();
+            //ContactInfoEntity info2 = context.ContactInfoes.FirstOrDefault(ci => ci.Id == 2);
+            //info2.MemberId = 2;
+            //context.SaveChanges();
 
             //FamilyEntity family = new FamilyEntity()
             //{
