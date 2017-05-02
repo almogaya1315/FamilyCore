@@ -73,103 +73,126 @@
     </div>
 }
 
-@using (Html.BeginForm("EditDetails", "Config", Model))
-{
-    @Html.HiddenFor(m => Model.Id)
+<div class="container">
+    <div class="row">
 
-    <div class="clearfix"></div>
-    <div style="margin-top:10%">
+        <div class="col-md-8 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Add new child</h4>
+                </div>
+                <div class="panel-body">
 
-        <div class="bot-border"></div>
+                    <div class="box box-info">
 
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.FirstName)
-            @Html.ValidationMessageFor(m => Model.FirstName)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.FirstName)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                        <div class="box-body" dir="rtl">
 
-        @*relationship combo box*@
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.FirstName)
-            @Html.ValidationMessageFor(m => Model.FirstName)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.FirstName)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
-        @***************@
+                            @using (Html.BeginForm("EditDetails", "Config", Model))
+                            {
+                                @Html.HiddenFor(m => Model.Id)
 
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.ContactInfo.Country)
-            @Html.ValidationMessageFor(m => Model.ContactInfo.Country)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.ContactInfo.Country)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                                <div class="clearfix"></div>
+                                <div style="margin-top:10%">
 
-        <div class="col-sm-7 col-xs-6 ">
-            @Html.EditorFor(m => Model.ContactInfo.City)
-            @Html.ValidationMessageFor(m => Model.ContactInfo.City)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.ContactInfo.City)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                                    <div class="bot-border"></div>
 
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.ContactInfo.Street)
-            @Html.ValidationMessageFor(m => Model.ContactInfo.Street)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.ContactInfo.Street)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.FirstName)
+                                        @Html.ValidationMessageFor(m => Model.FirstName)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.FirstName)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
 
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.ContactInfo.HouseNo)
-            @Html.ValidationMessageFor(m => Model.ContactInfo.HouseNo)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.ContactInfo.HouseNo)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                                    <div class="col-sm-7">
+                                        <select id="relcombo">
+                                            @foreach (string rel in ViewData["relenum"] as ICollection<string>)
+                                            {
+                                                <option>@rel</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
 
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.ContactInfo.PhoneNo)
-            @Html.ValidationMessageFor(m => Model.ContactInfo.PhoneNo)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.ContactInfo.Country)
+                                        @Html.ValidationMessageFor(m => Model.ContactInfo.Country)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.Country)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
 
-        <div class="col-sm-7">
-            @Html.EditorFor(m => Model.ContactInfo.Email)
-            @Html.ValidationMessageFor(m => Model.ContactInfo.Email)
-        </div>
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.ContactInfo.Email)
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+                                    <div class="col-sm-7 col-xs-6 ">
+                                        @Html.EditorFor(m => Model.ContactInfo.City)
+                                        @Html.ValidationMessageFor(m => Model.ContactInfo.City)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.City)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
 
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.ContactInfo.Street)
+                                        @Html.ValidationMessageFor(m => Model.ContactInfo.Street)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.Street)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.ContactInfo.HouseNo)
+                                        @Html.ValidationMessageFor(m => Model.ContactInfo.HouseNo)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.HouseNo)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.ContactInfo.PhoneNo)
+                                        @Html.ValidationMessageFor(m => Model.ContactInfo.PhoneNo)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.ContactInfo.Email)
+                                        @Html.ValidationMessageFor(m => Model.ContactInfo.Email)
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.Email)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+
+                                </div>
+
+                                <br />
+
+                                <div class="price-table-button-holder" style="display:inline; margin-right:2%">
+                                    <input type="submit" value="Save" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <br />
-
-    <div class="price-table-button-holder" style="display:inline; margin-right:2%">
-        <input type="submit" value="Save" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
-    </div>
-}
+</div>
 

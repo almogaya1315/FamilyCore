@@ -1,4 +1,5 @@
 ﻿using FCore.BL.Repositories;
+using FCore.Common.Enums;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Members;
@@ -15,6 +16,7 @@ namespace FCore.UI.Controllers
     public class ConfigController : Controller
     {
         ICoreRepository repo { get; set; }
+        public object RelatioshipType { get; private set; }
 
         public ActionResult ConfigPage()
         {
@@ -237,6 +239,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                ViewData["relenum"] = repo.GetChildRelationshipTypes();
                 return View(repo.GetFamilyMember(member.Id));
             }
         }
@@ -246,7 +249,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-
+                return null;
             }
         }
     }

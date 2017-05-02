@@ -131,7 +131,7 @@
             <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
                 <ul class="list-group" style="margin:-8%">
                     <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Add child", "AddChild", "Config", new { @member = Model, @form = "Get" }, new { @style = "color:white" }, )
+                        @Html.ActionLink("Add child", "AddChild", "Config", Model, new { @style = "color:white" })
                     </li>
                     <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
                         @Html.ActionLink("Remove member", "RemoveMember", "Config", new { @style = "color:white" })
