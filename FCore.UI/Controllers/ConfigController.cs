@@ -156,6 +156,7 @@ namespace FCore.UI.Controllers
             }
         }
 
+        [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult EditPermissions(PermissionsModel postedPerms, int memberId)
         {
             using (repo = new FCoreRepository())
@@ -165,7 +166,8 @@ namespace FCore.UI.Controllers
                     repo.UpdateUserPermissions(memberId, postedPerms);
                 }
                 ViewData["memberId"] = memberId;
-                return PartialView("EditPermissions", repo.GetFamilyMember(memberId));
+                FamilyMemberModel member = repo.GetFamilyMember(memberId);
+                return PartialView("EditPermissions", member.Permissions);
             }
         }
     }

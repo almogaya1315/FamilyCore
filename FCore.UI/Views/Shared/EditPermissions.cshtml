@@ -20,7 +20,7 @@
             @*<input class="checkbox" data-val="false" data-val-required="req" id="Admin" type="checkbox" value="false"/>
             <input name="Admin" type="hidden" value="true"/>*@
 
-             @Html.EditorFor(m => Model.Admin) @*, new { @data-val = "false" }*@
+             @Html.EditorFor(m => Model.Admin, new { @checked = Model.Admin }) 
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -29,7 +29,7 @@
             @Html.LabelFor(m => Model.Create)
         </div>
         <div class="col-sm-7 col-xs-6 " style="width:5%">
-            @Html.EditorFor(m => Model.Create)
+            @Html.EditorFor(m => Model.Create, new { @checked = Model.Create })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -38,7 +38,7 @@
             @Html.LabelFor(m => Model.Edit)
         </div>
         <div class="col-sm-7" style="width:5%">
-            @Html.EditorFor(m => Model.Edit)
+            @Html.EditorFor(m => Model.Edit, new { @checked = Model.Edit })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -47,7 +47,7 @@
             @Html.LabelFor(m => Model.ManageChat)
         </div>
         <div class="col-sm-7" style="width:5%">
-            @Html.EditorFor(m => Model.ManageChat)
+            @Html.EditorFor(m => Model.ManageChat, new { @checked = Model.ManageChat })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
