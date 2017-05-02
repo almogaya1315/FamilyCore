@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
 using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    //[OutputCache(NoStore = true, Duration = 0)]
     public class ConfigController : Controller
     {
         ICoreRepository repo { get; set; }
@@ -49,8 +51,6 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                //var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
-
                 if (ModelState.IsValid)
                 {
                     if (repo.GetFamilyMember(member.Id).About != member.About)
@@ -142,6 +142,7 @@ namespace FCore.UI.Controllers
             }
         }
 
+        //[OutputCache(NoStore = true, Duration = 0)]
         public ActionResult SecurityPage(FamilyMemberModel member)
         {
             using (repo = new FCoreRepository())
@@ -149,8 +150,8 @@ namespace FCore.UI.Controllers
                 member = repo.GetFamilyMember(member.Id);
                 //if (member.Permissions.Admin)
                 //{
-                    ViewData["memberId"] = member.Id;
-                    return View(member);
+                ViewData["memberId"] = member.Id;
+                return View(member);
                 //}
                 //return View("ConfigPage", member); // todo -- need to return msg that user is not admin
             }
@@ -161,14 +162,48 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                if (ModelState.IsValid)
+                //Response.Cache.SetCacheability(HttpCacheability.Server);
+
+                if (MemoryCache.Default.Contains("permValue"))
                 {
-                    repo.UpdateUserPermissions(memberId, postedPerms);
+                    if (MemoryCache.Default.FirstOrDefault(cache => cache.Key == "permValue").Value != postedPerms)
+                    {
+                        if (!UpdateDatabaseAndCache(memberId, postedPerms)) return new HttpStatusCodeResult(500);
+                    }
                 }
+                else
+                {
+                    if (!UpdateDatabaseAndCache(memberId, postedPerms)) return new HttpStatusCodeResult(500);
+                }
+
                 ViewData["memberId"] = memberId;
-                FamilyMemberModel member = repo.GetFamilyMember(memberId);
-                return PartialView("EditPermissions", member.Permissions);
+                return PartialView("EditPermissions", (PermissionsModel)MemoryCache.Default["permValue"]);
             }
+        }
+
+        private bool UpdateDatabaseAndCache(int memberId, PermissionsModel postedPerms)
+        {
+            if (ModelState.IsValid)
+            {
+                repo.UpdateUserPermissions(memberId, postedPerms);
+            }
+            else
+            {
+                var errors = ModelState.SelectMany(state => state.Value.Errors.Select(error => error.Exception));
+                throw new Exception($"Model is not valid. {errors}");
+            }
+
+            try
+            {
+                FamilyMemberModel member = repo.GetFamilyMember(memberId);
+                MemoryCache.Default.AddOrGetExisting("permValue", member.Permissions, DateTime.Now);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Unable to update cache. {e.Message}");
+            }
+
+            return true;
         }
     }
 }
