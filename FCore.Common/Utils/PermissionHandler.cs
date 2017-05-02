@@ -27,7 +27,7 @@ namespace FCore.Common.Utils
                     if (IsTwoRolesTrue(currentPerms)) // , out falseRole
                     {
                         postedPerms.Admin = true;
-                        
+
 
                         //switch (falseRole)
                         //{
@@ -43,12 +43,9 @@ namespace FCore.Common.Utils
                         //}
                         //return postedPerms;
                     }
-                    else
+                    else if ((currentPerms.Create == true && currentPerms.Edit == true && currentPerms.ManageChat == true) || IsOneRoleTrue(currentPerms))
                     {
-                        if (currentPerms.Create == true && currentPerms.Edit == true && currentPerms.ManageChat == true)
-                        {
-                            postedPerms.Admin = false;
-                        }
+                        postedPerms.Admin = false;
                     }
                 }
 
@@ -88,6 +85,23 @@ namespace FCore.Common.Utils
         //        return false;
         //    }
         //}
+
+        private static bool IsOneRoleTrue(PermEntity current)
+        {
+            if (current.Create == false & current.Edit == false && current.ManageChat == true)
+            {
+                return true;
+            }
+            if (current.Create == false & current.Edit == true && current.ManageChat == false)
+            {
+                return true;
+            }
+            if (current.Create == true & current.Edit == false && current.ManageChat == false)
+            {
+                return true;
+            }
+            return false;
+        }
 
         private static bool IsTwoRolesTrue(PermEntity current) // , out string falseRole
         {

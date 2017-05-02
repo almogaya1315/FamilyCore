@@ -12,7 +12,6 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
-    //[OutputCache(NoStore = true, Duration = 0)]
     public class ConfigController : Controller
     {
         ICoreRepository repo { get; set; }
@@ -142,7 +141,6 @@ namespace FCore.UI.Controllers
             }
         }
 
-        //[OutputCache(NoStore = true, Duration = 0)]
         public ActionResult SecurityPage(FamilyMemberModel member)
         {
             using (repo = new FCoreRepository())
@@ -157,12 +155,25 @@ namespace FCore.UI.Controllers
             }
         }
 
-        [OutputCache(NoStore = true, Duration = 0)]
+        //[OutputCache(NoStore = true, Duration = 0)] // can also be assigned to controller class
         public ActionResult EditPermissions(PermissionsModel postedPerms, int memberId)
         {
             using (repo = new FCoreRepository())
             {
-                //Response.Cache.SetCacheability(HttpCacheability.Server);
+                #region cache clear attempts
+                /*
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+                var urlToRemove = Url.Action("SecurityPage");
+                HttpResponse.RemoveOutputCacheItem(urlToRemove);
+
+                HttpContext.Cache.Insert("permValue", postedPerms);
+                HttpContext.Cache.Remove("permValue");
+
+                ResultExecutingContext context = new ResultExecutingContext();
+                context.HttpContext.Response.Cache.SetNoStore();
+
+
 
                 if (MemoryCache.Default.Contains("permValue"))
                 {
@@ -175,12 +186,26 @@ namespace FCore.UI.Controllers
                 {
                     if (!UpdateDatabaseAndCache(memberId, postedPerms)) return new HttpStatusCodeResult(500);
                 }
+                */
+                #endregion
+
+                if (ModelState.IsValid)
+                {
+                    repo.UpdateUserPermissions(memberId, postedPerms);
+                }
+                else
+                {
+                    var errors = ModelState.SelectMany(state => state.Value.Errors.Select(error => error.Exception));
+                    throw new Exception($"Model is not valid. {errors}");
+                }
 
                 ViewData["memberId"] = memberId;
-                return PartialView("EditPermissions", (PermissionsModel)MemoryCache.Default["permValue"]);
+                FamilyMemberModel member = repo.GetFamilyMember(memberId);
+                return PartialView("EditPermissions", member.Permissions); // (PermissionsModel)MemoryCache.Default["permValue"]
             }
         }
 
+        /* // clear cache method
         private bool UpdateDatabaseAndCache(int memberId, PermissionsModel postedPerms)
         {
             if (ModelState.IsValid)
@@ -196,7 +221,7 @@ namespace FCore.UI.Controllers
             try
             {
                 FamilyMemberModel member = repo.GetFamilyMember(memberId);
-                MemoryCache.Default.AddOrGetExisting("permValue", member.Permissions, DateTime.Now);
+                MemoryCache.Default.Add("permValue", member.Permissions, DateTime.Now);
             }
             catch (Exception e)
             {
@@ -205,5 +230,6 @@ namespace FCore.UI.Controllers
 
             return true;
         }
+        */
     }
 }
