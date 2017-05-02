@@ -231,5 +231,23 @@ namespace FCore.UI.Controllers
             return true;
         }
         */
+
+        [HttpGet]
+        public ActionResult AddChild(FamilyMemberModel member)
+        {
+            using (repo = new FCoreRepository())
+            {
+                return View(repo.GetFamilyMember(member.Id));
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddChild(int memberId)
+        {
+            using (repo = new FCoreRepository())
+            {
+
+            }
+        }
     }
 }

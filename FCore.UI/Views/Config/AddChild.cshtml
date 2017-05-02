@@ -73,78 +73,103 @@
     </div>
 }
 
-<div class="jumbotron" style="width:92%">
-    <div class="container text-center">
-        <h1 class="page-header">Configurations</h1>
-        <p class="lead">Manage your family core.</p>
+@using (Html.BeginForm("EditDetails", "Config", Model))
+{
+    @Html.HiddenFor(m => Model.Id)
+
+    <div class="clearfix"></div>
+    <div style="margin-top:10%">
+
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.FirstName)
+            @Html.ValidationMessageFor(m => Model.FirstName)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.FirstName)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        @*relationship combo box*@
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.FirstName)
+            @Html.ValidationMessageFor(m => Model.FirstName)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.FirstName)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        @***************@
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.Country)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.Country)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.Country)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7 col-xs-6 ">
+            @Html.EditorFor(m => Model.ContactInfo.City)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.City)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.City)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.Street)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.Street)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.Street)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.HouseNo)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.HouseNo)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.HouseNo)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.PhoneNo)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.PhoneNo)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.ContactInfo.Email)
+            @Html.ValidationMessageFor(m => Model.ContactInfo.Email)
+        </div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.ContactInfo.Email)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
     </div>
 
-</div>
+    <br />
 
-<div class="container ">
-    <div class="row">
-        <div class="col-md-4 well pricing-table">
-            <div class="pricing-table-holder">
-                <center>
-                    <h3>Administrator</h3>
-                    <p class="caption">
-                        Personal security & settings
-                    </p>
-                </center>
-            </div>
-            <div class="custom-button-group" style="">
-                <div class="col-md-8 col-sm-9" style="padding:0;">
-                </div>
-                <div class="col-md-4 col-sm-3" style="padding:0;">
-                </div>
-            </div>
-            <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
-                <ul class="list-group" style="margin:-8%">
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Personal details", "PersonalPage", "Config", Model, new { @style="color:white" })</li>
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Security", "SecurityPage", "Config", Model, new { @style = "color:white" })</li>
-                </ul>
-            </div>
-            <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#4386f1; border-color:#4386f1">
-                    @Html.ActionLink("Go to admin page", "MainConfigPage", "Config", new { @style= "color:white" })
-                </button>
-            </div>
-        </div>
-        
-        <div class="col-md-4 well pricing-table">
-            <div class="pricing-table-holder">
-                <center>
-                    <h3>Members customizations</h3>
-                    <p class="caption">
-                        Edit yourself & your relatives
-                    </p>
-                </center>
-            </div>
-            <div class="custom-button-group" style="">
-                <div class="col-md-8 col-sm-9" style="padding:0;">
-                </div>
-                <div class="col-md-4 col-sm-3" style="padding:0;">
-                </div>
-            </div>
-            <div class="pricing-feature-list" style="background-color:#82caf3; border-top-left-radius:5px; border-top-right-radius:5px">
-                <ul class="list-group" style="margin:-8%">
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Add child", "AddChild", "Config", new { @member = Model, @form = "Get" }, new { @style = "color:white" }, )
-                    </li>
-                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                        @Html.ActionLink("Remove member", "RemoveMember", "Config", new { @style = "color:white" })
-                    </li>
-                </ul>
-            </div>
-            <div class="price-table-button-holder">
-                <button class="btn btn-info btn-block" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px; background-color:#4386f1; border-color:#4386f1">
-                    @Html.ActionLink("Go to Editor page", "MainEditorPage", "Config", new { @style = "color:white" })
-                </button>
-            </div>
-        </div>
-        
+    <div class="price-table-button-holder" style="display:inline; margin-right:2%">
+        <input type="submit" value="Save" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
     </div>
-</div>
+}
 
