@@ -132,7 +132,8 @@ namespace FCore.BL.Repositories
 
         public ICollection<string> GetChildRelationshipTypes()
         {
-
+            ICollection<string> childRels = new List<string>();
+            childRels.Add(Enum.GetName(typeof(RelationshipType), ""));
         }
 
         public void UpdateUserAbout(int memberId, string about)
