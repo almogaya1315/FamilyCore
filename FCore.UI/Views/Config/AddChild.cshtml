@@ -87,7 +87,7 @@
 
                         <div class="box-body" dir="rtl">
 
-                            @using (Html.BeginForm("EditDetails", "Config", Model))
+                            @using (Html.BeginForm("EditDetails", "Config", Model, FormMethod.Post, new { @enctype = "multipart/form-data" }))
                             {
                                 @Html.HiddenFor(m => Model.Id)
 
@@ -153,8 +153,8 @@
                                     <div class="bot-border"></div>
 
                                     <div class="col-sm-7">
-                                        @Html.EditorFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @Value = "" } })
-                                        @Html.ValidationMessageFor(m => Model.ProfileImagePath)
+                                        <input style="display:inline" type="file" name="ProfileImagePath"/>
+                                        @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
                                     </div>
                                     <div class="col-sm-5 col-xs-6 tital ">
                                         @Html.LabelFor(m => Model.ProfileImagePath)
@@ -163,7 +163,8 @@
                                     <div class="bot-border"></div>
 
                                     <div class="col-sm-7">
-                                        @Html.EditorFor(m => Model.About, new { htmlAttributes = new { @Value = "" } })
+                                        @*<textarea  style="" />*@
+                                        @Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @Value = "", @resize = "false" } })
                                         @Html.ValidationMessageFor(m => Model.About)
                                     </div>
                                     <div class="col-sm-5 col-xs-6 tital ">
