@@ -39,6 +39,7 @@ namespace FCore.Common.Interfaces
         ContactInfoModel GetContactInfo(int id);
 
         string GetFilePath(HttpPostedFileBase file);
+        ICollection<string> GetChildRelationshipTypes();
 
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file);

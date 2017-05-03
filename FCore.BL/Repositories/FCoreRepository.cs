@@ -130,6 +130,11 @@ namespace FCore.BL.Repositories
             return $"~/Images/Profiles/{pic}";
         }
 
+        public ICollection<string> GetChildRelationshipTypes()
+        {
+
+        }
+
         public void UpdateUserAbout(int memberId, string about)
         {
             CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about); // ConvertToEntity
