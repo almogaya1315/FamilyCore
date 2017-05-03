@@ -95,6 +95,10 @@
                                 <div style="margin-top:10%">
 
                                     <div class="bot-border"></div>
+                                    <div>Personal info</div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="bot-border"></div>
 
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.FirstName, new { htmlAttributes = new { @Value = "" } })
@@ -112,6 +116,20 @@
                                     </div>
                                     <div class="col-sm-5 col-xs-6 tital ">
                                         @Html.LabelFor(m => Model.LastName)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+
+                                    <div class="col-sm-7">
+                                        <select id="relcombo">
+                                            @foreach (string rel in ViewData["relenum"] as ICollection<string>)
+                                            {
+                                                <option>@rel</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
@@ -152,40 +170,11 @@
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
-                                    <div class="col-sm-7">
-                                        <input style="display:inline" type="file" name="ProfileImagePath"/>
-                                        @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
-                                    </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ProfileImagePath)
-                                    </div>
+                                    
                                     <div class="clearfix"></div>
+                                    <div>Contact info</div>
                                     <div class="bot-border"></div>
-
-                                    <div class="col-sm-7">
-                                        @*<textarea  style="" />*@
-                                        @Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @Value = "", @resize = "false" } })
-                                        @Html.ValidationMessageFor(m => Model.About)
-                                    </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.About)
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="bot-border"></div>
-
-                                    <div class="col-sm-7">
-                                        <select id="relcombo">
-                                            @foreach (string rel in ViewData["relenum"] as ICollection<string>)
-                                            {
-                                                <option>@rel</option>
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="bot-border"></div>
+                                    
 
                                     <div class="col-sm-7">
                                         @Model.ContactInfo.Country
@@ -250,6 +239,31 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
+
+                                    <div style="margin-top:2%">
+                                        <div class="col-sm-7">
+                                            @*<textarea  style="" />*@
+                                            @Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @Value = "", @resize = "false" } })
+                                            @Html.ValidationMessageFor(m => Model.About)
+                                        </div>
+                                        <div class="col-sm-5 col-xs-6 tital ">
+                                            @Html.Label("סיפור חיים")
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+                                    </div>
+
+                                    <div style="margin-top:5%">
+                                        <div class="col-sm-7" >
+                                            <input style="display:inline" type="file" name="ProfileImagePath" />
+                                            @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
+                                        </div>
+                                        <div class="col-sm-5 col-xs-6 tital ">
+                                            @Html.LabelFor(m => Model.ProfileImagePath)
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+                                    </div>
 
                                 </div>
 
