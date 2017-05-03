@@ -240,6 +240,7 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 ViewData["relenum"] = repo.GetChildRelationshipTypes();
+                ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
                 return View(repo.GetFamilyMember(member.Id));
             }
         }

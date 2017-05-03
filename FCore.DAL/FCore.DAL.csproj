@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201705010519106_perm_admin.Designer.cs">
       <DependentUpon>201705010519106_perm_admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705030842290_member_gen.cs" />
+    <Compile Include="Migrations\201705030842290_member_gen.Designer.cs">
+      <DependentUpon>201705030842290_member_gen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705010519106_perm_admin.resx">
       <DependentUpon>201705010519106_perm_admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705030842290_member_gen.resx">
+      <DependentUpon>201705030842290_member_gen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

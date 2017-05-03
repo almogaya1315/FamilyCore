@@ -23,6 +23,14 @@
         protected override void Seed(FamilyContext context)
         {
             //FamilyMemberEntity m1 = context.FamilyMembers.FirstOrDefault(m => m.Id == 1);
+            //m1.Gender = GenderType.Male.ToString();
+            //context.Entry(m1).State = EntityState.Modified;
+
+            //FamilyMemberEntity m2 = context.FamilyMembers.FirstOrDefault(m => m.Id == 2);
+            //m2.Gender = GenderType.Female.ToString();
+            //context.Entry(m2).State = EntityState.Modified;
+
+            //FamilyMemberEntity m1 = context.FamilyMembers.FirstOrDefault(m => m.Id == 1);
             //m1.Permissions.Admin = true;
             //context.Entry(m1).State = EntityState.Modified;
             //context.SaveChanges();

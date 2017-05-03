@@ -107,6 +107,22 @@
                                     <div class="bot-border"></div>
 
                                     <div class="col-sm-7">
+                                        
+                                        <select id="gencombo">
+                                            @foreach (string gen in ViewData["genenum"] as ICollection<string>)
+                                            {
+                                                <option>@gen</option>
+                                            }
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.Gender)
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+
+                                    <div class="col-sm-7">
                                         <select id="relcombo">
                                             @foreach (string rel in ViewData["relenum"] as ICollection<string>)
                                             {

@@ -20,6 +20,7 @@ using FCore.DAL.Entities.Videos;
 using FCore.DAL.Entities.ChatGroups;
 using System.Web;
 using System.IO;
+using FCore.Common.Utils;
 
 namespace FCore.BL.Repositories
 {
@@ -132,8 +133,7 @@ namespace FCore.BL.Repositories
 
         public ICollection<string> GetChildRelationshipTypes()
         {
-            ICollection<string> childRels = new List<string>();
-            childRels.Add(Enum.GetName(typeof(RelationshipType), ""));
+            return ConstGenerator.ChildRelTypes;
         }
 
         public void UpdateUserAbout(int memberId, string about)

@@ -1,4 +1,5 @@
-﻿using FCore.Common.Models.Contacts;
+﻿using FCore.Common.Enums;
+using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,9 @@ namespace FCore.Common.Models.Members
         [Required(ErrorMessage = "שדה חובה", AllowEmptyStrings = false)]
         [StringLength(150), DisplayName("על עצמי")]
         public string About { get; set; }
+
+        [Required(ErrorMessage = "שדה חובה"), DisplayName("מין")]
+        public string Gender { get; set; }
 
         [DataType(DataType.Date), DisplayName("תאריך לידה")]
         public DateTime? BirthDate { get; set; }

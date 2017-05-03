@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Enums\RelationshipType.cs" />
     <Compile Include="Interfaces\ICoreRepository.cs" />
     <Compile Include="Interfaces\IPermission.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Models\Videos\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRepositoryConverter.cs" />
+    <Compile Include="Utils\ConstGenerator.cs" />
     <Compile Include="Utils\PermissionHandler.cs" />
   </ItemGroup>
   <ItemGroup>

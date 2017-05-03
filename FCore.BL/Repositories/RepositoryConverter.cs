@@ -64,6 +64,7 @@ namespace FCore.BL.Repositories
         {
             return new FamilyMemberModel()
             {
+                Gender = entity.Gender,
                 About = entity.About,
                 BirthDate = entity.BirthDate,
                 BirthPlace = entity.BirthPlace,
@@ -83,6 +84,7 @@ namespace FCore.BL.Repositories
         {
             return new FamilyMemberEntity()
             {
+                Gender = model.Gender,
                 About = model.About,
                 BirthDate = model.BirthDate,
                 BirthPlace = model.BirthPlace,
