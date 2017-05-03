@@ -3,6 +3,7 @@ using FCore.Common.Enums;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Members;
+using FCore.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -241,6 +242,7 @@ namespace FCore.UI.Controllers
             {
                 ViewData["relenum"] = repo.GetChildRelationshipTypes();
                 ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
+                ViewData["cityenum"] = ConstGenerator.Cities;
                 return View(repo.GetFamilyMember(member.Id));
             }
         }
