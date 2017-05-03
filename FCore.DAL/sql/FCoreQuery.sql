@@ -1,6 +1,13 @@
 
 use [FCore.DB]
 
+select * --Model
+from dbo.__MigrationHistory
+
+delete 
+from dbo.__MigrationHistory
+where MigrationId = '201704302004215_perm_admin'
+
 select *
 from dbf.Families
 
@@ -13,12 +20,32 @@ from dbf.ContactInfoes
 select *
 from dbf.FamilyMembers
 
+alter table dbf.FamilyMembers
+add Gender varchar not null default('')
+
+alter table dbf.FamilyMembers
+drop column Gender
+
+update dbf.FamilyMembers
+set Gender = 'Male'
+where Id = 1
+
+update dbf.FamilyMembers
+set Gender = 'Female'
+where Id = 2
+
+alter table dbf.FamilyMembers
+drop column Gender
+
 update dbf.FamilyMembers
 set ProfileImagePath = ''
 where Id = 1
 
 select *
 from dbf.Permissions
+
+alter table dbf.permissions
+drop column Admin 
 
 alter table dbf.permissions
 add Admin bit not null default(0)
@@ -28,7 +55,7 @@ drop column Admin
 
 delete 
 from dbf.Permissions
-where id != 1018 and id != 19
+where id != 1019 and id != 1020
 
 select *
 from dbf.Albums

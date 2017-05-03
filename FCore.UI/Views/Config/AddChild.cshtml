@@ -242,8 +242,8 @@
 
                                     <div style="margin-top:2%">
                                         <div class="col-sm-7">
-                                            @*<textarea  style="" />*@
-                                            @Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @Value = "", @resize = "false" } })
+                                            @*<textarea  style="resize:none" placeholder="Write here"/>*@
+                                            @Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @style = "resize:none", @placeholder = "Write here" } })
                                             @Html.ValidationMessageFor(m => Model.About)
                                         </div>
                                         <div class="col-sm-5 col-xs-6 tital ">
