@@ -79,12 +79,12 @@
         <div class="col-md-8 ">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Add new child</h4>
+                    <h2 style="color:#6fadbe; margin-left:2%">Add new child</h2>
                 </div>
 
                 <div class="panel-heading">
-                    <h5>In FAMILY-CORE, only members above 18 years of age are active.</h5>
-                    <h5>When a child reaches adult-hood, he become an active member.</h5>
+                    <h5 style="margin-left:2%">In FAMILY-CORE, only members above 18 years of age are active.</h5>
+                    <h5 style="margin-left:2%">When a child reaches adult-hood, he become an active member.</h5>
                 </div>
 
                 <div class="panel-body">
@@ -100,31 +100,34 @@
                                 <div class="clearfix"></div>
                                 <div style="margin-top:3%">
 
-                                    <div style="margin-left:2%; font-weight:bold; font-size:large">Personal info</div>
+                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Personal info</div>
                                     <div class="clearfix"></div>
 
                                     <div class="bot-border"></div>
-
+                                    
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.FirstName)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.FirstName, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.FirstName)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.FirstName)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
-
-                                    <div class="col-sm-7">
-                                        @Html.EditorFor(m => Model.LastName, new { htmlAttributes = new { @Value = ""} })
-                                        @Html.ValidationMessageFor(m => Model.LastName)
-                                    </div>
+                                    
                                     <div class="col-sm-5 col-xs-6 tital ">
                                         @Html.LabelFor(m => Model.LastName)
                                     </div>
+                                    <div class="col-sm-7">
+                                        @Html.EditorFor(m => Model.LastName, new { htmlAttributes = new { @Value = "" } })
+                                        @Html.ValidationMessageFor(m => Model.LastName)
+                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
+                                    </div>
                                     <div class="col-sm-7">
                                         <select id="relcombo">
                                             @foreach (string rel in ViewData["relenum"] as ICollection<string>)
@@ -133,12 +136,12 @@
                                             }
                                         </select>
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.Gender)
+                                    </div>
                                     <div class="col-sm-7">
 
                                         <select id="gencombo">
@@ -149,35 +152,32 @@
                                         </select>
 
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.Gender)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.BirthDate)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.BirthDate, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.BirthDate)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.BirthDate)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.BirthPlace)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.BirthPlace, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.BirthPlace)
-                                    </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.BirthPlace)
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
                                     
                                     <div class="clearfix" style="margin-top:5%"></div>
-                                    <div style="margin-right:2%">Contact info</div>
+                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Contact info</div>
                                     <div class="bot-border"></div>
                                     
 
