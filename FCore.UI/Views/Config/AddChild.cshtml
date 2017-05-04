@@ -98,14 +98,20 @@
 
                                 <div style="margin-top:5%">
 
-                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(Model.ProfileImagePath)</div>
+                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.ProfileImagePath)</div>
+                                    <div class="bot-border"></div>
 
-                                    @*<div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @style = "margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe" } })
-                                    </div>*@
-                                    <div class="col-sm-7">
-                                        <input style="display:inline" type="file" name="ProfileImagePath" />
+                                    <div class="col-sm-12" style="margin-top:2%; margin-bottom:2%" >
+
+                                        <div style="display:inline; margin-top:25%">
+                                            <button id="input_file_btn" class="btn btn-info" style="display:inline; max-width:230px; max-height:20px; text-align:center">Browse</button>
+                                            <input style="display:none" type="file" name="ProfileImagePath" />
+                                        </div>
+
+                                        <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle" style="cursor:auto; display:inline; margin-left:30%">
+
                                         @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
+
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
