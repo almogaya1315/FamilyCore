@@ -180,17 +180,19 @@
                                     <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Contact info</div>
                                     <div class="bot-border"></div>
                                     
-
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.Country)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Model.ContactInfo.Country
                                         @Html.ValidationMessageFor(m => Model.ContactInfo.Country)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ContactInfo.Country)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.City)
+                                    </div>
                                     <div class="col-sm-7 col-xs-6 ">
                                        <select id="citycombo">
                                            @foreach (string city in ViewData["cityenum"] as ICollection<string>)
@@ -199,72 +201,74 @@
                                            }
                                        </select>
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ContactInfo.City)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.Street)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.ContactInfo.Street, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.ContactInfo.Street)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ContactInfo.Street)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.HouseNo)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.ContactInfo.HouseNo, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.ContactInfo.HouseNo)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ContactInfo.HouseNo)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.ContactInfo.PhoneNo, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.ContactInfo.PhoneNo)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ContactInfo.PhoneNo)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ContactInfo.Email)
+                                    </div>
                                     <div class="col-sm-7">
                                         @Html.EditorFor(m => Model.ContactInfo.Email, new { htmlAttributes = new { @Value = "" } })
                                         @Html.ValidationMessageFor(m => Model.ContactInfo.Email)
                                     </div>
-                                    <div class="col-sm-5 col-xs-6 tital ">
-                                        @Html.LabelFor(m => Model.ContactInfo.Email)
-                                    </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
+                                    <div class="clearfix" style="margin-top:5%"></div>
+                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Life story</div>
+                                    <div class="bot-border"></div>
+
                                     <div style="margin-top:2%">
-                                        <div class="col-sm-7">
-                                            @*<textarea  style="resize:none" placeholder="Write here"/>*@
-                                            @Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @style = "resize:none", @placeholder = "Write here" } })
+                                        <div class="col-sm-12">
+                                            <textarea cols="20" data-val="true" data-val-length="The field About my self must be a string with a maximum length of 150." 
+                                                      data-val-length-max="150" data-val-required="Required field" id="About" name="About"
+                                                      rows="3" style="height: 150px; width: 100%; resize:none" placeholder=" Write here"></textarea>
+
+                                            @*@Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @style = "resize:none", @placeholder = "Write here" } })*@
+
                                             @Html.ValidationMessageFor(m => Model.About)
-                                        </div>
-                                        <div class="col-sm-5 col-xs-6 tital ">
-                                            @Html.Label("סיפור חיים")
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
                                     </div>
 
                                     <div style="margin-top:5%">
+                                        <div class="col-sm-5 col-xs-6 tital ">
+                                            @Html.LabelFor(m => Model.ProfileImagePath)
+                                        </div>
                                         <div class="col-sm-7" >
                                             <input style="display:inline" type="file" name="ProfileImagePath" />
                                             @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
-                                        </div>
-                                        <div class="col-sm-5 col-xs-6 tital ">
-                                            @Html.LabelFor(m => Model.ProfileImagePath)
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>

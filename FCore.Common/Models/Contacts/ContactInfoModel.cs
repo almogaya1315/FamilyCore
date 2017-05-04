@@ -17,37 +17,34 @@ namespace FCore.Common.Models.Contacts
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int ContactBookId { get; set; }
 
-        [DisplayName("ספר התקשרות")]
+        [DisplayName("Contact book")]
         public ContactBookModel ContactBook { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public int MemberId { get; set; }
 
-        [DisplayName("שם מלא")]
-        [Required(ErrorMessage = "שדה חובה"), StringLength(30)]
+        [DisplayName("Full name")]
+        [Required(ErrorMessage = "Required field"), StringLength(30)]
         public string MemberName { get; set; }
 
-        [DisplayName("מדינה")]
         [StringLength(40), Required(AllowEmptyStrings = true)]
         public string Country { get; set; }
 
-        [DisplayName("עיר")]
         [StringLength(40), Required(AllowEmptyStrings = true)]
         public string City { get; set; }
 
-        [DisplayName("רחוב")]
         [StringLength(40), Required(AllowEmptyStrings = true)]
         public string Street { get; set; }
 
-        [DisplayName("מספר בית")]
+        [DisplayName("House no.")]
         [Range(0, int.MaxValue)]
         public int? HouseNo { get; set; }
 
-        [DisplayName("מספר טלפון")]
+        [DisplayName("Phone no.")]
         [StringLength(11), Required(AllowEmptyStrings = true)]
         public string PhoneNo { get; set; }
 
-        [DisplayName("אימייל")]
+        [DisplayName("E-Mail")]
         [RegularExpression(".+\\@.+\\..+")]
         [StringLength(50), Required(AllowEmptyStrings = true, ErrorMessage = "Not a valid e-mail")]
         public string Email { get; set; }
