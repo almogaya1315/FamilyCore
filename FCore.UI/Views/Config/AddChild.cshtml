@@ -95,6 +95,23 @@
 
                             @using (Html.BeginForm("EditDetails", "Config", Model, FormMethod.Post, new { @enctype = "multipart/form-data" }))
                             {
+
+                                <div style="margin-top:5%">
+
+                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(Model.ProfileImagePath)</div>
+
+                                    @*<div class="col-sm-5 col-xs-6 tital ">
+                                        @Html.LabelFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @style = "margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe" } })
+                                    </div>*@
+                                    <div class="col-sm-7">
+                                        <input style="display:inline" type="file" name="ProfileImagePath" />
+                                        @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="bot-border"></div>
+                                </div>
+
+
                                 @Html.HiddenFor(m => Model.Id)
 
                                 <div class="clearfix"></div>
@@ -104,7 +121,7 @@
                                     <div class="clearfix"></div>
 
                                     <div class="bot-border"></div>
-                                    
+
                                     <div class="col-sm-5 col-xs-6 tital ">
                                         @Html.LabelFor(m => Model.FirstName)
                                     </div>
@@ -114,7 +131,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
-                                    
+
                                     <div class="col-sm-5 col-xs-6 tital ">
                                         @Html.LabelFor(m => Model.LastName)
                                     </div>
@@ -175,11 +192,11 @@
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
 
-                                    
+
                                     <div class="clearfix" style="margin-top:5%"></div>
                                     <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Contact info</div>
                                     <div class="bot-border"></div>
-                                    
+
                                     <div class="col-sm-5 col-xs-6 tital ">
                                         @Html.LabelFor(m => Model.ContactInfo.Country)
                                     </div>
@@ -194,12 +211,12 @@
                                         @Html.LabelFor(m => Model.ContactInfo.City)
                                     </div>
                                     <div class="col-sm-7 col-xs-6 ">
-                                       <select id="citycombo">
-                                           @foreach (string city in ViewData["cityenum"] as ICollection<string>)
-                                           {
-                                               <option>@city</option>
-                                           }
-                                       </select>
+                                        <select id="citycombo">
+                                            @foreach (string city in ViewData["cityenum"] as ICollection<string>)
+                                            {
+                                                <option>@city</option>
+                                            }
+                                        </select>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="bot-border"></div>
@@ -250,25 +267,14 @@
 
                                     <div style="margin-top:2%">
                                         <div class="col-sm-12">
-                                            <textarea cols="20" data-val="true" data-val-length="The field About my self must be a string with a maximum length of 150." 
+                                            <textarea cols="20" data-val="true" data-val-length="The field About my self must be a string with a maximum length of 150."
                                                       data-val-length-max="150" data-val-required="Required field" id="About" name="About"
-                                                      rows="3" style="height: 150px; width: 100%; resize:none" placeholder=" Write here"></textarea>
+                                                      rows="3" style="height: 150px; max-width:700px; width: 100%; resize:none; border-right:none; border-left:none; bor"
+                                                      placeholder=" Write your story here"></textarea>
 
                                             @*@Html.TextAreaFor(m => Model.About, new { htmlAttributes = new { @style = "resize:none", @placeholder = "Write here" } })*@
 
                                             @Html.ValidationMessageFor(m => Model.About)
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
-                                    </div>
-
-                                    <div style="margin-top:5%">
-                                        <div class="col-sm-5 col-xs-6 tital ">
-                                            @Html.LabelFor(m => Model.ProfileImagePath)
-                                        </div>
-                                        <div class="col-sm-7" >
-                                            <input style="display:inline" type="file" name="ProfileImagePath" />
-                                            @*@Html.ValidationMessageFor(m => Model.ProfileImagePath)*@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>
@@ -289,4 +295,3 @@
         </div>
     </div>
 </div>
-
