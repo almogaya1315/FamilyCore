@@ -1,19 +1,28 @@
-﻿using FCore.Common.Enums;
-using FCore.Common.Models.Contacts;
+﻿using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Security.Claims;
 
 namespace FCore.Common.Models.Members
 {
-    public class FamilyMemberModel
+    public class FamilyMemberModel // : IdentityUser
     {
+        /*
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<FamilyMemberModel> manager)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            return userIdentity;
+        }
+        */
+
         public FamilyMemberModel()
         {
             Permissions = new PermissionsModel();
@@ -26,44 +35,42 @@ namespace FCore.Common.Models.Members
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int FamilyId { get; set; }
 
-        [DisplayName("משפחה")]
         public FamilyModel Family { get; set; }
 
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int PermissionId { get; set; }
 
-        [DisplayName("הרשאות")]
         public virtual PermissionsModel Permissions { get; set; }
 
         [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
         public int ContactInfoId { get; set; }
 
-        [DisplayName("פרטי התקשרות")]
+        [DisplayName("Contact info")]
         public virtual ContactInfoModel ContactInfo { get; set; }
 
-        [Required(ErrorMessage = "שדה חובה"), StringLength(30), DisplayName("שם פרטי")]
+        [Required(ErrorMessage = "Required field"), StringLength(30), DisplayName("First name")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "שדה חובה"), StringLength(40), DisplayName("שם משפחה")]
+        [Required(ErrorMessage = "Required field"), StringLength(40), DisplayName("Last name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "שדה חובה", AllowEmptyStrings = false)]
-        [StringLength(150), DisplayName("על עצמי")]
+        [Required(ErrorMessage = "Required field", AllowEmptyStrings = false)]
+        [StringLength(150), DisplayName("About my self")]
         public string About { get; set; }
 
-        [Required(ErrorMessage = "שדה חובה"), DisplayName("מין")]
+        [Required(ErrorMessage = "Required field")]
         public string Gender { get; set; }
 
-        [DataType(DataType.Date), DisplayName("תאריך לידה")]
+        [DataType(DataType.Date), DisplayName("Birth date")]
         public DateTime? BirthDate { get; set; }
 
-        [Required(AllowEmptyStrings = true), StringLength(100), DisplayName("מקום לידה")]
+        [Required(AllowEmptyStrings = true), StringLength(100), DisplayName("Birth place")]
         public string BirthPlace { get; set; }
 
-        [Range(0, int.MaxValue), DisplayName("גיל")]
+        [Range(0, int.MaxValue)]
         public int? Age { get { return DateTime.Now.Year - BirthDate.Value.Year; } }
 
-        [DisplayName("?האם בגיר")]
+        [DisplayName("Is adult?")]
         public bool? IsAdult
         {
             get
@@ -74,10 +81,9 @@ namespace FCore.Common.Models.Members
             }
         }
 
-        [Required(AllowEmptyStrings = true, ErrorMessage = "שדה חובה"), DisplayName("תמונת פרופיל"), StringLength(400)]
+        [Required(AllowEmptyStrings = true, ErrorMessage = "Required field"), DisplayName("Profile picture"), StringLength(400)]
         public string ProfileImagePath { get; set; }
 
-        [DisplayName("קרובי משפחה")]
         public virtual ICollection<RelativeModel> Relatives { get; set; }
     }
 }

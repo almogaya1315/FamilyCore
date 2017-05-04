@@ -91,7 +91,7 @@
 
                     <div class="box box-info">
 
-                        <div class="box-body" dir="rtl">
+                        <div class="box-body" dir="ltr">
 
                             @using (Html.BeginForm("EditDetails", "Config", Model, FormMethod.Post, new { @enctype = "multipart/form-data" }))
                             {
@@ -100,7 +100,7 @@
                                 <div class="clearfix"></div>
                                 <div style="margin-top:3%">
 
-                                    <div>Personal info</div>
+                                    <div style="margin-left:2%; font-weight:bold; font-size:large">Personal info</div>
                                     <div class="clearfix"></div>
 
                                     <div class="bot-border"></div>
@@ -275,7 +275,7 @@
                                 <br />
 
                                 <div class="price-table-button-holder" style="display:inline; margin-right:2%">
-                                    <input type="submit" value="Save" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
+                                    <input type="submit" value="Create child" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
                                 </div>
                             }
                         </div>
