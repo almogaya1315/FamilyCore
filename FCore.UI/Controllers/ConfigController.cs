@@ -248,7 +248,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddChild(int memberId)
+        public ActionResult AddChild(FamilyMemberModel member, HttpPostedFileBase file)
         {
             using (repo = new FCoreRepository())
             {

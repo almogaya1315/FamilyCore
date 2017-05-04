@@ -68,7 +68,15 @@ namespace FCore.Common.Models.Members
         public string BirthPlace { get; set; }
 
         [Range(0, int.MaxValue)]
-        public int? Age { get { return DateTime.Now.Year - BirthDate.Value.Year; } }
+        public int? Age
+        {
+            get
+            {
+                if (BirthDate != null)
+                    return DateTime.Now.Year - BirthDate.Value.Year;
+                else return null;
+            }
+        }
 
         [DisplayName("Is adult?")]
         public bool? IsAdult
