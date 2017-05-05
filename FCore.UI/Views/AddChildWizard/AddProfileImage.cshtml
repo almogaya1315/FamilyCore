@@ -1,10 +1,7 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-@using (Ajax.BeginForm("AddProfileImage", "AddChildWizard", Model, new AjaxOptions
-{
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "wizard_page"
-}, new { @enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddProfileImage", "AddChildWizard", 
+    Model, FormMethod.Get, new { @enctype = "multipart/form-data" }))
 {
     <div style="margin-top:5%">
 
