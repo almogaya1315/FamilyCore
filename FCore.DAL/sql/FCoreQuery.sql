@@ -66,6 +66,14 @@ from dbf.images
 select *
 from dbf.Relatives
 
+update dbf.Relatives
+set Relationship = 'Wife'
+where Id = 1
+
+update dbf.Relatives
+set Relationship = 'Husband'
+where Id = 2
+
 select m.FirstName, m.LastName, r.Relationship, mr.FirstName, mr.LastName 
 from dbf.FamilyMembers m join dbf.Relatives r on m.Id = r.MemberId
 						 join dbf.FamilyMembers mr on mr.Id = r.RelativeId 
