@@ -95,22 +95,21 @@
 
                             @using (Html.BeginForm("AddChild", "Config", Model, FormMethod.Post, new { @enctype = "multipart/form-data" }))
                             {
-
                                 <div style="margin-top:5%">
 
                                     <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.ProfileImagePath)</div>
                                     <div class="bot-border"></div>
 
-                                    <div class="col-sm-12" style="margin-top:2%; margin-bottom:2%" >
+                                    <div class="col-sm-12" style="margin-top:2%; margin-bottom:2%">
 
                                         <div style="display:inline">
-                                            <input id="input_file"  type="file" name="ProfileImagePath" />
+                                            <input id="input_file" type="file" name="ProfileImagePath" style="display:inline; width:25%; margin-top:5%" />
                                             @*<span id="file_sel_path">No file selected</span>*@
                                             @*<button id="input_file_btn" class="btn btn-info" style="max-height:25px; padding:0.3%; width:20%; margin-top:10%; margin-left:-15%">Choose image</button>*@
                                             @Html.ValidationMessageFor(m => Model.ProfileImagePath)
                                         </div>
 
-                                        <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle" style="cursor:auto; display:inline; margin-left:45%">
+                                        <img alt="User Pic" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")" id="profile-image-defualt" class="img-circle" style="cursor:auto; display:inline; margin-left:40%">
 
                                     </div>
                                     <div class="clearfix"></div>
@@ -118,9 +117,9 @@
                                 </div>
 
                                 <div class="clearfix"></div>
-                                <div style="margin-top:3%; margin-bottom:5%">
+                                <div style="margin-top:3%; margin-bottom:5%;">
 
-                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Personal info</div>
+                                    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Personal info</div>
                                     <div class="clearfix"></div>
 
                                     <div class="bot-border"></div>
@@ -288,8 +287,8 @@
                                 <br />
 
                                 <div class="price-table-button-holder" style="display:inline; margin-left:2%">
-                                    <input type="submit" value="Create child" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
-                                </div>
+                                        <input id="add_child_form_input" type="submit" value="Create child" class="btn btn-info" style="width:20%; background-color:#43b98a; border-color:#43b98a" />
+                                    </div>
                             }
                         </div>
                     </div>

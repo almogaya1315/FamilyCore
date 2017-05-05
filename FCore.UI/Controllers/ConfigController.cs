@@ -248,10 +248,14 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddChild(FamilyMemberModel member, HttpPostedFileBase file)
+        public ActionResult AddChild(FamilyMemberModel postedMember, HttpPostedFileBase file)
         {
             using (repo = new FCoreRepository())
             {
+                if (ModelState.IsValid)
+                {
+                    var creator = repo.GetFamilyMember(postedMember.Id);
+                }
                 return null;
             }
         }
