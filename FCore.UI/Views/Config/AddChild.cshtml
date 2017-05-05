@@ -104,9 +104,9 @@
                                     <div class="col-sm-12" style="margin-top:2%; margin-bottom:2%" >
 
                                         <div style="display:inline">
-                                            <input id="input_file" style="display:none" type="file" name="ProfileImagePath" />
-                                            <span id="file_sel_path">No file selected</span>
-                                            <button id="input_file_btn" class="btn btn-info" style="max-height:25px; padding:0.3%; width:20%; margin-top:10%; margin-left:-15%">Choose image</button>
+                                            <input id="input_file"  type="file" name="ProfileImagePath" />
+                                            @*<span id="file_sel_path">No file selected</span>*@
+                                            @*<button id="input_file_btn" class="btn btn-info" style="max-height:25px; padding:0.3%; width:20%; margin-top:10%; margin-left:-15%">Choose image</button>*@
                                             @Html.ValidationMessageFor(m => Model.ProfileImagePath)
                                         </div>
 
