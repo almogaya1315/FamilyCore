@@ -1,0 +1,89 @@
+﻿@model FCore.Common.Models.Members.FamilyMemberModel
+
+@using (Ajax.BeginForm("AddPersonalInfo", "AddChildWizard", Model, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "wizard_page"
+}))
+{
+    <div class="clearfix"></div>
+    <div style="margin-top:3%; margin-bottom:5%;">
+
+        <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Personal info</div>
+        <div class="clearfix"></div>
+
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.FirstName)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.FirstName, new { htmlAttributes = new { @Value = "" } })
+            @Html.ValidationMessageFor(m => Model.FirstName)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.LastName)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.LastName, new { htmlAttributes = new { @Value = "" } })
+            @Html.ValidationMessageFor(m => Model.LastName)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
+        </div>
+        <div class="col-sm-7">
+            <select id="relcombo">
+                @foreach (string rel in ViewData["relenum"] as ICollection<string>)
+                {
+                    <option>@rel</option>
+                }
+            </select>
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Gender)
+        </div>
+        <div class="col-sm-7">
+
+            <select id="gencombo">
+                @foreach (string gen in ViewData["genenum"] as ICollection<string>)
+                {
+                    <option>@gen</option>
+                }
+            </select>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.BirthDate)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.BirthDate, new { htmlAttributes = new { @Value = "" } })
+            @Html.ValidationMessageFor(m => Model.BirthDate)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.BirthPlace)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.BirthPlace, new { htmlAttributes = new { @Value = "" } })
+            @Html.ValidationMessageFor(m => Model.BirthPlace)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%"/>
+    </div>
+}

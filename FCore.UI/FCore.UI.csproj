@@ -180,7 +180,10 @@
     <Content Include="Views\Config\RelativesDetails.cshtml" />
     <Content Include="Views\Config\SecurityPage.cshtml" />
     <Content Include="Views\Shared\EditPermissions.cshtml" />
-    <Content Include="Views\Config\AddChild.cshtml" />
+    <Content Include="Views\Config\AddChildx.cshtml" />
+    <Content Include="Views\AddChildWizard\AddChild.cshtml" />
+    <Content Include="Views\AddChildWizard\AddProfileImage.cshtml" />
+    <Content Include="Views\AddChildWizard\AddPersonalInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -191,7 +194,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\Profiles\" />
-    <Folder Include="Views\AddChildWizard\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">

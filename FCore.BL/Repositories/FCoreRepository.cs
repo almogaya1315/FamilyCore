@@ -60,6 +60,29 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetLastMemberJoined());
         }
+        /// <summary>
+        /// Sets the personal info properties that were posted in html form, 
+        /// by creating a new member object without the initial creator model credentials 
+        /// such as Id, PermissionsId & ContactInfoId. 
+        /// For add-child wizard step 1.
+        /// Updates the profile image path also. Doesn't save file. 
+        /// This action accures in create-child wizard step 4.
+        /// </summary>
+        /// <param name="posted">The posted model object created with only the personal info data, for add-child wizard step 1</param>
+        /// <param name="filePath">The HttpPostedFileBase string path</param>
+        /// <returns>The temporary member object with personal info & profile picutre data</returns>
+        public FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath)
+        {
+            return new FamilyMemberModel()
+            {
+                BirthDate = posted.BirthDate,
+                BirthPlace = posted.BirthPlace,
+                FirstName = posted.FirstName,
+                Gender = posted.Gender,
+                LastName = posted.LastName,
+                ProfileImagePath = filePath
+            };
+        }
 
         public PermissionsModel GetPermissionsModel(int id)
         {

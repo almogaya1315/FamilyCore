@@ -235,6 +235,7 @@ namespace FCore.UI.Controllers
         }
         */
 
+        /*
         [HttpGet]
         public ActionResult AddChild(FamilyMemberModel member)
         {
@@ -259,5 +260,6 @@ namespace FCore.UI.Controllers
                 return null;
             }
         }
+        */
     }
 }

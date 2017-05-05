@@ -21,6 +21,7 @@ namespace FCore.Common.Interfaces
 
         FamilyMemberModel GetFamilyMember(int id);
         FamilyMemberModel GetLastMemberJoined();
+        FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath);
 
         PermissionsModel GetPermissionsModel(int id);
 
