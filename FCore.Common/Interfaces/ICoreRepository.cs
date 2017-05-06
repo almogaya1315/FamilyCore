@@ -43,7 +43,7 @@ namespace FCore.Common.Interfaces
         ICollection<string> GetChildRelationshipTypes();
 
         void UpdateUserAbout(int memberId, string about);
-        void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file);
+        void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase);
         void UpdateUserDetails(ContactInfoModel postedInfo);
         void UpdateUserPermissions(int memberId, PermissionsModel postedPerms);
     }

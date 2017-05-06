@@ -163,13 +163,16 @@ namespace FCore.BL.Repositories
         {
             CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about); // ConvertToEntity
         }
-        public void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file)
+        public void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase)
         {
             string pic = Path.GetFileName(file.FileName);
             string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/Profiles/"), pic);
             file.SaveAs(path);
 
-            CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file)); // ConvertToEntity
+            if (updateDatabase)
+            {
+                CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file)); // ConvertToEntity
+            }
         }
         public void UpdateUserDetails(ContactInfoModel postedInfo)
         {

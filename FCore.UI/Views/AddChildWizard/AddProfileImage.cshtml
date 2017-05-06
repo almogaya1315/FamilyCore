@@ -1,20 +1,25 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
 
-@using (Html.BeginForm("AddProfileImage", "AddChildWizard",
-                                            Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Ajax.BeginForm("AddProfileImage", "AddChildWizard",
+        Model, new AjaxOptions
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "wizard_page"
+        }, new { enctype = "multipart/form-data" }))
 {
     <div style="margin-top:5%">
 
         <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.ProfileImagePath)</div>
         <div class="bot-border"></div>
 
-        <div class="col-sm-6">
-            <div align="center" style="margin-top:5%">
+        <div class="col-sm-12">
+            <div align="center" style="margin-top:7%; margin-bottom:5%">
                 @{if (String.IsNullOrWhiteSpace((string)ViewData["filepath"]))
-                {
+                    {
                         <img src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                             id="profile-image-defualt" class="img-circle img-responsive" />
+                             id="profile-image-defualt" class="img-circle img-responsive"/>
                     }
                     else
                     {
@@ -25,7 +30,17 @@
 
                 <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
                 <div style="margin-top:5%">@Html.ValidationMessageFor(m => Model.ProfileImagePath)</div>
-                <div id="message_file" style="color:#999; margin-top:3%">click avatar to choose profile picture</div>
+                @{
+                    if (String.IsNullOrWhiteSpace((string)ViewData["filename"]))
+                    {
+                        <div id="message_file" style="color:#999; margin-top:3%">click avatar to choose profile picture</div>
+                    }
+                    else
+                    {
+                        <div id="message_file" style="color:#999; margin-top:3%">@ViewData["filename"]</div>
+                    }
+                }
+
             </div>
         </div>
 
@@ -57,14 +72,14 @@
             var filename = path.replace(/.*[\/\\]/, '');
             $('#message_file').text(filename);
 
-            var localpath = '~' + '@Url.Content("~/Images/Profiles/")' + filename
+            //var localpath = '~' + '@Url.Content("~/Images/Profiles/")' + filename
 
-            $('Eprofile-image-defualt').attr('src', URL.createObjectURL(event.target.files[0]))
+            //$('Eprofile-image-defualt').attr('src', URL.createObjectURL(event.target.files[0]))
 
             //var fileReader = new FileReader();
             //fileReader.readAsDataURL($(this).files[0])
             //fileReader.onloadend = function (event) {
-            //    $('Eprofile-image-defualt').src = event.target.result; 
+            //    $('Eprofile-image-defualt').src = event.target.result;
             //}
         });
     });
