@@ -5,6 +5,7 @@ using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,28 +23,52 @@ namespace FCore.UI.Controllers
             }
         }
 
+        public ActionResult LoadProfileImage(FamilyMemberModel creator)
+        {
+            using (repo = new FCoreRepository())
+            {
+                return PartialView("AddProfileImage", repo.GetFamilyMember(creator.Id));
+            }
+        }
+
         [HttpPost]
         public ActionResult AddProfileImage(int Id, HttpPostedFileBase ProfileImagePath) // Id => the creator's id
         {
             using (repo = new FCoreRepository())
             {
-                if (ProfileImagePath != null && ProfileImagePath.ContentType.Contains("image"))
+                string defaultPath = "~/Images/Defualt/profile_defualt.jpg";
+                string path = repo.GetFilePath(ProfileImagePath);
+
+                if (ProfileImagePath != null && ProfileImagePath.ContentType.Contains("image") && path != defaultPath)
                 {
                     ViewData["HBFB_file"] = ProfileImagePath;
-                    ViewData["filepath"] = repo.GetFilePath(ProfileImagePath);
+                    ViewData["filepath"] = path;
                     ViewData["filename"] = ProfileImagePath.FileName;
-                    ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                    ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
 
                     repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
 
-                    return PartialView("AddPersonalInfo", repo.GetFamilyMember(Id));
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(new { success = true }); // PartialView("AddPersonalInfo", repo.GetFamilyMember(Id));
                 }
                 //else if ((HttpPostedFileBase)ViewData["HBFB_file"] != null)
                 //{
 
                 //}
-                else return PartialView();
+                else
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(new { success = false });
+                } 
+            }
+        }
+
+        public ActionResult LoadPersonalInfo(FamilyMemberModel creator)
+        {
+            using (repo = new FCoreRepository())
+            {
+                ViewData["relenum"] = repo.GetChildRelationshipTypes();
+                ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
+                return PartialView("AddPersonalInfo", repo.GetFamilyMember(creator.Id));
             }
         }
 

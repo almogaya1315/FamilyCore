@@ -35,7 +35,7 @@
                 @{
                     if (String.IsNullOrWhiteSpace((string)ViewData["filename"]))
                     {
-                        <div id="message_file" style="color:#999; margin-top:3%">click avatar to choose profile picture</div>
+                        <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
                     }
                     else
                     {
@@ -86,6 +86,21 @@
         });
     });
 
+    //$(function () {
+    //    $('#form_profile').on('submit', function () {
+    //        var form = $(this);
+    //        var url = form.attr('action');
+
+    //        //var path = $('#profile-image-upload').val();
+    //        //$('#ProfileImagePath').val() = path;
+
+    //        var data = new FormData(form[0]);
+    //        $.post(url, data, function (result) {
+    //            $('#wizard_page').html(result)
+    //        });
+    //    });
+    //});
+
     $(function () {
         $('#input_btn_profile').on('click', function (event) {
             event.preventDefault();
@@ -105,14 +120,19 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: OnSuccess
+                success: function () {
+                    //$('#wizard_page').html(result);
+                    var url = '@Url.Action("LoadPersonalInfo", "AddChildWizard", Model)';
+                    $('#wizard_page').load(url);
+                    //$.ajaxSettings.
+                },
+                error: function () {
+                    var url = '@Url.Action("LoadProfileImage", "AddChildWizard", Model)';
+                    $('#wizard_page').load(url);
+                }
             });
         });
     })
-
-    function OnSuccess(result) {
-        $('#wizard_page').html(result)
-    }
 
     function SetFileName(e) {
         if (e.lengthComputable) {

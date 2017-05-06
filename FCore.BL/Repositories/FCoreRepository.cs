@@ -150,8 +150,12 @@ namespace FCore.BL.Repositories
 
         public string GetFilePath(HttpPostedFileBase file)
         {
-            string pic = Path.GetFileName(file.FileName);
-            return $"~/Images/Profiles/{pic}";
+            if (file != null)
+            {
+                string pic = Path.GetFileName(file.FileName);
+                return $"~/Images/Profiles/{pic}";
+            }
+            else return string.Empty;
         }
 
         public ICollection<string> GetChildRelationshipTypes()
