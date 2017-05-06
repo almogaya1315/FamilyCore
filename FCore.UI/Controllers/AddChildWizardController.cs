@@ -23,7 +23,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddProfileImage(FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath)
+        public ActionResult AddProfileImage(int Id, HttpPostedFileBase ProfileImagePath) // Id => the creator's id
         {
             using (repo = new FCoreRepository())
             {
@@ -37,7 +37,7 @@ namespace FCore.UI.Controllers
 
                     repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
 
-                    return PartialView("AddPersonalInfo", repo.GetFamilyMember(creator.Id));
+                    return PartialView("AddPersonalInfo", repo.GetFamilyMember(Id));
                 }
                 //else if ((HttpPostedFileBase)ViewData["HBFB_file"] != null)
                 //{

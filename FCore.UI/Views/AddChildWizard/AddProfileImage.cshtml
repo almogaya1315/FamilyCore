@@ -2,14 +2,16 @@
 
 
 @using (Ajax.BeginForm("AddProfileImage", "AddChildWizard",
-        Model, new AjaxOptions
-        {
-            HttpMethod = "Post",
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "wizard_page"
-        }, new { enctype = "multipart/form-data" }))
+                    Model, new AjaxOptions
+                    {
+                        HttpMethod = "Post",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "wizard_page"
+                    }, new { id = "form_profile" })) // , @creatorId = Model.Id
 {
     <div style="margin-top:5%">
+
+        @Html.HiddenFor(m => Model.Id)
 
         <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.ProfileImagePath)</div>
         <div class="bot-border"></div>
@@ -19,7 +21,7 @@
                 @{if (String.IsNullOrWhiteSpace((string)ViewData["filepath"]))
                     {
                         <img src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                             id="profile-image-defualt" class="img-circle img-responsive"/>
+                             id="profile-image-defualt" class="img-circle img-responsive" />
                     }
                     else
                     {
@@ -49,7 +51,7 @@
 
         <br />
 
-        <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+        <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
     </div>
                     }
 
@@ -83,6 +85,42 @@
             //}
         });
     });
+
+    $(function () {
+        $('#input_btn_profile').on('click', function (event) {
+            event.preventDefault();
+            var formData = new FormData($('#form_profile')[0]);
+            $.ajax({
+                url: '/AddChildWizard/AddProfileImage',
+                type: 'Post',
+                xhr: function () {
+                    var xhr = $.ajaxSettings.xhr();
+                    if (xhr.upload) {
+                        xhr.upload.addEventListener('progress',
+                            SetFileName, false);
+                    }
+                    return xhr;
+                },
+                data: formData, // $('#form_profile').serialize(),
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: OnSuccess
+            });
+        });
+    })
+
+    function OnSuccess(result) {
+        $('#wizard_page').html(result)
+    }
+
+    function SetFileName(e) {
+        if (e.lengthComputable) {
+            //var path = $('#profile-image-upload').val();
+            //var filename = path.replace(/.*[\/\\]/, '');
+            //$('#message_file').text(filename);
+        }
+    }
 
 </script>
 

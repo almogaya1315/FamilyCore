@@ -23,7 +23,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetFamilyMember(1));
+                return View(repo.GetFamilyMember(2));
             }
         }
 
