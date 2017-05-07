@@ -18,6 +18,12 @@ namespace FCore.UI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "FamilyCore", action = "Main", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "AddChildWizard",
+                url: "{controller}/{action}/{id}",
+                defaults: new { contoller = "AddChildWizard", action = "AddChild", id = UrlParameter.Optional }
+            );
         }
     }
 }

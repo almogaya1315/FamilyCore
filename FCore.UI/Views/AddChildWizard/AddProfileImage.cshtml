@@ -50,8 +50,9 @@
         <div class="bot-border"></div>
 
         <br />
-
-        <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+        <div style="margin-bottom:5%">
+            <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+        </div>
     </div>
                     }
 
@@ -123,6 +124,7 @@
                 success: function () {
                     //$('#wizard_page').html(result);
                     var url = '@Url.Action("LoadPersonalInfo", "AddChildWizard", Model)';
+                    //var routeUrl = '@Url.RouteUrl("AddChildWizard", new { controller = "AddChildWizard", action = "LoadPersonalInfo", @creator = Model })'
                     $('#wizard_page').load(url);
                     //$.ajaxSettings.
                 },
