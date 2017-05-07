@@ -31,6 +31,7 @@
                 }
 
                 <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+                @Html.EditorFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @style = "display:none", @id = "hidden_img_path"} })
                 <div style="margin-top:5%">@Html.ValidationMessageFor(m => Model.ProfileImagePath)</div>
                 @{
                     if (String.IsNullOrWhiteSpace((string)Session["filename"]))
@@ -74,6 +75,7 @@
             var path = $(this).val();
             var filename = path.replace(/.*[\/\\]/, '');
             $('#message_file').text(filename);
+            $('#hidden_img_path').text(path);
 
             //var localpath = '~' + '@Url.Content("~/Images/Profiles/")' + filename
 

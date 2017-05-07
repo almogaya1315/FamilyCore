@@ -19,6 +19,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                Session.Clear();
                 return View(repo.GetFamilyMember(creator.Id));
             }
         }
@@ -62,6 +63,7 @@ namespace FCore.UI.Controllers
                 }
                 else
                 {
+                    //ModelState.IsValid = false;
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     return Json(new { success = false });
                 } 
