@@ -31,7 +31,8 @@
                 }
 
                 <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
-                @Html.EditorFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @style = "display:none", @id = "hidden_img_path"} })
+                @*<input type="hidden" id="hidden_img_path" name="ProfileImagePath"/>*@
+                @Html.HiddenFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @id = "hidden_img_path"} })
                 <div style="margin-top:5%">@Html.ValidationMessageFor(m => Model.ProfileImagePath)</div>
                 @{
                     if (String.IsNullOrWhiteSpace((string)Session["filename"]))
@@ -75,7 +76,19 @@
             var path = $(this).val();
             var filename = path.replace(/.*[\/\\]/, '');
             $('#message_file').text(filename);
-            $('#hidden_img_path').text(path);
+
+            //document.getElementById('hidden_img_path').value = path;
+            //var val = $('#hidden_img_path').val();
+
+            $.each($('input'), function () {
+                if ($(this).attr("type") == "hidden") {
+                    var id = $(this).attr('id');
+                    if (id == "ProfileImagePath") {
+                        $(this).val(path);
+                    }
+                }
+            })
+
 
             //var localpath = '~' + '@Url.Content("~/Images/Profiles/")' + filename
 

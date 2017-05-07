@@ -89,7 +89,8 @@ namespace FCore.Common.Models.Members
             }
         }
 
-        [Required(AllowEmptyStrings = true, ErrorMessage = "Required field"), DisplayName("Profile picture"), StringLength(400)]
+        [HiddenInput(DisplayValue = false)]
+        [Required(AllowEmptyStrings = true, ErrorMessage = "You must put in a profile picture"), DisplayName("Profile picture"), StringLength(400)]
         public string ProfileImagePath { get; set; }
 
         public virtual ICollection<RelativeModel> Relatives { get; set; }

@@ -38,35 +38,40 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddProfileImage(int Id, HttpPostedFileBase ProfileImagePath) // Id => the creator's id
+        public ActionResult AddProfileImage([Bind(Include = "Id, ProfileImagePath")]FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath) // Id => the creator's id
         {
             using (repo = new FCoreRepository())
             {
                 string defaultPath = "~/Images/Defualt/profile_defualt.jpg";
                 string path = repo.GetFilePath(ProfileImagePath);
 
-                if (ProfileImagePath != null && ProfileImagePath.ContentType.Contains("image") && path != defaultPath)
+                if (ModelState.IsValid)
                 {
-                    Session["HBFB_file"] = ProfileImagePath;
-                    Session["filepath"] = path;
-                    Session["filename"] = ProfileImagePath.FileName;
+                    if (ProfileImagePath != null && ProfileImagePath.ContentType.Contains("image") && path != defaultPath)
+                    {
+                        Session["HBFB_file"] = ProfileImagePath;
+                        Session["filepath"] = path;
+                        Session["filename"] = ProfileImagePath.FileName;
 
-                    repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
+                        repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
 
-                    Response.StatusCode = (int)HttpStatusCode.OK;
-                    return Json(new { success = true }); // PartialView("AddPersonalInfo", repo.GetFamilyMember(Id));
-                }
-                else if ((HttpPostedFileBase)Session["HBFB_file"] != null)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.OK;
-                    return Json(new { success = true });
+                        Response.StatusCode = (int)HttpStatusCode.OK;
+                        return Json(new { success = true }); 
+                    }
+                    else if ((HttpPostedFileBase)Session["HBFB_file"] != null)
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.OK;
+                        return Json(new { success = true });
+                    }
                 }
                 else
                 {
-                    //ModelState.IsValid = false;
-                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    return Json(new { success = false });
-                } 
+                    var errors = ModelState.SelectMany(state => state.Value.Errors.Select(error => error.Exception));
+                    throw new Exception($"Model is not valid. {errors}");
+                }
+
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new { success = false });
             }
         }
 
