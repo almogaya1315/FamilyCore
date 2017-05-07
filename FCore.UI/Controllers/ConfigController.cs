@@ -234,32 +234,5 @@ namespace FCore.UI.Controllers
             return true;
         }
         */
-
-        /*
-        [HttpGet]
-        public ActionResult AddChild(FamilyMemberModel member)
-        {
-            using (repo = new FCoreRepository())
-            {
-                ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
-                ViewData["cityenum"] = ConstGenerator.Cities;
-                return View(repo.GetFamilyMember(member.Id));
-            }
-        }
-
-        [HttpPost]
-        public ActionResult AddChild(FamilyMemberModel postedMember, HttpPostedFileBase file)
-        {
-            using (repo = new FCoreRepository())
-            {
-                if (ModelState.IsValid)
-                {
-                    var creator = repo.GetFamilyMember(postedMember.Id);
-                }
-                return null;
-            }
-        }
-        */
     }
 }

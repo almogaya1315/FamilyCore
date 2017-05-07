@@ -29,23 +29,15 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                //ViewData.Model = 
-                //Session[""] = 
-                //TempData[""] =
-                //Application
-
                 return PartialView("AddProfileImage", repo.GetFamilyMember((int)creator.Id));
             }
         }
 
         [HttpPost]
-        public ActionResult AddProfileImage(FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath) // [Bind(Exclude = "FamilyId,PermissionId,ContactInfoId,FirstName,LastName,About,Gender,BirthPlace")]
+        public ActionResult AddProfileImage(FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath) 
         {
             using (repo = new FCoreRepository())
             {
-                //string defaultPath = "~/Images/Defualt/profile_defualt.jpg";
-                //string path = repo.GetFilePath(ProfileImagePath);
-
                 if (Session["HBFB_file"] != null)
                 {
                     Response.StatusCode = (int)HttpStatusCode.OK;
@@ -57,7 +49,7 @@ namespace FCore.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (ProfileImagePath.ContentType.Contains("image")) // ProfileImagePath != null && //  && path != defaultPath
+                    if (ProfileImagePath.ContentType.Contains("image")) 
                     {
                         Session["HBFB_file"] = ProfileImagePath;
                         Session["filepath"] = repo.GetFilePath(ProfileImagePath);
@@ -66,15 +58,6 @@ namespace FCore.UI.Controllers
                         repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
                     }
                     else throw new FormatException("The target file is not type image.");
-
-                    //    Response.StatusCode = (int)HttpStatusCode.OK;
-                    //    return Json(new { success = true }); 
-                    //}
-                    //else if ((HttpPostedFileBase)Session["HBFB_file"] != null)
-                    //{
-                    //    Response.StatusCode = (int)HttpStatusCode.OK;
-                    //    return Json(new { success = true });
-                    //}
 
                     Response.StatusCode = (int)HttpStatusCode.OK;
                     return Json(new { success = true });
