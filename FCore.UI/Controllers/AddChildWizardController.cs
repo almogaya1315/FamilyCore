@@ -21,7 +21,7 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 Session.Clear();
-                return View(repo.GetFamilyMember((int)creator.Id));
+                return View(repo.GetFamilyMember(creator.Id));
             }
         }
 
@@ -43,22 +43,29 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                string defaultPath = "~/Images/Defualt/profile_defualt.jpg";
-                string path = repo.GetFilePath(ProfileImagePath);
+                //string defaultPath = "~/Images/Defualt/profile_defualt.jpg";
+                //string path = repo.GetFilePath(ProfileImagePath);
+
+                if (Session["HBFB_file"] != null)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(new { success = true });
+                }
 
                 var modelKeys = repo.GetModelKeys(ModelStateSet.ForProfileImage);
                 foreach (var key in modelKeys) ModelState.Remove(key);
 
                 if (ModelState.IsValid)
                 {
-                    if (ProfileImagePath != null && ProfileImagePath.ContentType.Contains("image") && path != defaultPath)
+                    if (ProfileImagePath.ContentType.Contains("image")) // ProfileImagePath != null && //  && path != defaultPath
                     {
                         Session["HBFB_file"] = ProfileImagePath;
-                        Session["filepath"] = path;
+                        Session["filepath"] = repo.GetFilePath(ProfileImagePath);
                         Session["filename"] = ProfileImagePath.FileName;
 
                         repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
                     }
+                    else throw new FormatException("The target file is not type image.");
 
                     //    Response.StatusCode = (int)HttpStatusCode.OK;
                     //    return Json(new { success = true }); 
@@ -78,6 +85,7 @@ namespace FCore.UI.Controllers
                 //    throw new Exception($"Model is not valid. {errors}");
                 //}
 
+                Session["modelstate"] = ModelState.IsValid;
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { success = false });
             }

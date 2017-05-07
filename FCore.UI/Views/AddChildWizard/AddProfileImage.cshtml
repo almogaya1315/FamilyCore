@@ -2,42 +2,53 @@
 
 
 @using (Ajax.BeginForm("AddProfileImage", "AddChildWizard",
-                    Model, new AjaxOptions
-                    {
-                        HttpMethod = "Post",
-                        InsertionMode = InsertionMode.Replace,
-                        UpdateTargetId = "wizard_page"
-                    }, new { id = "form_profile" })) // , @creatorId = Model.Id
+                                                        Model, new AjaxOptions
+                                                        {
+                                                            HttpMethod = "Post",
+                                                            InsertionMode = InsertionMode.Replace,
+                                                            UpdateTargetId = "wizard_page"
+                                                        }, new { id = "form_profile" })) // , @creatorId = Model.Id
 {
     <div style="margin-top:5%">
 
         @Html.HiddenFor(m => Model.Id)
+        <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+        @Html.HiddenFor(m => Model.ProfileImagePath)
 
         <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.ProfileImagePath)</div>
         <div class="bot-border"></div>
 
         <div class="col-sm-12">
             <div align="center" style="margin-top:7%; margin-bottom:5%">
-                @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
-                    {
-                        <img src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                             id="profile-image-defualt" class="img-circle img-responsive" />
+                <div style="display:inline">
+                    @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
+                {
+                            <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
+                                 id="profile-image-defualt" class="img-circle img-responsive" />
+                        }
+                        else
+                        {
+                            <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
+                                 id="profile-image" class="img-circle img-responsive" />
+                        }
                     }
-                    else
-                    {
-                        <img src="@Url.Content((string)Session["filepath"])" id="profile-image" class="img-circle img-responsive"
-                             style="border-radius:50%; cursor:pointer" />
-                    }
-                }
+                </div>
 
-                <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
-                @*<input type="hidden" id="hidden_img_path" name="ProfileImagePath"/>*@
-                @Html.HiddenFor(m => Model.ProfileImagePath, new { htmlAttributes = new { @id = "hidden_img_path"} })
-                <div style="margin-top:5%">@Html.ValidationMessageFor(m => Model.ProfileImagePath)</div>
+                @*<div style="margin-top:5%; display:inline">@Html.ValidationMessageFor(m => Model.ProfileImagePath)</div>*@
+
                 @{
                     if (String.IsNullOrWhiteSpace((string)Session["filename"]))
                     {
-                        <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
+                        if (Session["modelstate"] == null)
+                        {
+                            <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
+                        }
+                        else
+                        {
+                            <div id="message_file" style="color:#999; margin-top:3%">
+                                @Html.ValidationMessageFor(m => Model.ProfileImagePath, "", new { @style = "color:red" })
+                            </div>
+                        }
                     }
                     else
                     {
