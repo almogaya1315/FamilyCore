@@ -30,6 +30,11 @@ namespace FCore.UI.Controllers
                 var path = ViewData["filepath"];
                 var fileName = ViewData["filename"];
 
+                //ViewData.Model = 
+                //Session[""] = 
+                //TempData[""] =
+                //Application
+
                 return PartialView("AddProfileImage", repo.GetFamilyMember(creator.Id));
             }
         }
