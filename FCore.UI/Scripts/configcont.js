@@ -8,9 +8,14 @@
 //    $("#file_sel_path").text = path;
 //});
 
-$(function () {
-    $('#back_from_pi').on('click', function () {
-        var url = '@Url.Action("LoadProfileImage", "AddChildWizard", Model)'
-        $('#wizard_page').load(url)
-    })
-})
+//$(function () {
+//    $('#back_from_pi').on('click', function () {
+//        var url = '@Url.Action("LoadProfileImage", "AddChildWizard", Model)'
+//        $('#wizard_page').load(url)
+//    })
+//})
+
+//function BackFromPersonalInfo() {
+//    var url = '@Url.Action("LoadProfileImage", "AddChildWizard", Model)';
+//    $('#wizard_page').load(url);
+//}

@@ -27,6 +27,9 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                var path = ViewData["filepath"];
+                var fileName = ViewData["filename"];
+
                 return PartialView("AddProfileImage", repo.GetFamilyMember(creator.Id));
             }
         }
