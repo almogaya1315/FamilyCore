@@ -27,9 +27,6 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                var path = ViewData["filepath"];
-                var fileName = ViewData["filename"];
-
                 //ViewData.Model = 
                 //Session[""] = 
                 //TempData[""] =
@@ -49,19 +46,20 @@ namespace FCore.UI.Controllers
 
                 if (ProfileImagePath != null && ProfileImagePath.ContentType.Contains("image") && path != defaultPath)
                 {
-                    ViewData["HBFB_file"] = ProfileImagePath;
-                    ViewData["filepath"] = path;
-                    ViewData["filename"] = ProfileImagePath.FileName;
+                    Session["HBFB_file"] = ProfileImagePath;
+                    Session["filepath"] = path;
+                    Session["filename"] = ProfileImagePath.FileName;
 
                     repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
 
                     Response.StatusCode = (int)HttpStatusCode.OK;
                     return Json(new { success = true }); // PartialView("AddPersonalInfo", repo.GetFamilyMember(Id));
                 }
-                //else if ((HttpPostedFileBase)ViewData["HBFB_file"] != null)
-                //{
-
-                //}
+                else if ((HttpPostedFileBase)Session["HBFB_file"] != null)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(new { success = true });
+                }
                 else
                 {
                     Response.StatusCode = (int)HttpStatusCode.BadRequest;

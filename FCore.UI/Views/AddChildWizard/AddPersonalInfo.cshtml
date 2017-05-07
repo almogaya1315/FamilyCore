@@ -39,6 +39,9 @@
         </div>
         <div class="col-sm-7">
             <select id="relcombo">
+
+                @*@Html.DropDownList("Choose", ViewData["relenum"] as ICollection<SelectListItem>);*@
+
                 @foreach (string rel in ViewData["relenum"] as ICollection<string>)
                 {
                     <option>@rel</option>
