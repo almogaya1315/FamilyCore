@@ -1,4 +1,5 @@
-﻿using FCore.BL.Repositories;
+﻿using ExpressiveAnnotations.Attributes;
+using FCore.BL.Repositories;
 using FCore.Common.Enums;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Members;
@@ -20,7 +21,7 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 Session.Clear();
-                return View(repo.GetFamilyMember(creator.Id));
+                return View(repo.GetFamilyMember((int)creator.Id));
             }
         }
 
@@ -33,17 +34,20 @@ namespace FCore.UI.Controllers
                 //TempData[""] =
                 //Application
 
-                return PartialView("AddProfileImage", repo.GetFamilyMember(creator.Id));
+                return PartialView("AddProfileImage", repo.GetFamilyMember((int)creator.Id));
             }
         }
 
         [HttpPost]
-        public ActionResult AddProfileImage([Bind(Include = "Id, ProfileImagePath")]FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath) // Id => the creator's id
+        public ActionResult AddProfileImage(FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath) // [Bind(Exclude = "FamilyId,PermissionId,ContactInfoId,FirstName,LastName,About,Gender,BirthPlace")]
         {
             using (repo = new FCoreRepository())
             {
                 string defaultPath = "~/Images/Defualt/profile_defualt.jpg";
                 string path = repo.GetFilePath(ProfileImagePath);
+
+                var modelKeys = repo.GetModelKeys(ModelStateSet.ForProfileImage);
+                foreach (var key in modelKeys) ModelState.Remove(key);
 
                 if (ModelState.IsValid)
                 {
@@ -54,21 +58,25 @@ namespace FCore.UI.Controllers
                         Session["filename"] = ProfileImagePath.FileName;
 
                         repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
+                    }
 
-                        Response.StatusCode = (int)HttpStatusCode.OK;
-                        return Json(new { success = true }); 
-                    }
-                    else if ((HttpPostedFileBase)Session["HBFB_file"] != null)
-                    {
-                        Response.StatusCode = (int)HttpStatusCode.OK;
-                        return Json(new { success = true });
-                    }
+                    //    Response.StatusCode = (int)HttpStatusCode.OK;
+                    //    return Json(new { success = true }); 
+                    //}
+                    //else if ((HttpPostedFileBase)Session["HBFB_file"] != null)
+                    //{
+                    //    Response.StatusCode = (int)HttpStatusCode.OK;
+                    //    return Json(new { success = true });
+                    //}
+
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(new { success = true });
                 }
-                else
-                {
-                    var errors = ModelState.SelectMany(state => state.Value.Errors.Select(error => error.Exception));
-                    throw new Exception($"Model is not valid. {errors}");
-                }
+                //else
+                //{
+                //    var errors = ModelState.SelectMany(state => state.Value.Errors.Select(error => error.ErrorMessage));
+                //    throw new Exception($"Model is not valid. {errors}");
+                //}
 
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { success = false });
@@ -81,7 +89,7 @@ namespace FCore.UI.Controllers
             {
                 ViewData["relenum"] = repo.GetChildRelationshipTypes();
                 ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
-                return PartialView("AddPersonalInfo", repo.GetFamilyMember(creator.Id));
+                return PartialView("AddPersonalInfo", repo.GetFamilyMember((int)creator.Id));
             }
         }
 
@@ -94,7 +102,7 @@ namespace FCore.UI.Controllers
                 if (ModelState.IsValid)
                 {
                     ViewData["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
-                    return PartialView("AddContactInfo", repo.GetFamilyMember(postedMember.Id).ContactInfo);
+                    return PartialView("AddContactInfo", repo.GetFamilyMember((int)postedMember.Id).ContactInfo);
                 }
                 else return PartialView(postedMember);
             }

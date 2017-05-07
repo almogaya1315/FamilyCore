@@ -80,6 +80,8 @@
             //document.getElementById('hidden_img_path').value = path;
             //var val = $('#hidden_img_path').val();
 
+            //var val = $('input:hidden[id$="ProfileImagePath"]').val(path);
+
             $.each($('input'), function () {
                 if ($(this).attr("type") == "hidden") {
                     var id = $(this).attr('id');

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
+using ExpressiveAnnotations.Attributes;
 
 namespace FCore.Common.Models.Members
 {

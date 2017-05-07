@@ -163,6 +163,26 @@ namespace FCore.BL.Repositories
             return ConstGenerator.ChildRelTypes;
         }
 
+        public ICollection<string> GetModelKeys(ModelStateSet forPage)
+        {
+            switch (forPage)
+            {
+                case ModelStateSet.ForProfileImage:
+                    return new List<string>()
+                {
+                    "FamilyId", "PermissionId", "ContactInfoId", "FirstName", "LastName", "About", "Gender", "BirthPlace"
+                };
+                case ModelStateSet.ForPersonalInfo:
+                    return null;
+                case ModelStateSet.ForContactInfo:
+                    return null;
+                case ModelStateSet.ForLifeStory:
+                    return null;
+                default:
+                    throw new InvalidOperationException("The ModelStateSet passed was not implemented in switch.");
+            }
+        }
+
         public void UpdateUserAbout(int memberId, string about)
         {
             CoreDB.UpdateUserAbout(CoreDB.GetFamilyMember(memberId), about); // ConvertToEntity

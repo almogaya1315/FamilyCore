@@ -1,4 +1,5 @@
-﻿using FCore.Common.Models.Albums;
+﻿using FCore.Common.Enums;
+using FCore.Common.Models.Albums;
 using FCore.Common.Models.ChatGroups;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
@@ -41,6 +42,7 @@ namespace FCore.Common.Interfaces
 
         string GetFilePath(HttpPostedFileBase file);
         ICollection<string> GetChildRelationshipTypes();
+        ICollection<string> GetModelKeys(ModelStateSet forPage);
 
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase);

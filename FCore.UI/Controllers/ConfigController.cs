@@ -31,7 +31,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetFamilyMember(member.Id));
+                return View(repo.GetFamilyMember((int)member.Id));
             }
         }
 
@@ -55,11 +55,11 @@ namespace FCore.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (repo.GetFamilyMember(member.Id).About != member.About)
-                        repo.UpdateUserAbout(member.Id, member.About);
-                    return PartialView("UserAbout", repo.GetFamilyMember(member.Id));
+                    if (repo.GetFamilyMember((int)member.Id).About != member.About)
+                        repo.UpdateUserAbout((int)member.Id, member.About);
+                    return PartialView("UserAbout", repo.GetFamilyMember((int)member.Id));
                 }
-                else return PartialView("EditAbout", repo.GetFamilyMember(member.Id));
+                else return PartialView("EditAbout", repo.GetFamilyMember((int)member.Id));
             }
         }
 
@@ -73,11 +73,11 @@ namespace FCore.UI.Controllers
                     if (ProfileImagePath.ContentType.Contains("image"))
                     {
                         if (repo.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
-                            repo.UpdateMemberProfileImage(member.Id, ProfileImagePath, true);
+                            repo.UpdateMemberProfileImage((int)member.Id, ProfileImagePath, true);
                     }
                     else { } // todo
                 }
-                return View("PersonalPage", repo.GetFamilyMember(member.Id));
+                return View("PersonalPage", repo.GetFamilyMember((int)member.Id));
             }
         }
 
@@ -85,7 +85,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetFamilyMember(member.Id));
+                return View(repo.GetFamilyMember((int)member.Id));
             }
         }
 
@@ -129,7 +129,7 @@ namespace FCore.UI.Controllers
             {
                 try
                 {
-                    member = repo.GetFamilyMember(member.Id);
+                    member = repo.GetFamilyMember((int)member.Id);
                     foreach (RelativeModel relationship in member.Relatives)
                     {
                         relationship.Member = member;
@@ -148,7 +148,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                member = repo.GetFamilyMember(member.Id);
+                member = repo.GetFamilyMember((int)member.Id);
                 //if (member.Permissions.Admin)
                 //{
                 ViewData["memberId"] = member.Id;
