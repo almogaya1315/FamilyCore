@@ -163,14 +163,14 @@ namespace FCore.BL.Repositories
         {
             ICollection<SelectListItem> relListItems = new List<SelectListItem>();
             foreach (string rel in ConstGenerator.ChildRelTypes)
-                relListItems.Add(new SelectListItem() { Value = rel });
+                relListItems.Add(new SelectListItem() { Text = rel });
             return relListItems;
         }
         public ICollection<SelectListItem> GetGenderTypes()
         {
             ICollection<SelectListItem> genListItems = new List<SelectListItem>();
             foreach (string gen in Enum.GetNames(typeof(GenderType)).ToList())
-                genListItems.Add(new SelectListItem() { Value = gen });
+                genListItems.Add(new SelectListItem() { Text = gen });
             return genListItems;
         }
 

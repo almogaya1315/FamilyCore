@@ -47,15 +47,16 @@
             @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
         </div>
         <div class="col-sm-7">
-            <select id="relcombo">
 
-                @Html.DropDownList("Daughter", ViewData["relenum"] as ICollection<SelectListItem>)
+            @Html.DropDownList("Daughter", ViewData["relenum"] as ICollection<SelectListItem>)
 
-                @*@foreach (string rel in ViewData["relenum"] as ICollection<string>)
+            @*<select id="relcombo">
+                @foreach (string rel in ViewData["relenum"] as ICollection<string>)
                 {
                     <option>@rel</option>
-                }*@
-            </select>
+                }
+            </select>*@
+
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -65,15 +66,14 @@
         </div>
         <div class="col-sm-7">
 
-            <select id="gencombo">
+            @Html.DropDownList("Male", ViewData["genenum"] as ICollection<SelectListItem>)
 
-                @Html.DropDownList("Male", ViewData["genenum"] as ICollection<SelectListItem>)
-
-                @*@foreach (string gen in ViewData["genenum"] as ICollection<string>)
+            @*<select id="gencombo">
+                @foreach (string gen in ViewData["genenum"] as ICollection<string>)
                 {
                     <option>@gen</option>
-                }*@
-            </select>
+                }
+            </select>*@
 
         </div>
         <div class="clearfix"></div>
