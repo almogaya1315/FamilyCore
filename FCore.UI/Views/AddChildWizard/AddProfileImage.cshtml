@@ -44,7 +44,7 @@
                         else
                         {
                             <div id="message_file" style="color:#999; margin-top:3%">
-                                @Html.ValidationMessageFor(m => Model.ProfileImagePath, "", new { @style = "color:red" })
+                                @Html.ValidationMessageFor(m => Model.ProfileImagePath, "", new { @style = Session["validcolor"] })
                             </div>
                         }
                     }

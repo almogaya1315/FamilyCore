@@ -21,6 +21,7 @@ using FCore.DAL.Entities.ChatGroups;
 using System.Web;
 using System.IO;
 using FCore.Common.Utils;
+using System.Web.Mvc;
 
 namespace FCore.BL.Repositories
 {
@@ -158,9 +159,19 @@ namespace FCore.BL.Repositories
             else return string.Empty;
         }
 
-        public ICollection<string> GetChildRelationshipTypes()
+        public ICollection<SelectListItem> GetChildRelationshipTypes()
         {
-            return ConstGenerator.ChildRelTypes;
+            ICollection<SelectListItem> relListItems = new List<SelectListItem>();
+            foreach (string rel in ConstGenerator.ChildRelTypes)
+                relListItems.Add(new SelectListItem() { Value = rel });
+            return relListItems;
+        }
+        public ICollection<SelectListItem> GetGenderTypes()
+        {
+            ICollection<SelectListItem> genListItems = new List<SelectListItem>();
+            foreach (string gen in Enum.GetNames(typeof(GenderType)).ToList())
+                genListItems.Add(new SelectListItem() { Value = gen });
+            return genListItems;
         }
 
         public ICollection<string> GetModelKeys(ModelStateSet forPage)
@@ -170,7 +181,7 @@ namespace FCore.BL.Repositories
                 case ModelStateSet.ForProfileImage:
                     return new List<string>()
                 {
-                    "FamilyId", "PermissionId", "ContactInfoId", "FirstName", "LastName", "About", "Gender", "BirthPlace"
+                    "FamilyId", "PermissionId", "ContactInfoId", "FirstName", "LastName", "About", "Gender", "BirthPlace", "BirthDate"
                 };
                 case ModelStateSet.ForPersonalInfo:
                     return new List<string>()
@@ -184,6 +195,38 @@ namespace FCore.BL.Repositories
                 default:
                     throw new InvalidOperationException("The ModelStateSet passed was not implemented in switch.");
             }
+        }
+        public ViewDataDictionary SetModelState(ViewDataDictionary viewData, ModelStateDictionary modelState, ModelStateSet forPage)
+        {
+            switch (forPage)
+            {
+                case ModelStateSet.ForProfileImage:
+                    break;
+                case ModelStateSet.ForPersonalInfo:
+                    if (modelState.FirstOrDefault(state => state.Key == "FirstName").Value.Errors.Count > 0)
+                    {
+                        viewData["fnstate"] = true;
+                    }
+                    if (modelState.FirstOrDefault(state => state.Key == "LastName").Value.Errors.Count > 0)
+                    {
+                        viewData["lnstate"] = true;
+                    }
+                    if (modelState.FirstOrDefault(state => state.Key == "BirthDate").Value.Errors.Count > 0) // Value.AttemptedValue == string.Empty)
+                    {
+                        viewData["bdstate"] = true;
+                    }
+                    if (modelState.FirstOrDefault(state => state.Key == "BirthPlace").Value.Errors.Count > 0)
+                    {
+                        viewData["bpstate"] = true;
+                    }
+                    break;
+                case ModelStateSet.ForContactInfo:
+                    break;
+                case ModelStateSet.ForLifeStory:
+                    break;
+            }
+            
+            return viewData;
         }
 
         public void UpdateUserAbout(int memberId, string about)

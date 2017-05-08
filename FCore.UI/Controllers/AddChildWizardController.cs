@@ -2,7 +2,9 @@
 using FCore.BL.Repositories;
 using FCore.Common.Enums;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Members;
+using FCore.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,7 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 Session.Clear();
+                Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
                 return View(repo.GetFamilyMember(creator.Id));
             }
         }
@@ -79,7 +82,7 @@ namespace FCore.UI.Controllers
                 //    throw new Exception($"Model is not valid. {errors}");
                 //}
 
-                Session["modelstate"] = ModelState.IsValid;
+                Session["modelstate"] = ModelState.IsValid; // set to viewData with repo.SetModelState
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { success = false });
             }
@@ -93,14 +96,14 @@ namespace FCore.UI.Controllers
                 Session["creatorId"] = creator.Id;
 
                 ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
+                ViewData["genenum"] = repo.GetGenderTypes(); 
 
                 return PartialView("AddPersonalInfo", new FamilyMemberModel());
             }
         }
 
         [HttpPost]
-        public ActionResult AddPersonalInfo(FamilyMemberModel postedMember)
+        public ActionResult AddPersonalInfo([Bind(Exclude = ("Permissions,Relatives"))]FamilyMemberModel postedMember, string Relationship)
         {
             using (repo = new FCoreRepository())
             {
@@ -111,29 +114,14 @@ namespace FCore.UI.Controllers
                 {
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
                     Session["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
-                    return PartialView("AddContactInfo", repo.GetFamilyMember(postedMember.Id).ContactInfo);
+                    return PartialView("AddContactInfo", new ContactInfoModel());
                 }
                 else
                 {
-                    if (ModelState.FirstOrDefault(state => state.Key == "FirstName").Value.Errors.FirstOrDefault().Exception != null)
-                    {
-                        ViewData["fnstate"] = true;
-                    }
-                    if (ModelState.FirstOrDefault(state => state.Key == "LastName").Value.Errors.FirstOrDefault().Exception != null)
-                    {
-                        ViewData["lnstate"] = true;
-                    }
-                    if (ModelState.FirstOrDefault(state => state.Key == "BirthDate").Value.Errors.FirstOrDefault().Exception != null)
-                    {
-                        ViewData["bdstate"] = true;
-                    }
-                    if (ModelState.FirstOrDefault(state => state.Key == "BirthPlace").Value.Errors.FirstOrDefault().Exception != null)
-                    {
-                        ViewData["bpstate"] = true;
-                    }
+                    ViewData = repo.SetModelState(ViewData, ModelState, ModelStateSet.ForPersonalInfo);
 
                     ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                    ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
+                    ViewData["genenum"] = repo.GetGenderTypes();
                     return PartialView(postedMember);
                 }
             }

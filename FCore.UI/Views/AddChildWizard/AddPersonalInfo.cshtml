@@ -20,9 +20,9 @@
         </div>
         <div class="col-sm-7">
             @Html.EditorFor(m => Model.FirstName) @*, new { htmlAttributes = new { @Value = "" } }*@
-            @{ if (Session["fnstate"] != null)
+            @{ if (ViewData["fnstate"] != null)
                 {
-                    @Html.ValidationMessageFor(m => Model.FirstName)
+                    @Html.ValidationMessageFor(m => Model.FirstName, "", new { @style = Session["validcolor"] } )
                 }
             }
         </div>
@@ -34,9 +34,9 @@
         </div>
         <div class="col-sm-7">
             @Html.EditorFor(m => Model.LastName)
-            @{ if (Session["lnstate"] != null)
+            @{ if (ViewData["lnstate"] != null)
                 {
-                    @Html.ValidationMessageFor(m => Model.LastName)
+                    @Html.ValidationMessageFor(m => Model.LastName, "", new { @style = Session["validcolor"] })
                 }
             }
         </div>
@@ -49,12 +49,12 @@
         <div class="col-sm-7">
             <select id="relcombo">
 
-                @*@Html.DropDownList("Choose", ViewData["relenum"] as ICollection<SelectListItem>);*@
+                @Html.DropDownList("Daughter", ViewData["relenum"] as ICollection<SelectListItem>)
 
-                @foreach (string rel in ViewData["relenum"] as ICollection<string>)
+                @*@foreach (string rel in ViewData["relenum"] as ICollection<string>)
                 {
                     <option>@rel</option>
-                }
+                }*@
             </select>
         </div>
         <div class="clearfix"></div>
@@ -66,10 +66,13 @@
         <div class="col-sm-7">
 
             <select id="gencombo">
-                @foreach (string gen in ViewData["genenum"] as ICollection<string>)
+
+                @Html.DropDownList("Male", ViewData["genenum"] as ICollection<SelectListItem>)
+
+                @*@foreach (string gen in ViewData["genenum"] as ICollection<string>)
                 {
                     <option>@gen</option>
-                }
+                }*@
             </select>
 
         </div>
@@ -81,9 +84,9 @@
         </div>
         <div class="col-sm-7">
             @Html.EditorFor(m => Model.BirthDate)
-           @{ if (Session["bdstate"] != null)
+           @{ if (ViewData["bdstate"] != null)
                {
-                   Html.ValidationMessageFor(m => Model.BirthDate);
+                   @Html.ValidationMessageFor(m => Model.BirthDate, "", new { @style = Session["validcolor"] + "margin-left:5%" });
                }
            }
 
@@ -96,9 +99,9 @@
         </div>
         <div class="col-sm-7">
             @Html.EditorFor(m => Model.BirthPlace)
-            @{ if (Session["bpstate"] != null)
+            @{ if (ViewData["bpstate"] != null)
                 {
-                    @Html.ValidationMessageFor(m => Model.BirthPlace)
+                    @Html.ValidationMessageFor(m => Model.BirthPlace, "", new { @style = Session["validcolor"] })
                 }
             }
         </div>

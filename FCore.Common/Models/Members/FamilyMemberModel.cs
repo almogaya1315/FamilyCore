@@ -62,10 +62,12 @@ namespace FCore.Common.Models.Members
         [Required(ErrorMessage = "Required field")]
         public string Gender { get; set; }
 
+        [Required(ErrorMessage = "Required field")]
         [DataType(DataType.Date), DisplayName("Birth date")]
         public DateTime? BirthDate { get; set; }
 
-        [Required(AllowEmptyStrings = true), StringLength(100), DisplayName("Birth place")]
+        [StringLength(100), DisplayName("Birth place")]
+        [Required(AllowEmptyStrings = true, ErrorMessage = "Required field")] 
         public string BirthPlace { get; set; }
 
         [Range(0, int.MaxValue)]

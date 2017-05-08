@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FCore.Common.Interfaces
 {
@@ -41,8 +42,11 @@ namespace FCore.Common.Interfaces
         ContactInfoModel GetContactInfo(int id);
 
         string GetFilePath(HttpPostedFileBase file);
-        ICollection<string> GetChildRelationshipTypes();
+        ICollection<SelectListItem> GetChildRelationshipTypes();
+        ICollection<SelectListItem> GetGenderTypes();
+
         ICollection<string> GetModelKeys(ModelStateSet forPage);
+        ViewDataDictionary SetModelState(ViewDataDictionary viewData, ModelStateDictionary modelState, ModelStateSet forPage);
 
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase);
