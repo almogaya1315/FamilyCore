@@ -48,14 +48,7 @@
         </div>
         <div class="col-sm-7">
 
-            @Html.DropDownList("Daughter", ViewData["relenum"] as ICollection<SelectListItem>)
-
-            @*<select id="relcombo">
-                @foreach (string rel in ViewData["relenum"] as ICollection<string>)
-                {
-                    <option>@rel</option>
-                }
-            </select>*@
+            @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>)
 
         </div>
         <div class="clearfix"></div>
@@ -66,14 +59,7 @@
         </div>
         <div class="col-sm-7">
 
-            @Html.DropDownList("Male", ViewData["genenum"] as ICollection<SelectListItem>)
-
-            @*<select id="gencombo">
-                @foreach (string gen in ViewData["genenum"] as ICollection<string>)
-                {
-                    <option>@gen</option>
-                }
-            </select>*@
+            @Html.DropDownList("Gender", ViewData["genenum"] as ICollection<SelectListItem>)
 
         </div>
         <div class="clearfix"></div>

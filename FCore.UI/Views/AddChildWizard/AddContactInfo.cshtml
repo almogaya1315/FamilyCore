@@ -1,0 +1,80 @@
+﻿@model FCore.Common.Models.Contacts.ContactInfoModel
+
+@using (Ajax.BeginForm("AddPersonalInfo", "AddChildWizard", Model, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "wizard_page",
+    HttpMethod = "Post"
+}))
+{
+    <div class="clearfix" style="margin-top:5%"></div>
+    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Contact info</div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital ">
+        @Html.LabelFor(m => Model.Country)
+    </div>
+    <div class="col-sm-7">
+        @Model.Country
+        @Html.ValidationMessageFor(m => Model.Country)
+    </div>
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital ">
+        @Html.LabelFor(m => Model.City)
+    </div>
+    <div class="col-sm-7 col-xs-6 ">
+
+        @Html.DropDownList("City", ViewData["cityenum"] as ICollection<SelectListItem>)
+
+        @*<select id="citycombo">
+            @foreach (string city in ViewData["cityenum"] as ICollection<string>)
+            {
+                <option>@city</option>
+            }
+        </select>*@
+    </div>
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital ">
+        @Html.LabelFor(m => Model.Street)
+    </div>
+    <div class="col-sm-7">
+        @Html.EditorFor(m => Model.Street) @*, new { htmlAttributes = new { @Value = "" } }*@
+        @Html.ValidationMessageFor(m => Model.Street)
+    </div>
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital ">
+        @Html.LabelFor(m => Model.HouseNo)
+    </div>
+    <div class="col-sm-7">
+        @Html.EditorFor(m => Model.HouseNo)
+        @Html.ValidationMessageFor(m => Model.HouseNo)
+    </div>
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital ">
+        @Html.LabelFor(m => Model.PhoneNo)
+    </div>
+    <div class="col-sm-7">
+        @Html.EditorFor(m => Model.PhoneNo)
+        @Html.ValidationMessageFor(m => Model.PhoneNo)
+    </div>
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital ">
+        @Html.LabelFor(m => Model.Email)
+    </div>
+    <div class="col-sm-7">
+        @Html.EditorFor(m => Model.Email)
+        @Html.ValidationMessageFor(m => Model.Email)
+    </div>
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+}

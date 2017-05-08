@@ -114,6 +114,7 @@ namespace FCore.UI.Controllers
                 {
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
                     Session["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
+                    ViewData["cityenum"] = repo.GetCities();
                     return PartialView("AddContactInfo", new ContactInfoModel());
                 }
                 else
@@ -123,6 +124,33 @@ namespace FCore.UI.Controllers
                     ViewData["relenum"] = repo.GetChildRelationshipTypes();
                     ViewData["genenum"] = repo.GetGenderTypes();
                     return PartialView(postedMember);
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult LoadContactInfo(ContactInfoModel info)
+        {
+            using (repo = new FCoreRepository())
+            {
+                return PartialView("AddContactInfo", info);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddContactInfo(ContactInfoModel info)
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (ModelState.IsValid)
+                {
+                    var postedMember = (FamilyMemberModel)Session["personal_info"];
+                    postedMember = repo.SetContactInfo(postedMember, info);
+                    return PartialView("AddLifeStory", postedMember);
+                }
+                else
+                {
+                    return PartialView(info);
                 }
             }
         }

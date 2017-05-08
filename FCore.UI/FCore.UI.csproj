@@ -203,6 +203,7 @@
     <Content Include="Views\AddChildWizard\AddChild.cshtml" />
     <Content Include="Views\AddChildWizard\AddProfileImage.cshtml" />
     <Content Include="Views\AddChildWizard\AddPersonalInfo.cshtml" />
+    <Content Include="Views\AddChildWizard\AddContactInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

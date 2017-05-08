@@ -84,6 +84,27 @@ namespace FCore.BL.Repositories
                 ProfileImagePath = filePath
             };
         }
+        public FamilyMemberModel SetContactInfo(FamilyMemberModel posted, ContactInfoModel info)
+        {
+            return new FamilyMemberModel()
+            {
+                BirthDate = posted.BirthDate,
+                BirthPlace = posted.BirthPlace,
+                FirstName = posted.FirstName,
+                LastName = posted.LastName,
+                Gender = posted.Gender,
+                ProfileImagePath = posted.ProfileImagePath,
+                ContactInfo = new ContactInfoModel()
+                {
+                    Country = info.Country,
+                    City = info.City,
+                    Street = info.Street,
+                    HouseNo = info.HouseNo,
+                    PhoneNo = info.PhoneNo,
+                    Email = info.Email
+                }
+            };
+        }
 
         public PermissionsModel GetPermissionsModel(int id)
         {
@@ -172,6 +193,13 @@ namespace FCore.BL.Repositories
             foreach (string gen in Enum.GetNames(typeof(GenderType)).ToList())
                 genListItems.Add(new SelectListItem() { Text = gen });
             return genListItems;
+        }
+        public ICollection<SelectListItem> GetCities()
+        {
+            ICollection<SelectListItem> cities = new List<SelectListItem>();
+            foreach (string city in ConstGenerator.Cities)
+                cities.Add(new SelectListItem() { Text = city });
+            return cities;
         }
 
         public ICollection<string> GetModelKeys(ModelStateSet forPage)
