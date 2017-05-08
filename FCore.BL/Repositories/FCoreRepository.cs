@@ -173,7 +173,10 @@ namespace FCore.BL.Repositories
                     "FamilyId", "PermissionId", "ContactInfoId", "FirstName", "LastName", "About", "Gender", "BirthPlace"
                 };
                 case ModelStateSet.ForPersonalInfo:
-                    return null;
+                    return new List<string>()
+                {
+                    "Id", "FamilyId", "PermissionId", "ContactInfoId", "About", "ProfileImagePath"
+                };
                 case ModelStateSet.ForContactInfo:
                     return null;
                 case ModelStateSet.ForLifeStory:

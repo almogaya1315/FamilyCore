@@ -19,8 +19,12 @@
             @Html.LabelFor(m => Model.FirstName)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.FirstName, new { htmlAttributes = new { @Value = "" } })
-            @Html.ValidationMessageFor(m => Model.FirstName)
+            @Html.EditorFor(m => Model.FirstName) @*, new { htmlAttributes = new { @Value = "" } }*@
+            @{ if (Session["fnstate"] != null)
+                {
+                    @Html.ValidationMessageFor(m => Model.FirstName)
+                }
+            }
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -29,8 +33,12 @@
             @Html.LabelFor(m => Model.LastName)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.LastName, new { htmlAttributes = new { @Value = "" } })
-            @Html.ValidationMessageFor(m => Model.LastName)
+            @Html.EditorFor(m => Model.LastName)
+            @{ if (Session["lnstate"] != null)
+                {
+                    @Html.ValidationMessageFor(m => Model.LastName)
+                }
+            }
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -72,8 +80,13 @@
             @Html.LabelFor(m => Model.BirthDate)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.BirthDate, new { htmlAttributes = new { @Value = "" } })
-            @Html.ValidationMessageFor(m => Model.BirthDate)
+            @Html.EditorFor(m => Model.BirthDate)
+           @{ if (Session["bdstate"] != null)
+               {
+                   Html.ValidationMessageFor(m => Model.BirthDate);
+               }
+           }
+
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
@@ -82,8 +95,12 @@
             @Html.LabelFor(m => Model.BirthPlace)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.BirthPlace, new { htmlAttributes = new { @Value = "" } })
-            @Html.ValidationMessageFor(m => Model.BirthPlace)
+            @Html.EditorFor(m => Model.BirthPlace)
+            @{ if (Session["bpstate"] != null)
+                {
+                    @Html.ValidationMessageFor(m => Model.BirthPlace)
+                }
+            }
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>

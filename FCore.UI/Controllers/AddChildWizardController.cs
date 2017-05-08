@@ -25,16 +25,27 @@ namespace FCore.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// This function is called only if the user returns from pi page. The initial get is from the 'AddChild' PartialView.
+        /// </summary>
+        /// <param name="creator">On initial, this object is the creator member. On return from pi, it's a new member object</param>
+        /// <returns></returns>
         public ActionResult LoadProfileImage(FamilyMemberModel creator)
         {
             using (repo = new FCoreRepository())
             {
-                return PartialView("AddProfileImage", repo.GetFamilyMember((int)creator.Id));
+                if (creator.Id != 0)
+                    return PartialView("AddProfileImage", repo.GetFamilyMember(creator.Id));
+                else
+                {
+                    var created = new FamilyMemberModel() { ProfileImagePath = (string)Session["filepath"] };
+                    return PartialView("AddProfileImage", created);
+                }
             }
         }
 
         [HttpPost]
-        public ActionResult AddProfileImage(FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath) 
+        public ActionResult AddProfileImage(FamilyMemberModel creator, HttpPostedFileBase ProfileImagePath)
         {
             using (repo = new FCoreRepository())
             {
@@ -49,7 +60,7 @@ namespace FCore.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (ProfileImagePath.ContentType.Contains("image")) 
+                    if (ProfileImagePath.ContentType.Contains("image"))
                     {
                         Session["HBFB_file"] = ProfileImagePath;
                         Session["filepath"] = repo.GetFilePath(ProfileImagePath);
@@ -74,13 +85,17 @@ namespace FCore.UI.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult LoadPersonalInfo(FamilyMemberModel creator)
         {
             using (repo = new FCoreRepository())
             {
+                Session["creatorId"] = creator.Id;
+
                 ViewData["relenum"] = repo.GetChildRelationshipTypes();
                 ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
-                return PartialView("AddPersonalInfo", repo.GetFamilyMember((int)creator.Id));
+
+                return PartialView("AddPersonalInfo", new FamilyMemberModel());
             }
         }
 
@@ -89,13 +104,38 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                var modelKeys = repo.GetModelKeys(ModelStateSet.ForPersonalInfo);
+                foreach (var key in modelKeys) ModelState.Remove(key);
+
                 if (ModelState.IsValid)
                 {
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
                     Session["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
-                    return PartialView("AddContactInfo", repo.GetFamilyMember((int)postedMember.Id).ContactInfo);
+                    return PartialView("AddContactInfo", repo.GetFamilyMember(postedMember.Id).ContactInfo);
                 }
-                else return PartialView(postedMember);
+                else
+                {
+                    if (ModelState.FirstOrDefault(state => state.Key == "FirstName").Value.Errors.FirstOrDefault().Exception != null)
+                    {
+                        ViewData["fnstate"] = true;
+                    }
+                    if (ModelState.FirstOrDefault(state => state.Key == "LastName").Value.Errors.FirstOrDefault().Exception != null)
+                    {
+                        ViewData["lnstate"] = true;
+                    }
+                    if (ModelState.FirstOrDefault(state => state.Key == "BirthDate").Value.Errors.FirstOrDefault().Exception != null)
+                    {
+                        ViewData["bdstate"] = true;
+                    }
+                    if (ModelState.FirstOrDefault(state => state.Key == "BirthPlace").Value.Errors.FirstOrDefault().Exception != null)
+                    {
+                        ViewData["bpstate"] = true;
+                    }
+
+                    ViewData["relenum"] = repo.GetChildRelationshipTypes();
+                    ViewData["genenum"] = Enum.GetNames(typeof(GenderType)).ToList();
+                    return PartialView(postedMember);
+                }
             }
         }
     }
