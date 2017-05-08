@@ -84,15 +84,15 @@ namespace FCore.UI.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult AddPersonalInfo(FamilyMemberModel postedMember)
         {
-            HttpPostedFileBase file = (HttpPostedFileBase)ViewData["HBFB_file"];
-
             using (repo = new FCoreRepository())
             {
                 if (ModelState.IsValid)
                 {
-                    ViewData["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
+                    HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
+                    Session["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
                     return PartialView("AddContactInfo", repo.GetFamilyMember((int)postedMember.Id).ContactInfo);
                 }
                 else return PartialView(postedMember);

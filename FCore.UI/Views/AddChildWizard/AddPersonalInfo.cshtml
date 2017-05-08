@@ -3,7 +3,8 @@
 @using (Ajax.BeginForm("AddPersonalInfo", "AddChildWizard", Model, new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "wizard_page"
+    UpdateTargetId = "wizard_page",
+    HttpMethod = "Post"
 }))
 {
     <div class="clearfix"></div>
