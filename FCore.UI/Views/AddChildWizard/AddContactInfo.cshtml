@@ -77,4 +77,21 @@
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>
+
+    <br />
+
+    <div>
+        <input id="back_from_ci" type="button" class="btn btn-info" value="<<  Back" style="display:inline; margin-left:2%; width:17%" onclick="BackFromPersonalInfo" />
+
+        <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:62%; display:inline" />
+    </div>
 }
+
+<script>
+    $(function () {
+        $('#back_from_ci').on('click', function () {
+            var url = '@Url.Action("LoadPersonalInfo", "AddChildWizard", null)'
+            $('#wizard_page').load(url)
+        })
+    })
+</script>

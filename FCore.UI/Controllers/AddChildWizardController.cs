@@ -88,15 +88,42 @@ namespace FCore.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// this function is called from the custom ajax request that overrides the default one, from the result success attribute in the 'AddProfileImage' page. 
+        /// </summary>
+        /// <param name="creator"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult LoadPersonalInfo(FamilyMemberModel creator)
         {
             using (repo = new FCoreRepository())
             {
-                Session["creatorId"] = creator.Id;
+                // when 'back' from ci page, no member model can be passed because the ci view's model is type 'ContactInfo' 
+                if (creator == null) 
+                {
+                    ViewData["relenum"] = repo.GetChildRelationshipTypes();
+                    ViewData["genenum"] = repo.GetGenderTypes();
+
+                    return PartialView("AddPersonalInfo", Session["personal_info"]);
+
+                    // validation before returnig to pi page, yet to be checked
+                    //if (Session["creatorId"] != null)
+                    //{
+                    //    if (Session["personal_info"] != null)
+                    //    {
+                    //        return PartialView("AddPersonalInfo", Session["personal_info"]);
+                    //    }
+                    //    else throw new InvalidOperationException("The created member object wasn't stored in the controller session properly.");
+                    //}
+                    //else throw new NullReferenceException("The creator member object wasn't passed correctly to the action in the initial Load pi page.");
+                }
+                else
+                {
+                    Session["creatorId"] = creator.Id;
+                }
 
                 ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                ViewData["genenum"] = repo.GetGenderTypes(); 
+                ViewData["genenum"] = repo.GetGenderTypes();
 
                 return PartialView("AddPersonalInfo", new FamilyMemberModel());
             }
@@ -128,11 +155,17 @@ namespace FCore.UI.Controllers
             }
         }
 
+        /// <summary>
+        /// This function is called only from the ls page 'back' request
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult LoadContactInfo(ContactInfoModel info)
         {
             using (repo = new FCoreRepository())
             {
+                ViewData["cityenum"] = repo.GetCities();
                 return PartialView("AddContactInfo", info);
             }
         }
@@ -150,6 +183,7 @@ namespace FCore.UI.Controllers
                 }
                 else
                 {
+                    ViewData["cityenum"] = repo.GetCities();
                     return PartialView(info);
                 }
             }
