@@ -1,6 +1,6 @@
 ﻿@model FCore.Common.Models.Contacts.ContactInfoModel
 
-@using (Ajax.BeginForm("AddPersonalInfo", "AddChildWizard", Model, new AjaxOptions
+@using (Ajax.BeginForm("AddContactInfo", "AddChildWizard", Model, new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "wizard_page",
@@ -15,7 +15,7 @@
         @Html.LabelFor(m => Model.Country)
     </div>
     <div class="col-sm-7">
-        @Model.Country
+        @Html.EditorFor(m => Model.Country, new { htmlAttributes = new { @Value = "Israel", @readonly = "readonly" } })
         @Html.ValidationMessageFor(m => Model.Country)
     </div>
     <div class="clearfix"></div>
@@ -28,12 +28,6 @@
 
         @Html.DropDownList("City", ViewData["cityenum"] as ICollection<SelectListItem>)
 
-        @*<select id="citycombo">
-            @foreach (string city in ViewData["cityenum"] as ICollection<string>)
-            {
-                <option>@city</option>
-            }
-        </select>*@
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>
@@ -90,7 +84,7 @@
 <script>
     $(function () {
         $('#back_from_ci').on('click', function () {
-            var url = '@Url.Action("LoadPersonalInfo", "AddChildWizard", null)'
+            var url = '@Url.Action("LoadPersonalInfo", "AddChildWizard")'
             $('#wizard_page').load(url)
         })
     })

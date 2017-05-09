@@ -99,12 +99,13 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 // when 'back' from ci page, no member model can be passed because the ci view's model is type 'ContactInfo' 
-                if (creator == null) 
+                if (creator == null || creator.Id == 0) 
                 {
                     ViewData["relenum"] = repo.GetChildRelationshipTypes();
                     ViewData["genenum"] = repo.GetGenderTypes();
 
-                    return PartialView("AddPersonalInfo", Session["personal_info"]);
+                    var postedMember = Session["personal_info"];
+                    return PartialView("AddPersonalInfo", postedMember);
 
                     // validation before returnig to pi page, yet to be checked
                     //if (Session["creatorId"] != null)
@@ -175,6 +176,12 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                //if (info.Email == null)
+                //{
+                //    var modelKeys = repo.GetModelKeys(ModelStateSet.ForContactInfo);
+                //    foreach (var key in modelKeys) ModelState.Remove(key);
+                //}
+
                 if (ModelState.IsValid)
                 {
                     var postedMember = (FamilyMemberModel)Session["personal_info"];

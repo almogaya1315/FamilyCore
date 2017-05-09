@@ -11,10 +11,10 @@ namespace FCore.Common.Models.Contacts
 {
     public class ContactInfoModel
     {
-        [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [HiddenInput(DisplayValue = false), Range(1, int.MaxValue)]
+        [HiddenInput(DisplayValue = false)]
         public int ContactBookId { get; set; }
 
         [DisplayName("Contact book")]
@@ -24,7 +24,6 @@ namespace FCore.Common.Models.Contacts
         public int MemberId { get; set; }
 
         [DisplayName("Full name")]
-        [Required(ErrorMessage = "Required field"), StringLength(30)]
         public string MemberName { get; set; }
 
         [StringLength(40), Required(AllowEmptyStrings = true)]
@@ -33,20 +32,18 @@ namespace FCore.Common.Models.Contacts
         [StringLength(40), Required(AllowEmptyStrings = true)]
         public string City { get; set; }
 
-        [StringLength(40), Required(AllowEmptyStrings = true)]
+        [StringLength(40)]
         public string Street { get; set; }
 
         [DisplayName("House no.")]
-        [Range(0, int.MaxValue)]
         public int? HouseNo { get; set; }
 
         [DisplayName("Phone no.")]
-        [StringLength(11), Required(AllowEmptyStrings = true)]
         public string PhoneNo { get; set; }
 
+        [StringLength(50)]
         [DisplayName("E-Mail")]
-        [RegularExpression(".+\\@.+\\..+")]
-        [StringLength(50), Required(AllowEmptyStrings = true, ErrorMessage = "Not a valid e-mail")]
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Not a valid E-Mail")]
         public string Email { get; set; }
     }
 }

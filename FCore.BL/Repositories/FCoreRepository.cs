@@ -217,7 +217,7 @@ namespace FCore.BL.Repositories
                     "Id", "FamilyId", "PermissionId", "ContactInfoId", "About", "ProfileImagePath"
                 };
                 case ModelStateSet.ForContactInfo:
-                    return null;
+                    return new List<string>() { "Email" };
                 case ModelStateSet.ForLifeStory:
                     return null;
                 default:
