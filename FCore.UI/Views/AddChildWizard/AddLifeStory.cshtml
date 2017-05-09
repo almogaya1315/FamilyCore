@@ -1,0 +1,45 @@
+﻿@model FCore.Common.Models.Members.FamilyMemberModel
+
+@using (Ajax.BeginForm("AddContactInfo", "AddChildWizard", Model, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "wizard_page",
+    HttpMethod = "Post"
+}))
+{
+    <div class="clearfix" style="margin-top:5%"></div>
+    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Life story</div>
+    <div class="bot-border"></div>
+
+    <div style="margin-top:2%">
+        <div class="col-sm-12">
+            @*<textarea cols="20" data-val="true" data-val-length="The field About my self must be a string with a maximum length of 150."
+                      data-val-length-max="150" data-val-required="Required field" id="About" name="About"
+                      rows="3" style="height: 150px; max-width:700px; width: 100%; resize:none; border-right:none; border-left:none"
+                      placeholder=" Write your story here"></textarea>*@
+
+            @Html.TextAreaFor(m => Model.About, new { @class = "about-text-area", @placeholder = " Write your story here" } )
+
+            @Html.ValidationMessageFor(m => Model.About)
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+    </div>
+
+    <br />
+
+    <div>
+        <input id="back_from_ls" type="button" class="btn btn-info" value="<<  Back" style="display:inline; margin-left:2%; width:17%" onclick="BackFromPersonalInfo" />
+
+        <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:62%; display:inline" />
+    </div>
+}
+
+<script>
+    $(function () {
+        $('#back_from_ls').on('click', function () {
+            var url = '@Url.Action("LoadContactInfo", "AddChildWizard", Model.ContactInfo)'
+            $('#wizard_page').load(url)
+        })
+    })
+</script>

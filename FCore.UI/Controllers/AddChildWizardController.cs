@@ -104,7 +104,7 @@ namespace FCore.UI.Controllers
                     ViewData["relenum"] = repo.GetChildRelationshipTypes();
                     ViewData["genenum"] = repo.GetGenderTypes();
 
-                    var postedMember = Session["personal_info"];
+                    var postedMember = Session["postedMember_pi"];
                     return PartialView("AddPersonalInfo", postedMember);
 
                     // validation before returnig to pi page, yet to be checked
@@ -141,7 +141,7 @@ namespace FCore.UI.Controllers
                 if (ModelState.IsValid)
                 {
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
-                    Session["personal_info"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
+                    Session["postedMember_pi"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
                     ViewData["cityenum"] = repo.GetCities();
                     return PartialView("AddContactInfo", new ContactInfoModel());
                 }
@@ -166,8 +166,12 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                ViewData["cityenum"] = repo.GetCities();
-                return PartialView("AddContactInfo", info);
+                if (Session["postedMember_ci"] != null)
+                {
+                    ViewData["cityenum"] = repo.GetCities();
+                    return PartialView("AddContactInfo", (Session["postedMember_ci"] as FamilyMemberModel).ContactInfo);
+                }
+                else throw new InvalidOperationException("The created member object wasn't stored in the controller session properly.");
             }
         }
 
@@ -184,15 +188,47 @@ namespace FCore.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var postedMember = (FamilyMemberModel)Session["personal_info"];
-                    postedMember = repo.SetContactInfo(postedMember, info);
-                    return PartialView("AddLifeStory", postedMember);
+                    if (Session["postedMember_ci"] == null)
+                    {
+                        var postedMember = (FamilyMemberModel)Session["postedMember_pi"];
+                        postedMember = repo.SetContactInfo(postedMember, info);
+                        Session["postedMember_ci"] = postedMember;
+                    }
+                    
+                    return PartialView("AddLifeStory", Session["postedMember_ci"]);
                 }
                 else
                 {
                     ViewData["cityenum"] = repo.GetCities();
                     return PartialView(info);
                 }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddLifeStory(FamilyMemberModel postedMember)
+        {
+            using (repo = new FCoreRepository())
+            {
+                if (ModelState.IsValid)
+                {
+                    return RedirectToAction("CreateChild", postedMember);
+                }
+                else
+                {
+                    return PartialView(postedMember);
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult CreateChild(FamilyMemberModel postedMember)
+        {
+            using (repo = new FCoreRepository())
+            {
+                //repo.CreateMember((int)Session["creatorId"], postedMember, postedMember.IsAdult);
+
+                return null;
             }
         }
     }
