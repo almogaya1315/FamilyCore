@@ -180,11 +180,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                //if (info.Email == null)
-                //{
-                //    var modelKeys = repo.GetModelKeys(ModelStateSet.ForContactInfo);
-                //    foreach (var key in modelKeys) ModelState.Remove(key);
-                //}
+                // No need for modelStateHelper for ci model
 
                 if (ModelState.IsValid)
                 {
@@ -206,13 +202,18 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddLifeStory(FamilyMemberModel postedMember)
+        public ActionResult AddLifeStory([Bind(Exclude = ("Permissions,Relatives,ContactInfo"))]FamilyMemberModel postedMember)
         {
             using (repo = new FCoreRepository())
             {
+                var modelKeys = repo.GetModelKeys(ModelStateSet.ForLifeStory);
+                foreach (var key in modelKeys) ModelState.Remove(key);
+
                 if (ModelState.IsValid)
                 {
-                    return RedirectToAction("CreateChild", postedMember);
+                    (Session["postedMember_ci"] as FamilyMemberModel).About = postedMember.About;
+                    Session["postedMember_final"] = Session["postedMember_ci"];
+                    return RedirectToAction("CreateChild", Session["postedMember_final"]);
                 }
                 else
                 {
@@ -226,7 +227,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                //repo.CreateMember((int)Session["creatorId"], postedMember, postedMember.IsAdult);
+                repo.CreateMember((int)Session["creatorId"], postedMember, (bool)postedMember.IsAdult);
 
                 return null;
             }

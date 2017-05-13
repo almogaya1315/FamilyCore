@@ -219,7 +219,7 @@ namespace FCore.BL.Repositories
                 case ModelStateSet.ForContactInfo:
                     return new List<string>() { "Email" };
                 case ModelStateSet.ForLifeStory:
-                    return null;
+                    return new List<string>() { "Id", "FamilyId", "PermissionId", "ContactInfoId", };
                 default:
                     throw new InvalidOperationException("The ModelStateSet passed was not implemented in switch.");
             }
@@ -279,6 +279,17 @@ namespace FCore.BL.Repositories
         public void UpdateUserPermissions(int memberId, PermissionsModel postedPerms)
         {
             CoreDB.UpdateUserPermissions(memberId, ConvertToEntity(postedPerms));
+        }
+        public void CreateMember(int creatorId, FamilyMemberModel postedMember, bool isAdult)
+        {
+            if (isAdult)
+            {
+                // to do.. in sigh-in feature
+            }
+            else
+            {
+                CoreDB.CreateChild(creatorId, ConvertToEntity(postedMember));
+            }
         }
         #endregion
 

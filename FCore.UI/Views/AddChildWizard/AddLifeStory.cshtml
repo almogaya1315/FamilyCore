@@ -1,6 +1,6 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-@using (Ajax.BeginForm("AddContactInfo", "AddChildWizard", Model, new AjaxOptions
+@using (Ajax.BeginForm("AddLifeStory", "AddChildWizard", Model, new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = "wizard_page",
@@ -31,7 +31,7 @@
     <div>
         <input id="back_from_ls" type="button" class="btn btn-info" value="<<  Back" style="display:inline; margin-left:2%; width:17%" onclick="BackFromPersonalInfo" />
 
-        <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:62%; display:inline" />
+        <input class="btn btn-info" type="submit" value="Create child  >>" style="margin-left:59%; display:inline" />
     </div>
 }
 
