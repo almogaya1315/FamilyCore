@@ -324,7 +324,7 @@ namespace FCore.DAL.Entities.Families
                 throw new NullReferenceException($"Member permissions were not found by posted permissions id #{postedPermsEntity.Id}");
             }
         }
-        public CreateChild(int creatorId, FamilyMemberEntity postedEntity)
+        public void CreateChild(int creatorId, FamilyMemberEntity postedEntity)
         {
             var creator = GetFamilyMember(creatorId);
             if (creator.LastName == postedEntity.LastName)
