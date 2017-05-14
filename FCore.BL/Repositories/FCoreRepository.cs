@@ -105,6 +105,19 @@ namespace FCore.BL.Repositories
                 }
             };
         }
+        public FamilyMemberModel CreateMember(int creatorId, FamilyMemberModel postedMember, string relationship)
+        {
+            if ((bool)postedMember.IsAdult)
+            {
+                // to do.. in sigh-in feature
+                // CoreDB.CreateAdult(ConvertToEntity(postedMember));
+                return null;
+            }
+            else
+            {
+                return ConvertToModel(CoreDB.CreateChild(creatorId, ConvertToEntity(postedMember), relationship));
+            }
+        }
 
         public PermissionsModel GetPermissionsModel(int id)
         {
@@ -279,18 +292,6 @@ namespace FCore.BL.Repositories
         public void UpdateUserPermissions(int memberId, PermissionsModel postedPerms)
         {
             CoreDB.UpdateUserPermissions(memberId, ConvertToEntity(postedPerms));
-        }
-        public void CreateMember(int creatorId, FamilyMemberModel postedMember)
-        {
-            if ((bool)postedMember.IsAdult)
-            {
-                // to do.. in sigh-in feature
-                // CoreDB.CreateAdult(ConvertToEntity(postedMember));
-            }
-            else
-            {
-                CoreDB.CreateChild(creatorId, ConvertToEntity(postedMember));
-            }
         }
         #endregion
 

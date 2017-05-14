@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Linq.Expressions;
 using FCore.Common.Utils;
+using FCore.Common.Enums;
 
 namespace FCore.DAL.Entities.Families
 {
@@ -164,6 +165,27 @@ namespace FCore.DAL.Entities.Families
             return null;
 
             //return ContactBooks.FirstOrDefault(b => b.Id == id);
+        }
+        public ContactBookEntity GetContactBook(int contactInfoId = -1, ContactInfoEntity entity = null)
+        {
+            foreach (ContactBookEntity book in ContactBooks)
+            {
+                if (entity == null && contactInfoId != -1)
+                {
+                    return FindBook(book, contactInfoId);
+                }
+                else if ((contactInfoId == -1 && entity != null) || (contactInfoId != -1 && entity != null))
+                {
+                    return FindBook(book, entity.Id);
+                }
+            }
+            return null;
+        }
+        ContactBookEntity FindBook(ContactBookEntity book, int id)
+        {
+            var contactInfo = book.ContactInfoes.FirstOrDefault(ci => ci.Id == id);
+            if (contactInfo != null) return book;
+            else return null;
         }
 
         public VideoEntity GetMostViewedVideo()
@@ -324,15 +346,45 @@ namespace FCore.DAL.Entities.Families
                 throw new NullReferenceException($"Member permissions were not found by posted permissions id #{postedPermsEntity.Id}");
             }
         }
-        public void CreateChild(int creatorId, FamilyMemberEntity postedEntity)
+        public FamilyMemberEntity CreateChild(int creatorId, FamilyMemberEntity postedEntity, string relationship)
         {
             var creator = GetFamilyMember(creatorId);
             if (creator.LastName == postedEntity.LastName)
             {
                 postedEntity.Family = GetFamily(creator.FamilyId);
-            }
+                postedEntity.FamilyId = creator.FamilyId;
 
-            postedEntity.Family = GetFamily(postedEntity.FamilyId);
+                var contactBook = GetContactBook(creator.ContactInfoId);
+                if (contactBook != null)
+                {
+                    postedEntity.ContactInfo.ContactBook = contactBook;
+                    postedEntity.ContactInfo.ContactBookId = contactBook.Id;
+                }
+
+                postedEntity.Permissions = new MemberPermissions();
+                if (postedEntity.Relatives == null)
+                {
+                    postedEntity.Relatives = new List<MemberRelative>();
+                }
+
+                var gender = Enum.Parse(typeof(GenderType), creator.Gender);
+                var rel = Enum.Parse(typeof(RelationshipType), relationship);
+                postedEntity.Relatives.Add(new MemberRelative()
+                {
+                    Member = postedEntity,
+                    Relative = creator,
+                    Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)rel, (GenderType)gender)
+                });
+                creator.Relatives.Add(new MemberRelative()
+                {
+                    Member = creator,
+                    Relative = postedEntity,
+                    Relationship = relationship
+                });
+
+                SaveChanges();
+            }
+            return postedEntity;
         }
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="Utils\ConstGenerator.cs" />
     <Compile Include="Utils\ModelStateHelper.cs" />
     <Compile Include="Utils\PermissionHandler.cs" />
+    <Compile Include="Utils\TreeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />

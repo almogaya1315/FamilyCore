@@ -142,6 +142,7 @@ namespace FCore.UI.Controllers
                 {
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
                     Session["postedMember_pi"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
+                    Session["creator_rel"] = Relationship;
                     ViewData["cityenum"] = repo.GetCities();
                     return PartialView("AddContactInfo", new ContactInfoModel());
                 }
@@ -216,7 +217,7 @@ namespace FCore.UI.Controllers
                     //return RedirectToAction("CreateChild", Session["postedMember_final"]);
                     try
                     {
-                        postedMember = repo.CreateMember((int)Session["creatorId"], postedMember);
+                        postedMember = repo.CreateMember((int)Session["creatorId"], postedMember, (string)Session["creator_rel"]);
                     }
                     catch (Exception e)
                     {
