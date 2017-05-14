@@ -107,6 +107,19 @@ namespace FCore.DAL.Entities.Families
 
             //return FamilyMembers.Last();
         }
+        public FamilyMemberEntity CreateFamilyMember(FamilyMemberEntity postedEntity)
+        {
+            return new FamilyMemberEntity()
+            {
+                About = postedEntity.About,
+                BirthDate = postedEntity.BirthDate,
+                BirthPlace = postedEntity.BirthPlace,
+                FirstName = postedEntity.FirstName,
+                Gender = postedEntity.Gender,
+                LastName = postedEntity.LastName,
+                ProfileImagePath = postedEntity.ProfileImagePath
+            };
+        }
 
         public MemberPermissions GetPermissionsEntity(int id)
         {
@@ -162,6 +175,20 @@ namespace FCore.DAL.Entities.Families
             return null;
 
             //return ContactInfoes.FirstOrDefault(i => i.Id == id);
+        }
+        public ContactInfoEntity CreateContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
+        {
+            return new ContactInfoEntity()
+            {
+                City = postedInfo.City,
+                Country = postedInfo.Country,
+                Email = postedInfo.Email,
+                HouseNo = postedInfo.HouseNo,
+                MemberId = newChild.Id,
+                MemberName = $"{newChild.FirstName} {newChild.LastName}",
+                PhoneNo = postedInfo.PhoneNo,
+                Street = postedInfo.Street
+            };
         }
         public ContactBookEntity GetContactBook(int id)
         {
@@ -367,47 +394,76 @@ namespace FCore.DAL.Entities.Families
         }
         public FamilyMemberEntity CreateChild(int creatorId, FamilyMemberEntity postedEntity, string relationship)
         {
+            FamilyMemberEntity newChild = null;
+
+            newChild = SaveChild(postedEntity, newChild);
+
+            newChild = SaveContactInfo(postedEntity.ContactInfo, newChild);
+
             var creator = GetFamilyMember(creatorId);
-            if (creator.LastName == postedEntity.LastName)
+            if (creator.LastName == newChild.LastName)
             {
-                SaveFamily(postedEntity, creator, false, out postedEntity);
-                SaveContactBook(postedEntity, creator, false, out postedEntity);
+                newChild = SaveFamily(newChild, creator, false);
+                newChild = SaveContactBook(newChild, creator, false);
             }
             else
             {
-                SaveFamily(postedEntity, creator, true, out postedEntity);
-                SaveContactBook(postedEntity, creator, true, out postedEntity);
+                newChild = SaveFamily(newChild, creator, true);
+                newChild = SaveContactBook(newChild, creator, true);
             }
 
-            SaveRelationship(postedEntity, creator, relationship, out postedEntity);
+            newChild = SaveRelationship(newChild, creator, relationship);
 
-            return postedEntity;
+            return newChild;
         }
 
-        void SaveFamily(FamilyMemberEntity postedEntity, FamilyMemberEntity creator, bool newFamily, out FamilyMemberEntity updatedPosted)
+        FamilyMemberEntity SaveChild(FamilyMemberEntity postedEntity, FamilyMemberEntity newChild)
+        {
+            newChild = CreateFamilyMember(postedEntity);
+            FamilyMembers.Add(newChild);
+            Entry(newChild).State = EntityState.Added;
+            SaveChanges();
+            return newChild;
+        }
+        FamilyMemberEntity SaveContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
+        {
+            newChild.ContactInfo = CreateContactInfo(postedInfo, newChild);
+            ContactInfoes.Add(newChild.ContactInfo);
+            Entry(newChild.ContactInfo).State = EntityState.Added;
+            SaveChanges();
+            return newChild;
+        }
+        FamilyMemberEntity SaveFamily(FamilyMemberEntity newChild, FamilyMemberEntity creator, bool newFamily)
         {
             if (newFamily)
             {
-                postedEntity.Family = CreateFamily(postedEntity.LastName);
+                newChild.Family = CreateFamily(newChild.LastName);
+                Families.Add(newChild.Family);
+                newChild.Family.FamilyMembers.Add(newChild);
+                Entry(newChild.Family).State = EntityState.Added;
                 SaveChanges();
-                postedEntity.FamilyId = postedEntity.Family.Id;
+                newChild.FamilyId = newChild.Family.Id;
                 SaveChanges();
             }
             else
             {
-                postedEntity.Family = GetFamily(creator.FamilyId);
-                postedEntity.FamilyId = creator.FamilyId;
+                newChild.Family = GetFamily(creator.FamilyId);
+                newChild.Family.FamilyMembers.Add(newChild);
+                Entry(newChild.Family).State = EntityState.Modified;
+                newChild.FamilyId = creator.FamilyId;
                 SaveChanges();
             }
-            updatedPosted = postedEntity;
+            return newChild;
         }
-        void SaveContactBook(FamilyMemberEntity postedEntity, FamilyMemberEntity creator, bool newContactBook, out FamilyMemberEntity updatedPosted)
+        FamilyMemberEntity SaveContactBook(FamilyMemberEntity newChild, FamilyMemberEntity creator, bool newContactBook)
         {
             if (newContactBook)
             {
-                postedEntity.ContactInfo.ContactBook = CreateContactBook(postedEntity.Family);
+                newChild.ContactInfo.ContactBook = CreateContactBook(newChild.Family);
+                ContactBooks.Add(newChild.ContactInfo.ContactBook);
+                Entry(newChild.ContactInfo.ContactBook).State = EntityState.Added;
                 SaveChanges();
-                postedEntity.ContactInfo.ContactBookId = postedEntity.ContactInfo.ContactBook.Id;
+                newChild.ContactInfo.ContactBookId = newChild.ContactInfo.ContactBook.Id;
                 SaveChanges();
             }
             else
@@ -415,33 +471,37 @@ namespace FCore.DAL.Entities.Families
                 var contactBook = GetContactBook(creator.ContactInfoId);
                 if (contactBook != null)
                 {
-                    postedEntity.ContactInfo.ContactBook = contactBook;
-                    postedEntity.ContactInfo.ContactBookId = contactBook.Id;
+                    newChild.ContactInfo.ContactBook = contactBook;
+                    Entry(newChild.ContactInfo.ContactBook).State = EntityState.Modified;
+                    newChild.ContactInfo.ContactBookId = contactBook.Id;
                     SaveChanges();
                 }
                 else throw new NullReferenceException("Unable to find creator's contact book.");
             }
-            updatedPosted = postedEntity;
+            return newChild;
         }
-        void SaveRelationship(FamilyMemberEntity postedEntity, FamilyMemberEntity creator, string relationship, out FamilyMemberEntity updatedPosted)
+        FamilyMemberEntity SaveRelationship(FamilyMemberEntity newChild, FamilyMemberEntity creator, string relationship)
         {
-            var creatorGender = Enum.Parse(typeof(GenderType), creator.Gender);
-            var rel = Enum.Parse(typeof(RelationshipType), relationship);
-            postedEntity.Relatives.Add(new MemberRelative()
-            {
-                Member = postedEntity,
-                Relative = creator,
-                Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)rel, (GenderType)creatorGender)
-            });
             creator.Relatives.Add(new MemberRelative()
             {
                 Member = creator,
-                Relative = postedEntity,
+                Relative = newChild,
                 Relationship = relationship
             });
+            Entry(creator.Relatives).State = EntityState.Added;
+
+            var creatorGender = Enum.Parse(typeof(GenderType), creator.Gender);
+            var rel = Enum.Parse(typeof(RelationshipType), relationship);
+            newChild.Relatives.Add(new MemberRelative()
+            {
+                Member = newChild,
+                Relative = creator,
+                Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)rel, (GenderType)creatorGender)
+            });
+            Entry(newChild.Relatives).State = EntityState.Added;
 
             SaveChanges();
-            updatedPosted = postedEntity;
+            return newChild;
         }
     }
 }
