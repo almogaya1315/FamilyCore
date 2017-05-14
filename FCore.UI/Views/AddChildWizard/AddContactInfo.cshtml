@@ -1,5 +1,39 @@
 ﻿@model FCore.Common.Models.Contacts.ContactInfoModel
 
+<div class="container">
+    <div class="row bs-wizard" style="border-bottom:0; margin-left:-9%">
+
+        <div class="col-xs-3 bs-wizard-step complete">
+            <div class="text-center bs-wizard-stepnum">Step 1</div>
+            <div class="progress" style="width:30%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+            @*<div class="bs-wizard-info text-center">Profile picture</div>*@
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step complete" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 2</div>
+            <div class="progress" style="width:60%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <a href="#" class="bs-wizard-dot" style="background-color:#7da4f5"></a>
+            @*<div class="bs-wizard-info text-center">Personal info</div>*@
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step active" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 3</div>
+            <div class="progress" style="width:60%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <a href="#" class="bs-wizard-dot" style="background-color:#7da4f5"></a>
+            @*<div class="bs-wizard-info text-center">Contact info</div>*@
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step disabled" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 4</div>
+            <div class="progress" style="width:50%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <a href="#" class="bs-wizard-dot" style="background-color:#7da4f5"></a>
+            @*<div class="bs-wizard-info text-center">Life story</div>*@
+        </div>
+
+    </div>
+</div>
+
 @using (Ajax.BeginForm("AddContactInfo", "AddChildWizard", Model, new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
