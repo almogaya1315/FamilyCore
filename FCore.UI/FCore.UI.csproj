@@ -118,6 +118,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\wizardSheet.css" />
     <Content Include="Images\Defualt\profile_defualt.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -199,7 +200,6 @@
     <Content Include="Views\Config\RelativesDetails.cshtml" />
     <Content Include="Views\Config\SecurityPage.cshtml" />
     <Content Include="Views\Shared\EditPermissions.cshtml" />
-    <Content Include="Views\Config\AddChildx.cshtml" />
     <Content Include="Views\AddChildWizard\AddChild.cshtml" />
     <Content Include="Views\AddChildWizard\AddProfileImage.cshtml" />
     <Content Include="Views\AddChildWizard\AddPersonalInfo.cshtml" />

@@ -56,5 +56,6 @@ namespace FCore.Common.Interfaces
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase);
         void UpdateUserDetails(ContactInfoModel postedInfo);
         void UpdateUserPermissions(int memberId, PermissionsModel postedPerms);
+        void CreateMember(int creatorId, FamilyMemberModel postedMember, bool isAdult);
     }
 }

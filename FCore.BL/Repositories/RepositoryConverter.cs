@@ -88,12 +88,12 @@ namespace FCore.BL.Repositories
                 About = model.About,
                 BirthDate = model.BirthDate,
                 BirthPlace = model.BirthPlace,
-                ContactInfoId = (int)model.ContactInfoId,
-                FamilyId = (int)model.FamilyId,
+                ContactInfoId = model.ContactInfoId,
+                FamilyId = model.FamilyId,
                 FirstName = model.FirstName,
-                Id = (int)model.Id,
+                Id = model.Id,
                 LastName = model.LastName,
-                PermissionId = (int)model.PermissionId,
+                PermissionId = model.PermissionId,
                 ProfileImagePath = model.ProfileImagePath
             };
         }
