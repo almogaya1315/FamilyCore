@@ -32,7 +32,7 @@
             width: 30px;
             height: 30px;
             display: block;
-            background: #fbe8aa;
+            background: #7da4f5;
             top: 45px;
             left: 50%;
             margin-top: -15px;
@@ -62,7 +62,7 @@
             .bs-wizard > .bs-wizard-step > .progress > .progress-bar {
                 width: 0px;
                 box-shadow: none;
-                background: #fbe8aa;
+                background: #7da4f5;
             }
 
         .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {
