@@ -25,6 +25,7 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetLastMemberJoined();
         FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath);
         FamilyMemberModel SetContactInfo(FamilyMemberModel posted, ContactInfoModel info);
+        FamilyMemberModel CreateMember(int creatorId, FamilyMemberModel postedMember);
 
         PermissionsModel GetPermissionsModel(int id);
 
@@ -56,6 +57,5 @@ namespace FCore.Common.Interfaces
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase);
         void UpdateUserDetails(ContactInfoModel postedInfo);
         void UpdateUserPermissions(int memberId, PermissionsModel postedPerms);
-        void CreateMember(int creatorId, FamilyMemberModel postedMember, bool isAdult);
     }
 }

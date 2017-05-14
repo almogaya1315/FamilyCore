@@ -48,7 +48,7 @@
     </div>
     <div class="col-sm-7">
         @Html.EditorFor(m => Model.Country, new { htmlAttributes = new { @Value = "Israel", @readonly = "readonly" } })
-        @Html.ValidationMessageFor(m => Model.Country)
+        @*@Html.ValidationMessageFor(m => Model.Country)*@
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>
@@ -111,7 +111,7 @@
 
         <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:62%; display:inline" />
     </div>
-}
+            }
 
 <script>
     $(function () {

@@ -280,11 +280,12 @@ namespace FCore.BL.Repositories
         {
             CoreDB.UpdateUserPermissions(memberId, ConvertToEntity(postedPerms));
         }
-        public void CreateMember(int creatorId, FamilyMemberModel postedMember, bool isAdult)
+        public void CreateMember(int creatorId, FamilyMemberModel postedMember)
         {
-            if (isAdult)
+            if ((bool)postedMember.IsAdult)
             {
                 // to do.. in sigh-in feature
+                // CoreDB.CreateAdult(ConvertToEntity(postedMember));
             }
             else
             {

@@ -213,7 +213,16 @@ namespace FCore.UI.Controllers
                 {
                     (Session["postedMember_ci"] as FamilyMemberModel).About = postedMember.About;
                     Session["postedMember_final"] = Session["postedMember_ci"];
-                    return RedirectToAction("CreateChild", Session["postedMember_final"]);
+                    //return RedirectToAction("CreateChild", Session["postedMember_final"]);
+                    try
+                    {
+                        postedMember = repo.CreateMember((int)Session["creatorId"], postedMember);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception($"Unable to create posted member. {e.Message}");
+                    }
+                    return PartialView("CreateSuccess", postedMember);
                 }
                 else
                 {
@@ -222,15 +231,13 @@ namespace FCore.UI.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult CreateChild(FamilyMemberModel postedMember)
-        {
-            using (repo = new FCoreRepository())
-            {
-                repo.CreateMember((int)Session["creatorId"], postedMember, (bool)postedMember.IsAdult);
-
-                return null;
-            }
-        }
+        //[HttpPost]
+        //public ActionResult CreateChild(FamilyMemberModel postedMember)
+        //{
+        //    using (repo = new FCoreRepository())
+        //    {
+        //        return null;
+        //    }
+        //}
     }
 }
