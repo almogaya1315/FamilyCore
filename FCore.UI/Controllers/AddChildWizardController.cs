@@ -217,7 +217,9 @@ namespace FCore.UI.Controllers
                     //return RedirectToAction("CreateChild", Session["postedMember_final"]);
                     try
                     {
-                        postedMember = repo.CreateMember((int)Session["creatorId"], postedMember, (string)Session["creator_rel"]);
+                        postedMember = repo.CreateMember((int)Session["creatorId"], 
+                                                         (FamilyMemberModel)Session["postedMember_final"], 
+                                                         (string)Session["creator_rel"]);
                     }
                     catch (Exception e)
                     {

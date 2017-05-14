@@ -88,6 +88,7 @@ namespace FCore.BL.Repositories
                 About = model.About,
                 BirthDate = model.BirthDate,
                 BirthPlace = model.BirthPlace,
+                ContactInfo = ConvertToEntity(model.ContactInfo),
                 ContactInfoId = model.ContactInfoId,
                 FamilyId = model.FamilyId,
                 FirstName = model.FirstName,
