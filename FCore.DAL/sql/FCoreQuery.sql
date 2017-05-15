@@ -20,6 +20,10 @@ from dbf.ContactInfoes
 select *
 from dbf.FamilyMembers
 
+delete 
+from dbf.FamilyMembers
+where Id = 8
+
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
 
@@ -43,6 +47,10 @@ where Id = 1
 
 select *
 from dbf.Permissions
+
+delete 
+from dbf.Permissions
+where Id != 1022 and Id != 1023
 
 alter table dbf.permissions
 drop column Admin 

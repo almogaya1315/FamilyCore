@@ -14,7 +14,7 @@ namespace FCore.DAL.Entities.Contacts
         [Key]
         public int Id { get; set; }
 
-        public int ContactBookId { get; set; }
+        public int? ContactBookId { get; set; }
         [ForeignKey("ContactBookId")]
         public ContactBookEntity ContactBook { get; set; }
 
@@ -30,16 +30,16 @@ namespace FCore.DAL.Entities.Contacts
         [StringLength(40), Required(AllowEmptyStrings = true)]
         public string City { get; set; }
 
-        [StringLength(40), Required(AllowEmptyStrings = true)]
+        [StringLength(40)]
         public string Street { get; set; }
 
         [Range(0, int.MaxValue)]
         public int? HouseNo { get; set; }
 
-        [StringLength(11), Required(AllowEmptyStrings = true)]
+        [StringLength(11)]
         public string PhoneNo { get; set; }
 
-        [StringLength(50), Required(AllowEmptyStrings = true)]
+        [StringLength(50)]
         [RegularExpression(".+\\@.+\\..+")]
         public string Email { get; set; }
     }

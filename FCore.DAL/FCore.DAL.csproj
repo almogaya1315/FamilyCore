@@ -88,6 +88,14 @@
     <Compile Include="Migrations\201705150848276_drop_req.Designer.cs">
       <DependentUpon>201705150848276_drop_req.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705151549537_drop_req_ci.cs" />
+    <Compile Include="Migrations\201705151549537_drop_req_ci.Designer.cs">
+      <DependentUpon>201705151549537_drop_req_ci.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705151559052_drop_req_ci_cbId.cs" />
+    <Compile Include="Migrations\201705151559052_drop_req_ci_cbId.Designer.cs">
+      <DependentUpon>201705151559052_drop_req_ci_cbId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705150848276_drop_req.resx">
       <DependentUpon>201705150848276_drop_req.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705151549537_drop_req_ci.resx">
+      <DependentUpon>201705151549537_drop_req_ci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705151559052_drop_req_ci_cbId.resx">
+      <DependentUpon>201705151559052_drop_req_ci_cbId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

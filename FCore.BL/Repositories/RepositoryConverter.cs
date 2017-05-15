@@ -104,7 +104,7 @@ namespace FCore.BL.Repositories
             return new ContactInfoModel()
             {
                 City = entity.City,
-                ContactBookId = entity.ContactBookId,
+                ContactBookId = (int)entity.ContactBookId,
                 Country = entity.Country,
                 Email = entity.Email,
                 HouseNo = entity.HouseNo,

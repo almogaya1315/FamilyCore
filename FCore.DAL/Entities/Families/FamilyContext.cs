@@ -334,7 +334,7 @@ namespace FCore.DAL.Entities.Families
             {
                 toUpdate.Family = GetFamily((int)toUpdate.FamilyId);
                 toUpdate.ContactInfo = GetContactInfo((int)toUpdate.ContactInfoId);
-                toUpdate.ContactInfo.ContactBook = GetContactBook(toUpdate.ContactInfo.ContactBookId);
+                toUpdate.ContactInfo.ContactBook = GetContactBook((int)toUpdate.ContactInfo.ContactBookId);
 
                 toUpdate.ContactInfo.Country = postedInfoEntity.Country;
                 toUpdate.ContactInfo.City = postedInfoEntity.City;
@@ -422,14 +422,7 @@ namespace FCore.DAL.Entities.Families
             newChild = CreateFamilyMember(postedEntity);
             FamilyMembers.Add(newChild);
             Entry(newChild).State = EntityState.Added;
-            try
-            {
-                SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            SaveChanges();
             return newChild;
         }
         FamilyMemberEntity SaveContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
