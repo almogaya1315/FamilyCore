@@ -468,7 +468,7 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                var contactBook = GetContactBook((int)creator.ContactInfoId);
+                var contactBook = GetContactBook((int)creator.ContactInfoId, null);
                 if (contactBook != null)
                 {
                     newChild.ContactInfo.ContactBook = contactBook;
@@ -488,7 +488,7 @@ namespace FCore.DAL.Entities.Families
                 Relative = newChild,
                 Relationship = relationship
             });
-            Entry(creator.Relatives).State = EntityState.Added;
+            Entry(creator.Relatives.LastOrDefault()).State = EntityState.Added;
 
             var creatorGender = Enum.Parse(typeof(GenderType), creator.Gender);
             var rel = Enum.Parse(typeof(RelationshipType), relationship);
@@ -498,7 +498,7 @@ namespace FCore.DAL.Entities.Families
                 Relative = creator,
                 Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)rel, (GenderType)creatorGender)
             });
-            Entry(newChild.Relatives).State = EntityState.Added;
+            Entry(newChild.Relatives.LastOrDefault()).State = EntityState.Added;
 
             SaveChanges();
             return newChild;

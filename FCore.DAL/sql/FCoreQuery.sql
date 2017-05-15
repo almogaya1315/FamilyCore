@@ -17,12 +17,16 @@ from dbf.ContactBooks
 select *
 from dbf.ContactInfoes
 
+delete 
+from dbf.ContactInfoes
+where Id = 6
+
 select *
 from dbf.FamilyMembers
 
 delete 
 from dbf.FamilyMembers
-where Id = 8
+where Id = 13
 
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
@@ -50,7 +54,7 @@ from dbf.Permissions
 
 delete 
 from dbf.Permissions
-where Id != 1022 and Id != 1023
+where Id = 1038 or Id = 1039
 
 alter table dbf.permissions
 drop column Admin 
@@ -73,6 +77,10 @@ from dbf.images
 
 select *
 from dbf.Relatives
+
+delete
+from dbf.Relatives
+where Id = 3 and Id = 4
 
 update dbf.Relatives
 set Relationship = 'Wife'
