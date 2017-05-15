@@ -217,15 +217,17 @@ namespace FCore.UI.Controllers
                     //return RedirectToAction("CreateChild", Session["postedMember_final"]);
                     try
                     {
-                        postedMember = repo.CreateMember((int)Session["creatorId"], 
+                        var newChild = repo.CreateMember((int)Session["creatorId"], 
                                                          (FamilyMemberModel)Session["postedMember_final"], 
                                                          (string)Session["creator_rel"]);
+                        Session["newChild"] = newChild;
                     }
                     catch (Exception e)
                     {
                         throw new Exception($"Unable to create posted member. {e.Message}");
                     }
-                    return PartialView("CreateSuccess", postedMember);
+                    ViewData["creator_Relatives"] = repo.GetFamilyMember((int)Session["creatorId"]).Relatives;
+                    return PartialView("ConnectedRelatives", Session["newChild"]);
                 }
                 else
                 {
@@ -242,5 +244,13 @@ namespace FCore.UI.Controllers
         //        return null;
         //    }
         //}
+
+        public ActionResult AddRelatives()
+        {
+            using (repo = new FCoreRepository())
+            {
+
+            }
+        }
     }
 }

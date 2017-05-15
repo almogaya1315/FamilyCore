@@ -486,6 +486,7 @@ namespace FCore.DAL.Entities.Families
             {
                 Member = creator,
                 Relative = newChild,
+                RelativeId = newChild.Id,
                 Relationship = relationship
             });
             Entry(creator.Relatives.LastOrDefault()).State = EntityState.Added;
@@ -496,6 +497,7 @@ namespace FCore.DAL.Entities.Families
             {
                 Member = newChild,
                 Relative = creator,
+                RelativeId = creator.Id,
                 Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)rel, (GenderType)creatorGender)
             });
             Entry(newChild.Relatives.LastOrDefault()).State = EntityState.Added;

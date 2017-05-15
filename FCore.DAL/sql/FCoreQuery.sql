@@ -19,7 +19,7 @@ from dbf.ContactInfoes
 
 delete 
 from dbf.ContactInfoes
-where Id = 6
+where Id = 7
 
 select *
 from dbf.FamilyMembers
@@ -54,7 +54,7 @@ from dbf.Permissions
 
 delete 
 from dbf.Permissions
-where Id = 1038 or Id = 1039
+where Id != 1041 and Id != 1042
 
 alter table dbf.permissions
 drop column Admin 
@@ -80,7 +80,7 @@ from dbf.Relatives
 
 delete
 from dbf.Relatives
-where Id = 3 and Id = 4
+where Id = 3 or Id = 4
 
 update dbf.Relatives
 set Relationship = 'Wife'
