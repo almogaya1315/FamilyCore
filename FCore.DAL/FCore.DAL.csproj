@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201705030842290_member_gen.Designer.cs">
       <DependentUpon>201705030842290_member_gen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705150848276_drop_req.cs" />
+    <Compile Include="Migrations\201705150848276_drop_req.Designer.cs">
+      <DependentUpon>201705150848276_drop_req.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705030842290_member_gen.resx">
       <DependentUpon>201705030842290_member_gen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705150848276_drop_req.resx">
+      <DependentUpon>201705150848276_drop_req.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

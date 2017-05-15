@@ -23,18 +23,18 @@ namespace FCore.DAL.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public int FamilyId { get; set; }
+        //[Required]
+        public int? FamilyId { get; set; }
         [ForeignKey("FamilyId")]
         public FamilyEntity Family { get; set; }
 
-        [Required]
-        public int PermissionId { get; set; }
+        //[Required]
+        public int? PermissionId { get; set; }
         [ForeignKey("PermissionId")]
         public MemberPermissions Permissions { get; set; }
 
-        [Required]
-        public int ContactInfoId { get; set; }
+        //[Required]
+        public int? ContactInfoId { get; set; }
         [ForeignKey("ContactInfoId")]
         public ContactInfoEntity ContactInfo { get; set; }
 

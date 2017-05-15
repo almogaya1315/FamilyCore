@@ -24,15 +24,15 @@ namespace FCore.DAL.Entities.Families
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<FamilyMemberEntity>()
-                .HasRequired(e => e.ContactInfo)
-                .WithMany()
-                .HasForeignKey(e => e.ContactInfoId);
+            //modelBuilder.Entity<FamilyMemberEntity>()
+            //    .HasRequired(e => e.ContactInfo)
+            //    .WithMany()
+            //    .HasForeignKey(e => e.ContactInfoId);
 
-            modelBuilder.Entity<FamilyMemberEntity>()
-                .HasRequired(e => e.Permissions)
-                .WithMany()
-                .HasForeignKey(e => e.PermissionId);
+            //modelBuilder.Entity<FamilyMemberEntity>()
+            //    .HasRequired(e => e.Permissions)
+            //    .WithMany()
+            //    .HasForeignKey(e => e.PermissionId);
 
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
@@ -332,8 +332,8 @@ namespace FCore.DAL.Entities.Families
             }
             if (toUpdate != null)
             {
-                toUpdate.Family = GetFamily(toUpdate.FamilyId);
-                toUpdate.ContactInfo = GetContactInfo(toUpdate.ContactInfoId);
+                toUpdate.Family = GetFamily((int)toUpdate.FamilyId);
+                toUpdate.ContactInfo = GetContactInfo((int)toUpdate.ContactInfoId);
                 toUpdate.ContactInfo.ContactBook = GetContactBook(toUpdate.ContactInfo.ContactBookId);
 
                 toUpdate.ContactInfo.Country = postedInfoEntity.Country;
@@ -422,7 +422,14 @@ namespace FCore.DAL.Entities.Families
             newChild = CreateFamilyMember(postedEntity);
             FamilyMembers.Add(newChild);
             Entry(newChild).State = EntityState.Added;
-            SaveChanges();
+            try
+            {
+                SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return newChild;
         }
         FamilyMemberEntity SaveContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
@@ -447,7 +454,7 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                newChild.Family = GetFamily(creator.FamilyId);
+                newChild.Family = GetFamily((int)creator.FamilyId);
                 newChild.Family.FamilyMembers.Add(newChild);
                 Entry(newChild.Family).State = EntityState.Modified;
                 newChild.FamilyId = creator.FamilyId;
@@ -468,7 +475,7 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                var contactBook = GetContactBook(creator.ContactInfoId);
+                var contactBook = GetContactBook((int)creator.ContactInfoId);
                 if (contactBook != null)
                 {
                     newChild.ContactInfo.ContactBook = contactBook;
