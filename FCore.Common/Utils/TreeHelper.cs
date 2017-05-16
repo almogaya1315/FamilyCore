@@ -24,8 +24,15 @@ namespace FCore.Common.Utils
             throw new InvalidOperationException("Invalid relationship type passed to function.");
         }
 
-        public static string GetThirdLevelRelationship(RelativeModel creatorRelative, RelativeModel createdCreatorRel)
+        public static string GetThirdLevelRelationship(RelativeModel creatorRelativeRel, RelationshipType createdCreatorRel)
         {
+            switch (createdCreatorRel)
+            {
+                case RelationshipType.Father:
+                    return GetCreatedRelativeRel();
+                    break; 
+            }
+
             return null;
         }
     }

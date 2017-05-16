@@ -120,9 +120,10 @@ namespace FCore.BL.Repositories
         }
         public FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember)
         {
+            var createdCreatorRel = (RelationshipType)Enum.Parse(typeof(RelationshipType), newMember.Relatives.FirstOrDefault().Relationship);
             foreach (var relative in creator.Relatives)
             {
-                string rel = TreeHelper.GetThirdLevelRelationship(relative, newMember.Relatives.FirstOrDefault());
+                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relative, createdCreatorRel);
             }
             return null;
         }
