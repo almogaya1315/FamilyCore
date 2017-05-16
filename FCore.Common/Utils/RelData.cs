@@ -8,9 +8,16 @@ using System.Threading.Tasks;
 
 namespace FCore.Common.Utils
 {
-    internal static class ThirdLevelRelData
+    internal static class RelData
     {
-        public static string GetMother(RelativeModel creatorRelativeRel)
+        internal static string GetOppositeForChildren(GenderType creatorGender)
+        {
+            if (creatorGender == GenderType.Male) return RelationshipType.Father.ToString();
+            else if (creatorGender == GenderType.Female) return RelationshipType.Mother.ToString();
+            else throw new InvalidOperationException("Invalid gender type passed to function.");
+        }
+
+        internal static string GetThirdLevelForParents(RelativeModel creatorRelativeRel)
         {
             if (creatorRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return RelationshipType.Aunt.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Brother.ToString()) return RelationshipType.Uncle.ToString();
@@ -31,17 +38,17 @@ namespace FCore.Common.Utils
             if (creatorRelativeRel.Relationship == RelationshipType.Uncle.ToString()) return RelationshipType.Uncle.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Wife.ToString()) return RelationshipType.Mother.ToString();
 
-            // could also be 'Daughter'. needs to response to ui for user choice.
+            // could also return 'Daughter'. needs to response to ui for user choice.
             if (creatorRelativeRel.Relationship == RelationshipType.Granddaughter.ToString()) return RelationshipType.Nephew.ToString();
-            // could also be 'Son'. needs to response to ui for user choice.
+            // could also return 'Son'. needs to response to ui for user choice.
             if (creatorRelativeRel.Relationship == RelationshipType.Grandson.ToString()) return RelationshipType.Nephew.ToString();
-            // could also be 'Grandson'. needs to response to ui for user choice.
+            // could also return 'Grandson'. needs to response to ui for user choice.
             if (creatorRelativeRel.Relationship == RelationshipType.Great_GrandChild.ToString()) return RelationshipType.Granddaughter.ToString();
 
             else throw new InvalidOperationException("Invalid relationship type passed to function.");
         }
 
-        public static string GetFather(RelativeModel creatorRelativeRel) // copied from above func. yet to be modified!
+        internal static string GetThirdLevelForAuntOrUncle(RelativeModel creatorRelativeRel) // copied from above func. not yet modified!
         {
             if (creatorRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return RelationshipType.Aunt.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Brother.ToString()) return RelationshipType.Uncle.ToString();
@@ -62,11 +69,11 @@ namespace FCore.Common.Utils
             if (creatorRelativeRel.Relationship == RelationshipType.Uncle.ToString()) return RelationshipType.Uncle.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Wife.ToString()) return RelationshipType.Mother.ToString();
 
-            // could also be 'Daughter'. needs to response to ui for user choice.
+            // could also return 'Daughter'. needs to response to ui for user choice.
             if (creatorRelativeRel.Relationship == RelationshipType.Granddaughter.ToString()) return RelationshipType.Nephew.ToString();
-            // could also be 'Son'. needs to response to ui for user choice.
+            // could also return 'Son'. needs to response to ui for user choice.
             if (creatorRelativeRel.Relationship == RelationshipType.Grandson.ToString()) return RelationshipType.Nephew.ToString();
-            // could also be 'Grandson'. needs to response to ui for user choice.
+            // could also return 'Grandson'. needs to response to ui for user choice.
             if (creatorRelativeRel.Relationship == RelationshipType.Great_GrandChild.ToString()) return RelationshipType.Granddaughter.ToString();
 
             else throw new InvalidOperationException("Invalid relationship type passed to function.");
