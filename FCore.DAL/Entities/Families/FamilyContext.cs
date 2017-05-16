@@ -409,6 +409,7 @@ namespace FCore.DAL.Entities.Families
                 if (!toUpdate.Relatives.Contains(rel))
                 {
                     toUpdate.Relatives.Add(rel);
+                    Relationships.Add(rel);
                     Entry(rel).State = EntityState.Added;
                     SaveChanges();
 
@@ -424,6 +425,7 @@ namespace FCore.DAL.Entities.Families
                                                                           (GenderType)Enum.Parse(typeof(GenderType), toUpdate.Gender))
                     };
                     rel.Relative.Relatives.Add(r);
+                    Relationships.Add(r);
                     Entry(r).State = EntityState.Added;
                     SaveChanges();
                 }

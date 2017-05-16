@@ -14,16 +14,28 @@ using FCore.Common.Models.Videos;
 using System.Web.Mvc;
 using System.Web;
 using FCore.Common.Utils;
+using FCore.DAL.Entities.Families;
+using FCore.DAL.Entities;
+using FCore.DAL.Entities.Contacts;
+using FCore.BL.Repositories;
 
 namespace FCore.Tests.Moq
 {
-    public class MoqRepository : ICoreRepository
+    public class MoqRepository : RepositoryConverter, ICoreRepository
     {
+        FamilyContext CoreDB { get; set; }
+
+        public MoqRepository() : base(new FamilyContext())
+        {
+            CoreDB = new FamilyContext();
+        }
+
         public FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember)
         {
             var createdCreatorRel = (RelationshipType)Enum.Parse(typeof(RelationshipType), newMember.Relatives.FirstOrDefault().Relationship);
             foreach (var relativeModel in creator.Relatives)
             {
+                if (relativeModel.Relative.Id == newMember.Id) continue;
                 string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel);
                 newMember.Relatives.Add(new RelativeModel(newMember.Id, relativeModel.Relative.Id,
                                        (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
@@ -31,13 +43,14 @@ namespace FCore.Tests.Moq
                     Member = newMember,
                     Relative = relativeModel.Relative
                 });
+                //CoreDB.UpdateMemberRelatives(ConvertToEntity(newMember));
             }
             return newMember;
         }
 
         public FamilyMemberModel CreateMember(int creatorId, FamilyMemberModel postedMember, string relationship)
         {
-            return new FamilyMemberModel()
+            var gaya = new FamilyMemberModel()
             {
                 Id = 3,
                 FirstName = "Gaya",
@@ -67,6 +80,12 @@ namespace FCore.Tests.Moq
                 PermissionId = 3,
                 Permissions = new PermissionsModel() { Id = 3 }
             };
+            gaya.Relatives.Add(new RelativeModel(3, 1, RelationshipType.Father)
+            {
+                Member = gaya,
+                Relative = GetFamilyMember(1)
+            });
+            return gaya;
         }
 
         public void Dispose()

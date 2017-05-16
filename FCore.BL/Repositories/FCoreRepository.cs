@@ -123,6 +123,7 @@ namespace FCore.BL.Repositories
             var createdCreatorRel = (RelationshipType)Enum.Parse(typeof(RelationshipType), newMember.Relatives.FirstOrDefault().Relationship);
             foreach (var relativeModel in creator.Relatives)
             {
+                if (relativeModel.Relative.Id == newMember.Id) continue;
                 string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel);
                 newMember.Relatives.Add(new RelativeModel(newMember.Id, relativeModel.Relative.Id, 
                                        (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))

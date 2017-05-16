@@ -16,6 +16,10 @@ namespace FCore.Common.Utils
             else if (creatorGender == GenderType.Female) return RelationshipType.Mother.ToString();
             else throw new InvalidOperationException("Invalid gender type passed to function.");
         }
+        internal static string GetOppositeForParents(GenderType creatorGender)
+        {
+            throw new NotImplementedException();
+        }
 
         internal static string GetRelForParents(RelativeModel creatorRelativeRel)
         {
