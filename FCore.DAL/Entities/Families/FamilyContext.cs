@@ -392,11 +392,47 @@ namespace FCore.DAL.Entities.Families
                 throw new NullReferenceException($"Member permissions were not found by posted permissions id #{postedPermsEntity.Id}");
             }
         }
+        public void UpdateMemberRelatives(FamilyMemberEntity member)
+        {
+            FamilyMemberEntity toUpdate = null;
+            foreach (var entity in FamilyMembers)
+            {
+                if (entity.Id == member.Id)
+                {
+                    toUpdate = entity;
+                    break;
+                }
+            }
+
+            foreach (var rel in member.Relatives)
+            {
+                if (!toUpdate.Relatives.Contains(rel))
+                {
+                    toUpdate.Relatives.Add(rel);
+                    Entry(rel).State = EntityState.Added;
+                    SaveChanges();
+
+                    var r = new MemberRelative()
+                    {
+                        Member = rel.Relative,
+                        MemberId = rel.Relative.Id,
+
+                        Relative = toUpdate,
+                        RelativeId = toUpdate.Id,
+
+                        Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)Enum.Parse(typeof(RelationshipType), rel.Relationship), 
+                                                                          (GenderType)Enum.Parse(typeof(GenderType), toUpdate.Gender))
+                    };
+                    rel.Relative.Relatives.Add(r);
+                    Entry(r).State = EntityState.Added;
+                    SaveChanges();
+                }
+            }
+        }
+
         public FamilyMemberEntity CreateChild(int creatorId, FamilyMemberEntity postedEntity, string relationship)
         {
-            FamilyMemberEntity newChild = null;
-
-            newChild = SaveChild(postedEntity, newChild);
+            var newChild = SaveChild(postedEntity);
 
             newChild = SaveContactInfo(postedEntity.ContactInfo, newChild);
 
@@ -417,9 +453,9 @@ namespace FCore.DAL.Entities.Families
             return newChild;
         }
 
-        FamilyMemberEntity SaveChild(FamilyMemberEntity postedEntity, FamilyMemberEntity newChild)
+        FamilyMemberEntity SaveChild(FamilyMemberEntity postedEntity)
         {
-            newChild = CreateFamilyMember(postedEntity);
+            var newChild = CreateFamilyMember(postedEntity);
             FamilyMembers.Add(newChild);
             Entry(newChild).State = EntityState.Added;
             SaveChanges();

@@ -20,6 +20,9 @@ namespace FCore.Common.Utils
                 case RelationshipType.Son:
                     return RelData.GetOppositeForChildren(creatorGender);
 
+                case RelationshipType.Father:
+                    return RelData.GetOppositeForParents(creatorGender);
+
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");
             }
@@ -30,16 +33,16 @@ namespace FCore.Common.Utils
             switch (createdCreatorRel)
             {
                 case RelationshipType.Mother:
-                    return RelData.GetThirdLevelForParents(creatorRelativeRel);
+                    return RelData.GetRelForParents(creatorRelativeRel);
 
                 case RelationshipType.Father:
-                    return RelData.GetThirdLevelForParents(creatorRelativeRel);
+                    return RelData.GetRelForParents(creatorRelativeRel);
 
                 case RelationshipType.Aunt:
-                    return RelData.GetThirdLevelForAuntOrUncle(creatorRelativeRel);
+                    return RelData.GetRelForAuntOrUncle(creatorRelativeRel);
 
                 case RelationshipType.Uncle:
-                    return RelData.GetThirdLevelForAuntOrUncle(creatorRelativeRel);
+                    return RelData.GetRelForAuntOrUncle(creatorRelativeRel);
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");

@@ -121,9 +121,16 @@ namespace FCore.BL.Repositories
         public FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember)
         {
             var createdCreatorRel = (RelationshipType)Enum.Parse(typeof(RelationshipType), newMember.Relatives.FirstOrDefault().Relationship);
-            foreach (var relative in creator.Relatives)
+            foreach (var relativeModel in creator.Relatives)
             {
-                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relative, createdCreatorRel);
+                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel);
+                newMember.Relatives.Add(new RelativeModel(newMember.Id, relativeModel.Relative.Id, 
+                                       (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
+                {
+                   Member = newMember,
+                   Relative = relativeModel.Relative
+                });
+                CoreDB.UpdateMemberRelatives(ConvertToEntity(newMember));
             }
             return null;
         }

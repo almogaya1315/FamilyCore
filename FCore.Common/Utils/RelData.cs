@@ -17,7 +17,7 @@ namespace FCore.Common.Utils
             else throw new InvalidOperationException("Invalid gender type passed to function.");
         }
 
-        internal static string GetThirdLevelForParents(RelativeModel creatorRelativeRel)
+        internal static string GetRelForParents(RelativeModel creatorRelativeRel)
         {
             if (creatorRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return RelationshipType.Aunt.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Brother.ToString()) return RelationshipType.Uncle.ToString();
@@ -48,9 +48,9 @@ namespace FCore.Common.Utils
             else throw new InvalidOperationException("Invalid relationship type passed to function.");
         }
 
-        internal static string GetThirdLevelForAuntOrUncle(RelativeModel creatorRelativeRel) // copied from above func. not yet modified!
+        internal static string GetRelForAuntOrUncle(RelativeModel creatorRelativeRel) // copied from above func. not yet modified!
         {
-            if (creatorRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return RelationshipType.Aunt.ToString();
+            if (creatorRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return RelationshipType.Undefined.ToString(); // modified
             if (creatorRelativeRel.Relationship == RelationshipType.Brother.ToString()) return RelationshipType.Uncle.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Brother_in_law.ToString()) return RelationshipType.Uncle.ToString();
             if (creatorRelativeRel.Relationship == RelationshipType.Cousin.ToString()) return RelationshipType.Cousin.ToString();

@@ -28,6 +28,7 @@ namespace FCore.Common.Enums
         Father_in_law,
         Sister_in_law,
         Brother_in_law,
-        Nephew
+        Nephew,
+        Undefined
     }
 }
