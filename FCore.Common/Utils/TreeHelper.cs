@@ -1,4 +1,5 @@
 ﻿using FCore.Common.Enums;
+using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,11 @@ namespace FCore.Common.Utils
                     break;
             }
             throw new InvalidOperationException("Invalid relationship type passed to function.");
+        }
+
+        public static string GetThirdLevelRelationship(RelativeModel creatorRelative, RelativeModel createdCreatorRel)
+        {
+
         }
     }
 }

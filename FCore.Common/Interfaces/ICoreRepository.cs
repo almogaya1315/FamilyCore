@@ -26,6 +26,7 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath);
         FamilyMemberModel SetContactInfo(FamilyMemberModel posted, ContactInfoModel info);
         FamilyMemberModel CreateMember(int creatorId, FamilyMemberModel postedMember, string relationship);
+        FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember);
 
         PermissionsModel GetPermissionsModel(int id);
 

@@ -118,6 +118,13 @@ namespace FCore.BL.Repositories
                 return ConvertToModel(CoreDB.CreateChild(creatorId, ConvertToEntity(postedMember), relationship));
             }
         }
+        public FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember)
+        {
+            foreach (var relative in creator.Relatives)
+            {
+                string rel = TreeHelper.GetThirdLevelRelationship(relative, newMember.Relatives.FirstOrDefault());
+            }
+        }
 
         public PermissionsModel GetPermissionsModel(int id)
         {
