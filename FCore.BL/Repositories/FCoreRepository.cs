@@ -132,7 +132,7 @@ namespace FCore.BL.Repositories
                 });
                 CoreDB.UpdateMemberRelatives(ConvertToEntity(newMember));
             }
-            return null;
+            return newMember;
         }
 
         public PermissionsModel GetPermissionsModel(int id)
