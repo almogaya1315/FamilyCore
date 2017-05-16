@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCore.Common.Utils
 {
-    public static class TreeHelper
+    public static class TreeHelper 
     {
         public static string GetOppositeRelationship(RelationshipType relationship, GenderType creatorGender)
         {
@@ -20,19 +20,22 @@ namespace FCore.Common.Utils
                     break;
                 case RelationshipType.Son:
                     break;
+                default:
+                    throw new InvalidOperationException("Invalid relationship type passed to function.");
             }
-            throw new InvalidOperationException("Invalid relationship type passed to function.");
+            return null;
         }
 
         public static string GetThirdLevelRelationship(RelativeModel creatorRelativeRel, RelationshipType createdCreatorRel)
         {
             switch (createdCreatorRel)
             {
-                case RelationshipType.Father:
-                    return GetCreatedRelativeRel();
-                    break; 
-            }
+                case RelationshipType.Mother:
+                    return ThirdLevelRelData.GetMother(creatorRelativeRel);
 
+                case RelationshipType.Father:
+                    return ThirdLevelRelData.GetFather(creatorRelativeRel);
+            }
             return null;
         }
     }
