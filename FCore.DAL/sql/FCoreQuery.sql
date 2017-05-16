@@ -54,7 +54,7 @@ from dbf.Permissions
 
 delete 
 from dbf.Permissions
-where Id != 1041 and Id != 1042
+where Id != 18 and Id != 19
 
 alter table dbf.permissions
 drop column Admin 

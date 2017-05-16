@@ -124,6 +124,7 @@ namespace FCore.BL.Repositories
             {
                 string rel = TreeHelper.GetThirdLevelRelationship(relative, newMember.Relatives.FirstOrDefault());
             }
+            return null;
         }
 
         public PermissionsModel GetPermissionsModel(int id)
