@@ -95,7 +95,8 @@ namespace FCore.BL.Repositories
                 Id = model.Id,
                 LastName = model.LastName,
                 PermissionId = model.PermissionId,
-                ProfileImagePath = model.ProfileImagePath
+                ProfileImagePath = model.ProfileImagePath,
+                Relatives = model.Relatives.Select(r => ConvertToEntity(r)).ToList()
             };
         }
 
@@ -162,7 +163,12 @@ namespace FCore.BL.Repositories
         }
         public MemberRelative ConvertToEntity(RelativeModel model)
         {
-            throw new NotImplementedException();
+            return new MemberRelative()
+            {
+                MemberId = model.MemberId,
+                RelativeId = model.RelativeId,
+                Relationship = model.Relationship
+            };
         }
 
         public ContactBookModel ConvertToModel(ContactBookEntity entity)

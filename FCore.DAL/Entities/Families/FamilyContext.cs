@@ -406,7 +406,7 @@ namespace FCore.DAL.Entities.Families
 
             foreach (var rel in member.Relatives)
             {
-                if (!toUpdate.Relatives.Contains(rel))
+                if (!toUpdate.Relatives.Contains(rel)) // find the correct rel that's allready in list
                 {
                     toUpdate.Relatives.Add(rel);
                     Relationships.Add(rel);
@@ -585,7 +585,7 @@ namespace FCore.DAL.Entities.Families
             var permsToRemove = new List<MemberPermissions>();
             foreach (var perm in Permissions)
             {
-                if (perm.Id != 26 && perm.Id != 27) // check before every run 
+                if (perm.Id != 38 && perm.Id != 39) // check before every run 
                 {
                     permsToRemove.Add(perm);
                 }

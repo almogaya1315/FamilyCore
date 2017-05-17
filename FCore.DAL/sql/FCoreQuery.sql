@@ -19,14 +19,14 @@ from dbf.ContactInfoes
 
 delete 
 from dbf.ContactInfoes
-where Id = 7
+where Id = 3
 
 select *
 from dbf.FamilyMembers
 
 delete 
 from dbf.FamilyMembers
-where Id = 13
+where Id = 3
 
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
@@ -54,7 +54,7 @@ from dbf.Permissions
 
 delete 
 from dbf.Permissions
-where Id != 18 and Id != 19
+where Id != 26 and Id != 27
 
 alter table dbf.permissions
 drop column Admin 
