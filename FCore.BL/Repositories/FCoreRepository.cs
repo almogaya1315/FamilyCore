@@ -125,13 +125,14 @@ namespace FCore.BL.Repositories
             {
                 if (relativeModel.RelativeId == newMember.Id) continue;
                 string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel);
-                newMember.Relatives.Add(new RelativeModel(newMember.Id, relativeModel.RelativeId, 
-                                       (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
+                var createdRelativeModel = new RelativeModel(newMember.Id, relativeModel.RelativeId,
+                                                            (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
                 {
-                   Member = newMember,
-                   Relative = GetFamilyMember(relativeModel.RelativeId)
-                });
-                CoreDB.UpdateMemberRelatives(ConvertToEntity(newMember));
+                    Member = newMember,
+                    Relative = GetFamilyMember(relativeModel.RelativeId)
+                };
+                newMember.Relatives.Add(createdRelativeModel);
+                CoreDB.UpdateMemberRelatives(ConvertToEntity(newMember), ConvertToEntity(createdRelativeModel));
             }
             return newMember;
         }
@@ -283,7 +284,7 @@ namespace FCore.BL.Repositories
                 case ModelStateSet.ForLifeStory:
                     break;
             }
-            
+
             return viewData;
         }
 

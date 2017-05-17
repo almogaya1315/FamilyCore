@@ -392,7 +392,7 @@ namespace FCore.DAL.Entities.Families
                 throw new NullReferenceException($"Member permissions were not found by posted permissions id #{postedPermsEntity.Id}");
             }
         }
-        public void UpdateMemberRelatives(FamilyMemberEntity member)
+        public void UpdateMemberRelatives(FamilyMemberEntity member, MemberRelative createdRelativeModel)
         {
             FamilyMemberEntity toUpdate = null;
             foreach (var entity in FamilyMembers)
@@ -404,32 +404,26 @@ namespace FCore.DAL.Entities.Families
                 }
             }
 
-            foreach (var rel in member.Relatives)
+            toUpdate.Relatives.Add(createdRelativeModel);
+            Relationships.Add(createdRelativeModel);
+            Entry(createdRelativeModel).State = EntityState.Added;
+            SaveChanges();
+
+            var r = new MemberRelative()
             {
-                if (!toUpdate.Relatives.Contains(rel)) // find the correct rel that's allready in list
-                {
-                    toUpdate.Relatives.Add(rel);
-                    Relationships.Add(rel);
-                    Entry(rel).State = EntityState.Added;
-                    SaveChanges();
+                Member = createdRelativeModel.Relative,
+                MemberId = createdRelativeModel.Relative.Id,
 
-                    var r = new MemberRelative()
-                    {
-                        Member = rel.Relative,
-                        MemberId = rel.Relative.Id,
+                Relative = toUpdate,
+                RelativeId = toUpdate.Id,
 
-                        Relative = toUpdate,
-                        RelativeId = toUpdate.Id,
-
-                        Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)Enum.Parse(typeof(RelationshipType), rel.Relationship), 
-                                                                          (GenderType)Enum.Parse(typeof(GenderType), toUpdate.Gender))
-                    };
-                    rel.Relative.Relatives.Add(r);
-                    Relationships.Add(r);
-                    Entry(r).State = EntityState.Added;
-                    SaveChanges();
-                }
-            }
+                Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeModel.Relationship),
+                                                                  (GenderType)Enum.Parse(typeof(GenderType), toUpdate.Gender))
+            };
+            createdRelativeModel.Relative.Relatives.Add(r);
+            Relationships.Add(r);
+            Entry(r).State = EntityState.Added;
+            SaveChanges();
         }
 
         public FamilyMemberEntity CreateChild(int creatorId, FamilyMemberEntity postedEntity, string relationship)
