@@ -12,7 +12,7 @@ namespace FCore.Tests.ControllerTests
     public class AddChildWizardTests
     {
         [TestMethod]
-        public void CheckCreatedMemberRelationshipWithCreatorRelatives() // signature to be fully detailed
+        public void CheckCreatedMemberRelationshipWithCreatorRelatives() 
         {
             // set
             MoqRepository moqRepo = new MoqRepository();
