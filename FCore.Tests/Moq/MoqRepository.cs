@@ -291,5 +291,11 @@ namespace FCore.Tests.Moq
         {
             throw new NotImplementedException();
         }
+
+        // for debug
+        public void DeletePreviousCreatedMember()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

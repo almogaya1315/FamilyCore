@@ -543,5 +543,11 @@ namespace FCore.DAL.Entities.Families
             SaveChanges();
             return newChild;
         }
+
+        // for debug
+        public DeletePreviousCreatedMember()
+        {
+
+        }
     }
 }

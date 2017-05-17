@@ -312,6 +312,12 @@ namespace FCore.BL.Repositories
         }
         #endregion
 
+        // for debug
+        public void DeletePreviousCreatedMember()
+        {
+            CoreDB.DeletePreviousCreatedMember();
+        }
+
         public void Dispose()
         {
             CoreDB.Dispose();
