@@ -392,7 +392,7 @@ namespace FCore.DAL.Entities.Families
                 throw new NullReferenceException($"Member permissions were not found by posted permissions id #{postedPermsEntity.Id}");
             }
         }
-        public void UpdateMemberRelatives(FamilyMemberEntity member, MemberRelative createdRelativeModel)
+        public void UpdateMemberRelatives(FamilyMemberEntity member, MemberRelative createdRelativeRel)
         {
             FamilyMemberEntity toUpdate = null;
             foreach (var entity in FamilyMembers)
@@ -404,25 +404,25 @@ namespace FCore.DAL.Entities.Families
                 }
             }
 
-            toUpdate.Relatives.Add(createdRelativeModel);
-            Relationships.Add(createdRelativeModel);
-            Entry(createdRelativeModel).State = EntityState.Added;
+            toUpdate.Relatives.Add(createdRelativeRel);
+            Relationships.Add(createdRelativeRel);
+            Entry(createdRelativeRel).State = EntityState.Added;
             SaveChanges();
 
-            var r = new MemberRelative()
+            var relativeCreatedRel = new MemberRelative()
             {
-                Member = createdRelativeModel.Relative,
-                MemberId = createdRelativeModel.Relative.Id,
+                Member = createdRelativeRel.Relative,
+                MemberId = createdRelativeRel.Relative.Id,
 
                 Relative = toUpdate,
                 RelativeId = toUpdate.Id,
 
-                Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeModel.Relationship),
+                Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel.Relationship),
                                                                   (GenderType)Enum.Parse(typeof(GenderType), toUpdate.Gender))
             };
-            createdRelativeModel.Relative.Relatives.Add(r);
-            Relationships.Add(r);
-            Entry(r).State = EntityState.Added;
+            createdRelativeRel.Relative.Relatives.Add(relativeCreatedRel);
+            Relationships.Add(relativeCreatedRel);
+            Entry(relativeCreatedRel).State = EntityState.Added;
             SaveChanges();
         }
 
