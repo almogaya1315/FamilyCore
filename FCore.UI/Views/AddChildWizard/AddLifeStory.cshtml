@@ -45,14 +45,8 @@
 
     <div style="margin-top:2%">
         <div class="col-sm-12">
-            @*<textarea cols="20" data-val="true" data-val-length="The field About my self must be a string with a maximum length of 150."
-                      data-val-length-max="150" data-val-required="Required field" id="About" name="About"
-                      rows="3" style="height: 150px; max-width:700px; width: 100%; resize:none; border-right:none; border-left:none"
-                      placeholder=" Write your story here"></textarea>*@
-
             @Html.TextAreaFor(m => Model.About, new { @class = "about-text-area", @placeholder = " Write your story here" } )
-
-            @Html.ValidationMessageFor(m => Model.About)
+            @Html.ValidationMessageFor(m => Model.About) @* yet to be set in proper position in html view *@
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>

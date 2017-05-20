@@ -409,10 +409,11 @@ namespace FCore.DAL.Entities.Families
             Entry(createdRelativeRel).State = EntityState.Added;
             SaveChanges();
 
+            var relative = GetFamilyMember(createdRelativeRel.RelativeId);
             var relativeCreatedRel = new MemberRelative()
             {
-                Member = createdRelativeRel.Relative,
-                MemberId = createdRelativeRel.Relative.Id,
+                Member = relative,
+                MemberId = relative.Id,
 
                 Relative = toUpdate,
                 RelativeId = toUpdate.Id,
@@ -420,7 +421,7 @@ namespace FCore.DAL.Entities.Families
                 Relationship = TreeHelper.GetOppositeRelationship((RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel.Relationship),
                                                                   (GenderType)Enum.Parse(typeof(GenderType), toUpdate.Gender))
             };
-            createdRelativeRel.Relative.Relatives.Add(relativeCreatedRel);
+            relative.Relatives.Add(relativeCreatedRel);
             Relationships.Add(relativeCreatedRel);
             Entry(relativeCreatedRel).State = EntityState.Added;
             SaveChanges();

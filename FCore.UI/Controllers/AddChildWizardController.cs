@@ -218,7 +218,7 @@ namespace FCore.UI.Controllers
                     try
                     {
                         // for debug
-                        repo.DeletePreviousCreatedMember();
+                        // repo.DeletePreviousCreatedMember();
 
                         var newChild = repo.CreateMember((int)Session["creatorId"], 
                                                          (FamilyMemberModel)Session["postedMember_final"], 
