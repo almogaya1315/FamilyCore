@@ -1,21 +1,25 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
-<div class="clearfix" style="margin-top:5%"></div>
-<div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Great!</div>
-<div class="bot-border"></div>
+<div class="container">
 
-<div style="margin-top:2%">
-    <div class="col-sm-12">
-        @Model.FirstName was created successfully!
-    </div>
-    <div class="clearfix"></div>
+    <div class="clearfix" style="margin-top:5%"></div>
+    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Great!</div>
     <div class="bot-border"></div>
-</div>
 
-<br />
+    <div style="margin-top:2%">
+        <div class="col-sm-12">
+            @Model.FirstName was created successfully!
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+    </div>
 
-<div>
-    @Html.ActionLink("Relatives list", "RelativesDetails", "Config", ViewData["creator"], new { @class = "btn btn-info", @style = "display:inline; margin-left:2%; width:17%" })
+    <br />
 
-    @Html.ActionLink("Done", "ConfigPage", "Config", null, new { @class = "btn btn-info", @style = "display:inline; margin-left:2%; width:17%" });
+    <div>
+        @Html.ActionLink("Relatives list", "RelativesDetails", "Config", ViewData["creator"], new { @class = "btn btn-info", @style = "display:inline; margin-left:2%; width:17%" })
+
+        @Html.ActionLink("Done", "ConfigPage", "Config", null, new { @class = "btn btn-info", @style = "display:inline; margin-left:2%; width:17%" })
+    </div>
+
 </div>

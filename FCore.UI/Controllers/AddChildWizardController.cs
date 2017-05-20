@@ -230,6 +230,7 @@ namespace FCore.UI.Controllers
                     {
                         throw new Exception($"Unable to create posted member. {e.Message}");
                     }
+                    ViewData["creator"] = repo.GetFamilyMember((int)Session["creatorId"]);
                     return PartialView("CreateSuccess", Session["newChild"]);
                 }
                 else
