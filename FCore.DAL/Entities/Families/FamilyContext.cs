@@ -538,55 +538,5 @@ namespace FCore.DAL.Entities.Families
             SaveChanges();
             return newChild;
         }
-
-        // for debug. very specific. needs to be modified every run.
-        public void DeletePreviousCreatedMember()
-        {
-            var relToRemove = new List<MemberRelative>();
-            foreach (var rel in Relationships)
-            {
-                if (rel.Relationship == RelationshipType.Mother.ToString() || rel.Relationship == RelationshipType.Daughter.ToString())
-                {
-                    relToRemove.Add(rel);
-                }
-            }
-            Relationships.RemoveRange(relToRemove);
-            SaveChanges();
-
-            FamilyMemberEntity memToRemove = null;
-            foreach (var member in FamilyMembers)
-            {
-                if (member.FirstName == "Gaya")
-                {
-                    memToRemove = member;
-                    break;
-                }
-            }
-            FamilyMembers.Remove(memToRemove);
-            SaveChanges();
-
-            ContactInfoEntity ciToRemove = null;
-            foreach (var ci in ContactInfoes)
-            {
-                if (ci.MemberName == "Gaya Matsliah")
-                {
-                    ciToRemove = ci;
-                    break;
-                }
-            }
-            ContactInfoes.Remove(ciToRemove);
-            SaveChanges();
-
-            var permsToRemove = new List<MemberPermissions>();
-            foreach (var perm in Permissions)
-            {
-                if (perm.Id != 38 && perm.Id != 39) // check before every run 
-                {
-                    permsToRemove.Add(perm);
-                }
-            }
-            Permissions.RemoveRange(permsToRemove);
-            SaveChanges();
-        }
     }
 }

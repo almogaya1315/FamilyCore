@@ -16,16 +16,6 @@ namespace FCore.UI.Controllers
 {
     public class ConfigController : Controller
     {
-        public ActionResult CreateSuccessTest(FamilyMemberModel model)
-        {
-            using (repo = new FCoreRepository())
-            {
-                model = repo.GetFamilyMember(model.Id);
-                return View(model);
-            }
-        }
-
-
         ICoreRepository repo { get; set; }
         public object RelatioshipType { get; private set; }
 
