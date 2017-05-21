@@ -72,6 +72,9 @@
     <Compile Include="Entities\Videos\VideoEntity.cs" />
     <Compile Include="Entities\Videos\VideoLibraryEntity.cs" />
     <Compile Include="Entities\Families\FamilyContext.cs" />
+    <Compile Include="Identity\User.cs" />
+    <Compile Include="Identity\UserContext.cs" />
+    <Compile Include="Identity\UserStore.cs" />
     <Compile Include="Migrations\201704011003137_initial.cs" />
     <Compile Include="Migrations\201704011003137_initial.Designer.cs">
       <DependentUpon>201704011003137_initial.cs</DependentUpon>
