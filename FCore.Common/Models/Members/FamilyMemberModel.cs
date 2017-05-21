@@ -6,24 +6,13 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
 using ExpressiveAnnotations.Attributes;
 
 namespace FCore.Common.Models.Members
 {
-    public class FamilyMemberModel // : IdentityUser
+    public class FamilyMemberModel 
     {
-        /*
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<FamilyMemberModel> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            return userIdentity;
-        }
-        */
-
         public FamilyMemberModel()
         {
             Permissions = new PermissionsModel();
