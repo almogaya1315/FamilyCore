@@ -206,6 +206,7 @@
     <Content Include="Views\AddChildWizard\AddContactInfo.cshtml" />
     <Content Include="Views\AddChildWizard\AddLifeStory.cshtml" />
     <Content Include="Views\AddChildWizard\CreateSuccess.cshtml" />
+    <Content Include="Views\Config\CreateSuccessTest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -216,6 +217,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\Profiles\" />
+    <Folder Include="Views\Debug\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">
