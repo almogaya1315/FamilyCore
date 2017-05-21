@@ -23,6 +23,13 @@ namespace FCore.Common.Utils
             else throw new InvalidOperationException("Invalid gender type passed to function.");
         }
 
+        internal static string GetOppositeForSiblings(GenderType siblingGender)
+        {
+            if (siblingGender == GenderType.Male) return RelationshipType.Brother.ToString();
+            else if (siblingGender == GenderType.Female) return RelationshipType.Sister.ToString();
+            else throw new InvalidOperationException("Invalid gender type passed to function.");
+        }
+
         internal static string GetRelForParents(RelativeModel creatorRelativeRel)
         {
             if (creatorRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return RelationshipType.Aunt.ToString();

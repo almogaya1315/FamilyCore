@@ -19,14 +19,14 @@ from dbf.ContactInfoes
 
 delete 
 from dbf.ContactInfoes
-where Id = 15
+where Id = 8
 
 select *
 from dbf.FamilyMembers
 
 delete 
 from dbf.FamilyMembers
-where Id = 21
+where Id = 8
 
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
@@ -67,7 +67,7 @@ drop column Admin
 
 delete 
 from dbf.Permissions
-where id != 1019 and id != 1020
+where id != 38 and id != 39
 
 select *
 from dbf.Albums
@@ -80,7 +80,7 @@ from dbf.Relatives
 
 delete
 from dbf.Relatives
-where Id != 12 and Id != 13
+where Id != 1 and Id != 2
 
 insert into dbf.Relatives
 values (1, 2, 'Wife')

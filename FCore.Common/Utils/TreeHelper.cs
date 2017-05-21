@@ -23,6 +23,15 @@ namespace FCore.Common.Utils
                 case RelationshipType.Father:
                     return RelData.GetOppositeForParents(creatorGender);
 
+                case RelationshipType.Mother:
+                    return RelData.GetOppositeForParents(creatorGender);
+
+                case RelationshipType.Sister:
+                    return RelData.GetOppositeForSiblings(creatorGender);
+
+                case RelationshipType.Brother:
+                    return RelData.GetOppositeForSiblings(creatorGender);
+
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");
             }
