@@ -37,7 +37,5 @@ namespace FCore.DAL.Entities.Users
         }
 
         public string ProfileImagePath { get; set; }
-
-        public bool IsActive { get { return IsAdult; } }
     }
 }
