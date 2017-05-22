@@ -1,6 +1,7 @@
 ﻿using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Families;
 using FCore.DAL.Entities.Members;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace FCore.DAL.Entities
 {
     [Table("FamilyMembers", Schema = "dbf")]
-    public class FamilyMemberEntity
+    public class FamilyMemberEntity 
     {
         public FamilyMemberEntity()
         {

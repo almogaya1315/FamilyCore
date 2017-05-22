@@ -69,6 +69,8 @@
     <Compile Include="Entities\Members\MemberPermissions.cs" />
     <Compile Include="Entities\Members\MemberRelative.cs" />
     <Compile Include="Entities\ChatGroups\MessageEntity.cs" />
+    <Compile Include="Entities\Users\User.cs" />
+    <Compile Include="Entities\Users\UserContext.cs" />
     <Compile Include="Entities\Videos\VideoEntity.cs" />
     <Compile Include="Entities\Videos\VideoLibraryEntity.cs" />
     <Compile Include="Entities\Families\FamilyContext.cs" />
