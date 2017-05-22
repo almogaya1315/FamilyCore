@@ -103,6 +103,7 @@
     <Compile Include="Models\Contacts\ContactBookModel.cs" />
     <Compile Include="Models\Contacts\ContactInfoModel.cs" />
     <Compile Include="Models\Families\FamilyModel.cs" />
+    <Compile Include="Models\Identity\UserModel.cs" />
     <Compile Include="Models\Members\FamilyMemberModel.cs" />
     <Compile Include="Models\Members\PermissionsModel.cs" />
     <Compile Include="Models\Members\RelativeModel.cs" />
