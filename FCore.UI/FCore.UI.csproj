@@ -247,7 +247,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\Profiles\" />
     <Folder Include="Views\Acount\" />
-    <Folder Include="Views\Debug\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">

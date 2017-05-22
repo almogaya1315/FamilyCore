@@ -1,17 +1,16 @@
 namespace FCore.DAL.Identity
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Linq;
 
-    public class UserContext : DbContext
+    public class UserContext : IdentityDbContext<UserEntity>
     {
         public UserContext()
             : base("name=UserContext")
         {
         }
-
-        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
