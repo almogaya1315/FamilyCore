@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 [assembly: OwinStartup(typeof(FCore.DAL.Identity.OwinStartup))]
 
