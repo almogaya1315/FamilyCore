@@ -16,16 +16,14 @@ namespace FCore.DAL.Identity
             context = _context;
         }
 
-        public Task CreateAsync(User user)
+        public Task CreateAsync(UserEntity user)
         {
-            context.Users.Add(user);
-            return context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(User user)
+        public Task DeleteAsync(UserEntity user)
         {
-            context.Users.Remove(user);
-            return context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public void Dispose()
@@ -33,32 +31,32 @@ namespace FCore.DAL.Identity
             throw new NotImplementedException();
         }
 
-        public Task<User> FindByIdAsync(int userId)
+        public Task<UserEntity> FindByIdAsync(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> FindByNameAsync(string userName)
+        public Task<UserEntity> FindByNameAsync(string userName)
         {
             throw new NotImplementedException();
         }
 
-        public Task<string> GetPasswordHashAsync(User user)
+        public Task<string> GetPasswordHashAsync(UserEntity user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> HasPasswordAsync(User user)
+        public Task<bool> HasPasswordAsync(UserEntity user)
         {
             throw new NotImplementedException();
         }
 
-        public Task SetPasswordHashAsync(User user, string passwordHash)
+        public Task SetPasswordHashAsync(UserEntity user, string passwordHash)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(User user)
+        public Task UpdateAsync(UserEntity user)
         {
             throw new NotImplementedException();
         }
