@@ -7,7 +7,7 @@ namespace FCore.DAL.Identity
 
     public class UserContext : IdentityDbContext<UserEntity>
     {
-        public UserContext()
+        public UserContext(string connectionStringName)
             : base("name=UserContext")
         {
         }

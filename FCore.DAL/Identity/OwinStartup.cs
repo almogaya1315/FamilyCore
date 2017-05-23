@@ -12,9 +12,10 @@ namespace FCore.DAL.Identity
     {
         public void Configuration(IAppBuilder app)
         {
-            const string connectionString =
-                @"data source=(LocalDb)\sqldev;initial catalog=FCore.DB.UserIdentity;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
-            app.CreatePerOwinContext(() => new UserContext(connectionString));
+            //const string connectionString =
+            //    @"data source=(LocalDb)\sqldev;initial catalog=FCore.DB.UserIdentity;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
+            const string connectionStringName = "name=UserContext";
+            app.CreatePerOwinContext(() => new UserContext(connectionStringName));
             app.CreatePerOwinContext<PasswordStore>((opt, cont) => new PasswordStore(cont.Get<UserContext>()));
             app.CreatePerOwinContext<UserManager<UserEntity>>((opt, cont) => new UserManager<UserEntity>(cont.Get<>(PasswordStore<UserEntity>)));
         }
