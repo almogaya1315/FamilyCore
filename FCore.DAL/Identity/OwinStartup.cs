@@ -16,8 +16,8 @@ namespace FCore.DAL.Identity
             const string connectionString =
                 @"data source=(LocalDb)\sqldev;initial catalog=FCore.DB.UserIdentity;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
             app.CreatePerOwinContext(() => new UserContext(connectionString));
-            app.CreatePerOwinContext<PasswordHandler<IdentityUser>>((opt, cont) => new UserStore<IdentityUser>(cont.Get<IdentityDbContext>()));
-            app.CreatePerOwinContext<UserManager<IdentityUser>>((opt, cont) => new UserManager<IdentityUser>(cont.Get<>(UserStore<IdentityUser>)));
+            app.CreatePerOwinContext<PasswordStore>((opt, cont) => new PasswordStore(cont.Get<UserContext>()));
+            app.CreatePerOwinContext<UserManager<UserEntity>>((opt, cont) => new UserManager<UserEntity>(cont.Get<>(PasswordStore<UserEntity>)));
         }
     }
 }

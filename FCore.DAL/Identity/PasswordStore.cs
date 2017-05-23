@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Identity
 {
-    public class PasswordHandler : IUserPasswordStore<UserEntity, int>
+    public class PasswordStore : IUserPasswordStore<UserEntity, string>
     {
         readonly UserContext context;
 
-        public PasswordHandler(UserContext _context)
+        public PasswordStore(UserContext _context)
         {
             context = _context;
         }
@@ -31,7 +31,7 @@ namespace FCore.DAL.Identity
             throw new NotImplementedException();
         }
 
-        public Task<UserEntity> FindByIdAsync(int userId)
+        public Task<UserEntity> FindByIdAsync(string userId)
         {
             throw new NotImplementedException();
         }

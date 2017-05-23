@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace FCore.DAL.Identity
 {
     [Table("Users", Schema = "dbf")]
-    public class UserEntity : IdentityUser<int, IdentityUserLogin<int>, IdentityUserRole<int>, IdentityUserClaim<int>>
+    public class UserEntity : IdentityUser
     {
         public int MemberId { get; set; }
 

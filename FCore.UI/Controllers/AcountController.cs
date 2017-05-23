@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using FCore.Common.Models.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -20,9 +21,9 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User model)
+        public ActionResult Register(UserModel model)
         {
-
+            return null;
         }
     }
 }
