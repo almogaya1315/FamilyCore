@@ -4,6 +4,7 @@ using FCore.Common.Models.Albums;
 using FCore.Common.Models.ChatGroups;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
+using FCore.Common.Models.Identity;
 using FCore.Common.Models.Members;
 using FCore.Common.Models.Videos;
 using FCore.DAL.Entities;
@@ -13,6 +14,7 @@ using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Families;
 using FCore.DAL.Entities.Members;
 using FCore.DAL.Entities.Videos;
+using FCore.DAL.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,24 +24,45 @@ using System.Threading.Tasks;
 
 namespace FCore.BL.Repositories
 {
-    public abstract class RepositoryConverter :IRepositoryConverter<FamilyModel, FamilyEntity>,
-                                               IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
-                                               IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
-                                               IRepositoryConverter<PermissionsModel, MemberPermissions>,
-                                               IRepositoryConverter<RelativeModel, MemberRelative>,
-                                               IRepositoryConverter<ContactBookModel, ContactBookEntity>,
-                                               IRepositoryConverter<ImageModel, ImageEntity>,
-                                               IRepositoryConverter<AlbumModel, AlbumEntity>,
-                                               IRepositoryConverter<VideoModel, VideoEntity>,
-                                               IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>,
-                                               IRepositoryConverter<ChatGroupModel, ChatGroupEntity>,
-                                               IRepositoryConverter<MessageModel, MessageEntity>
+    public abstract class RepositoryConverter : IRepositoryConverter<UserModel, UserEntity>,
+                                                IRepositoryConverter<FamilyModel, FamilyEntity>,
+                                                IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
+                                                IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
+                                                IRepositoryConverter<PermissionsModel, MemberPermissions>,
+                                                IRepositoryConverter<RelativeModel, MemberRelative>,
+                                                IRepositoryConverter<ContactBookModel, ContactBookEntity>,
+                                                IRepositoryConverter<ImageModel, ImageEntity>,
+                                                IRepositoryConverter<AlbumModel, AlbumEntity>,
+                                                IRepositoryConverter<VideoModel, VideoEntity>,
+                                                IRepositoryConverter<VideoLibraryModel, VideoLibraryEntity>,
+                                                IRepositoryConverter<ChatGroupModel, ChatGroupEntity>,
+                                                IRepositoryConverter<MessageModel, MessageEntity>
+
     {
         FamilyContext CoreDB { get; set; }
 
         public RepositoryConverter(DbContext db)
         {
             CoreDB = (FamilyContext)db;
+        }
+
+        public UserModel ConvertToModel(UserEntity entity)
+        {
+            return new UserModel()
+            {
+                MemberId = entity.MemberId,
+                FamilyId = entity.FamilyId,
+                FullName = entity.FullName
+            };
+        }
+        public UserEntity ConvertToEntity(UserModel model)
+        {
+            return new UserEntity()
+            {
+                MemberId = model.MemberId,
+                FamilyId = model.FamilyId,
+                FullName = model.FullName
+            };
         }
 
         public FamilyModel ConvertToModel(FamilyEntity entity)

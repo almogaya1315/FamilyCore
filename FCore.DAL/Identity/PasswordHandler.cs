@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Identity
 {
-    public class UserStore : IUserPasswordStore<User, int>
+    public class PasswordHandler : IUserPasswordStore<UserEntity, int>
     {
         readonly UserContext context;
 
-        public UserStore(UserContext _context)
+        public PasswordHandler(UserContext _context)
         {
             context = _context;
         }
