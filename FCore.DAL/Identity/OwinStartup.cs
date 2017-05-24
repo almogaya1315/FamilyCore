@@ -18,7 +18,7 @@ namespace FCore.DAL.Identity
             const string connectionStringName = "name=UserContext";
             app.CreatePerOwinContext(() => new UserContext(connectionStringName));
             app.CreatePerOwinContext<PasswordStore>((opt, cont) => new PasswordStore(cont.Get<UserContext>()));
-            app.CreatePerOwinContext<UserManager<UserEntity>>((opt, cont) => new UserManager<UserEntity>(cont.Get<>(PasswordStore<UserEntity>)));
+            app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<PasswordStore>()));
         }
     }
 }
