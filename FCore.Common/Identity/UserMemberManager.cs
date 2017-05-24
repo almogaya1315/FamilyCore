@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.DAL.Identity
+namespace FCore.Common.Identity
 {
-    public class UserMemberManager : UserManager<UserEntity, string>
+    public class UserMemberManager : UserManager<UserModel, string>
     {
         public UserMemberManager(UserMemberStore store) : base(store)
         {

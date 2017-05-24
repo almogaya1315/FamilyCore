@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.Common.Models.Identity
+namespace FCore.Common.Identity
 {
     public class UserModel : IdentityUser
     {

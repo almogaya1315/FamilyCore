@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.DAL.Identity
+namespace FCore.UI
 {
-    public class UserMemberStore : UserStore<UserEntity>
+    public class UserMemberStore : UserStore<UserModel>
     {
-        readonly UserContext context;
+        readonly IdentityDbContext context;
 
-        public UserMemberStore(UserContext _context)
+        public UserMemberStore(IdentityDbContext _context)
         {
             context = _context;
         }

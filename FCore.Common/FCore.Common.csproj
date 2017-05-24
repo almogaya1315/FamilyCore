@@ -102,8 +102,12 @@
     <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Enums\ModelStateSet.cs" />
     <Compile Include="Enums\RelationshipType.cs" />
+    <Compile Include="Identity\UserMemberManager.cs" />
+    <Compile Include="Identity\UserMemberStore.cs" />
     <Compile Include="Interfaces\ICoreRepository.cs" />
     <Compile Include="Interfaces\IPermission.cs" />
+    <Compile Include="Interfaces\IUserContext.cs" />
+    <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Models\Albums\AlbumModel.cs" />
     <Compile Include="Models\Albums\ImageModel.cs" />
     <Compile Include="Models\ChatGroups\ChatGroupModel.cs" />
@@ -111,7 +115,7 @@
     <Compile Include="Models\Contacts\ContactBookModel.cs" />
     <Compile Include="Models\Contacts\ContactInfoModel.cs" />
     <Compile Include="Models\Families\FamilyModel.cs" />
-    <Compile Include="Models\Identity\UserModel.cs" />
+    <Compile Include="Identity\UserModel.cs" />
     <Compile Include="Models\Members\FamilyMemberModel.cs" />
     <Compile Include="Models\Members\PermissionsModel.cs" />
     <Compile Include="Models\Members\RelativeModel.cs" />

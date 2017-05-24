@@ -1,4 +1,4 @@
-﻿using FCore.Common.Models.Identity;
+﻿using FCore.Common.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -12,7 +12,7 @@ namespace FCore.UI.Controllers
 {
     public class AcountController : Controller
     {
-        public UserManager<IdentityUser> userManager => HttpContext.GetOwinContext().Get<UserManager<IdentityUser>>();
+        public UserMemberManager userManager => HttpContext.GetOwinContext().Get<UserMemberManager>();
 
         [HttpGet]
         public ActionResult Register()

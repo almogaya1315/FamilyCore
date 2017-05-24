@@ -1,10 +1,10 @@
 ﻿using FCore.Common.Enums;
+using FCore.Common.Identity;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Albums;
 using FCore.Common.Models.ChatGroups;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
-using FCore.Common.Models.Identity;
 using FCore.Common.Models.Members;
 using FCore.Common.Models.Videos;
 using FCore.DAL.Entities;
@@ -15,6 +15,7 @@ using FCore.DAL.Entities.Families;
 using FCore.DAL.Entities.Members;
 using FCore.DAL.Entities.Videos;
 using FCore.DAL.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -24,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace FCore.BL.Repositories
 {
-    public abstract class RepositoryConverter : IRepositoryConverter<UserModel, UserEntity>,
+    public abstract class RepositoryConverter : IRepositoryConverter<IdentityUser, IdentityUser>,
                                                 IRepositoryConverter<FamilyModel, FamilyEntity>,
                                                 IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
                                                 IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
@@ -46,22 +47,22 @@ namespace FCore.BL.Repositories
             CoreDB = (FamilyContext)db;
         }
 
-        public UserModel ConvertToModel(UserEntity entity)
+        public IdentityUser ConvertToModel(IdentityUser entity)
         {
             return new UserModel()
             {
-                MemberId = entity.MemberId,
-                FamilyId = entity.FamilyId,
-                FullName = entity.FullName
+                MemberId = (entity as UserEntity).MemberId,
+                FamilyId = (entity as UserEntity).FamilyId,
+                FullName = (entity as UserEntity).FullName
             };
         }
-        public UserEntity ConvertToEntity(UserModel model)
+        public IdentityUser ConvertToEntity(IdentityUser model)
         {
             return new UserEntity()
             {
-                MemberId = model.MemberId,
-                FamilyId = model.FamilyId,
-                FullName = model.FullName
+                MemberId = (model as UserModel).MemberId,
+                FamilyId = (model as UserModel).FamilyId,
+                FullName = (model as UserModel).FullName
             };
         }
 
