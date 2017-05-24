@@ -12,7 +12,7 @@ namespace FCore.BL.Repositories
     {
         IUserContext UserDB { get; set; }
 
-        public IUserContext CreateUserContext(string connectionStringName)
+        public UserContext CreateUserContext(string connectionStringName)
         {
             return UserDB = new UserContext(connectionStringName);
         }
