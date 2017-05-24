@@ -21,7 +21,9 @@ namespace FCore.DAL.Identity
             using (userRepo = new UserRepository())
             {
                 const string connectionStringName = "name=UserContext";
-                app.CreatePerOwinContext(() => userRepo.CreateUserContext(connectionStringName)); //new UserContext(connectionStringName));
+                app = userRepo.CreateUserContext(app, connectionStringName);
+                app = userRepo.CreateUserStore(app);
+
                 app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore(cont.Get<UserContext>()));
                 app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
             }

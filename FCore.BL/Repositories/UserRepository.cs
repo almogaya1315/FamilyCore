@@ -1,5 +1,8 @@
-﻿using FCore.Common.Interfaces;
+﻿using FCore.BL.Stores;
+using FCore.Common.Interfaces;
 using FCore.DAL.Identity;
+using Microsoft.Owin;
+using Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +13,16 @@ namespace FCore.BL.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        IUserContext UserDB { get; set; }
+        UserContext UserDB { get; set; }
 
-        public UserContext CreateUserContext(string connectionStringName)
+        public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
         {
-            return UserDB = new UserContext(connectionStringName);
+            return app.CreatePerOwinContext(() => new UserContext(connectionStringName));
+        }
+
+        public IAppBuilder CreateUserStore(IAppBuilder app)
+        {
+            return app.CreatePerOwinContext((opt, cont) => new UserMemberStore((cont as IOwinContext).Get<UserContext>));
         }
 
         public void Dispose()

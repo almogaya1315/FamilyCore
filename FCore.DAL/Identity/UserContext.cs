@@ -6,7 +6,7 @@ namespace FCore.DAL.Identity
     using System.Data.Entity;
     using System.Linq;
 
-    public class UserContext : IdentityDbContext<UserEntity>, IUserContext
+    public class UserContext : IdentityDbContext<UserEntity>
     {
         public UserContext(string connectionStringName)
             : base(connectionStringName) { }
