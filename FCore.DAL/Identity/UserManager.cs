@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Identity
 {
-    class UserManager
+    public class UserManager : System.AspNet.Identity.EntityFramework.
     {
     }
 }

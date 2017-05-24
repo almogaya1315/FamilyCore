@@ -8,9 +8,7 @@ namespace FCore.DAL.Identity
     public class UserContext : IdentityDbContext<UserEntity>
     {
         public UserContext(string connectionStringName)
-            : base("name=UserContext")
-        {
-        }
+            : base(connectionStringName) { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
