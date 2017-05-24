@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,36 +8,13 @@ using System.Threading.Tasks;
 
 namespace FCore.DAL.Identity
 {
-    public class UserMemberStore : IUserStore<UserEntity, string>
+    public class UserMemberStore : UserStore<UserEntity>
     {
-        public Task CreateAsync(UserEntity user)
-        {
-            throw new NotImplementedException();
-        }
+        readonly UserContext context;
 
-        public Task DeleteAsync(UserEntity user)
+        public UserMemberStore(UserContext _context)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserEntity> FindByIdAsync(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserEntity> FindByNameAsync(string userName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(UserEntity user)
-        {
-            throw new NotImplementedException();
+            context = _context;
         }
     }
 }

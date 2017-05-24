@@ -9,7 +9,7 @@ namespace FCore.DAL.Identity
 {
     public class UserMemberManager : UserManager<UserEntity, string>
     {
-        public UserMemberManager(PasswordStore passStore) : base(new UserMemberStore())
+        public UserMemberManager(UserMemberStore store) : base(store)
         {
 
         }
