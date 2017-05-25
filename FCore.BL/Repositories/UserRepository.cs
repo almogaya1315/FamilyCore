@@ -16,14 +16,16 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using FCore.Common.Utils;
 using System.Web;
+using FCore.DAL.Entities.Families;
 
 namespace FCore.BL.Repositories
 {
     public class UserRepository : RepositoryConverter, IUserRepository 
     {
         UserMemberManager userManager { get; set; }
+        UserContext userDB { get; set; }
 
-        public UserRepository() : base(new DbContext(ConstGenerator.UserContextConnectionString)) { }
+        public UserRepository() : base(new UserContext(ConstGenerator.UserContextConnectionString)) { }
 
         public UserRepository(HttpContextBase httpContext) : this()
         {
@@ -58,8 +60,7 @@ namespace FCore.BL.Repositories
 
         public void Dispose()
         {
-            // todo
-            throw new NotImplementedException();
+            if (userDB != null) userDB.Dispose();
         }
     }
 }

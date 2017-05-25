@@ -41,10 +41,15 @@ namespace FCore.BL.Repositories
 
     {
         FamilyContext CoreDB { get; set; }
+        UserContext UserDB { get; set; }
 
-        public RepositoryConverter(DbContext db)
+        public RepositoryConverter(FamilyContext db)
         {
-            CoreDB = (FamilyContext)db;
+            CoreDB = db;
+        }
+        public RepositoryConverter(UserContext db)
+        {
+            UserDB = db;
         }
 
         public async Task<UserModel> ConvertToModel(UserEntity entity)
