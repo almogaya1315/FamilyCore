@@ -49,36 +49,55 @@ namespace FCore.BL.Repositories
 
         public IdentityUser ConvertToModel(IdentityUser entity)
         {
-            return new UserModel()
+            var userModel = new UserModel()
             {
                 MemberId = (entity as UserEntity).MemberId,
                 FamilyId = (entity as UserEntity).FamilyId,
                 FullName = (entity as UserEntity).FullName,
                 Id = entity.Id,
-                AccessFailedCount = entity.AccessFailedCount,
+                UserName = entity.UserName,
+                PasswordHash = entity.PasswordHash,
                 Email = entity.Email,
                 EmailConfirmed = entity.EmailConfirmed,
-                LockoutEnabled = entity.LockoutEnabled,
-                LockoutEndDateUtc = entity.LockoutEndDateUtc,
-                PasswordHash = entity.PasswordHash,
                 PhoneNumber = entity.PhoneNumber,
                 PhoneNumberConfirmed = entity.PhoneNumberConfirmed,
                 SecurityStamp = entity.SecurityStamp,
+                AccessFailedCount = entity.AccessFailedCount,
+                LockoutEnabled = entity.LockoutEnabled,
+                LockoutEndDateUtc = entity.LockoutEndDateUtc,
                 TwoFactorEnabled = entity.TwoFactorEnabled,
-                UserName = entity.UserName
             };
-            // Claims
-            // Logins
-            // Roles
+            foreach (var claim in entity.Claims) userModel.Claims.Add(claim);
+            foreach (var login in entity.Logins) userModel.Logins.Add(login);
+            foreach (var role in entity.Roles) userModel.Roles.Add(role);
+
+            return userModel;
         }
         public IdentityUser ConvertToEntity(IdentityUser model)
         {
-            return new UserEntity()
+            var userEntity = new UserEntity()
             {
                 MemberId = (model as UserModel).MemberId,
                 FamilyId = (model as UserModel).FamilyId,
-                FullName = (model as UserModel).FullName
+                FullName = (model as UserModel).FullName,
+                Id = model.Id,
+                UserName = model.UserName,
+                PasswordHash = model.PasswordHash,
+                Email = model.Email,
+                EmailConfirmed = model.EmailConfirmed,
+                PhoneNumber = model.PhoneNumber,
+                PhoneNumberConfirmed = model.PhoneNumberConfirmed,
+                SecurityStamp = model.SecurityStamp,
+                AccessFailedCount = model.AccessFailedCount,
+                LockoutEnabled = model.LockoutEnabled,
+                LockoutEndDateUtc = model.LockoutEndDateUtc,
+                TwoFactorEnabled = model.TwoFactorEnabled,
             };
+            foreach (var claim in model.Claims) userEntity.Claims.Add(claim);
+            foreach (var login in model.Logins) userEntity.Logins.Add(login);
+            foreach (var role in model.Roles) userEntity.Roles.Add(role);
+
+            return userEntity;
         }
 
         public FamilyModel ConvertToModel(FamilyEntity entity)

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using FCore.Common.Interfaces;
 using FCore.BL.Repositories;
 using FCore.BL;
+using FCore.Common.Models.Users;
 
 [assembly: OwinStartup(typeof(FCore.DAL.Identity.OwinStartup))]
 
@@ -16,14 +17,14 @@ namespace FCore.DAL.Identity
     {
         public void Configuration(IAppBuilder app)
         {
-            IUserRepository userRepo;
+            IUserRepository<UserModel> userRepo;
 
             using (userRepo = new UserRepository())
             {
                 const string connectionStringName = "name=UserContext";
                 app = userRepo.CreateUserContext(app, connectionStringName);
                 app = userRepo.CreateUserStore(app);
-                app = userRepo.CreateuserManager(app);
+                app = userRepo.CreateUserManager(app);
             }
         }
     }
