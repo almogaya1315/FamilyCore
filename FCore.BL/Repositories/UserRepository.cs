@@ -15,11 +15,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using FCore.Common.Utils;
+using System.Web;
 
 namespace FCore.BL.Repositories
 {
     public class UserRepository : RepositoryConverter, IUserRepository 
     {
+        UserMemberManager userManager { get; set; }
+
         public UserRepository() : base(new DbContext(ConstGenerator.UserContextConnectionString)) { }
 
         public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
@@ -37,8 +40,10 @@ namespace FCore.BL.Repositories
             return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
         }
 
-        public Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model) // ***
+        public Task<IdentityResult> CreateAsync(HttpContextBase httpContext, UserModel model) // ***
         {
+            userManager => httpContext.GetOwinContext().Get<UserMemberManager>();
+
             var userEntity = ConvertToEntity(model);
             return manager.CreateAsync(userEntity, model.PasswordHash);
         }
