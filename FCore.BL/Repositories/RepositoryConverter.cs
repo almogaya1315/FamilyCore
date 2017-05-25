@@ -53,8 +53,23 @@ namespace FCore.BL.Repositories
             {
                 MemberId = (entity as UserEntity).MemberId,
                 FamilyId = (entity as UserEntity).FamilyId,
-                FullName = (entity as UserEntity).FullName
+                FullName = (entity as UserEntity).FullName,
+                Id = entity.Id,
+                AccessFailedCount = entity.AccessFailedCount,
+                Email = entity.Email,
+                EmailConfirmed = entity.EmailConfirmed,
+                LockoutEnabled = entity.LockoutEnabled,
+                LockoutEndDateUtc = entity.LockoutEndDateUtc,
+                PasswordHash = entity.PasswordHash,
+                PhoneNumber = entity.PhoneNumber,
+                PhoneNumberConfirmed = entity.PhoneNumberConfirmed,
+                SecurityStamp = entity.SecurityStamp,
+                TwoFactorEnabled = entity.TwoFactorEnabled,
+                UserName = entity.UserName
             };
+            // Claims
+            // Logins
+            // Roles
         }
         public IdentityUser ConvertToEntity(IdentityUser model)
         {
