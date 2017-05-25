@@ -11,5 +11,6 @@ namespace FCore.Common.Interfaces
     {
         IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName);
         IAppBuilder CreateUserStore(IAppBuilder app);
+        IAppBuilder CreateuserManager(IAppBuilder app);
     }
 }

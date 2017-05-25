@@ -1,4 +1,5 @@
-﻿using FCore.BL.Stores;
+﻿using FCore.BL.Identity;
+using FCore.BL.Identity.Stores;
 using FCore.Common.Interfaces;
 using FCore.DAL.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -24,12 +25,17 @@ namespace FCore.BL.Repositories
 
         public IAppBuilder CreateUserStore(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore((IdentityDbContext)cont.Get<UserContext>()));
+            return app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore(cont.Get<UserContext>()));
+        }
+
+        public IAppBuilder CreateuserManager(IAppBuilder app)
+        {
+            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            UserDB.Dispose();
         }
     }
 }

@@ -118,7 +118,8 @@
     <Compile Include="Repositories\FCoreRepository.cs" />
     <Compile Include="Repositories\RepositoryConverter.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Stores\UserMemberStore.cs" />
+    <Compile Include="Identity\Stores\UserMemberStore.cs" />
+    <Compile Include="Identity\UserMemberManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.Common\FCore.Common.csproj">
@@ -134,6 +135,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

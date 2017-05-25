@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.BL.Stores
+namespace FCore.BL.Identity.Stores
 {
     public class UserMemberStore : UserStore<UserEntity>
     {
         protected IdentityDbContext context { get; private set; }
 
-        public UserMemberStore(IdentityDbContext _context) : base(_context)
+        public UserMemberStore(UserContext _context) : base(_context)
         {
-            context = _context;
+            context = (IdentityDbContext)_context;
         }
     }
 }

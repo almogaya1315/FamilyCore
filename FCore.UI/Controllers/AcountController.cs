@@ -1,4 +1,5 @@
-﻿using FCore.Common.Identity;
+﻿using FCore.BL.Identity;
+using FCore.Common.Models.Users;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

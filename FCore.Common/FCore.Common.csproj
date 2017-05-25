@@ -106,7 +106,6 @@
     <Compile Include="Enums\GenderType.cs" />
     <Compile Include="Enums\ModelStateSet.cs" />
     <Compile Include="Enums\RelationshipType.cs" />
-    <Compile Include="Identity\UserMemberManager.cs" />
     <Compile Include="Interfaces\ICoreRepository.cs" />
     <Compile Include="Interfaces\IPermission.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
@@ -117,7 +116,7 @@
     <Compile Include="Models\Contacts\ContactBookModel.cs" />
     <Compile Include="Models\Contacts\ContactInfoModel.cs" />
     <Compile Include="Models\Families\FamilyModel.cs" />
-    <Compile Include="Identity\UserModel.cs" />
+    <Compile Include="Models\Users\UserModel.cs" />
     <Compile Include="Models\Members\FamilyMemberModel.cs" />
     <Compile Include="Models\Members\PermissionsModel.cs" />
     <Compile Include="Models\Members\RelativeModel.cs" />

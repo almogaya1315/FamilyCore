@@ -1,4 +1,5 @@
-﻿using FCore.Common.Identity;
+﻿using FCore.BL.Identity.Stores;
+using FCore.DAL.Identity;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.Common.Identity
+namespace FCore.BL.Identity
 {
-    public class UserMemberManager : UserManager<UserModel, string>
+    public class UserMemberManager : UserManager<UserEntity, string>
     {
         public UserMemberManager(UserMemberStore store) : base(store)
         {
