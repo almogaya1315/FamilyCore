@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace FCore.Common.Interfaces
 {
-    public interface IUserRepository<TEntity> : IDisposable where TEntity : IdentityUser
+    public interface IUserRepository : IDisposable 
     {
         IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName);
         IAppBuilder CreateUserStore(IAppBuilder app);
         IAppBuilder CreateUserManager(IAppBuilder app);
 
-        Task<IdentityResult> CreateAsync(UserManager<TEntity> manager, UserModel model);
+        Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model);
     }
 }

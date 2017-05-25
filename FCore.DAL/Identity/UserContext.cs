@@ -15,10 +15,5 @@ namespace FCore.DAL.Identity
         {
             base.OnModelCreating(modelBuilder);
         }
-
-        public static explicit operator IdentityDbContext(UserContext v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -17,7 +17,7 @@ using System.Data.Entity;
 
 namespace FCore.BL.Repositories
 {
-    public class UserRepository : RepositoryConverter, IUserRepository<UserEntity> 
+    public class UserRepository : RepositoryConverter, IUserRepository 
     {
         UserContext UserDB { get; set; }
         public UserRepository() : base(new DbContext("")) { } // ***
@@ -38,7 +38,7 @@ namespace FCore.BL.Repositories
             return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
         }
 
-        public Task<IdentityResult> CreateAsync(UserManager<UserEntity> manager, UserModel model)
+        public Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model)
         {
             var userEntity = ConvertToEntity(model);
             return manager.CreateAsync(userEntity, model.PasswordHash);
