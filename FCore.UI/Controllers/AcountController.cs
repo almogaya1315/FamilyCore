@@ -30,7 +30,7 @@ namespace FCore.UI.Controllers
         {
             using (userRepo = new UserRepository())
             {
-                await userRepo.CreateAsync((userManager as UserManager<IdentityUser>), model);
+                await userRepo.CreateAsync(userManager, model);
                 return null;
             }
         }

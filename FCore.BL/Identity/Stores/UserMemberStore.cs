@@ -15,7 +15,7 @@ namespace FCore.BL.Identity.Stores
 
         public UserMemberStore(UserContext _context) : base(_context)
         {
-            context = (IdentityDbContext)_context;
+            context = _context;
         }
     }
 }

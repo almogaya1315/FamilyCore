@@ -17,7 +17,7 @@ namespace FCore.DAL.Identity
     {
         public void Configuration(IAppBuilder app)
         {
-            IUserRepository<UserModel> userRepo;
+            IUserRepository userRepo;
 
             using (userRepo = new UserRepository())
             {
