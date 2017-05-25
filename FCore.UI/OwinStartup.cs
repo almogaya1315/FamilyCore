@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using FCore.Common.Identity;
 using FCore.Common.Interfaces;
 using FCore.BL.Repositories;
+using FCore.BL.Stores;
 
 [assembly: OwinStartup(typeof(FCore.DAL.Identity.OwinStartup))]
 
@@ -24,7 +25,7 @@ namespace FCore.DAL.Identity
                 app = userRepo.CreateUserContext(app, connectionStringName);
                 app = userRepo.CreateUserStore(app);
 
-                app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore(cont.Get<UserContext>()));
+                app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore(cont.Get<IdentityDbContext>()));
                 app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
             }
         }

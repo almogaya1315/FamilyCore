@@ -1,6 +1,8 @@
 ﻿using FCore.BL.Stores;
 using FCore.Common.Interfaces;
 using FCore.DAL.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Owin;
 using System;
@@ -22,7 +24,7 @@ namespace FCore.BL.Repositories
 
         public IAppBuilder CreateUserStore(IAppBuilder app)
         {
-            return app.CreatePerOwinContext((opt, cont) => new UserMemberStore((cont as IOwinContext).Get<UserContext>));
+            return app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore((IdentityDbContext)cont.Get<UserContext>()));
         }
 
         public void Dispose()
