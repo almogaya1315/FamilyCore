@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace FCore.UI.Controllers
     {
         ICoreRepository repo { get; set; }
 
-        public ActionResult Main()
+        public ActionResult Main(UserModel model)
         {
             using (repo = new FCoreRepository())
             {

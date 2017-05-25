@@ -14,15 +14,15 @@ namespace FCore.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "MainPage",
+                name: "RegisterLoginPage",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "FamilyCore", action = "Main", id = UrlParameter.Optional }
+                defaults: new { controller = "Acount", action = "RegisterPage", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
-                name: "AddChildWizard",
+                name: "MainPage",
                 url: "{controller}/{action}/{id}",
-                defaults: new { contoller = "AddChildWizard", action = "AddChild", id = UrlParameter.Optional }
+                defaults: new { controller = "FamilyCore", action = "Main", id = UrlParameter.Optional }
             );
         }
     }

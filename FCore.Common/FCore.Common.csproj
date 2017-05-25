@@ -108,6 +108,7 @@
     <Compile Include="Enums\RelationshipType.cs" />
     <Compile Include="Interfaces\ICoreRepository.cs" />
     <Compile Include="Interfaces\IPermission.cs" />
+    <Compile Include="Interfaces\IRepositoryConverterAsync.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Models\Albums\AlbumModel.cs" />
     <Compile Include="Models\Albums\ImageModel.cs" />

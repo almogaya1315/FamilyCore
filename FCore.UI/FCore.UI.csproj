@@ -146,6 +146,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\registerLoginPageSheet.css" />
     <Content Include="Content\wizardSheet.css" />
     <Content Include="Images\Defualt\profile_defualt.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -236,6 +237,7 @@
     <Content Include="Views\AddChildWizard\AddContactInfo.cshtml" />
     <Content Include="Views\AddChildWizard\AddLifeStory.cshtml" />
     <Content Include="Views\AddChildWizard\CreateSuccess.cshtml" />
+    <Content Include="Views\Acount\RegisterPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -246,7 +248,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\Profiles\" />
-    <Folder Include="Views\Acount\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">

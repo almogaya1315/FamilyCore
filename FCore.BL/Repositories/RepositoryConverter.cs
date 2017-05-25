@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace FCore.BL.Repositories
 {
-    public abstract class RepositoryConverter : IRepositoryConverter<UserModel, UserEntity>,
+    public abstract class RepositoryConverter : IRepositoryConverterAsync<UserModel, UserEntity>,
                                                 IRepositoryConverter<FamilyModel, FamilyEntity>,
                                                 IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
                                                 IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
@@ -73,7 +73,8 @@ namespace FCore.BL.Repositories
 
             return await Task.FromResult(userModel);
         }
-        public IdentityUser ConvertToEntity(IdentityUser model)
+        
+        /*public IdentityUser ConvertToEntity(IdentityUser model)
         {
             // todo
             throw new NotImplementedException();
@@ -101,7 +102,7 @@ namespace FCore.BL.Repositories
             //foreach (var role in model.Roles) userEntity.Roles.Add(role);
 
             //return userEntity;
-        }
+        }*/
 
         public FamilyModel ConvertToModel(FamilyEntity entity)
         {

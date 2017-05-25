@@ -19,13 +19,13 @@ namespace FCore.UI.Controllers
         public IUserRepository userRepo { get; set;}
 
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult RegisterPage()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register(UserModel model)
+        public async Task<ActionResult> RegisterPage(UserModel model)
         {
             using (userRepo = new UserRepository())
             {
