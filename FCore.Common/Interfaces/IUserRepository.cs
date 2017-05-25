@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace FCore.Common.Interfaces
 {
@@ -16,6 +17,8 @@ namespace FCore.Common.Interfaces
         IAppBuilder CreateUserStore(IAppBuilder app);
         IAppBuilder CreateUserManager(IAppBuilder app);
 
-        Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model); // ***
+        Task<IdentityResult> CreateNewUserAsync(UserModel model);
+
+        Task<UserModel> GetUser(string userName);
     }
 }

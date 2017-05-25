@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 
 namespace FCore.BL.Repositories
 {
-    public abstract class RepositoryConverter : IRepositoryConverter<IdentityUser, IdentityUser>,
+    public abstract class RepositoryConverter : IRepositoryConverter<UserModel, UserEntity>,
                                                 IRepositoryConverter<FamilyModel, FamilyEntity>,
                                                 IRepositoryConverter<FamilyMemberModel, FamilyMemberEntity>,
                                                 IRepositoryConverter<ContactInfoModel, ContactInfoEntity>,
@@ -47,13 +47,13 @@ namespace FCore.BL.Repositories
             CoreDB = (FamilyContext)db;
         }
 
-        public IdentityUser ConvertToModel(IdentityUser entity)
+        public async Task<UserModel> ConvertToModel(UserEntity entity)
         {
             var userModel = new UserModel()
             {
-                MemberId = (entity as UserEntity).MemberId,
-                FamilyId = (entity as UserEntity).FamilyId,
-                FullName = (entity as UserEntity).FullName,
+                MemberId = entity.MemberId,
+                FamilyId = entity.FamilyId,
+                FullName = entity.FullName,
                 Id = entity.Id,
                 UserName = entity.UserName,
                 PasswordHash = entity.PasswordHash,
@@ -71,33 +71,36 @@ namespace FCore.BL.Repositories
             foreach (var login in entity.Logins) userModel.Logins.Add(login);
             foreach (var role in entity.Roles) userModel.Roles.Add(role);
 
-            return userModel;
+            return await Task.FromResult(userModel);
         }
         public IdentityUser ConvertToEntity(IdentityUser model)
         {
-            var userEntity = new UserEntity()
-            {
-                MemberId = (model as UserModel).MemberId,
-                FamilyId = (model as UserModel).FamilyId,
-                FullName = (model as UserModel).FullName,
-                Id = model.Id,
-                UserName = model.UserName,
-                PasswordHash = model.PasswordHash,
-                Email = model.Email,
-                EmailConfirmed = model.EmailConfirmed,
-                PhoneNumber = model.PhoneNumber,
-                PhoneNumberConfirmed = model.PhoneNumberConfirmed,
-                SecurityStamp = model.SecurityStamp,
-                AccessFailedCount = model.AccessFailedCount,
-                LockoutEnabled = model.LockoutEnabled,
-                LockoutEndDateUtc = model.LockoutEndDateUtc,
-                TwoFactorEnabled = model.TwoFactorEnabled,
-            };
-            foreach (var claim in model.Claims) userEntity.Claims.Add(claim);
-            foreach (var login in model.Logins) userEntity.Logins.Add(login);
-            foreach (var role in model.Roles) userEntity.Roles.Add(role);
+            // todo
+            throw new NotImplementedException();
 
-            return userEntity;
+            //var userEntity = new UserEntity()
+            //{
+            //    MemberId = (model as UserModel).MemberId,
+            //    FamilyId = (model as UserModel).FamilyId,
+            //    FullName = (model as UserModel).FullName,
+            //    Id = model.Id,
+            //    UserName = model.UserName,
+            //    PasswordHash = model.PasswordHash,
+            //    Email = model.Email,
+            //    EmailConfirmed = model.EmailConfirmed,
+            //    PhoneNumber = model.PhoneNumber,
+            //    PhoneNumberConfirmed = model.PhoneNumberConfirmed,
+            //    SecurityStamp = model.SecurityStamp,
+            //    AccessFailedCount = model.AccessFailedCount,
+            //    LockoutEnabled = model.LockoutEnabled,
+            //    LockoutEndDateUtc = model.LockoutEndDateUtc,
+            //    TwoFactorEnabled = model.TwoFactorEnabled,
+            //};
+            //foreach (var claim in model.Claims) userEntity.Claims.Add(claim);
+            //foreach (var login in model.Logins) userEntity.Logins.Add(login);
+            //foreach (var role in model.Roles) userEntity.Roles.Add(role);
+
+            //return userEntity;
         }
 
         public FamilyModel ConvertToModel(FamilyEntity entity)

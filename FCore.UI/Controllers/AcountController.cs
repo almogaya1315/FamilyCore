@@ -17,7 +17,6 @@ namespace FCore.UI.Controllers
     public class AcountController : Controller
     {
         public IUserRepository userRepo { get; set;}
-        UserMemberManager userManager => HttpContext.GetOwinContext().Get<UserMemberManager>();
 
         [HttpGet]
         public ActionResult Register()
@@ -30,8 +29,17 @@ namespace FCore.UI.Controllers
         {
             using (userRepo = new UserRepository())
             {
-                await userRepo.CreateAsync(userManager, model);
-                return null;
+                var identityResult = await userRepo.CreateNewUserAsync(model);
+
+                if (identityResult.Succeeded)
+                {
+                    var userModel = await userRepo.GetUser(model.UserName);
+                    return RedirectToAction("Main", "FamilyCore", userModel);
+                }
+
+                ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
+
+                return View(model);
             }
         }
     }

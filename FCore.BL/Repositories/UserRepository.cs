@@ -25,6 +25,11 @@ namespace FCore.BL.Repositories
 
         public UserRepository() : base(new DbContext(ConstGenerator.UserContextConnectionString)) { }
 
+        public UserRepository(HttpContextBase httpContext) : this()
+        {
+            userManager = httpContext.GetOwinContext().Get<UserMemberManager>();
+        }
+
         public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
         {
             return app.CreatePerOwinContext(() => new UserContext(connectionStringName));
@@ -40,12 +45,15 @@ namespace FCore.BL.Repositories
             return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
         }
 
-        public Task<IdentityResult> CreateAsync(HttpContextBase httpContext, UserModel model) // ***
+        public async Task<IdentityResult> CreateNewUserAsync(UserModel model) // ***
         {
-            userManager => httpContext.GetOwinContext().Get<UserMemberManager>();
+            //var userEntity = ConvertToEntity(model);
+            return await userManager.CreateAsync(new UserEntity(model.UserName), model.Password);
+        }
 
-            var userEntity = ConvertToEntity(model);
-            return manager.CreateAsync(userEntity, model.PasswordHash);
+        public async Task<UserModel> GetUser(string userName)
+        {
+            return await ConvertToModel(userManager.FindByNameAsync(userName).Result);
         }
 
         public void Dispose()

@@ -13,6 +13,8 @@ namespace FCore.DAL.Identity
     [Table("Users", Schema = "dbf")]
     public class UserEntity : IdentityUser
     {
+        public UserEntity(string userName) : base(userName) { }
+
         public int MemberId { get; set; }
 
         public int FamilyId { get; set; }

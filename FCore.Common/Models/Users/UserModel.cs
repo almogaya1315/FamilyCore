@@ -14,5 +14,7 @@ namespace FCore.Common.Models.Users
         public int FamilyId { get; set; }
 
         public string FullName { get; set; }
+
+        public string Password { get; set; }
     }
 }
