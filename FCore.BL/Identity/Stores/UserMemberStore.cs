@@ -11,11 +11,6 @@ namespace FCore.BL.Identity.Stores
 {
     public class UserMemberStore : UserStore<UserEntity>
     {
-        protected IdentityDbContext context { get; private set; }
-
-        public UserMemberStore(UserContext _context) : base(_context)
-        {
-            context = _context;
-        }
+        public UserMemberStore(UserContext _context) : base(_context) { }
     }
 }

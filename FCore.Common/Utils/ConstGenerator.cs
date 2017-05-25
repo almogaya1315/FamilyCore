@@ -8,6 +8,14 @@ namespace FCore.Common.Utils
 {
     public static class ConstGenerator
     {
+        public static string UserContextConnectionString
+        {
+            get
+            {
+                return "name=UserContext";
+            }
+        }
+
         public static ICollection<string> ChildRelTypes
         {
             get

@@ -11,9 +11,6 @@ namespace FCore.BL.Identity
 {
     public class UserMemberManager : UserManager<UserEntity, string>
     {
-        public UserMemberManager(UserMemberStore store) : base(store)
-        {
-
-        }
+        public UserMemberManager(UserMemberStore store) : base(store) { }
     }
 }

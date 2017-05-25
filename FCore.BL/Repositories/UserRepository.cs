@@ -14,14 +14,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using FCore.Common.Utils;
 
 namespace FCore.BL.Repositories
 {
     public class UserRepository : RepositoryConverter, IUserRepository 
     {
-        UserContext UserDB { get; set; }
-        public UserRepository() : base(new DbContext("")) { } // ***
-        public UserRepository(DbContext db) : base(db) { }
+        public UserRepository() : base(new DbContext(ConstGenerator.UserContextConnectionString)) { }
 
         public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
         {
@@ -38,7 +37,7 @@ namespace FCore.BL.Repositories
             return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
         }
 
-        public Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model)
+        public Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model) // ***
         {
             var userEntity = ConvertToEntity(model);
             return manager.CreateAsync(userEntity, model.PasswordHash);
@@ -46,7 +45,8 @@ namespace FCore.BL.Repositories
 
         public void Dispose()
         {
-            UserDB.Dispose();
+            // todo
+            throw new NotImplementedException();
         }
     }
 }

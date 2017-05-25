@@ -16,6 +16,6 @@ namespace FCore.Common.Interfaces
         IAppBuilder CreateUserStore(IAppBuilder app);
         IAppBuilder CreateUserManager(IAppBuilder app);
 
-        Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model);
+        Task<IdentityResult> CreateAsync(UserManager<IdentityUser> manager, UserModel model); // ***
     }
 }

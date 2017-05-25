@@ -8,6 +8,7 @@ using FCore.Common.Interfaces;
 using FCore.BL.Repositories;
 using FCore.BL;
 using FCore.Common.Models.Users;
+using FCore.Common.Utils;
 
 [assembly: OwinStartup(typeof(FCore.DAL.Identity.OwinStartup))]
 
@@ -21,7 +22,7 @@ namespace FCore.DAL.Identity
 
             using (userRepo = new UserRepository())
             {
-                const string connectionStringName = "name=UserContext";
+                string connectionStringName = ConstGenerator.UserContextConnectionString;
                 app = userRepo.CreateUserContext(app, connectionStringName);
                 app = userRepo.CreateUserStore(app);
                 app = userRepo.CreateUserManager(app);
