@@ -27,18 +27,19 @@ namespace FCore.UI.Controllers
         [HttpPost]
         public async Task<ActionResult> LoginPage(UserModel model)
         {
-            using (userRepo = new UserRepository())
+            using (userRepo = new UserRepository(HttpContext))
             {
-                var identityResult = await userRepo.CreateNewUserAsync(model);
-
-                if (identityResult.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    var userModel = await userRepo.GetUser(model.UserName);
-                    return RedirectToAction("Main", "FamilyCore", userModel);
+                    var identityResult = await userRepo.CreateNewUserAsync(model);
+
+                    if (identityResult.Succeeded)
+                    {
+                        var userModel = await userRepo.GetUser(model.UserName);
+                        return RedirectToAction("Main", "FamilyCore", userModel);
+                    }
+                    ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
                 }
-
-                ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
-
                 return View(model);
             }
         }
