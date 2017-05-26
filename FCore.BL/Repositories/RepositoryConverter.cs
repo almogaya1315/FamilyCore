@@ -14,7 +14,7 @@ using FCore.DAL.Entities.Contacts;
 using FCore.DAL.Entities.Families;
 using FCore.DAL.Entities.Members;
 using FCore.DAL.Entities.Videos;
-using FCore.DAL.Identity;
+using FCore.Identity.DAL;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;

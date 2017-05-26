@@ -1,5 +1,5 @@
 ﻿using FCore.BL.Identity.Stores;
-using FCore.DAL.Identity;
+using FCore.Identity.DAL;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;

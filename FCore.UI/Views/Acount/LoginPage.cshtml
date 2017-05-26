@@ -1,0 +1,37 @@
+﻿@model FCore.Common.Models.Users.UserModel
+
+@{ 
+    Layout = null;
+}
+
+<link href="~/Content/registerLoginPageSheet.css" rel="stylesheet" type="text/css"/>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="text-center">Welcome</h1>
+        </div>
+        @using (Html.BeginForm("LoginPage", "Acount", FormMethod.Post))
+        {
+            <div class="modal-body">
+                <div class="form-group">
+                    @Html.TextBoxForUp(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                    @Html.ValidationMessageFor(u => Model.UserName)
+                    @*<input type="text" class="form-control input-lg" placeholder="Username" />*@
+                </div>
+                <div class="form-group">
+                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(u => Model.Password)
+                    @*<input type="password" class="form-control input-lg" placeholder="Password" />*@
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login" />
+                    <span class="pull-right"><a href="#">Register</a></span>
+                    <span><a href="#">Forgot Password</a></span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

@@ -107,6 +107,10 @@
       <Project>{517D8BFB-E3EB-4E76-A200-81D0926AEA51}</Project>
       <Name>FCore.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FCore.Identity.DAL\FCore.Identity.DAL.csproj">
+      <Project>{248a49b2-f09c-4d23-a185-dba95192d83e}</Project>
+      <Name>FCore.Identity.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

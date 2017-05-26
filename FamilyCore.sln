@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCore.BL", "FCore.BL\FCore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCore.Tests", "FCore.Tests\FCore.Tests.csproj", "{9B4751EA-2E70-43D7-8C18-BBF90FE7613A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCore.Identity.DAL", "FCore.Identity.DAL\FCore.Identity.DAL.csproj", "{248A49B2-F09C-4D23-A185-DBA95192D83E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9B4751EA-2E70-43D7-8C18-BBF90FE7613A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B4751EA-2E70-43D7-8C18-BBF90FE7613A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B4751EA-2E70-43D7-8C18-BBF90FE7613A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248A49B2-F09C-4D23-A185-DBA95192D83E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248A49B2-F09C-4D23-A185-DBA95192D83E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248A49B2-F09C-4D23-A185-DBA95192D83E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248A49B2-F09C-4D23-A185-DBA95192D83E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,7 +16,7 @@ namespace FCore.UI
             routes.MapRoute(
                 name: "RegisterLoginPage",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Acount", action = "RegisterPage", id = UrlParameter.Optional }
+                defaults: new { controller = "Acount", action = "LoginPage", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

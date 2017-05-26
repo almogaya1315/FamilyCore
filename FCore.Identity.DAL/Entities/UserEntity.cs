@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.DAL.Identity
+namespace FCore.Identity.DAL
 {
     [Table("Users", Schema = "dbf")]
     public class UserEntity : IdentityUser

@@ -2,7 +2,6 @@
 using FCore.BL.Identity.Stores;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Users;
-using FCore.DAL.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -17,6 +16,7 @@ using System.Data.Entity;
 using FCore.Common.Utils;
 using System.Web;
 using FCore.DAL.Entities.Families;
+using FCore.Identity.DAL;
 
 namespace FCore.BL.Repositories
 {
