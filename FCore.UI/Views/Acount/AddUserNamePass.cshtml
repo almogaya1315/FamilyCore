@@ -40,18 +40,65 @@
                         UpdateTargetId = "register_wizard"
                     }, new { id = "form_profile" }))
 {
+    @*<div class="modal-body">
+            <div class="form-group">
+                @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                @Html.ValidationMessageFor(u => Model.UserName)
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                @Html.ValidationMessageFor(u => Model.Password)
+            </div>
+            <div class="form-group">
+                <div style="margin-bottom:5%">
+                    <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+                </div>
+            </div>
+        </div>*@
+
     <div class="modal-body">
-        <div class="form-group">
-            @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
-            @Html.ValidationMessageFor(u => Model.UserName)
-        </div>
-        <div class="form-group">
-            @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
-            @Html.ValidationMessageFor(u => Model.Password)
-        </div>
-        <div class="form-group">
-            <div style="margin-bottom:5%">
-                <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+        <div class="clearfix"></div>
+        <div style="margin-top:5%; margin-bottom:5%;">
+
+            <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Initial info</div>
+            <div class="clearfix"></div>
+
+            <div class="bot-border"></div>
+
+            <div class="form-group">
+                <div class="col-sm-5 col-xs-6 tital ">
+                    @Html.LabelFor(m => Model.UserName)
+                </div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(m => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                    @Html.ValidationMessageFor(m => Model.UserName)
+                    }
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+
+            <div class="form-group">
+                <div class="col-sm-5 col-xs-6 tital ">
+                    @Html.LabelFor(m => Model.Password)
+                </div>
+                <div class="col-sm-7">
+                    @Html.PasswordFor(m => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => Model.Password)
+                    }
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
+
+            <div class="form-group">
+                <div class="form-group">
+                    <div style="margin-bottom:5%">
+                        <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
