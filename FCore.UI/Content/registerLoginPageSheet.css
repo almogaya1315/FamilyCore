@@ -2549,8 +2549,8 @@ output {
   color: #555;
 }
 .form-control {
-  display: block;
-  width: 100%;
+  display: inline;
+  width: 85%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -3465,7 +3465,7 @@ fieldset[disabled] .btn-link:focus {
 input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
-  width: 100%;
+  width: 85%;
 }
 .fade {
   opacity: 0;

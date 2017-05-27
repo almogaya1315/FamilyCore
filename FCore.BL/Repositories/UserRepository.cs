@@ -55,7 +55,9 @@ namespace FCore.BL.Repositories
 
         public async Task<UserModel> GetUser(string userName)
         {
-            return await ConvertToModel(userManager.FindByNameAsync(userName).Result);
+            Task<UserEntity> asyncUserEntity = userManager.FindByNameAsync(userName);
+            if (asyncUserEntity.Result != null) return await ConvertToModel(asyncUserEntity.Result);
+            else return null;
         }
 
         public void Dispose()

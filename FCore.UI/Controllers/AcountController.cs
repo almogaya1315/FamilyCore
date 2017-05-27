@@ -21,6 +21,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoginPage()
         {
+            // todo.. varify past logged-in user & ask if to use OR which user if multiple
             return View();
         }
 
@@ -31,17 +32,41 @@ namespace FCore.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var identityResult = await userRepo.CreateNewUserAsync(model);
+                    var identityUser = await userRepo.GetUser(model.UserName);
 
-                    if (identityResult.Succeeded)
+                    if (identityUser != null)
                     {
-                        var userModel = await userRepo.GetUser(model.UserName);
-                        return RedirectToAction("Main", "FamilyCore", userModel);
+                        return RedirectToAction("Main", "FamilyCore", identityUser);
                     }
-                    ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
+                    // todo.. signin manager
                 }
                 return View(model);
             }
+        }
+
+        public ActionResult RegisterPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RegisterPage(UserModel model)
+        {
+            using (userRepo = new UserRepository(HttpContext))
+            {
+                // todo.. able to enter funcion, only if username & password verified that not in use
+                // tofo.. create action that runs when exiting username & password textbox
+
+                var identityResult = await userRepo.CreateNewUserAsync(model);
+
+                if (identityResult.Succeeded)
+                {
+                    var userModel = await userRepo.GetUser(model.UserName);
+                    return RedirectToAction("Main", "FamilyCore", userModel);
+                }
+                ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
+            }
+            return View(model);
         }
     }
 }

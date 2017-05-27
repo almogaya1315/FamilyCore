@@ -13,20 +13,20 @@
         </div>
         @using (Html.BeginForm("LoginPage", "Acount", FormMethod.Post))
         {
+            @Html.ValidationSummary()
+
             <div class="modal-body">
                 <div class="form-group">
                     @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
                     @Html.ValidationMessageFor(u => Model.UserName)
-                    @*<input type="text" class="form-control input-lg" placeholder="Username" />*@
                 </div>
                 <div class="form-group">
                     @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
                     @Html.ValidationMessageFor(u => Model.Password)
-                    @*<input type="password" class="form-control input-lg" placeholder="Password" />*@
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login" />
-                    <span class="pull-right"><a href="#">Register</a></span>
+                    @Html.ActionLink("Register", "RegisterPage", "Acount", null, new { @style = "margin-right:55.5%" })
                     <span><a href="#">Forgot Password</a></span>
                 </div>
             </div>
