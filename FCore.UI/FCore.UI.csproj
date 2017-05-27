@@ -239,7 +239,7 @@
     <Content Include="Views\AddChildWizard\CreateSuccess.cshtml" />
     <Content Include="Views\Acount\LoginPage.cshtml" />
     <Content Include="Views\Acount\RegisterPage.cshtml" />
-    <Content Include="Views\Acount\AddUserNamePass.cshtml" />
+    <Content Include="Views\Acount\AddInitialInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

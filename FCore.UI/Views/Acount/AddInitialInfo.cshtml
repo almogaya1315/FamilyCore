@@ -1,0 +1,201 @@
+﻿@model FCore.Common.Models.Users.UserModel
+
+<div class="container">
+    <div class="row bs-wizard" style="border-bottom:0; margin-left:-9%">
+
+        <div class="col-xs-3 bs-wizard-step active">
+            <div class="text-center bs-wizard-stepnum">Step 1</div>
+            <div class="progress" style="width:30%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step disabled" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 2</div>
+            <div class="progress" style="width:60%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step disabled" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 3</div>
+            <div class="progress" style="width:60%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step disabled" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 4</div>
+            <div class="progress" style="width:50%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+    </div>
+</div>
+
+<br />
+
+@using (Ajax.BeginForm("AddInitialInfo", "Acount", 
+                    Model, new AjaxOptions
+                    {
+                        HttpMethod = "Post",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "register_wizard"
+                    }, new { id = "form_profile" }))
+{
+    @*<div class="modal-body">
+            <div class="form-group">
+                @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                @Html.ValidationMessageFor(u => Model.UserName)
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                @Html.ValidationMessageFor(u => Model.Password)
+            </div>
+            <div class="form-group">
+                <div style="margin-bottom:5%">
+                    <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
+                </div>
+            </div>
+        </div>*@
+
+    <div class="clearfix"></div>
+    <div class="bot-border"></div>
+    <div style="margin-top:5%; margin-bottom:5%;">
+
+        <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Initial info</div>
+        <div class="clearfix"></div>
+
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.UserName)
+        </div>
+        <div class="col-sm-7">
+            @Html.TextBoxFor(m => Model.UserName) @* , new { @class = "form-control input-lg" } *@
+            @Html.ValidationMessageFor(m => Model.UserName)
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Password)
+        </div>
+        <div class="col-sm-7">
+            @Html.PasswordFor(m => Model.Password)
+            @Html.ValidationMessageFor(m => Model.Password)
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+        <div class="bot-border"></div>
+
+        @Html.HiddenFor(m => Model.Id)
+        <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+        @Html.HiddenFor(m => Model.Member.ProfileImagePath)
+
+        <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-12">
+            <div align="center" style="margin-top:7%; margin-bottom:5%">
+                <div style="display:inline">
+                    @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
+                {
+                            <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
+                                 id="profile-image-defualt" class="img-circle img-responsive" />
+                        }
+                        else
+                        {
+                            <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
+                                 id="profile-image" class="img-circle img-responsive" />
+                        }
+                    }
+                </div>
+
+                @{
+                    if (String.IsNullOrWhiteSpace((string)Session["filename"]))
+                    {
+                        if (Session["modelstate"] == null)
+                        {
+                            <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
+                        }
+                        else
+                        {
+                            <div id="message_file" style="color:#999; margin-top:3%">
+                                @Html.ValidationMessageFor(m => Model.Member.ProfileImagePath, "", new { @style = Session["validcolor"] })
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div id="message_file" style="color:#999; margin-top:3%">@Session["filename"]</div>
+                    }
+                }
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="form-group">
+            <div style="margin-bottom:5%">
+                <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
+            </div>
+        </div>
+    </div>
+                    }
+
+<script>
+    $(function () {
+        $('#profile-image-defualt').on('click', function () {
+            $('#profile-image-upload').click();
+        });
+    });
+
+    $(function () {
+        $('#profile-image').on('click', function () {
+            $('#profile-image-upload').click();
+        });
+    });
+
+    $(function () {
+        $('#profile-image-upload').on('change', function (event) {
+            var path = $(this).val();
+            var filename = path.replace(/.*[\/\\]/, '');
+            $('#message_file').text(filename);
+
+            $.each($('input'), function () {
+                if ($(this).attr("type") == "hidden") {
+                    var id = $(this).attr('id');
+                    if (id == "ProfileImagePath") {
+                        $(this).val(path);
+                    }
+                }
+            });
+        });
+    });
+
+    @*$(function () {
+        $('#input_btn_profile').on('click', function (event) {
+            event.preventDefault();
+            var formData = new FormData($('#form_profile')[0]);
+            $.ajax({
+                url: '/Acount/AddInitialInfo',
+                type: 'Post',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    var url = '@Url.Action("LoadPersonalInfo", "Acount", Model)';
+                    $('#register_wizard').load(url);
+                },
+                error: function () {
+                    var url = '@Url.Action("LoadInitialInfo", "Acount", Model)';
+                    $('#register_wizard').load(url);
+                }
+            });
+        });
+    });*@
+
+</script>

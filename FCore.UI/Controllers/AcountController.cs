@@ -49,24 +49,38 @@ namespace FCore.UI.Controllers
             return View();
         }
 
+        public ActionResult LoadInitialInfo()
+        {
+            return PartialView("AddInitialInfo");
+        }
+
         [HttpPost]
-        public async Task<ActionResult> RegisterPage(UserModel model)
+        public async Task<ActionResult> AddInitialInfo(UserModel model)
         {
             using (userRepo = new UserRepository(HttpContext))
             {
                 // todo.. able to enter funcion, only if username & password verified that not in use
                 // tofo.. create action that runs when exiting username & password textbox
 
-                var identityResult = await userRepo.CreateNewUserAsync(model);
+                //if (ModelState.IsValid)
+                //{
+                    var identityResult = await userRepo.CreateNewUserAsync(model);
 
-                if (identityResult.Succeeded)
-                {
-                    var userModel = await userRepo.GetUser(model.UserName);
-                    return RedirectToAction("Main", "FamilyCore", userModel);
-                }
-                ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
+                    if (identityResult.Succeeded)
+                    {
+                        var userModel = await userRepo.GetUser(model.UserName);
+                        return RedirectToAction("Main", "FamilyCore", userModel);
+                    }
+                    ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
+                //}
             }
-            return View(model);
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        public ActionResult LoadPersonalInfo()
+        {
+            return PartialView();
         }
     }
 }

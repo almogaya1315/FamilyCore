@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using FCore.Common.Models.Members;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,5 +26,7 @@ namespace FCore.Common.Models.Users
             get { return base.UserName; }
             set { base.UserName = value; }
         }
+
+        public FamilyMemberModel Member { get; set; }
     }
 }
