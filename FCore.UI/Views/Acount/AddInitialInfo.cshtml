@@ -39,22 +39,6 @@
                         UpdateTargetId = "register_wizard"
                     }, new { id = "form_profile" }))
 {
-    @*<div class="modal-body">
-            <div class="form-group">
-                @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
-                @Html.ValidationMessageFor(u => Model.UserName)
-            </div>
-            <div class="form-group">
-                @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
-                @Html.ValidationMessageFor(u => Model.Password)
-            </div>
-            <div class="form-group">
-                <div style="margin-bottom:5%">
-                    <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%" />
-                </div>
-            </div>
-        </div>*@
-
     <div class="clearfix"></div>
 
     @Html.ValidationSummary()
@@ -71,7 +55,7 @@
             @Html.LabelFor(m => Model.UserName)
         </div>
         <div class="col-sm-7">
-            @Html.TextBoxFor(m => Model.UserName) @* , new { @class = "form-control input-lg" } *@
+            @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" }) 
             @Html.ValidationMessageFor(m => Model.UserName)
         </div>
 
@@ -82,7 +66,7 @@
             @Html.LabelFor(m => Model.Password)
         </div>
         <div class="col-sm-7">
-            @Html.PasswordFor(m => Model.Password)
+            @Html.PasswordFor(m => Model.Password, new { @id = "password_box" })
             @Html.ValidationMessageFor(m => Model.Password)
         </div>
 
@@ -148,6 +132,24 @@
                     }
 
 <script>
+    $(function () {
+        $('#password_box').on('input', function () {
+            var text = $(this).val();
+            if (text.length >= 2) {
+                var passData = new FormData($('#form_profile')[0])
+                $.ajax({
+                    url: '/Acount/ValidatePassword',
+                    type: 'Post',
+                    data: passData
+                    @*success: function () {
+                        var url = '@Url.Action("AddInitialInfo", "Acount", Model)';
+                        $('#register_wizard').load(url);
+                    }*@
+                })
+            }
+        })
+    })
+
     $(function () {
         $('#profile-image-defualt').on('click', function () {
             $('#profile-image-upload').click();

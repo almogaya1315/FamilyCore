@@ -18,6 +18,7 @@ using System.Web;
 using FCore.DAL.Entities.Families;
 using FCore.Identity.DAL;
 using FCore.BL.Identity.Managers;
+using System.Security.Claims;
 
 namespace FCore.BL.Repositories
 {
@@ -52,7 +53,8 @@ namespace FCore.BL.Repositories
             return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => 
             {
                 userManager = new UserMemberManager(cont.Get<UserMemberStore>());
-                userManager.UserValidator = new UserValidator<UserEntity>(userManager) { RequireUniqueEmail = true };
+                //userManager.UserValidator = new UserValidator<UserEntity>(userManager)
+                //    { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
                 userManager.PasswordValidator = new PasswordValidator()
                 {
                     RequireDigit = true,
