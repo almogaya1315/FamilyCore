@@ -69,18 +69,23 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo");
         }
 
-        [HttpPost]
-        public async Task<ActionResult> ValidatePassword(UserModel model)
-        {
-            using (userRepo = new UserRepository(HttpContext))
-            {
-                var passValid = await userRepo.ValidatePassword(model.Password);
-                Session["isValidPass"] = passValid.Succeeded;
-                if (!passValid.Succeeded)
-                    ModelState.AddModelError("invalid password", passValid.Errors.FirstOrDefault());
-                return PartialView("AddInitialInfo", model);
-            }
-        }
+        //[HttpPost]
+        //public async Task<ActionResult> ValidatePassword(UserModel model)
+        //{
+        //    using (userRepo = new UserRepository(HttpContext))
+        //    {
+        //        var passValid = await userRepo.ValidatePassword(model.Password);
+        //        Session["isValidPass"] = passValid.Succeeded;
+        //        if (!passValid.Succeeded)
+        //        {
+        //            ModelState.Clear();
+        //            //ModelState["Password"].Errors.Add(passValid.Errors.FirstOrDefault());
+        //            ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
+        //        }
+
+        //        return PartialView("AddInitialInfo", model);
+        //    }
+        //}
 
         [HttpPost]
         public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
@@ -97,12 +102,11 @@ namespace FCore.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    //var identityResult = await userRepo.CreateNewUserAsync(model); // for final step ***
-
                     var identityUser = await userRepo.GetUserAsync(model.UserName);
                     if (identityUser == null)
                     {
-                        if ((bool)Session["isValidPass"])
+                        var passValid = await userRepo.ValidatePassword(model.Password);
+                        if (passValid.Succeeded) //if ((bool)Session["isValidPass"])
                         {
                             Session["username"] = model.UserName;
                             Session["password"] = model.Password;
@@ -111,19 +115,12 @@ namespace FCore.UI.Controllers
                             //Session["filename"] = ProfileImagePath.FileName;
                             return PartialView("AddPersonalInfo", new UserModel());
                         }
-                        //ModelState.AddModelError("invalid password", passValid.Errors.FirstOrDefault());
+                        ModelState.AddModelError("invalid password", passValid.Errors.FirstOrDefault());
                     }
                     else
                     {
-                        //ModelState.AddModelError("username", "Username allready in use.");
                         ModelState["UserName"].Errors.Add("Allready in use");
                     }
-
-                    //if (identityResult.Succeeded) // for final step ***
-                    //{
-                    //    var userModel = await userRepo.GetUser(model.UserName);
-                    //    return RedirectToAction("Main", "FamilyCore", userModel);
-                    //}
                 }
             }
             return PartialView(model);
@@ -133,6 +130,24 @@ namespace FCore.UI.Controllers
         public ActionResult LoadPersonalInfo()
         {
             return PartialView();
+        }
+
+        // *** 
+
+        [HttpPost]
+        public async Task<ActionResult> CreateUser(UserModel model)
+        {
+            using (userRepo = new UserRepository(HttpContext))
+            {
+                var identityResult = await userRepo.CreateNewUserAsync(model); // for final step ***
+
+                if (identityResult.Succeeded) // for final step ***
+                {
+                    var userModel = await userRepo.GetUserAsync(model.UserName);
+                    return RedirectToAction("CreateSuccess", "Acount", userModel);
+                }
+                return PartialView(model);
+            }
         }
     }
 }

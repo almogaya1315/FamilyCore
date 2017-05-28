@@ -33,11 +33,11 @@
 <br />
 
 @using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
-                    {
-                        HttpMethod = "Post",
-                        InsertionMode = InsertionMode.Replace,
-                        UpdateTargetId = "register_wizard"
-                    }, new { id = "form_profile" }))
+{
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "register_wizard"
+}, new { id = "form_profile" }))
 {
     <div class="clearfix"></div>
 
@@ -55,7 +55,7 @@
             @Html.LabelFor(m => Model.UserName)
         </div>
         <div class="col-sm-7">
-            @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" }) 
+            @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
             @Html.ValidationMessageFor(m => Model.UserName)
         </div>
 
@@ -132,10 +132,11 @@
                     }
 
 <script>
-    $(function () {
-        $('#password_box').on('input', function () {
+    @*$(function () {
+        $('#password_box').on('input', function (event) {
             var text = $(this).val();
             if (text.length >= 2) {
+                event.preventDefault();
                 var formData = new FormData($('#form_profile')[0]);
                 $.ajax({
                     url: '/Acount/ValidatePassword',
@@ -147,11 +148,11 @@
                     @*success: function () {
                         var url = '@Url.Action("AddInitialInfo", "Acount", Model)';
                         $('#register_wizard').load(url);
-                    }*@
+                    }
                 })
             }
         })
-    })
+    })*@
 
     $(function () {
         $('#profile-image-defualt').on('click', function () {
