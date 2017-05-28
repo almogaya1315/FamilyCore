@@ -52,20 +52,20 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                if (Session["HBFB_file"] != null)
+                if (Session["HPFB_file"] != null)
                 {
                     Response.StatusCode = (int)HttpStatusCode.OK;
                     return Json(new { success = true });
                 }
 
-                var modelKeys = repo.GetModelKeys(ModelStateSet.ForProfileImage);
+                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForProfileImage);
                 foreach (var key in modelKeys) ModelState.Remove(key);
 
                 if (ModelState.IsValid)
                 {
                     if (ProfileImagePath.ContentType.Contains("image"))
                     {
-                        Session["HBFB_file"] = ProfileImagePath;
+                        Session["HPFB_file"] = ProfileImagePath;
                         Session["filepath"] = repo.GetFilePath(ProfileImagePath);
                         Session["filename"] = ProfileImagePath.FileName;
 
@@ -135,12 +135,12 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                var modelKeys = repo.GetModelKeys(ModelStateSet.ForPersonalInfo);
+                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForPersonalInfo);
                 foreach (var key in modelKeys) ModelState.Remove(key);
 
                 if (ModelState.IsValid)
                 {
-                    HttpPostedFileBase file = (HttpPostedFileBase)Session["HBFB_file"];
+                    HttpPostedFileBase file = (HttpPostedFileBase)Session["HPFB_file"];
                     Session["postedMember_pi"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
                     Session["creator_rel"] = Relationship;
                     ViewData["cityenum"] = repo.GetCities();
@@ -148,7 +148,7 @@ namespace FCore.UI.Controllers
                 }
                 else
                 {
-                    ViewData = repo.SetModelState(ViewData, ModelState, ModelStateSet.ForPersonalInfo);
+                    ViewData = ModelStateHelper.SetModelState(ViewData, ModelState, ModelStateSet.ForPersonalInfo);
 
                     ViewData["relenum"] = repo.GetChildRelationshipTypes();
                     ViewData["genenum"] = repo.GetGenderTypes();
@@ -207,7 +207,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                var modelKeys = repo.GetModelKeys(ModelStateSet.ForLifeStory);
+                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForLifeStory);
                 foreach (var key in modelKeys) ModelState.Remove(key);
 
                 if (ModelState.IsValid)

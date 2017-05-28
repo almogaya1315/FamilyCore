@@ -53,7 +53,7 @@ namespace FCore.BL.Repositories
             return await userManager.CreateAsync(new UserEntity(model.UserName), model.Password);
         }
 
-        public async Task<UserModel> GetUser(string userName)
+        public async Task<UserModel> GetUserAsync(string userName)
         {
             Task<UserEntity> asyncUserEntity = userManager.FindByNameAsync(userName);
             if (asyncUserEntity.Result != null) return await ConvertToModel(asyncUserEntity.Result);

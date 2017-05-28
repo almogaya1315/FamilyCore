@@ -32,8 +32,7 @@
 
 <br />
 
-@using (Ajax.BeginForm("AddInitialInfo", "Acount", 
-                    Model, new AjaxOptions
+@using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
                     {
                         HttpMethod = "Post",
                         InsertionMode = InsertionMode.Replace,

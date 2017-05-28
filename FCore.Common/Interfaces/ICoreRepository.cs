@@ -49,9 +49,6 @@ namespace FCore.Common.Interfaces
         ICollection<SelectListItem> GetChildRelationshipTypes();
         ICollection<SelectListItem> GetGenderTypes();
         ICollection<SelectListItem> GetCities();
-
-        ICollection<string> GetModelKeys(ModelStateSet forPage);
-        ViewDataDictionary SetModelState(ViewDataDictionary viewData, ModelStateDictionary modelState, ModelStateSet forPage);
         #endregion
 
         void UpdateUserAbout(int memberId, string about);

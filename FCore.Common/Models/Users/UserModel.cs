@@ -18,9 +18,11 @@ namespace FCore.Common.Models.Users
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "Required!")]
+        [MinLength(5, ErrorMessage = "At least 5 letters")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Required!")]
+        [MinLength(3, ErrorMessage = "At least 3 letters")]
         public override string UserName
         {
             get { return base.UserName; }

@@ -19,6 +19,6 @@ namespace FCore.Common.Interfaces
 
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
 
-        Task<UserModel> GetUser(string userName);
+        Task<UserModel> GetUserAsync(string userName);
     }
 }

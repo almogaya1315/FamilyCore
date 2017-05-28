@@ -8,6 +8,7 @@ namespace FCore.Common.Enums
 {
     public enum ModelStateSet
     {
+        ForInitialInfo,
         ForProfileImage,
         ForPersonalInfo,
         ForContactInfo,
