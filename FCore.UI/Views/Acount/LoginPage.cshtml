@@ -15,15 +15,15 @@
 
             <div class="modal-body">
                 <div class="form-group">
-                    @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @placeholder = "Username" })
+                    @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Username" })
                     @Html.ValidationMessageFor(u => Model.UserName)
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @placeholder = "Password" })
+                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Password" })
                     @Html.ValidationMessageFor(u => Model.Password)
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-block btn-lg btn-primary" value="Login" />
+                    <input type="submit" class="btn btn-block btn-lg btn-primary" style="max-width:100%" value="Login" />
                     @Html.ActionLink("Register", "RegisterPage", "Acount", null, new { @style = "margin-right:55.5%" })
                     <span><a href="#">Forgot Password</a></span>
                 </div>

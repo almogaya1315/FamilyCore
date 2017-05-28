@@ -17,12 +17,14 @@ using FCore.Common.Utils;
 using System.Web;
 using FCore.DAL.Entities.Families;
 using FCore.Identity.DAL;
+using FCore.BL.Identity.Managers;
 
 namespace FCore.BL.Repositories
 {
     public class UserRepository : RepositoryConverter, IUserRepository 
     {
         UserMemberManager userManager { get; set; }
+        LoginManager loginManager { get; set; }
         UserContext userDB { get; set; }
 
         public UserRepository() : base(new UserContext(ConstGenerator.UserContextConnectionString)) { }
@@ -30,8 +32,10 @@ namespace FCore.BL.Repositories
         public UserRepository(HttpContextBase httpContext) : this()
         {
             userManager = httpContext.GetOwinContext().Get<UserMemberManager>();
+            loginManager = httpContext.GetOwinContext().Get<LoginManager>();
         }
 
+        #region Owin
         public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
         {
             return app.CreatePerOwinContext(() => new UserContext(connectionStringName));
@@ -39,18 +43,33 @@ namespace FCore.BL.Repositories
 
         public IAppBuilder CreateUserStore(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<UserMemberStore>((opt, cont) => new UserMemberStore(cont.Get<UserContext>()));
+            return app.CreatePerOwinContext<UserMemberStore>((opt, cont) 
+                => new UserMemberStore(cont.Get<UserContext>()));
         }
 
         public IAppBuilder CreateUserManager(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => new UserMemberManager(cont.Get<UserMemberStore>()));
+            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) 
+                => new UserMemberManager(cont.Get<UserMemberStore>()));
         }
 
+        public IAppBuilder CreateLoginManager(IAppBuilder app)
+        {
+            return app.CreatePerOwinContext<LoginManager>((opt, cont) 
+                => new LoginManager(cont.Get<UserMemberManager>(), cont.Authentication));
+        }
+        #endregion
+
+        #region identityUserDB
         public async Task<IdentityResult> CreateNewUserAsync(UserModel model) // ***
         {
             //var userEntity = ConvertToEntity(model);
             return await userManager.CreateAsync(new UserEntity(model.UserName), model.Password);
+        }
+
+        public async Task<SignInStatus> PasswordLoginAsync(UserModel model)
+        {
+            return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
         }
 
         public async Task<UserModel> GetUserAsync(string userName)
@@ -59,6 +78,7 @@ namespace FCore.BL.Repositories
             if (asyncUserEntity.Result != null) return await ConvertToModel(asyncUserEntity.Result);
             else return null;
         }
+        #endregion
 
         public void Dispose()
         {

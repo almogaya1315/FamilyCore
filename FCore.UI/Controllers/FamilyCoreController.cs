@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    [Authorize]
     public class FamilyCoreController : Controller
     {
         ICoreRepository repo { get; set; }

@@ -35,13 +35,25 @@ namespace FCore.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var identityUser = await userRepo.GetUserAsync(model.UserName);
+                    SignInStatus loginStatus = await userRepo.PasswordLoginAsync(model);
 
-                    if (identityUser != null)
+                    switch (loginStatus)
                     {
-                        return RedirectToAction("Main", "FamilyCore", identityUser);
+                        case SignInStatus.Success:
+                            var identityUser = await userRepo.GetUserAsync(model.UserName);
+                            return RedirectToAction("Main", "FamilyCore", identityUser);
+                        default:
+                            ModelState.AddModelError("", "Invalid username or password");
+                            break;
                     }
-                    // todo.. signin manager
+
+                    //var identityUser = await userRepo.GetUserAsync(model.UserName);
+
+                    //if (identityUser != null)
+                    //{
+                    //    return RedirectToAction("Main", "FamilyCore", identityUser);
+                    //}
+                    //// todo.. signin manager
                 }
                 return View(model);
             }

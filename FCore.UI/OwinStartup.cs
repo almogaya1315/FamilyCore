@@ -9,6 +9,7 @@ using FCore.BL.Repositories;
 using FCore.BL;
 using FCore.Common.Models.Users;
 using FCore.Common.Utils;
+using Microsoft.AspNet.Identity;
 
 [assembly: OwinStartup(typeof(FCore.DAL.Identity.OwinStartup))]
 
@@ -26,6 +27,10 @@ namespace FCore.DAL.Identity
                 app = userRepo.CreateUserContext(app, connectionStringName);
                 app = userRepo.CreateUserStore(app);
                 app = userRepo.CreateUserManager(app);
+                app = userRepo.CreateLoginManager(app);
+
+                app.UseCookieAuthentication(new Microsoft.Owin.Security.Cookies.CookieAuthenticationOptions
+                    { AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie });
             }
         }
     }

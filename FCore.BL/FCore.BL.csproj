@@ -118,6 +118,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Identity\Managers\LoginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FCoreRepository.cs" />
     <Compile Include="Repositories\RepositoryConverter.cs" />
