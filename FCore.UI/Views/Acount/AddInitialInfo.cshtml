@@ -136,11 +136,14 @@
         $('#password_box').on('input', function () {
             var text = $(this).val();
             if (text.length >= 2) {
-                var passData = new FormData($('#form_profile')[0])
+                var formData = new FormData($('#form_profile')[0]);
                 $.ajax({
                     url: '/Acount/ValidatePassword',
                     type: 'Post',
-                    data: passData
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
                     @*success: function () {
                         var url = '@Url.Action("AddInitialInfo", "Acount", Model)';
                         $('#register_wizard').load(url);
