@@ -20,6 +20,7 @@ namespace FCore.Common.Interfaces
         IAppBuilder CreateLoginManager(IAppBuilder app);
 
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
+        Task<IdentityResult> ValidatePassword(string password);
         Task<SignInStatus> PasswordLoginAsync(UserModel model);
         Task<UserModel> GetUserAsync(string userName);
     }

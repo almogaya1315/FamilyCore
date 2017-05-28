@@ -49,8 +49,20 @@ namespace FCore.BL.Repositories
 
         public IAppBuilder CreateUserManager(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) 
-                => new UserMemberManager(cont.Get<UserMemberStore>()));
+            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => 
+            {
+                userManager = new UserMemberManager(cont.Get<UserMemberStore>());
+                userManager.UserValidator = new UserValidator<UserEntity>(userManager) { RequireUniqueEmail = true };
+                userManager.PasswordValidator = new PasswordValidator()
+                {
+                    RequireDigit = true,
+                    RequireLowercase = true,
+                    RequireUppercase = true,
+                    RequireNonLetterOrDigit = true,
+                    RequiredLength = 5
+                };
+                return userManager;
+            }); 
         }
 
         public IAppBuilder CreateLoginManager(IAppBuilder app)
@@ -65,6 +77,11 @@ namespace FCore.BL.Repositories
         {
             //var userEntity = ConvertToEntity(model);
             return await userManager.CreateAsync(new UserEntity(model.UserName), model.Password);
+        }
+
+        public async Task<IdentityResult> ValidatePassword(string password)
+        {
+            return await userManager.PasswordValidator.ValidateAsync(password);
         }
 
         public async Task<SignInStatus> PasswordLoginAsync(UserModel model)

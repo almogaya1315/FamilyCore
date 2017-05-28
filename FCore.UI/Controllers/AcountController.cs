@@ -86,19 +86,28 @@ namespace FCore.UI.Controllers
                 {
                     //var identityResult = await userRepo.CreateNewUserAsync(model); // for final step ***
 
+                    
+
                     var identityUser = await userRepo.GetUserAsync(model.UserName);
                     if (identityUser == null)
                     {
-                        Session["username"] = model.UserName;
-                        Session["password"] = model.Password;
-                        //Session["HPFB_file"] = ProfileImagePath;
-                        //Session["filepath"] = repo.GetFilePath(ProfileImagePath);
-                        //Session["filename"] = ProfileImagePath.FileName;
-                        return PartialView("AddPersonalInfo", new UserModel());
+                        var passValid = userRepo.ValidatePassword(model.Password);
+                        if (passValid.Result.Succeeded)
+                        {
+                            Session["username"] = model.UserName;
+                            Session["password"] = model.Password;
+                            //Session["HPFB_file"] = ProfileImagePath;
+                            //Session["filepath"] = repo.GetFilePath(ProfileImagePath);
+                            //Session["filename"] = ProfileImagePath.FileName;
+                            return PartialView("AddPersonalInfo", new UserModel());
+                        }
+                        ModelState.AddModelError("invalid password", passValid.Result.Errors.FirstOrDefault());
                     }
-
-                    //ModelState.AddModelError("username", "Username allready in use.");
-                    ModelState["UserName"].Errors.Add("Allready in use");
+                    else
+                    {
+                        //ModelState.AddModelError("username", "Username allready in use.");
+                        ModelState["UserName"].Errors.Add("Allready in use");
+                    }
 
                     //if (identityResult.Succeeded) // for final step ***
                     //{
