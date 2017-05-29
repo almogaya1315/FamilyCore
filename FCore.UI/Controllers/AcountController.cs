@@ -69,23 +69,26 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo");
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult> ValidatePassword(UserModel model)
-        //{
-        //    using (userRepo = new UserRepository(HttpContext))
-        //    {
-        //        var passValid = await userRepo.ValidatePassword(model.Password);
-        //        Session["isValidPass"] = passValid.Succeeded;
-        //        if (!passValid.Succeeded)
-        //        {
-        //            ModelState.Clear();
-        //            //ModelState["Password"].Errors.Add(passValid.Errors.FirstOrDefault());
-        //            ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
-        //        }
+        [HttpPost]
+        public async Task<ActionResult> ValidatePassword(UserModel model)
+        {
+            using (userRepo = new UserRepository(HttpContext))
+            {
+                ViewData["validSummary"] = null;
 
-        //        return PartialView("AddInitialInfo", model);
-        //    }
-        //}
+                var passValid = await userRepo.ValidatePassword(model.Password);
+                Session["isValidPass"] = passValid.Succeeded;
+                if (!passValid.Succeeded)
+                {
+                    //ModelState.Clear();
+                    //ModelState["Password"].Errors.Add(passValid.Errors.FirstOrDefault());
+                    //ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
+                    ViewData["validSummary"] = passValid.Errors.FirstOrDefault();
+                }
+
+                return PartialView("AddInitialInfo", model);
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
@@ -105,8 +108,8 @@ namespace FCore.UI.Controllers
                     var identityUser = await userRepo.GetUserAsync(model.UserName);
                     if (identityUser == null)
                     {
-                        var passValid = await userRepo.ValidatePassword(model.Password);
-                        if (passValid.Succeeded) //if ((bool)Session["isValidPass"])
+                        //var passValid = await userRepo.ValidatePassword(model.Password);
+                        if ((bool)Session["isValidPass"]) //if (passValid.Succeeded)
                         {
                             Session["username"] = model.UserName;
                             Session["password"] = model.Password;
@@ -115,7 +118,7 @@ namespace FCore.UI.Controllers
                             //Session["filename"] = ProfileImagePath.FileName;
                             return PartialView("AddPersonalInfo", new UserModel());
                         }
-                        ModelState.AddModelError("invalid password", passValid.Errors.FirstOrDefault());
+                        //ModelState.AddModelError("invalid password", passValid.Errors.FirstOrDefault());
                     }
                     else
                     {

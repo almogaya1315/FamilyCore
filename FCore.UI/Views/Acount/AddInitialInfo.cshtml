@@ -43,6 +43,13 @@
 
     @Html.ValidationSummary()
 
+    if (ViewData["validSummary"] != null)
+    {
+        <span>
+            @ViewData["validSummary"]
+        </span>
+    }
+
     <div class="bot-border"></div>
     <div style="margin-top:5%; margin-bottom:5%;">
 
@@ -132,7 +139,7 @@
                     }
 
 <script>
-    @*$(function () {
+    $(function () {
         $('#password_box').on('input', function (event) {
             var text = $(this).val();
             if (text.length >= 2) {
@@ -148,11 +155,11 @@
                     @*success: function () {
                         var url = '@Url.Action("AddInitialInfo", "Acount", Model)';
                         $('#register_wizard').load(url);
-                    }
+                    }*@
                 })
             }
         })
-    })*@
+    })
 
     $(function () {
         $('#profile-image-defualt').on('click', function () {
