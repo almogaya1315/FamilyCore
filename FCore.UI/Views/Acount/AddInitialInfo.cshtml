@@ -177,8 +177,8 @@
         })
     })
 
-    function SetPasswordBox() {
-        var pass = @Html.Raw(Json.Encode(Model.Password))
+    function SetPasswordBox(model) {
+        var pass = model.Password @*@Html.Raw(Json.Encode(Model.Password))*@
         $('#password_box').val();
         $('#password_box').focus();
     }
