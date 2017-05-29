@@ -64,7 +64,7 @@
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "register_wizard",
-        OnComplete = "SetPasswordBox()"
+        OnSuccess = "SetPasswordBox"
     }, new { id = "form_password" }))
     {
         <div class="clearfix"></div>
@@ -74,7 +74,14 @@
             @Html.LabelFor(m => Model.Password)
         </div>
         <div class="col-sm-7">
-            @Html.PasswordFor(m => Model.Password, new { @id = "password_box" })
+            @if (Model == null)
+            {
+                @Html.PasswordFor(m => Model.Password, new { @id = "password_box" })
+            }
+            else
+            {
+                @Html.PasswordFor(m => Model.Password, new { @id = "password_box", @value = Model.Password })
+            }
             @Html.ValidationMessageFor(m => Model.Password)
         </div>
 
@@ -177,10 +184,11 @@
         })
     })
 
-    function SetPasswordBox(model) {
-        var pass = model.Password @*@Html.Raw(Json.Encode(Model.Password))*@
-        $('#password_box').val();
+    function SetPasswordBox() {
         $('#password_box').focus();
+        var input = $('#password_box');
+        var len = input.selectionEnd;
+        input.setSelectionRange(0, len);
     }
 
     $(function () {
