@@ -53,10 +53,10 @@
         <div class="col-sm-5 col-xs-6 tital ">
             @Html.LabelFor(m => Model.UserName)
         </div>
-            <div class="col-sm-7">
-                @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
-                @Html.ValidationMessageFor(m => Model.UserName)
-            </div>
+        <div class="col-sm-7">
+            @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
+            @Html.ValidationMessageFor(m => Model.UserName)
+        </div>
     }
 
     @using (Ajax.BeginForm("ValidatePassword", "Acount", Model, new AjaxOptions
@@ -85,7 +85,7 @@
             @Html.ValidationMessageFor(m => Model.Password)
         </div>
 
-        <input id="form_password_submit" type="submit" style="display:none"/>
+        <input id="form_password_submit" type="submit" style="display:none" />
     }
 
     @using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
@@ -97,13 +97,13 @@
     {
         <div class="clearfix"></div>
         <div class="bot-border"></div>
-            <div class="bot-border"></div>
+        <div class="bot-border"></div>
 
-            @Html.HiddenFor(m => Model.Id)
-            <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
-            @Html.HiddenFor(m => Model.Member.ProfileImagePath)
+        @Html.HiddenFor(m => Model.Id)
+        <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+        @Html.HiddenFor(m => Model.Member.ProfileImagePath)
 
-            <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
+        <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
             <div class="bot-border"></div>
 
             <div class="col-sm-12">
@@ -166,29 +166,18 @@
             var text = $(this).val();
             if (text.length >= 2) {
                 $('#form_password_submit').click();
-                @*event.preventDefault();
-                var formData = new FormData($('#form_profile')[0]);
-                $.ajax({
-                    url: '/Acount/ValidatePassword',
-                    type: 'Post',
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function () {
-                        var url = '@Url.Action("AddInitialInfo", "Acount", Model)';
-                        $('#register_wizard').load(url);
-                    }
-                })*@
             }
         })
     })
 
     function SetPasswordBox() {
-        $('#password_box').focus();
         var input = $('#password_box');
-        var len = input.selectionEnd;
-        input.setSelectionRange(0, len);
+        input.focus();
+        var len = input.val().length;
+        if (len > 0) {
+            var val = input.val();
+            input.focus().val('').val(val);
+        }
     }
 
     $(function () {
