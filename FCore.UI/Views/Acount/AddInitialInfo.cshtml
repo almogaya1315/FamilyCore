@@ -32,27 +32,19 @@
 
 <br />
 
-@using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
-{
-    HttpMethod = "Post",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "register_wizard"
-}, new { id = "form_profile" }))
-{
-    <div class="clearfix"></div>
+<div class="clearfix"></div>
 
-    @Html.ValidationSummary()
+@Html.ValidationSummary()
 
-    if (ViewData["validSummary"] != null)
+<div class="bot-border"></div>
+<div style="margin-top:5%; margin-bottom:5%;">
+    @using (Ajax.BeginForm("ValidateUsername", "Acount", Model, new AjaxOptions
     {
-        <span>
-            @ViewData["validSummary"]
-        </span>
-    }
-
-    <div class="bot-border"></div>
-    <div style="margin-top:5%; margin-bottom:5%;">
-
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "register_wizard"
+    }, new { id = "form_username" }))
+    {
         <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Initial info</div>
         <div class="clearfix"></div>
 
@@ -61,11 +53,20 @@
         <div class="col-sm-5 col-xs-6 tital ">
             @Html.LabelFor(m => Model.UserName)
         </div>
-        <div class="col-sm-7">
-            @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
-            @Html.ValidationMessageFor(m => Model.UserName)
-        </div>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
+                @Html.ValidationMessageFor(m => Model.UserName)
+            </div>
+    }
 
+    @using (Ajax.BeginForm("ValidatePassword", "Acount", Model, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "register_wizard",
+        OnComplete = "SetPasswordBox()"
+    }, new { id = "form_password" }))
+    {
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
@@ -77,73 +78,88 @@
             @Html.ValidationMessageFor(m => Model.Password)
         </div>
 
+        <input id="form_password_submit" type="submit" style="display:none"/>
+    }
+
+    @using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "register_wizard"
+    }, new { id = "form_profile" }))
+    {
         <div class="clearfix"></div>
         <div class="bot-border"></div>
-        <div class="bot-border"></div>
+            <div class="bot-border"></div>
 
-        @Html.HiddenFor(m => Model.Id)
-        <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
-        @Html.HiddenFor(m => Model.Member.ProfileImagePath)
+            @Html.HiddenFor(m => Model.Id)
+            <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
+            @Html.HiddenFor(m => Model.Member.ProfileImagePath)
 
-        <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
-        <div class="bot-border"></div>
+            <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
+            <div class="bot-border"></div>
 
-        <div class="col-sm-12">
-            <div align="center" style="margin-top:7%; margin-bottom:5%">
-                <div style="display:inline">
-                    @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
-                {
-                            <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                                 id="profile-image-defualt" class="img-circle img-responsive" />
+            <div class="col-sm-12">
+                <div align="center" style="margin-top:7%; margin-bottom:5%">
+                    <div style="display:inline">
+                        @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
+                            {
+                                <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
+                                     id="profile-image-defualt" class="img-circle img-responsive" />
+                            }
+                            else
+                            {
+                                <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
+                                     id="profile-image" class="img-circle img-responsive" />
+                            }
+                        }
+                    </div>
+
+                    @{
+                        if (String.IsNullOrWhiteSpace((string)Session["filename"]))
+                        {
+                            if (Session["modelstate"] == null)
+                            {
+                                <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
+                            }
+                            else
+                            {
+                                <div id="message_file" style="color:#999; margin-top:3%">
+                                    @Html.ValidationMessageFor(m => Model.Member.ProfileImagePath, "", new { @style = Session["validcolor"] })
+                                </div>
+                            }
                         }
                         else
                         {
-                            <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
-                                 id="profile-image" class="img-circle img-responsive" />
+                            <div id="message_file" style="color:#999; margin-top:3%">@Session["filename"]</div>
                         }
                     }
+
                 </div>
-
-                @{
-                    if (String.IsNullOrWhiteSpace((string)Session["filename"]))
-                    {
-                        if (Session["modelstate"] == null)
-                        {
-                            <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
-                        }
-                        else
-                        {
-                            <div id="message_file" style="color:#999; margin-top:3%">
-                                @Html.ValidationMessageFor(m => Model.Member.ProfileImagePath, "", new { @style = Session["validcolor"] })
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div id="message_file" style="color:#999; margin-top:3%">@Session["filename"]</div>
-                    }
-                }
-
             </div>
-        </div>
 
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
+            <div class="clearfix"></div>
+            <div class="bot-border"></div>
 
-        <div class="form-group">
-            <div style="margin-bottom:5%">
-                <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
+            <div class="form-group">
+                <div style="margin-bottom:5%">
+                    <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
+                </div>
             </div>
-        </div>
-    </div>
-                    }
+                        }
+
+</div>
+
+
+
 
 <script>
     $(function () {
         $('#password_box').on('input', function (event) {
             var text = $(this).val();
             if (text.length >= 2) {
-                event.preventDefault();
+                $('#form_password_submit').click();
+                @*event.preventDefault();
                 var formData = new FormData($('#form_profile')[0]);
                 $.ajax({
                     url: '/Acount/ValidatePassword',
@@ -152,14 +168,20 @@
                     cache: false,
                     contentType: false,
                     processData: false,
-                    @*success: function () {
+                    success: function () {
                         var url = '@Url.Action("AddInitialInfo", "Acount", Model)';
                         $('#register_wizard').load(url);
-                    }*@
-                })
+                    }
+                })*@
             }
         })
     })
+
+    function SetPasswordBox() {
+        var pass = @Html.Raw(Json.Encode(Model.Password))
+        $('#password_box').val();
+        $('#password_box').focus();
+    }
 
     $(function () {
         $('#profile-image-defualt').on('click', function () {

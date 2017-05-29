@@ -74,16 +74,13 @@ namespace FCore.UI.Controllers
         {
             using (userRepo = new UserRepository(HttpContext))
             {
-                ViewData["validSummary"] = null;
-
                 var passValid = await userRepo.ValidatePassword(model.Password);
                 Session["isValidPass"] = passValid.Succeeded;
                 if (!passValid.Succeeded)
                 {
-                    //ModelState.Clear();
+                    ModelState.Clear();
                     //ModelState["Password"].Errors.Add(passValid.Errors.FirstOrDefault());
-                    //ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
-                    ViewData["validSummary"] = passValid.Errors.FirstOrDefault();
+                    ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
                 }
 
                 return PartialView("AddInitialInfo", model);
