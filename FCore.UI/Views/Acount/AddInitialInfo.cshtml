@@ -45,7 +45,7 @@
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "register_wizard",
-        //OnSuccess = "SetUsernameBox"
+        OnSuccess = "SetUsernameBox"
     }, new { id = "form_username" }))
     {
         <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Initial info</div>
@@ -111,44 +111,44 @@
         <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
         <div class="bot-border"></div>
 
-            <div class="col-sm-12">
-                <div align="center" style="margin-top:7%; margin-bottom:5%">
-                    <div style="display:inline">
-                        @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
-                            {
-                                <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                                     id="profile-image-defualt" class="img-circle img-responsive" />
-                            }
-                            else
-                            {
-                                <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
-                                     id="profile-image" class="img-circle img-responsive" />
-                            }
-                        }
-                    </div>
-
-                    @{
-                        if (String.IsNullOrWhiteSpace((string)Session["filename"]))
+        <div class="col-sm-12">
+            <div align="center" style="margin-top:7%; margin-bottom:5%">
+                <div style="display:inline">
+                    @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
                         {
-                            if (Session["modelstate"] == null)
-                            {
-                                <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
-                            }
-                            else
-                            {
-                                <div id="message_file" style="color:#999; margin-top:3%">
-                                    @Html.ValidationMessageFor(m => Model.Member.ProfileImagePath, "", new { @style = Session["validcolor"] })
-                                </div>
-                            }
+                            <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
+                                 id="profile-image-defualt" class="img-circle img-responsive" />
                         }
                         else
                         {
-                            <div id="message_file" style="color:#999; margin-top:3%">@Session["filename"]</div>
+                            <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
+                                 id="profile-image" class="img-circle img-responsive" />
                         }
                     }
-
                 </div>
+
+                @{
+                    if (String.IsNullOrWhiteSpace((string)Session["filename"]))
+                    {
+                        if (Session["modelstate"] == null)
+                        {
+                            <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
+                        }
+                        else
+                        {
+                            <div id="message_file" style="color:#999; margin-top:3%">
+                                @Html.ValidationMessageFor(m => Model.Member.ProfileImagePath, "", new { @style = Session["validcolor"] })
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div id="message_file" style="color:#999; margin-top:3%">@Session["filename"]</div>
+                    }
+                }
+
             </div>
+        </div>
 
             <div class="clearfix"></div>
             <div class="bot-border"></div>
@@ -158,11 +158,8 @@
                     <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
                 </div>
             </div>
-                        }
-
+                    }
 </div>
-
-
 
 
 <script>
@@ -177,7 +174,6 @@
 
     function SetPasswordBox() {
         var input = $('#password_box');
-        input.focus();
         var len = input.val().length;
         if (len > 0) {
             var val = input.val();
@@ -193,6 +189,15 @@
             }
         })
     })
+
+    function SetUsernameBox() {
+        var input = $('#username_box');
+        var len = input.val().length;
+        if (len > 0) {
+            var val = input.val();
+            input.focus().val('').val(val);
+        }
+    }
 
     $(function () {
         $('#profile-image-defualt').on('click', function () {

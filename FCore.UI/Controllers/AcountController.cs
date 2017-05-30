@@ -111,7 +111,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
+        public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
         {
             using (userRepo = new UserRepository(HttpContext))
             {
@@ -136,9 +136,9 @@ namespace FCore.UI.Controllers
                             //Session["filename"] = ProfileImagePath.FileName;
                             return PartialView("AddPersonalInfo", new UserModel());
                         }
-                        else RedirectToAction("ValidateUsername", model);
+                        else return await ValidatePassword(model); // RedirectToAction("ValidatePassword", model);
                     }
-                    else RedirectToAction("ValidatePassword", model);
+                    else return await ValidateUsername(model); // RedirectToAction("ValidateUsername", model);
                 }
             }
             return PartialView(model);

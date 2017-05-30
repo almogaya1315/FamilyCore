@@ -25,7 +25,8 @@ namespace FCore.Common.Utils
                 case ModelStateSet.ForInitialInfo:
                     return new List<string>()
                     {
-                        "Id","Member.Id", "Member.FamilyId", "Member.PermissionId", "Member.ContactInfoId", "Member.FirstName",
+                        "Id", "Member", "Member.Id", "MemberId", "FamilyId", "EmailConfirmed", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount",
+                        "Member.FamilyId", "Member.PermissionId", "Member.ContactInfoId", "Member.FirstName",
                         "Member.LastName", "Member.About", "Member.Gender", "Member.BirthPlace", "Member.BirthDate"
                     };
                 case ModelStateSet.ForUsernameValidation:
