@@ -241,6 +241,7 @@
     <Content Include="Views\Acount\RegisterPage.cshtml" />
     <Content Include="Views\Acount\AddInitialInfo.cshtml" />
     <Content Include="Views\Shared\LoginReg_Layout.cshtml" />
+    <Content Include="Views\Acount\AddPersonalInfo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

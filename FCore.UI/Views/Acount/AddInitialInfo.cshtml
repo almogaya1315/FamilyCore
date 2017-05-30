@@ -93,12 +93,12 @@
         <input id="form_password_submit" type="submit" style="display:none" />
     }
 
-    @using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
+    @using (Ajax.BeginForm("AddProfileImage", "Acount", Model, new AjaxOptions
     {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "register_wizard"
-    }, new { id = "form_profile" }))
+    }, new { id = "form_profile_image" }))
     {
         <div class="clearfix"></div>
         <div class="bot-border"></div>

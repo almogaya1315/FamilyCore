@@ -25,6 +25,7 @@ namespace FCore.UI.Controllers
         public ActionResult LoginPage()
         {
             // todo.. varify past logged-in user & ask if to use OR which user if multiple
+            Session.Clear();
             return View();
         }
 
@@ -46,14 +47,6 @@ namespace FCore.UI.Controllers
                             ModelState.AddModelError("", "Invalid username or password");
                             break;
                     }
-
-                    //var identityUser = await userRepo.GetUserAsync(model.UserName);
-
-                    //if (identityUser != null)
-                    //{
-                    //    return RedirectToAction("Main", "FamilyCore", identityUser);
-                    //}
-                    //// todo.. signin manager
                 }
                 return View(model);
             }
@@ -61,6 +54,7 @@ namespace FCore.UI.Controllers
 
         public ActionResult RegisterPage()
         {
+            Session.Clear();
             return View();
         }
 
@@ -115,9 +109,6 @@ namespace FCore.UI.Controllers
         {
             using (userRepo = new UserRepository(HttpContext))
             {
-                // todo.. able to enter funcion, only if username & password valid verified 
-                // todo.. create action that runs when username & password textbox text changed
-
                 var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
                 foreach (var key in modelKeys) ModelState.Remove(key);
 
@@ -136,9 +127,9 @@ namespace FCore.UI.Controllers
                             //Session["filename"] = ProfileImagePath.FileName;
                             return PartialView("AddPersonalInfo", new UserModel());
                         }
-                        else return await ValidatePassword(model); // RedirectToAction("ValidatePassword", model);
+                        else return await ValidatePassword(model);
                     }
-                    else return await ValidateUsername(model); // RedirectToAction("ValidateUsername", model);
+                    else return await ValidateUsername(model); 
                 }
             }
             return PartialView(model);
@@ -147,7 +138,16 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadPersonalInfo()
         {
-            return PartialView();
+            return PartialView("AddPersonalInfo");
+        }
+
+        [HttpPost]
+        public ActionResult AddPersonalInfo(UserModel model)
+        {
+            using (userRepo  = new UserRepository(HttpContext))
+            {
+                return PartialView("AddContactInfo", model);
+            }
         }
 
         // *** 
