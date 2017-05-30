@@ -70,6 +70,25 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> ValidateUsername(UserModel model)
+        {
+            using (userRepo = new UserRepository(HttpContext))
+            {
+                var identityUser = await userRepo.GetUserAsync(model.UserName);
+                if (identityUser == null)
+                {
+                    Session["isValidUsername"] = true;
+                }
+                else
+                {
+                    Session["isValidUsername"] = false;
+                    ModelState["UserName"].Errors.Add("Allready in use");
+                }
+                return PartialView("AddInitialInfo", model);
+            }
+        }
+
+        [HttpPost]
         public async Task<ActionResult> ValidatePassword(UserModel model)
         {
             using (userRepo = new UserRepository(HttpContext))
@@ -79,20 +98,18 @@ namespace FCore.UI.Controllers
                 if (!passValid.Succeeded)
                 {
                     ModelState.Clear();
-                    //ModelState["Password"].Errors.Add(passValid.Errors.FirstOrDefault());
                     ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
                 }
-
                 return PartialView("AddInitialInfo", model);
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
+        public ActionResult AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
         {
             using (userRepo = new UserRepository(HttpContext))
             {
-                // todo.. able to enter funcion, only if username & password verified that not in use
+                // todo.. able to enter funcion, only if username & password valid verified 
                 // todo.. create action that runs when username & password textbox text changed
 
                 var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
@@ -102,11 +119,9 @@ namespace FCore.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var identityUser = await userRepo.GetUserAsync(model.UserName);
-                    if (identityUser == null)
+                    if ((bool)Session["isValidUsername"])
                     {
-                        //var passValid = await userRepo.ValidatePassword(model.Password);
-                        if ((bool)Session["isValidPass"]) //if (passValid.Succeeded)
+                        if ((bool)Session["isValidPass"])
                         {
                             Session["username"] = model.UserName;
                             Session["password"] = model.Password;
@@ -115,12 +130,9 @@ namespace FCore.UI.Controllers
                             //Session["filename"] = ProfileImagePath.FileName;
                             return PartialView("AddPersonalInfo", new UserModel());
                         }
-                        //ModelState.AddModelError("invalid password", passValid.Errors.FirstOrDefault());
+                        else RedirectToAction("ValidateUsername", model);
                     }
-                    else
-                    {
-                        ModelState["UserName"].Errors.Add("Allready in use");
-                    }
+                    else RedirectToAction("ValidatePassword", model);
                 }
             }
             return PartialView(model);

@@ -1,4 +1,11 @@
-﻿/*!
+﻿.valid-box{
+    position:absolute;
+    margin-left:99%;
+    max-width:100%;
+    width:42%
+}
+
+/*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
