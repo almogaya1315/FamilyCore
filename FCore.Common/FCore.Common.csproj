@@ -146,6 +146,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRepositoryConverter.cs" />
     <Compile Include="Utils\ConstGenerator.cs" />
+    <Compile Include="Utils\InputHelper.cs" />
     <Compile Include="Utils\ModelStateHelper.cs" />
     <Compile Include="Utils\PermissionHandler.cs" />
     <Compile Include="Utils\RelData.cs" />

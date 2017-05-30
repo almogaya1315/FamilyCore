@@ -58,9 +58,9 @@ namespace FCore.UI.Controllers
             return View();
         }
 
-        public ActionResult LoadInitialInfo()
+        public ActionResult LoadInitialInfo(UserModel model)
         {
-            return PartialView("AddInitialInfo");
+            return PartialView("AddInitialInfo", model);
         }
 
         [HttpPost]
@@ -105,14 +105,53 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model, HttpPostedFileBase ProfileImagePath)
+        public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
+        {
+            using (userRepo = new UserRepository(HttpContext))
+            {
+                if (Session["HPFB_file"] != null)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    return Json(new { success = true });
+                }
+
+                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForProfileImage);
+                foreach (var key in modelKeys) ModelState.Remove(key);
+
+                if (ModelState.IsValid)
+                {
+                    if (ProfileImagePath.ContentType.Contains("image"))
+                    {
+                        Session["HPFB_file"] = ProfileImagePath;
+                        Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
+                        Session["filename"] = ProfileImagePath.FileName;
+
+                        // repo.UpdateMemberProfileImage(-1, ProfileImagePath, false); // todo.. in final step 'CreateUser' ***
+                    }
+                    else
+                    {
+                        ModelState["Member.ProfileImagePath"].Errors.Clear();
+                        ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
+                        Session["valid_profileimage"] = false;
+
+                        //throw new FormatException("The target file is not type image.");
+                    }
+                }
+
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Json(new { success = true });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model)
         {
             using (userRepo = new UserRepository(HttpContext))
             {
                 var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
                 foreach (var key in modelKeys) ModelState.Remove(key);
 
-                ModelState.Remove("Member.ProfileImagePath"); // todo.. validation message in 'message_file' tag & new ajax http request 
+                // ModelState.Remove("Member.ProfileImagePath"); // todo.. validation message in 'message_file' tag & new ajax http request 
 
                 if (ModelState.IsValid)
                 {
@@ -120,12 +159,12 @@ namespace FCore.UI.Controllers
                     {
                         if ((bool)Session["isValidPass"])
                         {
-                            Session["username"] = model.UserName;
-                            Session["password"] = model.Password;
-                            //Session["HPFB_file"] = ProfileImagePath;
-                            //Session["filepath"] = repo.GetFilePath(ProfileImagePath);
-                            //Session["filename"] = ProfileImagePath.FileName;
-                            return PartialView("AddPersonalInfo", new UserModel());
+                            if (Session["HPFB_file"] != null)
+                            {
+                                Session["username"] = model.UserName;
+                                Session["password"] = model.Password;
+                                return PartialView("AddPersonalInfo", new UserModel());
+                            }
                         }
                         else return await ValidatePassword(model);
                     }

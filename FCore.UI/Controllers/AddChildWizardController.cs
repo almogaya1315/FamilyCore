@@ -66,7 +66,7 @@ namespace FCore.UI.Controllers
                     if (ProfileImagePath.ContentType.Contains("image"))
                     {
                         Session["HPFB_file"] = ProfileImagePath;
-                        Session["filepath"] = repo.GetFilePath(ProfileImagePath);
+                        Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
                         Session["filename"] = ProfileImagePath.FileName;
 
                         repo.UpdateMemberProfileImage(-1, ProfileImagePath, false);
@@ -141,7 +141,7 @@ namespace FCore.UI.Controllers
                 if (ModelState.IsValid)
                 {
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HPFB_file"];
-                    Session["postedMember_pi"] = postedMember = repo.SetPersonalInfo(postedMember, repo.GetFilePath(file));
+                    Session["postedMember_pi"] = postedMember = repo.SetPersonalInfo(postedMember, InputHelper.GetFilePath(file));
                     Session["creator_rel"] = Relationship;
                     ViewData["cityenum"] = repo.GetCities();
                     return PartialView("AddContactInfo", new ContactInfoModel());

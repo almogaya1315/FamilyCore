@@ -201,16 +201,6 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetContactInfo(id));
         }
 
-        public string GetFilePath(HttpPostedFileBase file)
-        {
-            if (file != null)
-            {
-                string pic = Path.GetFileName(file.FileName);
-                return $"~/Images/Profiles/{pic}";
-            }
-            else return string.Empty;
-        }
-
         public ICollection<SelectListItem> GetChildRelationshipTypes()
         {
             ICollection<SelectListItem> relListItems = new List<SelectListItem>();

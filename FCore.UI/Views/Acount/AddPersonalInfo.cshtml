@@ -1,2 +1,129 @@
 ﻿@model FCore.Common.Models.Users.UserModel
 
+<div class="container">
+    <div class="row bs-wizard" style="border-bottom:0; margin-left:-9%">
+
+        <div class="col-xs-3 bs-wizard-step disabled">
+            <div class="text-center bs-wizard-stepnum">Step 1</div>
+            <div class="progress" style="width:30%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step active" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 2</div>
+            <div class="progress" style="width:60%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step disabled" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 3</div>
+            <div class="progress" style="width:60%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+        <div class="col-xs-3 bs-wizard-step disabled" style="margin-left:-10%">
+            <div class="text-center bs-wizard-stepnum">Step 4</div>
+            <div class="progress" style="width:50%; background-color:#7da4f5"><div class="progress-bar"></div></div>
+            <div class="bs-wizard-dot" style="background-color:#7da4f5"></div>
+        </div>
+
+    </div>
+</div>
+
+<br />
+
+@using (Ajax.BeginForm("AddPersonalInfo", "Acount", Model, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "register_wizard",
+    HttpMethod = "Post"
+}))
+{
+    <div class="clearfix"></div>
+    <div style="margin-top:5%; margin-bottom:5%;">
+
+        <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Personal info</div>
+        <div class="clearfix"></div>
+
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Member.FirstName)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.Member.FirstName)
+            @Html.ValidationMessageFor(m => Model.Member.FirstName, "", new { @style = Session["validcolor"] })
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Member.LastName)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.Member.LastName)
+            @Html.ValidationMessageFor(m => Model.Member.LastName, "", new { @style = Session["validcolor"] })
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Member.Relatives.FirstOrDefault().Relationship)
+        </div>
+        <div class="col-sm-7">
+
+            @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>)
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Member.Gender)
+        </div>
+        <div class="col-sm-7">
+
+            @Html.DropDownList("Gender", ViewData["genenum"] as ICollection<SelectListItem>)
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Member.BirthDate)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.Member.BirthDate)
+            @Html.ValidationMessageFor(m => Model.Member.BirthDate, "", new { @style = Session["validcolor"] + "margin-left:5%" });
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Member.BirthPlace)
+        </div>
+        <div class="col-sm-7">
+            @Html.EditorFor(m => Model.Member.BirthPlace)
+            @Html.ValidationMessageFor(m => Model.Member.BirthPlace, "", new { @style = Session["validcolor"] })
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <br />
+
+        <div>
+            <input id="back_from_pi" type="button" class="btn btn-info" value="<<  Back" style="display:inline; margin-left:2%; width:17%" onclick="BackFromPersonalInfo" />
+
+            <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:62%; display:inline" />
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        $('#back_from_pi').on('click', function () {
+            var url = '@Url.Action("LoadInitialInfo", "Acount", Model)'
+            $('#register_wizard').load(url)
+        })
+    })
+</script>

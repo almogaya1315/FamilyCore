@@ -45,7 +45,6 @@ namespace FCore.Common.Interfaces
         ContactInfoModel GetContactInfo(int id);
 
         #region should be in supporting classes
-        string GetFilePath(HttpPostedFileBase file);
         ICollection<SelectListItem> GetChildRelationshipTypes();
         ICollection<SelectListItem> GetGenderTypes();
         ICollection<SelectListItem> GetCities();
