@@ -70,19 +70,25 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ValidateUsername(UserModel model)
+        public async Task<ActionResult> ValidateUsername([Bind(Exclude = "Claims,Logins,Roles")]UserModel model)
         {
             using (userRepo = new UserRepository(HttpContext))
             {
-                var identityUser = await userRepo.GetUserAsync(model.UserName);
-                if (identityUser == null)
+                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForUsernameValidation);
+                foreach (var key in modelKeys) ModelState.Remove(key);
+
+                if (ModelState.IsValid)
                 {
-                    Session["isValidUsername"] = true;
-                }
-                else
-                {
-                    Session["isValidUsername"] = false;
-                    ModelState["UserName"].Errors.Add("Allready in use");
+                    var identityUser = await userRepo.GetUserAsync(model.UserName);
+                    if (identityUser == null)
+                    {
+                        Session["isValidUsername"] = true;
+                    }
+                    else
+                    {
+                        Session["isValidUsername"] = false;
+                        ModelState["UserName"].Errors.Add("Allready in use");
+                    }
                 }
                 return PartialView("AddInitialInfo", model);
             }

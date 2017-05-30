@@ -44,7 +44,8 @@
     {
         HttpMethod = "Post",
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "register_wizard"
+        UpdateTargetId = "register_wizard",
+        //OnSuccess = "SetUsernameBox"
     }, new { id = "form_username" }))
     {
         <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Initial info</div>
@@ -59,6 +60,8 @@
             @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
             @Html.ValidationMessageFor(m => Model.UserName)
         </div>
+
+        <input id="form_username_submit" type="submit" style="display:none" />
     }
 
     @using (Ajax.BeginForm("ValidatePassword", "Acount", Model, new AjaxOptions
@@ -181,6 +184,15 @@
             input.focus().val('').val(val);
         }
     }
+
+    $(function () {
+        $('#username_box').on('input', function () {
+            var text = $(this).val();
+            if (text.length >= 2) {
+                $('#form_username_submit').click();
+            }
+        })
+    })
 
     $(function () {
         $('#profile-image-defualt').on('click', function () {

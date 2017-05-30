@@ -28,6 +28,13 @@ namespace FCore.Common.Utils
                         "Id","Member.Id", "Member.FamilyId", "Member.PermissionId", "Member.ContactInfoId", "Member.FirstName",
                         "Member.LastName", "Member.About", "Member.Gender", "Member.BirthPlace", "Member.BirthDate"
                     };
+                case ModelStateSet.ForUsernameValidation:
+                    return new List<string>()
+                    {
+                        "Id", "Password", "MemberId", "FamilyId", "EmailConfirmed", "PhoneNumberConfirmed", "TwoFactorEnabled", "LockoutEnabled", "AccessFailedCount",
+                        "Member.Id", "Member.FamilyId", "Member.PermissionId", "Member.ContactInfoId", "Member.FirstName",
+                        "Member.LastName", "Member.About", "Member.Gender", "Member.BirthPlace", "Member.BirthDate"
+                    };
                 case ModelStateSet.ForProfileImage:
                     return new List<string>()
                 {
