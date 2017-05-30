@@ -26,6 +26,7 @@ namespace FCore.UI.Controllers
         {
             // todo.. varify past logged-in user & ask if to use OR which user if multiple
             Session.Clear();
+            Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
             return View();
         }
 
@@ -55,6 +56,7 @@ namespace FCore.UI.Controllers
         public ActionResult RegisterPage()
         {
             Session.Clear();
+            Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
             return View();
         }
 
@@ -126,7 +128,7 @@ namespace FCore.UI.Controllers
                         Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
                         Session["filename"] = ProfileImagePath.FileName;
 
-                        // repo.UpdateMemberProfileImage(-1, ProfileImagePath, false); // todo.. in final step 'CreateUser' ***
+                        repo.UpdateMemberProfileImage(-1, ProfileImagePath, false); // todo.. put in utils class
                     }
                     else
                     {
@@ -164,6 +166,11 @@ namespace FCore.UI.Controllers
                                 Session["username"] = model.UserName;
                                 Session["password"] = model.Password;
                                 return PartialView("AddPersonalInfo", new UserModel());
+                            }
+                            else
+                            {
+                                Session["profileimage_modelstate"] = false;
+                                ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
                             }
                         }
                         else return await ValidatePassword(model);

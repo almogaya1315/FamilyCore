@@ -105,7 +105,7 @@
         <div class="bot-border"></div>
 
         <input id="profile-image-upload" name="ProfileImagePath" class="hidden" type="file">
-        @Html.HiddenFor(m => Model.Member.ProfileImagePath)
+        @Html.HiddenFor(m => Model.Member.ProfileImagePath, new { id = "hidden_input_image" })
 
         <div style="margin-left:2%; margin-top:5%; font-weight:bold; font-size:x-large; color:#6fadbe">@Html.LabelFor(m => Model.Member.ProfileImagePath)</div>
         <div class="bot-border"></div>
@@ -223,7 +223,7 @@
     });
 
     $(function () {
-        $('#profile-image-upload').on('change', function (event) {
+        $('#profile-image-upload').on('change', function () {
             var path = $(this).val();
             var filename = path.replace(/.*[\/\\]/, '');
             $('#message_file').text(filename);
@@ -231,7 +231,7 @@
             $.each($('input'), function () {
                 if ($(this).attr("type") == "hidden") {
                     var id = $(this).attr('id');
-                    if (id == "ProfileImagePath") {
+                    if (id == "hidden_input_image") {
                         $(this).val(path);
                         $('#form_image_submit').click();
                     }

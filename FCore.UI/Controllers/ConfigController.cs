@@ -72,7 +72,7 @@ namespace FCore.UI.Controllers
                 {
                     if (ProfileImagePath.ContentType.Contains("image"))
                     {
-                        if (repo.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
+                        if (InputHelper.GetFilePath(ProfileImagePath) != member.ProfileImagePath)
                             repo.UpdateMemberProfileImage((int)member.Id, ProfileImagePath, true);
                     }
                     else { } // todo

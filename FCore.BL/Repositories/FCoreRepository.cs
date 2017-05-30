@@ -235,7 +235,7 @@ namespace FCore.BL.Repositories
 
             if (updateDatabase)
             {
-                CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), GetFilePath(file)); // ConvertToEntity
+                CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), InputHelper.GetFilePath(file)); // ConvertToEntity
             }
         }
         public void UpdateUserDetails(ContactInfoModel postedInfo)
