@@ -72,6 +72,11 @@ namespace FCore.UI.Controllers
                 model.Password = (string)Session["temp_pass"];
                 ModelState.Remove("Password");
             }
+            if (Session["HPFB_file"] != null)
+            {
+                model.Member.ProfileImagePath = (string)Session["filepath"];
+                ModelState.Remove("Member.ProfileImagePath");
+            }
             return PartialView("AddInitialInfo", model);
         }
 
