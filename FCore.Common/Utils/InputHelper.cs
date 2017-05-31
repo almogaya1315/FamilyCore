@@ -19,5 +19,12 @@ namespace FCore.Common.Utils
             }
             else return string.Empty;
         }
+
+        public static void UploadProfileImage(HttpPostedFileBase file)
+        {
+            string pic = Path.GetFileName(file.FileName);
+            string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/Profiles/"), pic);
+            file.SaveAs(path);
+        }
     }
 }

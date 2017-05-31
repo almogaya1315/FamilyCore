@@ -163,6 +163,10 @@
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
+        @Html.HiddenFor(m => Model.UserName, new { id = "next_hidden_username"})
+        @Html.HiddenFor(m => Model.Password, new { id = "next_hidden_password" })
+        @Html.HiddenFor(m => Model.Member.ProfileImagePath, new { id = "next_hidden_image" })
+
             <div class="form-group">
                 <div style="margin-bottom:5%">
                     <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
@@ -258,5 +262,13 @@
             });
         });
     });
+
+    $(function () {
+        $('#input_btn_profile').on('click', function () {
+            $('#next_hidden_username').val($('#username_box').val());
+            $('#next_hidden_password').val($('#password_box').val());
+            $('#next_hidden_imaged').val($('#hidden_input_image').val());
+        })
+    })
 
 </script>

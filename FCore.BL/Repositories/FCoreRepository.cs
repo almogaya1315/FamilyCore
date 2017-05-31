@@ -229,10 +229,7 @@ namespace FCore.BL.Repositories
         }
         public void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase)
         {
-            string pic = Path.GetFileName(file.FileName);
-            string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Images/Profiles/"), pic);
-            file.SaveAs(path);
-
+            InputHelper.UploadProfileImage(file);
             if (updateDatabase)
             {
                 CoreDB.UpdateMemberProfileImage(CoreDB.GetFamilyMember(memberId), InputHelper.GetFilePath(file)); // ConvertToEntity

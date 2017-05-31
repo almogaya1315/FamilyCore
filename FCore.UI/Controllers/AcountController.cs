@@ -62,6 +62,16 @@ namespace FCore.UI.Controllers
 
         public ActionResult LoadInitialInfo(UserModel model)
         {
+            if ((bool)Session["isValidUsername"])
+            {
+                model.UserName = (string)Session["temp_username"];
+                ModelState.Remove("UserName");
+            }
+            if ((bool)Session["isValidPass"])
+            {
+                model.Password = (string)Session["temp_pass"];
+                ModelState.Remove("Password");
+            }
             return PartialView("AddInitialInfo", model);
         }
 
@@ -79,6 +89,7 @@ namespace FCore.UI.Controllers
                     if (identityUser == null)
                     {
                         Session["isValidUsername"] = true;
+                        Session["temp_username"] = model.UserName;
                     }
                     else
                     {
@@ -102,6 +113,7 @@ namespace FCore.UI.Controllers
                     ModelState.Clear();
                     ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
                 }
+                Session["temp_pass"] = model.Password;
                 return PartialView("AddInitialInfo", model);
             }
         }
@@ -128,7 +140,7 @@ namespace FCore.UI.Controllers
                         Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
                         Session["filename"] = ProfileImagePath.FileName;
 
-                        repo.UpdateMemberProfileImage(-1, ProfileImagePath, false); // todo.. put in utils class
+                        InputHelper.UploadProfileImage(ProfileImagePath); 
                     }
                     else
                     {
