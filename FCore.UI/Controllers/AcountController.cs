@@ -184,18 +184,22 @@ namespace FCore.UI.Controllers
                                 Session["password"] = model.Password;
                                 return PartialView("AddPersonalInfo", new UserModel());
                             }
-                            else
-                            {
-                                Session["profileimage_modelstate"] = false;
-                                ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
-                            }
+                            else SetImageFileModelState();
                         }
                         else return await ValidatePassword(model);
                     }
                     else return await ValidateUsername(model); 
                 }
+                else if (Session["HPFB_file"] == null) SetImageFileModelState();
             }
             return PartialView(model);
+        }
+
+        void SetImageFileModelState()
+        {
+            Session["profileimage_modelstate"] = false;
+            ModelState.Remove("Member.ProfileImagePath");
+            ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
         }
 
         [HttpGet]
