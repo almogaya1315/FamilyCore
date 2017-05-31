@@ -101,8 +101,8 @@ namespace FCore.UI.Controllers
                 // when 'back' from ci page, no member model can be passed because the ci view's model is type 'ContactInfo' 
                 if (creator == null || creator.Id == 0) 
                 {
-                    ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                    ViewData["genenum"] = repo.GetGenderTypes();
+                    ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+                    ViewData["genenum"] = ConstGenerator.GenderTypes;
 
                     var postedMember = Session["postedMember_pi"];
                     return PartialView("AddPersonalInfo", postedMember);
@@ -123,8 +123,8 @@ namespace FCore.UI.Controllers
                     Session["creatorId"] = creator.Id;
                 }
 
-                ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                ViewData["genenum"] = repo.GetGenderTypes();
+                ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+                ViewData["genenum"] = ConstGenerator.GenderTypes;
 
                 return PartialView("AddPersonalInfo", new FamilyMemberModel());
             }
@@ -143,15 +143,15 @@ namespace FCore.UI.Controllers
                     HttpPostedFileBase file = (HttpPostedFileBase)Session["HPFB_file"];
                     Session["postedMember_pi"] = postedMember = repo.SetPersonalInfo(postedMember, InputHelper.GetFilePath(file));
                     Session["creator_rel"] = Relationship;
-                    ViewData["cityenum"] = repo.GetCities();
+                    ViewData["cityenum"] = ConstGenerator.Cities;
                     return PartialView("AddContactInfo", new ContactInfoModel());
                 }
                 else
                 {
                     ViewData = ModelStateHelper.SetModelState(ViewData, ModelState, ModelStateSet.ForPersonalInfo);
 
-                    ViewData["relenum"] = repo.GetChildRelationshipTypes();
-                    ViewData["genenum"] = repo.GetGenderTypes();
+                    ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+                    ViewData["genenum"] = ConstGenerator.GenderTypes;
                     return PartialView(postedMember);
                 }
             }
@@ -169,7 +169,7 @@ namespace FCore.UI.Controllers
             {
                 if (Session["postedMember_ci"] != null)
                 {
-                    ViewData["cityenum"] = repo.GetCities();
+                    ViewData["cityenum"] = ConstGenerator.Cities;
                     return PartialView("AddContactInfo", (Session["postedMember_ci"] as FamilyMemberModel).ContactInfo);
                 }
                 else throw new InvalidOperationException("The created member object wasn't stored in the controller session properly.");
@@ -196,7 +196,7 @@ namespace FCore.UI.Controllers
                 }
                 else
                 {
-                    ViewData["cityenum"] = repo.GetCities();
+                    ViewData["cityenum"] = ConstGenerator.Cities;
                     return PartialView(info);
                 }
             }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using FCore.Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace FCore.Common.Utils
 {
@@ -16,27 +18,45 @@ namespace FCore.Common.Utils
             }
         }
 
-        public static ICollection<string> ChildRelTypes
+        public static ICollection<SelectListItem> ChildRelTypes
         {
             get
             {
-                return GetChildRelTypeList();
+                ICollection<SelectListItem> relListItems = new List<SelectListItem>();
+                foreach (string rel in GetChildRelTypeList())
+                    relListItems.Add(new SelectListItem() { Text = rel });
+                return relListItems;
             }
             private set { }
         }
 
-        public static ICollection<string> Cities
+        public static ICollection<SelectListItem> GenderTypes
         {
             get
             {
-                return GetCities();
+                ICollection<SelectListItem> genListItems = new List<SelectListItem>();
+                foreach (string gen in Enum.GetNames(typeof(GenderType)).ToList())
+                    genListItems.Add(new SelectListItem() { Text = gen });
+                return genListItems;
+            }
+            private set { }
+        }
+
+        public static ICollection<SelectListItem> Cities
+        {
+            get
+            {
+                ICollection<SelectListItem> cities = new List<SelectListItem>();
+                foreach (string city in GetCities())
+                    cities.Add(new SelectListItem() { Text = city });
+                return cities;
             }
             private set { }
         }
 
         private static ICollection<string> GetChildRelTypeList()
         {
-            return ChildRelTypes = new List<string>()
+            return new List<string>()
             {
                 "Daughter", "Son", "Grand-Daughter", "Grand-Son",
                 "Sister", "Brother", "Uncle", "Aunt", "Cousin",
@@ -46,7 +66,7 @@ namespace FCore.Common.Utils
 
         private static ICollection<string> GetCities()
         {
-            return Cities = new List<string>()
+            return new List<string>()
             {
                 "Petah-Tikva", "Tel-Aviv", "Eilat", "Ramat-Gan", "Bat-Yam", "Afula", "Haifa", "Jerusalem", "Kfar-Saba"
             };

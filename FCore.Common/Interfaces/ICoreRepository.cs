@@ -45,9 +45,9 @@ namespace FCore.Common.Interfaces
         ContactInfoModel GetContactInfo(int id);
 
         #region should be in supporting classes
-        ICollection<SelectListItem> GetChildRelationshipTypes();
-        ICollection<SelectListItem> GetGenderTypes();
-        ICollection<SelectListItem> GetCities();
+        //ICollection<SelectListItem> GetChildRelationshipTypes();
+        //ICollection<SelectListItem> GetGenderTypes();
+        //ICollection<SelectListItem> GetCities();
         #endregion
 
         void UpdateUserAbout(int memberId, string about);

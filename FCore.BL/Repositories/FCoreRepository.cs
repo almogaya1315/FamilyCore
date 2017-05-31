@@ -201,27 +201,27 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetContactInfo(id));
         }
 
-        public ICollection<SelectListItem> GetChildRelationshipTypes()
-        {
-            ICollection<SelectListItem> relListItems = new List<SelectListItem>();
-            foreach (string rel in ConstGenerator.ChildRelTypes)
-                relListItems.Add(new SelectListItem() { Text = rel });
-            return relListItems;
-        }
-        public ICollection<SelectListItem> GetGenderTypes()
-        {
-            ICollection<SelectListItem> genListItems = new List<SelectListItem>();
-            foreach (string gen in Enum.GetNames(typeof(GenderType)).ToList())
-                genListItems.Add(new SelectListItem() { Text = gen });
-            return genListItems;
-        }
-        public ICollection<SelectListItem> GetCities()
-        {
-            ICollection<SelectListItem> cities = new List<SelectListItem>();
-            foreach (string city in ConstGenerator.Cities)
-                cities.Add(new SelectListItem() { Text = city });
-            return cities;
-        }
+        //public ICollection<SelectListItem> GetChildRelationshipTypes()
+        //{
+        //    ICollection<SelectListItem> relListItems = new List<SelectListItem>();
+        //    foreach (string rel in ConstGenerator.ChildRelTypes)
+        //        relListItems.Add(new SelectListItem() { Text = rel });
+        //    return relListItems;
+        //}
+        //public ICollection<SelectListItem> GetGenderTypes()
+        //{
+        //    ICollection<SelectListItem> genListItems = new List<SelectListItem>();
+        //    foreach (string gen in Enum.GetNames(typeof(GenderType)).ToList())
+        //        genListItems.Add(new SelectListItem() { Text = gen });
+        //    return genListItems;
+        //}
+        //public ICollection<SelectListItem> GetCities()
+        //{
+        //    ICollection<SelectListItem> cities = new List<SelectListItem>();
+        //    foreach (string city in ConstGenerator.Cities)
+        //        cities.Add(new SelectListItem() { Text = city });
+        //    return cities;
+        //}
 
         public void UpdateUserAbout(int memberId, string about)
         {

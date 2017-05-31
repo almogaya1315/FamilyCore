@@ -178,6 +178,9 @@ namespace FCore.UI.Controllers
                             {
                                 Session["username"] = model.UserName;
                                 Session["password"] = model.Password;
+
+                                ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+                                ViewData["genenum"] = ConstGenerator.GenderTypes;
                                 return PartialView("AddPersonalInfo", new UserModel());
                             }
                             else SetImageFileModelState();
@@ -209,6 +212,8 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadPersonalInfo()
         {
+            ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+            ViewData["genenum"] = ConstGenerator.GenderTypes;
             return PartialView("AddPersonalInfo");
         }
 
