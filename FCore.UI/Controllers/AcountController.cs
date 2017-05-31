@@ -119,7 +119,7 @@ namespace FCore.UI.Controllers
                 if (!passValid.Succeeded)
                 {
                     ModelState.Clear();
-                    ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
+                    ModelState.AddModelError("PassSpecificReq", passValid.Errors.FirstOrDefault());
                 }
                 Session["temp_pass"] = model.Password;
                 SetImageFileModelState();
