@@ -2,6 +2,7 @@
 using FCore.BL.Repositories;
 using FCore.Common.Enums;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Members;
 using FCore.Common.Models.Users;
 using FCore.Common.Utils;
 using Microsoft.AspNet.Identity;
@@ -62,18 +63,19 @@ namespace FCore.UI.Controllers
 
         public ActionResult LoadInitialInfo(UserModel model)
         {
-            if ((bool)Session["isValidUsername"])
+            if (Session["isValidUsername"] != null && (bool)Session["isValidUsername"])
             {
                 model.UserName = (string)Session["temp_username"];
                 ModelState.Remove("UserName");
             }
-            if ((bool)Session["isValidPass"])
+            if (Session["isValidPass"] != null && (bool)Session["isValidPass"])
             {
                 model.Password = (string)Session["temp_pass"];
                 ModelState.Remove("Password");
             }
             if (Session["HPFB_file"] != null)
             {
+                if (model.Member == null) model.Member = new FamilyMemberModel();
                 model.Member.ProfileImagePath = (string)Session["filepath"];
                 ModelState.Remove("Member.ProfileImagePath");
             }
@@ -102,6 +104,7 @@ namespace FCore.UI.Controllers
                         ModelState["UserName"].Errors.Add("Allready in use");
                     }
                 }
+                SetImageFileModelState();
                 return PartialView("AddInitialInfo", model);
             }
         }
@@ -119,6 +122,7 @@ namespace FCore.UI.Controllers
                     ModelState.AddModelError("", passValid.Errors.FirstOrDefault());
                 }
                 Session["temp_pass"] = model.Password;
+                SetImageFileModelState();
                 return PartialView("AddInitialInfo", model);
             }
         }
@@ -134,27 +138,21 @@ namespace FCore.UI.Controllers
                     return Json(new { success = true });
                 }
 
-                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForProfileImage);
-                foreach (var key in modelKeys) ModelState.Remove(key);
-
-                if (ModelState.IsValid)
+                if (ProfileImagePath.ContentType.Contains("image"))
                 {
-                    if (ProfileImagePath.ContentType.Contains("image"))
-                    {
-                        Session["HPFB_file"] = ProfileImagePath;
-                        Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
-                        Session["filename"] = ProfileImagePath.FileName;
+                    Session["HPFB_file"] = ProfileImagePath;
+                    Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
+                    Session["filename"] = ProfileImagePath.FileName;
 
-                        InputHelper.UploadProfileImage(ProfileImagePath); 
-                    }
-                    else
-                    {
-                        ModelState["Member.ProfileImagePath"].Errors.Clear();
-                        ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
-                        Session["valid_profileimage"] = false;
+                    InputHelper.UploadProfileImage(ProfileImagePath);
+                }
+                else
+                {
+                    ModelState["Member.ProfileImagePath"].Errors.Clear();
+                    ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
+                    Session["valid_profileimage"] = false;
 
-                        //throw new FormatException("The target file is not type image.");
-                    }
+                    //throw new FormatException("The target file is not type image.");
                 }
 
                 Response.StatusCode = (int)HttpStatusCode.OK;
@@ -163,14 +161,12 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Claims,Logins,Roles")]UserModel model)
+        public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Member,Claims,Logins,Roles")]UserModel model)
         {
             using (userRepo = new UserRepository(HttpContext))
             {
                 var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
                 foreach (var key in modelKeys) ModelState.Remove(key);
-
-                // ModelState.Remove("Member.ProfileImagePath"); // todo.. validation message in 'message_file' tag & new ajax http request 
 
                 if (ModelState.IsValid)
                 {
@@ -188,18 +184,26 @@ namespace FCore.UI.Controllers
                         }
                         else return await ValidatePassword(model);
                     }
-                    else return await ValidateUsername(model); 
+                    else return await ValidateUsername(model);
                 }
-                else if (Session["HPFB_file"] == null) SetImageFileModelState();
+                else SetImageFileModelState();
             }
             return PartialView(model);
         }
 
         void SetImageFileModelState()
         {
-            Session["profileimage_modelstate"] = false;
-            ModelState.Remove("Member.ProfileImagePath");
-            ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
+            if (Session["HPFB_file"] == null)
+            {
+                Session["profileimage_modelstate"] = false;
+                ModelState.Remove("Member.ProfileImagePath");
+                ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
+            }
+            else
+            {
+                Session["profileimage_modelstate"] = null;
+                ModelState.Remove("Member.ProfileImagePath");
+            }
         }
 
         [HttpGet]
@@ -211,7 +215,7 @@ namespace FCore.UI.Controllers
         [HttpPost]
         public ActionResult AddPersonalInfo(UserModel model)
         {
-            using (userRepo  = new UserRepository(HttpContext))
+            using (userRepo = new UserRepository(HttpContext))
             {
                 return PartialView("AddContactInfo", model);
             }
