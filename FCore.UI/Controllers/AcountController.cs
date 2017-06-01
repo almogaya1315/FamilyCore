@@ -138,6 +138,8 @@ namespace FCore.UI.Controllers
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
         {
+            //Session["imgClicked"] = true;
+
             if (Session["HPFB_file"] != null)
             {
                 Response.StatusCode = (int)HttpStatusCode.OK;
@@ -198,17 +200,20 @@ namespace FCore.UI.Controllers
 
         void SetImageFileModelState()
         {
-            if (Session["HPFB_file"] == null)
-            {
-                Session["profileimage_modelstate"] = false;
-                ModelState.Remove("Member.ProfileImagePath");
-                ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
-            }
-            else
-            {
-                Session["profileimage_modelstate"] = null;
-                ModelState.Remove("Member.ProfileImagePath");
-            }
+            //if ((bool)Session["imgClicked"])
+            //{
+                if (Session["HPFB_file"] == null)
+                {
+                    Session["profileimage_modelstate"] = false;
+                    ModelState.Remove("Member.ProfileImagePath");
+                    ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
+                }
+                else
+                {
+                    Session["profileimage_modelstate"] = null;
+                    ModelState.Remove("Member.ProfileImagePath");
+                }
+            //}
         }
 
         [HttpGet]
