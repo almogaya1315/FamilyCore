@@ -1,4 +1,5 @@
 ﻿using FCore.BL.Identity;
+using FCore.BL.Identity.Managers;
 using FCore.BL.Repositories;
 using FCore.Common.Enums;
 using FCore.Common.Interfaces;
@@ -21,6 +22,11 @@ namespace FCore.UI.Controllers
     public class AcountController : Controller
     {
         public IUserRepository userRepo { get; set; }
+
+        public AcountController(UserMemberManager userManager, LoginManager loginManager)
+        {
+            userRepo = new UserRepository(userManager, loginManager); // todo.. no 'using' with repo in actions or other solution
+        }
 
         [HttpGet]
         public ActionResult LoginPage()

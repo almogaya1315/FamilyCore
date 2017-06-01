@@ -31,11 +31,15 @@ namespace FCore.BL.Repositories
         UserContext userDB { get; set; }
 
         public UserRepository() : base(new UserContext(ConstGenerator.UserContextConnectionString)) { }
-
         public UserRepository(HttpContextBase httpContext) : this()
         {
             userManager = httpContext.GetOwinContext().Get<UserMemberManager>();
             loginManager = httpContext.GetOwinContext().Get<LoginManager>();
+        }
+        public UserRepository(UserMemberManager _userManager, LoginManager _loginManager) : this()
+        {
+            userManager = _userManager;
+            loginManager = _loginManager;
         }
 
         #region DI
@@ -79,7 +83,7 @@ namespace FCore.BL.Repositories
         #endregion
 
         #region Owin
-        IAppBuilder CreateUserManagerFromDependency(IAppBuilder app)
+        public IAppBuilder CreateUserManagerFromDependency(IAppBuilder app)
         {
             return app.CreatePerOwinContext<UserMemberManager>(()
                 => DependencyResolver.Current.GetService<UserMemberManager>());
