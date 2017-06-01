@@ -14,6 +14,11 @@
     box-shadow: 0 5px 5px rgba(0, 0, 0, .5);
 }
 
+.valid-msg-padding{
+    padding-bottom:1%;
+    padding-top:1%
+}
+
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
