@@ -15,6 +15,8 @@ namespace FCore.Common.Interfaces
 {
     public interface IUserRepository : IDisposable 
     {
+        Task<IdentityResult> CliamTest();
+
         Container RegisterContext(Container container, string connectionStringName);
         Container RegisterUserStore(Container container);
         Container RegisterUserManager(Container container);

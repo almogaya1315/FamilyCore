@@ -28,6 +28,12 @@ namespace FCore.UI.Controllers
             userRepo = new UserRepository(userManager, loginManager); // todo.. no 'using' with repo in actions or other solution
         }
 
+        public ActionResult ClaimTest()
+        {
+            var res = userRepo.CliamTest();
+            return null;
+        }
+
         [HttpGet]
         public ActionResult LoginPage()
         {

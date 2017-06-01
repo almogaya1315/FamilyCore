@@ -42,6 +42,15 @@ namespace FCore.BL.Repositories
             loginManager = _loginManager;
         }
 
+
+        public Task<IdentityResult> CliamTest()
+        {
+            var user = userManager.FindByNameAsync("Lior");
+            var claimResilt = userManager.AddClaimAsync(user.Id.ToString(), new Claim("given_name", "Lior"));
+            return claimResilt;
+        }
+
+
         #region DI
         public Container RegisterContext(Container container, string connectionStringName)
         {
