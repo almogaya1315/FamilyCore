@@ -19,6 +19,8 @@ using FCore.DAL.Entities.Families;
 using FCore.Identity.DAL;
 using FCore.BL.Identity.Managers;
 using System.Security.Claims;
+using SimpleInjector;
+using System.Web.Mvc;
 
 namespace FCore.BL.Repositories
 {
@@ -36,7 +38,52 @@ namespace FCore.BL.Repositories
             loginManager = httpContext.GetOwinContext().Get<LoginManager>();
         }
 
+        #region DI
+        public Container RegisterContext(Container container, string connectionStringName)
+        {
+            container.Register(() => new UserContext(connectionStringName), Lifestyle.Scoped);
+            return container;
+        }
+
+        public Container RegisterUserStore(Container container)
+        {
+            container.Register(() => new UserMemberStore(container.GetInstance<UserContext>()), Lifestyle.Scoped);
+            return container;
+        }
+
+        public Container RegisterUserManager(Container container)
+        {
+            container.Register(() => 
+            {
+                userManager = new UserMemberManager(container.GetInstance<UserMemberStore>());
+                //userManager.UserValidator = new UserValidator<UserEntity>(userManager)
+                //    { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
+                userManager.PasswordValidator = new PasswordValidator()
+                {
+                    RequireDigit = true,
+                    RequireLowercase = true,
+                    RequireUppercase = true,
+                    RequireNonLetterOrDigit = true,
+                    RequiredLength = 5
+                };
+                return userManager;
+            }, Lifestyle.Scoped);
+            return container;
+        }
+
+        public Container RegisterSignInManager(Container container)
+        {
+            container.Register<LoginManager>(Lifestyle.Scoped);
+            return container;
+        }
+        #endregion
+
         #region Owin
+        IAppBuilder CreateUserManagerFromDependency(IAppBuilder app)
+        {
+            return app.CreatePerOwinContext<UserMemberManager>(()
+                => DependencyResolver.Current.GetService<UserMemberManager>());
+        }
         public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
         {
             return app.CreatePerOwinContext(() => new UserContext(connectionStringName));

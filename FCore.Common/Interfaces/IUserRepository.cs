@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace FCore.Common.Interfaces
 {
     public interface IUserRepository : IDisposable 
     {
+        Container RegisterContext(Container container, string connectionStringName);
+        Container RegisterUserStore(Container container);
+        Container RegisterUserManager(Container container);
+        Container RegisterSignInManager(Container container);
+
+        IAppBuilder CreateUserManagerFromDependency(IAppBuilder app);
         IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName);
         IAppBuilder CreateUserStore(IAppBuilder app);
         IAppBuilder CreateUserManager(IAppBuilder app);

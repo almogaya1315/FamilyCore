@@ -10,6 +10,7 @@ using FCore.BL;
 using FCore.Common.Models.Users;
 using FCore.Common.Utils;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Cookies;
 
 [assembly: OwinStartup(typeof(FCore.DAL.Identity.OwinStartup))]
 
@@ -23,14 +24,22 @@ namespace FCore.DAL.Identity
 
             using (userRepo = new UserRepository())
             {
-                string connectionStringName = ConstGenerator.UserContextConnectionString;
-                app = userRepo.CreateUserContext(app, connectionStringName);
-                app = userRepo.CreateUserStore(app);
-                app = userRepo.CreateUserManager(app);
-                app = userRepo.CreateLoginManager(app);
+                app = userRepo.CreateUserManagerFromDependency(app);
 
-                app.UseCookieAuthentication(new Microsoft.Owin.Security.Cookies.CookieAuthenticationOptions
-                    { AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie });
+                //string connectionStringName = ConstGenerator.UserContextConnectionString;
+                //app = userRepo.CreateUserContext(app, connectionStringName);
+                //app = userRepo.CreateUserStore(app);
+                //app = userRepo.CreateUserManager(app);
+                //app = userRepo.CreateLoginManager(app);
+
+                //app.UseCookieAuthentication(new Microsoft.Owin.Security.Cookies.CookieAuthenticationOptions
+                //{
+                //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                //    Provider = new CookieAuthenticationProvider
+                //    {
+                //        OnValidateIdentity = userRepo.CreateSecurityStampValidator() // .OnValidateIdentity<UserMemberManager>
+                //    }
+                //});
             }
         }
     }
