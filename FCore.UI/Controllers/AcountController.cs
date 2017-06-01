@@ -25,7 +25,7 @@ namespace FCore.UI.Controllers
 
         public AcountController(UserMemberManager userManager, LoginManager loginManager)
         {
-            userRepo = new UserRepository(userManager, loginManager); // todo.. no 'using' with repo in actions or other solution
+            userRepo = new UserRepository(userManager, loginManager); // todo.. no 'using' with repo in actions OR ctor solution OR disable DI
         }
 
         public ActionResult ClaimTest()
