@@ -21,9 +21,51 @@ namespace FCore.UI.Controllers
 {
     public class AcountController : Controller
     {
-        public IUserRepository userRepo { get; set; }
+        #region private data
+        IUserRepository userRepo { get; set; }
 
-        // system enters here every 'verify' funcion in global.asax, when 'OwinStartup' is done & every action call from view => no 'using' needed!
+        void CheckIfImageAndUpload(HttpPostedFileBase ProfileImagePath)
+        {
+            if (ProfileImagePath.ContentType.Contains("image"))
+            {
+                Session["HPFB_file"] = ProfileImagePath;
+                Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
+                Session["filename"] = ProfileImagePath.FileName;
+
+                InputHelper.UploadProfileImage(ProfileImagePath);
+            }
+            else
+            {
+                Session["valid_profileimage"] = false;
+                Session["profileimage_modelstate"] = false;
+
+                Session["HPFB_file"] = null;
+                Session["filepath"] = null;
+                Session["filename"] = null;
+            }
+        }
+
+        void SetImageFileModelState()
+        {
+            if (Session["imgClicked"] != null)
+            {
+                if (Session["HPFB_file"] == null)
+                {
+                    Session["profileimage_modelstate"] = false;
+                    ModelState.Remove("Member.ProfileImagePath");
+                    ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
+                }
+                else
+                {
+                    Session["profileimage_modelstate"] = null;
+                    ModelState.Remove("Member.ProfileImagePath");
+                }
+            }
+        }
+        #endregion
+
+        // system enters here every 'verify' funcion in global.asax, 
+        // when 'OwinStartup' is done & every action call from view => no 'using' needed!
         public AcountController(UserMemberManager userManager, LoginManager loginManager) 
         {
             userRepo = new UserRepository(userManager, loginManager); 
@@ -80,7 +122,7 @@ namespace FCore.UI.Controllers
                 model.UserName = (string)Session["temp_username"];
                 ModelState.Remove("UserName");
             }
-            if (Session["isValidPass"] != null && (bool)Session["isValidPass"])
+            if (Session["isValidPass"] != null && (bool)Session["isValidPass"] || Session["temp_pass"] != null)
             {
                 model.Password = (string)Session["temp_pass"];
                 ModelState.Remove("Password");
@@ -90,6 +132,14 @@ namespace FCore.UI.Controllers
                 if (model.Member == null) model.Member = new FamilyMemberModel();
                 model.Member.ProfileImagePath = (string)Session["filepath"];
                 ModelState.Remove("Member.ProfileImagePath");
+            }
+            else if (model.Member == null)
+            {
+                model.Member = new FamilyMemberModel();
+                if (ModelState["Member.ProfileImagePath"] == null)
+                    ModelState.Add("Member.ProfileImagePath", new ModelState());
+                ModelState["Member.ProfileImagePath"].Errors.Clear();
+                ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
             }
             return PartialView("AddInitialInfo", model);
         }
@@ -138,31 +188,17 @@ namespace FCore.UI.Controllers
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
         {
-            //Session["imgClicked"] = true;
+            Session["imgClicked"] = true;
 
             if (Session["HPFB_file"] != null)
             {
-                Response.StatusCode = (int)HttpStatusCode.OK;
-                return Json(new { success = true });
+                if (Session["HPFB_file"] != ProfileImagePath)
+                {
+                    CheckIfImageAndUpload(ProfileImagePath);
+                }
             }
-
-            if (ProfileImagePath.ContentType.Contains("image"))
-            {
-                Session["HPFB_file"] = ProfileImagePath;
-                Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
-                Session["filename"] = ProfileImagePath.FileName;
-
-                InputHelper.UploadProfileImage(ProfileImagePath);
-            }
-            else
-            {
-                ModelState["Member.ProfileImagePath"].Errors.Clear();
-                ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
-                Session["valid_profileimage"] = false;
-
-                //throw new FormatException("The target file is not type image.");
-            }
-
+            else CheckIfImageAndUpload(ProfileImagePath);
+    
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true });
         }
@@ -196,24 +232,6 @@ namespace FCore.UI.Controllers
             }
             else SetImageFileModelState();
             return PartialView(model);
-        }
-
-        void SetImageFileModelState()
-        {
-            //if ((bool)Session["imgClicked"])
-            //{
-                if (Session["HPFB_file"] == null)
-                {
-                    Session["profileimage_modelstate"] = false;
-                    ModelState.Remove("Member.ProfileImagePath");
-                    ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
-                }
-                else
-                {
-                    Session["profileimage_modelstate"] = null;
-                    ModelState.Remove("Member.ProfileImagePath");
-                }
-            //}
         }
 
         [HttpGet]
