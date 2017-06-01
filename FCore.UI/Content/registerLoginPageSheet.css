@@ -12,11 +12,7 @@
     background-color: white;
     padding-left: 1%;
     box-shadow: 0 5px 5px rgba(0, 0, 0, .5);
-}
-
-.valid-msg-padding{
-    padding-bottom:1%;
-    padding-top:1%
+    line-height:180%
 }
 
 /*!

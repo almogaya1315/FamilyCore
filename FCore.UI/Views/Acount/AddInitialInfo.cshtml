@@ -176,47 +176,12 @@
 
 
 <script>
-    var PadDivs = function() {
-        var div1 = $('#pass0_div');
-        if (div1.attr('value')) {
-            var text1 = div.text();
-            if (text1.length > 0) {
-                div1.addClass("valid-msg-padding");
-            }
-        }
-
-        var div2 = $('#pass1_div');
-        if (div2.attr('value')) {
-            var text2 = div.text();
-            if (text2.length > 0) {
-                div2.addClass("valid-msg-padding");
-            }
-        }
-
-        var div3 = $('#pass2_div');
-        if (div3.attr('value')) {
-            var tex3t = div.text();
-            if (text3.length > 0) {
-                div3.addClass("valid-msg-padding");
-            }
-        }
-
-        var div4 = $('#pass3_div');
-        if (div4.attr('value')) {
-            var text4 = div.text();
-            if (text4.length > 0) {
-                div4.addClass("valid-msg-padding");
-            }
-        }
-    }
-
     $(function () {
         $('#password_box').on('input', function (event) {
             var text = $(this).val();
             if (text.length >= 2) {
                 $('#form_password_submit').click();
             }
-            PadDivs();
         })
     })
 
