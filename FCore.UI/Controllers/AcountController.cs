@@ -126,11 +126,9 @@ namespace FCore.UI.Controllers
             if (!passValid.Succeeded)
             {
                 ModelState.Clear();
-                var errors = ModelStateHelper.GetPasswordValidationErrors(passValid.Errors);
+                var errors = ModelStateHelper.GetPasswordValidationErrors(passValid.Errors.FirstOrDefault());
                 for (int i = 0; i < errors.Count; i++)
-                {
                     ModelState.AddModelError($"Pass{i}", errors.ElementAt(i));
-                }
             }
             Session["temp_pass"] = model.Password;
             SetImageFileModelState();

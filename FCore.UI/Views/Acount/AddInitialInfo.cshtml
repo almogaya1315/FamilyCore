@@ -35,7 +35,11 @@
 <div class="clearfix"></div>
 
 <div class="valid-box">
-    @Html.ValidationSummary()
+    @Html.ValidationMessage("pass0", new { }, "div")
+    @Html.ValidationMessage("pass1", new { }, "div")
+    @Html.ValidationMessage("pass2", new { }, "div")
+    @Html.ValidationMessage("pass3", new { }, "div")
+    @Html.ValidationMessage("pass4", new { }, "div")
 </div>
 
 <div class="bot-border"></div>

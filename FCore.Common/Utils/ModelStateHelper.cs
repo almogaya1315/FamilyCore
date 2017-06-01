@@ -88,9 +88,20 @@ namespace FCore.Common.Utils
             return viewData;
         }
 
-        public static ICollection<string> GetPasswordValidationErrors(IEnumerable<string> errorMessage)
+        public static ICollection<string> GetPasswordValidationErrors(string errorMessage)
         {
-            
+            ICollection<string> errors = new List<string>();
+            var error = "- ";
+            foreach (var c in errorMessage)
+            {
+                error += c;
+                if (c == '.')
+                {
+                    errors.Add(error);
+                    error = "-";
+                }
+            }
+            return errors;
         }
     }
 }
