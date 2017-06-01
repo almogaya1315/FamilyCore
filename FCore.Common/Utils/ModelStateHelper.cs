@@ -87,5 +87,10 @@ namespace FCore.Common.Utils
 
             return viewData;
         }
+
+        public static ICollection<string> GetPasswordValidationErrors(IEnumerable<string> errorMessage)
+        {
+            
+        }
     }
 }

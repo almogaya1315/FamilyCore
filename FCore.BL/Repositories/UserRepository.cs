@@ -31,11 +31,13 @@ namespace FCore.BL.Repositories
         UserContext userDB { get; set; }
 
         public UserRepository() : base(new UserContext(ConstGenerator.UserContextConnectionString)) { }
-        public UserRepository(HttpContextBase httpContext) : this()
-        {
-            userManager = httpContext.GetOwinContext().Get<UserMemberManager>();
-            loginManager = httpContext.GetOwinContext().Get<LoginManager>();
-        }
+
+        //public UserRepository(HttpContextBase httpContext) : this()
+        //{
+        //    userManager = httpContext.GetOwinContext().Get<UserMemberManager>();
+        //    loginManager = httpContext.GetOwinContext().Get<LoginManager>();
+        //}
+
         public UserRepository(UserMemberManager _userManager, LoginManager _loginManager) : this()
         {
             userManager = _userManager;
@@ -69,8 +71,8 @@ namespace FCore.BL.Repositories
             container.Register(() => 
             {
                 userManager = new UserMemberManager(container.GetInstance<UserMemberStore>());
-                //userManager.UserValidator = new UserValidator<UserEntity>(userManager)
-                //    { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
+                // userManager.UserValidator = new UserValidator<UserEntity>(userManager)
+                //     { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
                 userManager.PasswordValidator = new PasswordValidator()
                 {
                     RequireDigit = true,
@@ -89,14 +91,15 @@ namespace FCore.BL.Repositories
             container.Register<LoginManager>(Lifestyle.Scoped);
             return container;
         }
-        #endregion
 
-        #region Owin
         public IAppBuilder CreateUserManagerFromDependency(IAppBuilder app)
         {
             return app.CreatePerOwinContext<UserMemberManager>(()
                 => DependencyResolver.Current.GetService<UserMemberManager>());
         }
+        #endregion
+
+        /*#region Owin
         public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
         {
             return app.CreatePerOwinContext(() => new UserContext(connectionStringName));
@@ -104,17 +107,17 @@ namespace FCore.BL.Repositories
 
         public IAppBuilder CreateUserStore(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<UserMemberStore>((opt, cont) 
+            return app.CreatePerOwinContext<UserMemberStore>((opt, cont)
                 => new UserMemberStore(cont.Get<UserContext>()));
         }
 
         public IAppBuilder CreateUserManager(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) => 
+            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) =>
             {
                 userManager = new UserMemberManager(cont.Get<UserMemberStore>());
-                //userManager.UserValidator = new UserValidator<UserEntity>(userManager)
-                //    { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
+                // userManager.UserValidator = new UserValidator<UserEntity>(userManager)
+                //     { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
                 userManager.PasswordValidator = new PasswordValidator()
                 {
                     RequireDigit = true,
@@ -124,20 +127,19 @@ namespace FCore.BL.Repositories
                     RequiredLength = 5
                 };
                 return userManager;
-            }); 
+            });
         }
 
         public IAppBuilder CreateLoginManager(IAppBuilder app)
         {
-            return app.CreatePerOwinContext<LoginManager>((opt, cont) 
+            return app.CreatePerOwinContext<LoginManager>((opt, cont)
                 => new LoginManager(cont.Get<UserMemberManager>(), cont.Authentication));
         }
-        #endregion
+        #endregion*/
 
         #region identityUserDB
-        public async Task<IdentityResult> CreateNewUserAsync(UserModel model) // ***
+        public async Task<IdentityResult> CreateNewUserAsync(UserModel model) 
         {
-            //var userEntity = ConvertToEntity(model);
             return await userManager.CreateAsync(new UserEntity(model.UserName), model.Password);
         }
 

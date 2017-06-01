@@ -35,7 +35,7 @@
 <div class="clearfix"></div>
 
 <div class="valid-box">
-    @Html.ValidationSummary("", "PassSpecificReq")
+    @Html.ValidationSummary()
 </div>
 
 <div class="bot-border"></div>
@@ -93,12 +93,7 @@
         <input id="form_password_submit" type="submit" style="display:none" />
     }
 
-    @using (Ajax.BeginForm("ValidateProfileImage", "Acount", Model, null, @*, new AjaxOptions
-    {
-        HttpMethod = "Post",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "register_wizard"
-    }*@ new { id = "form_profile_image" }))
+    @using (Ajax.BeginForm("ValidateProfileImage", "Acount", Model, null, new { id = "form_profile_image" }))
     {
         <div class="clearfix"></div>
         <div class="bot-border"></div>

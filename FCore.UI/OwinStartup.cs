@@ -32,14 +32,8 @@ namespace FCore.DAL.Identity
                 //app = userRepo.CreateUserManager(app);
                 //app = userRepo.CreateLoginManager(app);
 
-                //app.UseCookieAuthentication(new Microsoft.Owin.Security.Cookies.CookieAuthenticationOptions
-                //{
-                //    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                //    Provider = new CookieAuthenticationProvider
-                //    {
-                //        OnValidateIdentity = userRepo.CreateSecurityStampValidator() // .OnValidateIdentity<UserMemberManager>
-                //    }
-                //});
+                app.UseCookieAuthentication(new CookieAuthenticationOptions
+                    { AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie });
             }
         }
     }

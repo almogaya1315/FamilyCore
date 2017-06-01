@@ -14,7 +14,7 @@ using System.Web.Routing;
 
 namespace FCore.UI
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -42,7 +42,7 @@ namespace FCore.UI
                 Lifestyle.Scoped);
 
                 container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
-                container.Verify();
+                container.Verify(); // goes to controller ctor
 
                 DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
             }

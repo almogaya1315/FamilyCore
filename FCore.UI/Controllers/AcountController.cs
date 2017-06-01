@@ -23,9 +23,10 @@ namespace FCore.UI.Controllers
     {
         public IUserRepository userRepo { get; set; }
 
-        public AcountController(UserMemberManager userManager, LoginManager loginManager)
+        // system enters here every 'verify' funcion in global.asax, when 'OwinStartup' is done & every action call from view => no 'using' needed!
+        public AcountController(UserMemberManager userManager, LoginManager loginManager) 
         {
-            userRepo = new UserRepository(userManager, loginManager); // todo.. no 'using' with repo in actions OR ctor solution OR disable DI
+            userRepo = new UserRepository(userManager, loginManager); 
         }
 
         public ActionResult ClaimTest()
@@ -37,33 +38,32 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoginPage()
         {
+            // ClaimTest();
+
             // todo.. varify past logged-in user & ask if to use OR which user if multiple
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
             return View();
         }
 
-        [HttpPost]
+        [HttpPost] // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public async Task<ActionResult> LoginPage(UserModel model)
         {
-            using (userRepo = new UserRepository(HttpContext))
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    SignInStatus loginStatus = await userRepo.PasswordLoginAsync(model);
+                SignInStatus loginStatus = await userRepo.PasswordLoginAsync(model);
 
-                    switch (loginStatus)
-                    {
-                        case SignInStatus.Success:
-                            var identityUser = await userRepo.GetUserAsync(model.UserName);
-                            return RedirectToAction("Main", "FamilyCore", identityUser);
-                        default:
-                            ModelState.AddModelError("", "Invalid username or password");
-                            break;
-                    }
+                switch (loginStatus)
+                {
+                    case SignInStatus.Success:
+                        var identityUser = await userRepo.GetUserAsync(model.UserName);
+                        return RedirectToAction("Main", "FamilyCore", identityUser);
+                    default:
+                        ModelState.AddModelError("", "Invalid username or password");
+                        break;
                 }
-                return View(model);
             }
+            return View(model);
         }
 
         public ActionResult RegisterPage()
@@ -94,115 +94,107 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]
+        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public async Task<ActionResult> ValidateUsername([Bind(Exclude = "Claims,Logins,Roles")]UserModel model)
         {
-            using (userRepo = new UserRepository(HttpContext))
+            var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForUsernameValidation);
+            foreach (var key in modelKeys) ModelState.Remove(key);
+
+            if (ModelState.IsValid)
             {
-                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForUsernameValidation);
-                foreach (var key in modelKeys) ModelState.Remove(key);
-
-                if (ModelState.IsValid)
+                var identityUser = await userRepo.GetUserAsync(model.UserName);
+                if (identityUser == null)
                 {
-                    var identityUser = await userRepo.GetUserAsync(model.UserName);
-                    if (identityUser == null)
-                    {
-                        Session["isValidUsername"] = true;
-                        Session["temp_username"] = model.UserName;
-                    }
-                    else
-                    {
-                        Session["isValidUsername"] = false;
-                        ModelState["UserName"].Errors.Add("Allready in use");
-                    }
-                }
-                SetImageFileModelState();
-                return PartialView("AddInitialInfo", model);
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> ValidatePassword(UserModel model)
-        {
-            using (userRepo = new UserRepository(HttpContext))
-            {
-                var passValid = await userRepo.ValidatePassword(model.Password);
-                Session["isValidPass"] = passValid.Succeeded;
-                if (!passValid.Succeeded)
-                {
-                    ModelState.Clear();
-                    ModelState.AddModelError("PassSpecificReq", passValid.Errors.FirstOrDefault());
-                }
-                Session["temp_pass"] = model.Password;
-                SetImageFileModelState();
-                return PartialView("AddInitialInfo", model);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
-        {
-            using (userRepo = new UserRepository(HttpContext))
-            {
-                if (Session["HPFB_file"] != null)
-                {
-                    Response.StatusCode = (int)HttpStatusCode.OK;
-                    return Json(new { success = true });
-                }
-
-                if (ProfileImagePath.ContentType.Contains("image"))
-                {
-                    Session["HPFB_file"] = ProfileImagePath;
-                    Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
-                    Session["filename"] = ProfileImagePath.FileName;
-
-                    InputHelper.UploadProfileImage(ProfileImagePath);
+                    Session["isValidUsername"] = true;
+                    Session["temp_username"] = model.UserName;
                 }
                 else
                 {
-                    ModelState["Member.ProfileImagePath"].Errors.Clear();
-                    ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
-                    Session["valid_profileimage"] = false;
-
-                    //throw new FormatException("The target file is not type image.");
+                    Session["isValidUsername"] = false;
+                    ModelState["UserName"].Errors.Add("Allready in use");
                 }
+            }
+            SetImageFileModelState();
+            return PartialView("AddInitialInfo", model);
+        }
 
+        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        public async Task<ActionResult> ValidatePassword(UserModel model)
+        {
+            var passValid = await userRepo.ValidatePassword(model.Password);
+            Session["isValidPass"] = passValid.Succeeded;
+            if (!passValid.Succeeded)
+            {
+                ModelState.Clear();
+                var errors = ModelStateHelper.GetPasswordValidationErrors(passValid.Errors);
+                for (int i = 0; i < errors.Count; i++)
+                {
+                    ModelState.AddModelError($"Pass{i}", errors.ElementAt(i));
+                }
+            }
+            Session["temp_pass"] = model.Password;
+            SetImageFileModelState();
+            return PartialView("AddInitialInfo", model);
+        }
+
+        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
+        {
+            if (Session["HPFB_file"] != null)
+            {
                 Response.StatusCode = (int)HttpStatusCode.OK;
                 return Json(new { success = true });
             }
+
+            if (ProfileImagePath.ContentType.Contains("image"))
+            {
+                Session["HPFB_file"] = ProfileImagePath;
+                Session["filepath"] = InputHelper.GetFilePath(ProfileImagePath);
+                Session["filename"] = ProfileImagePath.FileName;
+
+                InputHelper.UploadProfileImage(ProfileImagePath);
+            }
+            else
+            {
+                ModelState["Member.ProfileImagePath"].Errors.Clear();
+                ModelState["Member.ProfileImagePath"].Errors.Add("The target file is not type image");
+                Session["valid_profileimage"] = false;
+
+                //throw new FormatException("The target file is not type image.");
+            }
+
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new { success = true });
         }
 
-        [HttpPost]
+        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Member,Claims,Logins,Roles")]UserModel model)
         {
-            using (userRepo = new UserRepository(HttpContext))
+            var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
+            foreach (var key in modelKeys) ModelState.Remove(key);
+
+            if (ModelState.IsValid)
             {
-                var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
-                foreach (var key in modelKeys) ModelState.Remove(key);
-
-                if (ModelState.IsValid)
+                if ((bool)Session["isValidUsername"])
                 {
-                    if ((bool)Session["isValidUsername"])
+                    if ((bool)Session["isValidPass"])
                     {
-                        if ((bool)Session["isValidPass"])
+                        if (Session["HPFB_file"] != null)
                         {
-                            if (Session["HPFB_file"] != null)
-                            {
-                                Session["username"] = model.UserName;
-                                Session["password"] = model.Password;
+                            Session["username"] = model.UserName;
+                            Session["password"] = model.Password;
 
-                                ViewData["relenum"] = ConstGenerator.ChildRelTypes;
-                                ViewData["genenum"] = ConstGenerator.GenderTypes;
-                                return PartialView("AddPersonalInfo", new UserModel());
-                            }
-                            else SetImageFileModelState();
+                            ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+                            ViewData["genenum"] = ConstGenerator.GenderTypes;
+                            return PartialView("AddPersonalInfo", new UserModel());
                         }
-                        else return await ValidatePassword(model);
+                        else SetImageFileModelState();
                     }
-                    else return await ValidateUsername(model);
+                    else return await ValidatePassword(model);
                 }
-                else SetImageFileModelState();
+                else return await ValidateUsername(model);
             }
+            else SetImageFileModelState();
             return PartialView(model);
         }
 
@@ -229,31 +221,25 @@ namespace FCore.UI.Controllers
             return PartialView("AddPersonalInfo");
         }
 
-        [HttpPost]
+        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult AddPersonalInfo(UserModel model)
         {
-            using (userRepo = new UserRepository(HttpContext))
-            {
-                return PartialView("AddContactInfo", model);
-            }
+            return PartialView("AddContactInfo", model);
         }
 
-        // *** 
+        // final step *** 
 
-        [HttpPost]
+        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public async Task<ActionResult> CreateUser(UserModel model)
         {
-            using (userRepo = new UserRepository(HttpContext))
-            {
-                var identityResult = await userRepo.CreateNewUserAsync(model); // for final step ***
+            var identityResult = await userRepo.CreateNewUserAsync(model);
 
-                if (identityResult.Succeeded) // for final step ***
-                {
-                    var userModel = await userRepo.GetUserAsync(model.UserName);
-                    return RedirectToAction("CreateSuccess", "Acount", userModel);
-                }
-                return PartialView(model);
+            if (identityResult.Succeeded)
+            {
+                var userModel = await userRepo.GetUserAsync(model.UserName);
+                return RedirectToAction("CreateSuccess", "Acount", userModel);
             }
+            return PartialView(model);
         }
     }
 }

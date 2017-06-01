@@ -23,10 +23,11 @@ namespace FCore.Common.Interfaces
         Container RegisterSignInManager(Container container);
 
         IAppBuilder CreateUserManagerFromDependency(IAppBuilder app);
-        IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName);
-        IAppBuilder CreateUserStore(IAppBuilder app);
-        IAppBuilder CreateUserManager(IAppBuilder app);
-        IAppBuilder CreateLoginManager(IAppBuilder app);
+
+        //IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName);
+        //IAppBuilder CreateUserStore(IAppBuilder app);
+        //IAppBuilder CreateUserManager(IAppBuilder app);
+        //IAppBuilder CreateLoginManager(IAppBuilder app);
 
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
         Task<IdentityResult> ValidatePassword(string password);
