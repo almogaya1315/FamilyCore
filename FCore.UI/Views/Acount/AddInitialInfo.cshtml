@@ -35,11 +35,10 @@
 <div class="clearfix"></div>
 
 <div class="valid-box">
-    @Html.ValidationMessage("pass0", new { }, "div")
-    @Html.ValidationMessage("pass1", new { }, "div")
-    @Html.ValidationMessage("pass2", new { }, "div")
-    @Html.ValidationMessage("pass3", new { }, "div")
-    @Html.ValidationMessage("pass4", new { }, "div")
+    @Html.ValidationMessage("pass0", new { @class = "valid-msg" }, "div")
+    @Html.ValidationMessage("pass1", new { @class = "valid-msg" }, "div")
+    @Html.ValidationMessage("pass2", new { @class = "valid-msg" }, "div")
+    @Html.ValidationMessage("pass3", new { @class = "valid-msg" }, "div")
 </div>
 
 <div class="bot-border"></div>
