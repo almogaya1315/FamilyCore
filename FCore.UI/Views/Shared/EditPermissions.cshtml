@@ -4,7 +4,8 @@
                new AjaxOptions
                {
                    UpdateTargetId = "userperms_div",
-                   InsertionMode = InsertionMode.Replace
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "Post"
                }))
 {
     <div class="clearfix"></div>
@@ -51,6 +52,8 @@
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
+
+        <input id="perms_form_submit" type="submit" style="display:none"/>
 
     </div>
 }

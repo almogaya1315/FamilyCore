@@ -159,6 +159,7 @@ namespace FCore.UI.Controllers
         }
 
         //[OutputCache(NoStore = true, Duration = 0)] // can also be assigned to controller class
+        [HttpPost]
         public ActionResult EditPermissions(PermissionsModel postedPerms, int memberId)
         {
             using (repo = new FCoreRepository())

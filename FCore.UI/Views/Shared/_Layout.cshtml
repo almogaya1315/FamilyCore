@@ -31,6 +31,8 @@
                     <li class="active">@Html.ActionLink("אלבומים", "AlbumsPage", "Album", null, new { @style = "color: #f1d97d; font-size:20px" })</li>
                     <li class="active">@Html.ActionLink("צ'טים", "ChatsPage", "Message", null, new { @style = "color: #f1d97d; font-size:20px" })</li>
                     <li>@Html.ActionLink("עץ משפחה", "TreePage", "Tree", null, new { @style = "color: #f1d97d; font-size:20px" })</li>
+                    <li class="active">@RenderSection("current_user_section", true)</li>
+                    <li class="active">@Html.ActionLink("Log-out", "Logout", "Acount", RenderSection("user_model_section", true), new { @style = "color: #f1d97d; font-size:20px" })</li>
                 </ul>
 
                 <div class="navbar-header" style="margin-left:10%">

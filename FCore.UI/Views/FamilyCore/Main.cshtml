@@ -1,4 +1,16 @@
-﻿@model ICollection<FCore.Common.Models.Families.FamilyModel>
+﻿@model FCore.Common.Models.Users.UserModel
+
+@section user_model_section
+{
+    @Model
+}
+
+@section current_user_section
+{
+    <div style = "color: #f1d97d; font-size:20px">
+        @Model.Member.FirstName @Model.Member.LastName
+    </div>
+}
 
 @section section1
 {
@@ -54,7 +66,7 @@
             
         </div> <br />
         <div>
-            The @Model.FirstOrDefault().Name family
+            The @ViewBag.FirstFamily family
         </div>
     </div>
 }

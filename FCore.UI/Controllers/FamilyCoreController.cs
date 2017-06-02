@@ -12,18 +12,20 @@ namespace FCore.UI.Controllers
     [Authorize]
     public class FamilyCoreController : Controller
     {
-        ICoreRepository repo { get; set; }
+        ICoreRepository coreRepo { get; set; }
 
-        public ActionResult Main(UserModel model)
+        public ActionResult Main(UserModel userModel)
         {
-            using (repo = new FCoreRepository())
+            using (coreRepo = new FCoreRepository())
             {
-                ViewBag.LastJoinName = repo.GetLastMemberJoined().FirstName;
-                ViewBag.VideoDesc = repo.GetMostViewedVideo().Description;
-                ViewBag.LastImgDesc = repo.GetLastImageUploaded().Description;
-                //ViewBag.FirstFamily = 
+                userModel.Member = coreRepo.GetFamilyMember(userModel.MemberId);
 
-                return View(repo.GetFamilies());
+                ViewBag.LastJoinName = coreRepo.GetLastMemberJoined().FirstName;
+                ViewBag.VideoDesc = coreRepo.GetMostViewedVideo().Description;
+                ViewBag.LastImgDesc = coreRepo.GetLastImageUploaded().Description;
+                ViewBag.FirstFamily = "Matsliah"; // todo..
+
+                return View(userModel);
             }
         }
     }

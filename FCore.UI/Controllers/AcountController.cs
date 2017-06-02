@@ -71,17 +71,9 @@ namespace FCore.UI.Controllers
             userRepo = new UserRepository(userManager, loginManager); 
         }
 
-        public ActionResult ClaimTest()
-        {
-            var res = userRepo.CliamTest();
-            return null;
-        }
-
         [HttpGet]
         public ActionResult LoginPage()
         {
-            // ClaimTest();
-
             // todo.. varify past logged-in user & ask if to use OR which user if multiple
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
