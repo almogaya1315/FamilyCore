@@ -22,6 +22,7 @@ namespace FCore.UI.Controllers
     public class AcountController : Controller
     {
         #region private data
+        FCoreRepository coreRepo { get; set; }
         IUserRepository userRepo { get; set; }
 
         void CheckIfImageAndUpload(HttpPostedFileBase ProfileImagePath)
@@ -68,15 +69,25 @@ namespace FCore.UI.Controllers
         // when 'OwinStartup' is done & every action call from view => no 'using' needed!
         public AcountController(UserMemberManager userManager, LoginManager loginManager) 
         {
+            coreRepo = new FCoreRepository();
             userRepo = new UserRepository(userManager, loginManager); 
         }
 
         [HttpGet]
-        public ActionResult LoginPage()
+        public async Task<ActionResult> LoginPage()
         {
-            // todo.. varify past logged-in user & ask if to use OR which user if multiple
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
+
+            // todo.. varify past logged-in user & ask if to use OR which user if multiple
+            var cookie = Request.Cookies.Get("userCookie");
+            if (cookie != null)
+            {
+                var user = await userRepo.GetUserByIdAsync(cookie.Value);
+                if (user != null) return await LoginPage(user);
+                else throw new Exception();
+            }
+            
             return View();
         }
 
@@ -90,7 +101,21 @@ namespace FCore.UI.Controllers
                 switch (loginStatus)
                 {
                     case SignInStatus.Success:
-                        var identityUser = await userRepo.GetUserAsync(model.UserName);
+                        var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
+
+                        if (Request.Cookies.Get("userCookie") == null)
+                        {
+                            HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
+                            userCookie.Expires.AddYears(1);
+                            Response.Cookies.Add(userCookie);
+                        }
+
+                        if (Session["cureentUser"] == null)
+                        {
+                            identityUser.Member = coreRepo.GetFamilyMember(identityUser.MemberId);
+                            Session["cureentUser"] = identityUser;
+                        }
+
                         return RedirectToAction("Main", "FamilyCore", identityUser);
                     default:
                         ModelState.AddModelError("", "Invalid username or password");
@@ -144,7 +169,7 @@ namespace FCore.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                var identityUser = await userRepo.GetUserAsync(model.UserName);
+                var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
                 if (identityUser == null)
                 {
                     Session["isValidUsername"] = true;
@@ -249,7 +274,7 @@ namespace FCore.UI.Controllers
 
             if (identityResult.Succeeded)
             {
-                var userModel = await userRepo.GetUserAsync(model.UserName);
+                var userModel = await userRepo.GetUserByUsrenameAsync(model.UserName);
                 return RedirectToAction("CreateSuccess", "Acount", userModel);
             }
             return PartialView(model);

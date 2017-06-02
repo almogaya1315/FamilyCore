@@ -18,7 +18,12 @@ namespace FCore.UI.Controllers
         {
             using (coreRepo = new FCoreRepository())
             {
-                userModel.Member = coreRepo.GetFamilyMember(userModel.MemberId);
+                //HttpCookie userCookie = new HttpCookie("userCookie", userModel.Id);
+                //userCookie.Expires.AddYears(1);
+                //Response.Cookies.Add(userCookie);
+
+                //userModel.Member = coreRepo.GetFamilyMember(int.Parse(Response.Cookies.Get("userCookie").Value));
+                //Session["cureentUser"] = userModel;
 
                 ViewBag.LastJoinName = coreRepo.GetLastMemberJoined().FirstName;
                 ViewBag.VideoDesc = coreRepo.GetMostViewedVideo().Description;

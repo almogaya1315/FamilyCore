@@ -15,8 +15,6 @@ namespace FCore.Common.Interfaces
 {
     public interface IUserRepository : IDisposable 
     {
-        Task<IdentityResult> CliamTest();
-
         Container RegisterContext(Container container, string connectionStringName);
         Container RegisterUserStore(Container container);
         Container RegisterUserManager(Container container);
@@ -32,6 +30,7 @@ namespace FCore.Common.Interfaces
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
         Task<IdentityResult> ValidatePassword(string password);
         Task<SignInStatus> PasswordLoginAsync(UserModel model);
-        Task<UserModel> GetUserAsync(string userName);
+        Task<UserModel> GetUserByIdAsync(string id);
+        Task<UserModel> GetUserByUsrenameAsync(string userName);
     }
 }

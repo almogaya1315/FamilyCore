@@ -1,15 +1,8 @@
 ﻿@model FCore.Common.Models.Users.UserModel
 
-@section user_model_section
-{
-    @Model
-}
-
 @section current_user_section
 {
-    <div style = "color: #f1d97d; font-size:20px">
-        @Model.Member.FirstName @Model.Member.LastName
-    </div>
+    @Html.ActionLink($"{@Model.Member.FirstName} {@Model.Member.LastName}", "UserPage", "Config", Model, new { @style = "color: #f1d97d;font-size: 15px;margin-left: 180%;max-width: 100%;width: 100%;" })
 }
 
 @section section1

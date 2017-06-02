@@ -44,15 +44,6 @@ namespace FCore.BL.Repositories
             loginManager = _loginManager;
         }
 
-
-        public Task<IdentityResult> CliamTest()
-        {
-            var user = userManager.FindByNameAsync("Lior");
-            var claimResilt = userManager.AddClaimAsync(user.Id.ToString(), new Claim("given_name", "Lior"));
-            return claimResilt;
-        }
-
-
         #region DI
         public Container RegisterContext(Container container, string connectionStringName)
         {
@@ -153,7 +144,13 @@ namespace FCore.BL.Repositories
             return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
         }
 
-        public async Task<UserModel> GetUserAsync(string userName)
+        public async Task<UserModel> GetUserByIdAsync(string id)
+        {
+            Task<UserEntity> asyncUserEntity = userManager.FindByIdAsync(id);
+            if (asyncUserEntity.Result != null) return await ConvertToModel(asyncUserEntity.Result);
+            else return null;
+        }
+        public async Task<UserModel> GetUserByUsrenameAsync(string userName)
         {
             Task<UserEntity> asyncUserEntity = userManager.FindByNameAsync(userName);
             if (asyncUserEntity.Result != null) return await ConvertToModel(asyncUserEntity.Result);
