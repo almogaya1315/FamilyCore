@@ -61,6 +61,7 @@ namespace FCore.BL.Repositories
                 FullName = entity.FullName,
                 Id = entity.Id,
                 UserName = entity.UserName,
+                Password = entity.Password,
                 PasswordHash = entity.PasswordHash,
                 Email = entity.Email,
                 EmailConfirmed = entity.EmailConfirmed,

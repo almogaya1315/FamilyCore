@@ -18,7 +18,6 @@ namespace FCore.Common.Models.Users
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "Required!")]
-        //[MinLength(5, ErrorMessage = "At least 5 letters")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Required!")]

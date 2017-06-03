@@ -79,11 +79,14 @@ namespace FCore.UI.Controllers
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
 
-            // todo.. varify past logged-in user & ask if to use OR which user if multiple
-            var cookieValue = HttpContext.GetOwinContext().Request.Cookies["userCookie"];
-            if (!string.IsNullOrWhiteSpace(cookieValue))
+            var cookie = HttpContext.Request.Cookies["userCookie"];
+            string userId = string.Empty;
+            if (cookie != null)
+                userId = cookie.Value;
+
+            if (!string.IsNullOrWhiteSpace(userId))
             {
-                var user = await userRepo.GetUserByIdAsync(cookieValue);
+                var user = await userRepo.GetUserByIdAsync(userId);
                 if (user != null)
                 {
                     Session["isCookie"] = true;
@@ -112,7 +115,8 @@ namespace FCore.UI.Controllers
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
                             userCookie.Expires.AddYears(1);
-                            Request.Cookies.Add(userCookie);
+                            HttpContext.Response.Cookies.Add(userCookie);
+                            //HttpContext.Response.Cookies["userCookie"].Value = identityUser.Id;
                         }
 
                         if (Session["cureentUser"] == null)
