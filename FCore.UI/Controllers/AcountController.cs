@@ -83,6 +83,8 @@ namespace FCore.UI.Controllers
             var cookie = Request.Cookies.Get("userCookie");
             if (cookie != null)
             {
+                //HttpContext.GetOwinContext().Response.Cookies.
+
                 var user = await userRepo.GetUserByIdAsync(cookie.Value);
                 if (user != null) return await LoginPage(user);
                 else throw new Exception();
