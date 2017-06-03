@@ -260,11 +260,13 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult LoadPersonalInfo()
+        public ActionResult LoadPersonalInfo(UserModel model)
         {
+            model.Member = coreRepo.GetFamilyMember(model.MemberId);
+
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
-            return PartialView("AddPersonalInfo");
+            return PartialView("AddPersonalInfo", model);
         }
 
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
