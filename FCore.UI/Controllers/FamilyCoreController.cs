@@ -4,6 +4,7 @@ using FCore.Common.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -24,6 +25,11 @@ namespace FCore.UI.Controllers
 
                 //userModel.Member = coreRepo.GetFamilyMember(int.Parse(Response.Cookies.Get("userCookie").Value));
                 //Session["cureentUser"] = userModel;
+
+                if (Session["cureentUser"] != null)
+                    userModel.Member = (Session["cureentUser"] as UserModel).Member;
+                //else if(Session["isCookie"] == null || (bool)Session["isCookie"] == true)
+                //    return new HttpStatusCodeResult((int)HttpStatusCode.Unauthorized);
 
                 ViewBag.LastJoinName = coreRepo.GetLastMemberJoined().FirstName;
                 ViewBag.VideoDesc = coreRepo.GetMostViewedVideo().Description;
