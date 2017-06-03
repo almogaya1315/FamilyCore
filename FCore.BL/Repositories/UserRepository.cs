@@ -141,10 +141,12 @@ namespace FCore.BL.Repositories
 
         public async Task<SignInStatus> PasswordLoginAsync(UserModel model)
         {
-            var result = userManager.PasswordHasher.VerifyHashedPassword(model.PasswordHash, model.Password);
-            if (result == PasswordVerificationResult.Success)
-                return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
-            else throw new Exception(); // todo..
+            if (!string.IsNullOrWhiteSpace(model.PasswordHash))
+            {
+                var result = userManager.PasswordHasher.VerifyHashedPassword(model.PasswordHash, model.Password);
+                if (result == PasswordVerificationResult.Failed) throw new Exception(); // todo..
+            }
+            return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
         }
 
         public async Task<UserModel> GetUserByIdAsync(string id)

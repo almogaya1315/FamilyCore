@@ -111,12 +111,11 @@ namespace FCore.UI.Controllers
                         var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
 
                         // for new logged-in user
-                        if (!(bool)Session["isCookie"])//HttpContext.Response.Cookies["userCookie"] == null)//Request.Cookies.Get("userCookie") == null)
+                        if (!(bool)Session["isCookie"])
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
                             userCookie.Expires.AddYears(1);
                             HttpContext.Response.Cookies.Add(userCookie);
-                            //HttpContext.Response.Cookies["userCookie"].Value = identityUser.Id;
                         }
 
                         if (Session["cureentUser"] == null)
