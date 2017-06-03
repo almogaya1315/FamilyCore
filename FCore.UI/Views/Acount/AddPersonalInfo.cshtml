@@ -68,11 +68,11 @@
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.Relatives.FirstOrDefault().Relationship)
+            @Html.LabelFor(m => Model.Member.Family)
         </div>
         <div class="col-sm-7">
 
-            @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>)
+            @Html.DropDownList("Family", ViewData["famenum"] as ICollection<SelectListItem>)
 
         </div>
         <div class="clearfix"></div>
