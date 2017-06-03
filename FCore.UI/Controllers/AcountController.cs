@@ -270,6 +270,12 @@ namespace FCore.UI.Controllers
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult AddPersonalInfo(UserModel model)
         {
+            foreach (var family in coreRepo.GetFamilies())
+            {
+                (ViewData["famenum"] as ICollection<SelectListItem>).Add(new SelectListItem() { Text = family.Name });
+            }
+            model.Member = coreRepo.GetFamilyMember(model.MemberId);
+            model.Member.Family = coreRepo.GetFamily(model.FamilyId);
             return PartialView("AddContactInfo", model);
         }
 
