@@ -79,15 +79,22 @@ namespace FCore.UI.Controllers
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
 
-            // todo.. varify past logged-in user & ask if to use OR which user if multiple
-            var cookie = Request.Cookies.Get("userCookie");
+            var cookie = HttpContext.Request.Cookies["userCookie"];
+            string userId = string.Empty;
             if (cookie != null)
+                userId = cookie.Value;
+
+            if (!string.IsNullOrWhiteSpace(userId))
             {
-                var user = await userRepo.GetUserByIdAsync(cookie.Value);
-                if (user != null) return await LoginPage(user);
-                else throw new Exception();
+                var user = await userRepo.GetUserByIdAsync(userId);
+                if (user != null)
+                {
+                    Session["isCookie"] = true;
+                    return await LoginPage(user);
+                }
+                else throw new Exception(); // todo..
             }
-            
+            Session["isCookie"] = false;
             return View();
         }
 
@@ -103,11 +110,13 @@ namespace FCore.UI.Controllers
                     case SignInStatus.Success:
                         var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
 
-                        if (Request.Cookies.Get("userCookie") == null)
+                        // for new logged-in user
+                        if (!(bool)Session["isCookie"])//HttpContext.Response.Cookies["userCookie"] == null)//Request.Cookies.Get("userCookie") == null)
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
                             userCookie.Expires.AddYears(1);
-                            Response.Cookies.Add(userCookie);
+                            HttpContext.Response.Cookies.Add(userCookie);
+                            //HttpContext.Response.Cookies["userCookie"].Value = identityUser.Id;
                         }
 
                         if (Session["cureentUser"] == null)

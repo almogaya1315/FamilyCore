@@ -33,7 +33,10 @@ namespace FCore.DAL.Identity
                 //app = userRepo.CreateLoginManager(app);
 
                 app.UseCookieAuthentication(new CookieAuthenticationOptions
-                    { AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie });
+                {
+                    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                    
+                });
             }
         }
     }
