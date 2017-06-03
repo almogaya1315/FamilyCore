@@ -1,4 +1,5 @@
 ﻿using FCore.Common.Enums;
+using FCore.Common.Models.Families;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,14 @@ namespace FCore.Common.Utils
                 return cities;
             }
             private set { }
+        }
+
+        public static ICollection<SelectListItem> GetFamilies(ICollection<FamilyModel> familyModels)
+        {
+            ICollection<SelectListItem> families = new List<SelectListItem>();
+            foreach (var family in familyModels)
+                families.Add(new SelectListItem() { Text = family.Name });
+            return families;
         }
 
         private static ICollection<string> GetChildRelTypeList()

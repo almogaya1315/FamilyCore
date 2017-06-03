@@ -68,11 +68,22 @@
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.Family.Name)
+            @Html.Label("Relative family")
         </div>
         <div class="col-sm-7">
 
-            @Html.DropDownList("Family", ViewData["famenum"] as ICollection<SelectListItem>)
+            @Html.DropDownList("RelativeFamily", ViewData["famenum"] as ICollection<SelectListItem>)
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.Label("Relative name")
+        </div>
+        <div class="col-sm-7" >
+
+            @Html.DropDownList("RelativeName", ViewData["memenum"] as ICollection<SelectListItem>, new { @disabled = "true" })
 
         </div>
         <div class="clearfix"></div>

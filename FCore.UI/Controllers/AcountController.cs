@@ -262,20 +262,18 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadPersonalInfo()
         {
-            ViewData["relenum"] = ConstGenerator.ChildRelTypes;
             ViewData["genenum"] = ConstGenerator.GenderTypes;
+            ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
             return PartialView("AddPersonalInfo");
         }
 
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult AddPersonalInfo(UserModel model)
         {
-            foreach (var family in coreRepo.GetFamilies())
-            {
-                (ViewData["famenum"] as ICollection<SelectListItem>).Add(new SelectListItem() { Text = family.Name });
-            }
             model.Member = coreRepo.GetFamilyMember(model.MemberId);
-            model.Member.Family = coreRepo.GetFamily(model.FamilyId);
+
+            ViewData["genenum"] = ConstGenerator.GenderTypes;
+            ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
             return PartialView("AddContactInfo", model);
         }
 
