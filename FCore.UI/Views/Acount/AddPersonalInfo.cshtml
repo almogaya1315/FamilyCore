@@ -81,9 +81,9 @@
         <div class="col-sm-5 col-xs-6 tital ">
             @Html.Label("Relative name")
         </div>
-        <div class="col-sm-7" >
+        <div id="memenum_div" class="col-sm-7" >
 
-            @{ Html.RenderPartial("LoadMembersDynamic", ViewData["memenum"])}
+            @{ Html.RenderPartial("LoadMembersDynamic", ViewData["memenum"]);}
 
         </div>
         <div class="clearfix"></div>
@@ -105,7 +105,7 @@
         </div>
         <div class="col-sm-7">
             @Html.EditorFor(m => Model.Member.BirthDate)
-            @Html.ValidationMessageFor(m => Model.Member.BirthDate, "", new { @style = Session["validcolor"] + "margin-left:5%" });
+            @Html.ValidationMessageFor(m => Model.Member.BirthDate, "", new { @style = Session["validcolor"] + "margin-left:5%" })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>

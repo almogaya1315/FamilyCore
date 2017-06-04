@@ -1,6 +1,8 @@
 ﻿@model ICollection<SelectListItem>
 
+<input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -0.2%"/>
 @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
+
 
 <script>
     $(function () {
@@ -15,13 +17,11 @@
                     cache: false,
                     contentType: false,
                     processData: false,
-                    success: function (response) {
+                    success: function () {
                         var relmem = $('#memenum_box');
                         relmem.prop('disabled', false);
-
-                        var data = response.data;
-                        @Model = data;
-                        var url = '@Url.Action("LoadFamiliesDynamic", "Acount", Model)';
+                        
+                        var url = '@Url.Action("LoadFamiliesDynamic", "Acount")';
                         $('#famenum_div').load(url);
                     }
                 })

@@ -1,5 +1,6 @@
 ﻿@model ICollection<SelectListItem>
 
+<input type="text" id="relmem_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -0.2%" />
 @Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true" })
 
 <script>
@@ -15,11 +16,9 @@
                     cache: false,
                     contentType: false,
                     processData: false,
-                    success: function (response) {
-                        var data = response.data;
-                        @Model = data;
-                        var url = '@Url.Action("LoadMembersDynamic", "Acount", Model)';
-                        $('#famenum_div').load(url);
+                    success: function () {
+                        var url = '@Url.Action("LoadMembersDynamic", "Acount")';
+                        $('#memenum_div').load(url);
                     }
                 })
             }

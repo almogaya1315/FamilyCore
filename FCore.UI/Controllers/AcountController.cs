@@ -111,7 +111,7 @@ namespace FCore.UI.Controllers
                         var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
 
                         // for new logged-in user
-                        if (!(bool)Session["isCookie"])
+                        if (Session["isCookie"] == null || !(bool)Session["isCookie"])
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
                             userCookie.Expires.AddYears(1);
@@ -267,24 +267,25 @@ namespace FCore.UI.Controllers
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(text));
             Session["relfam"] = families;
             Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, data = families });
+            return Json(new { success = true });
         }
         [HttpPost]
-        public ActionResult LoadFamiliesDynamic(ICollection<SelectListItem> families)
+        public ActionResult LoadFamiliesDynamic()
         {
-            return PartialView(families);
+            return PartialView(Session["relfam"]);
         }
         [HttpGet]
         public ActionResult LoadMembersDynamic(string text)
         {
             var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((ICollection<SelectListItem>)Session["relfam"], text));
+            Session["relmem"] = members;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, data = members });
         }
         [HttpPost]
-        public ActionResult LoadMembersDynamic(ICollection<SelectListItem> members)
+        public ActionResult LoadMembersDynamic()
         {
-            return PartialView(members);
+            return PartialView(Session["relmem"]);
         }
 
         [HttpGet]
