@@ -44,6 +44,16 @@ namespace FCore.BL.Repositories
             }
             return families;
         }
+        public ICollection<FamilyModel> GetFamiliesDynamic(string text)
+        {
+            ICollection<FamilyModel> families = new List<FamilyModel>();
+            foreach (FamilyEntity family in CoreDB.GetFamilies())
+            {
+                if (family.Name.Contains(text)) ;
+                families.Add(ConvertToModel(family));
+            }
+            return families;
+        }
         public FamilyModel GetFamily(string name)
         {
             return ConvertToModel(CoreDB.GetFamily(name));

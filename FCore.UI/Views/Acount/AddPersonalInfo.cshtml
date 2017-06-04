@@ -70,9 +70,9 @@
         <div class="col-sm-5 col-xs-6 tital ">
             @Html.Label("Relative family")
         </div>
-        <div class="col-sm-7">
+        <div id="famenum_div" class="col-sm-7">
 
-            @Html.DropDownList("RelativeFamily", ViewData["famenum"] as ICollection<SelectListItem>)
+            @{ Html.RenderPartial("LoadFamiliesDynamic", ViewData["famenum"]); }
 
         </div>
         <div class="clearfix"></div>
@@ -83,7 +83,7 @@
         </div>
         <div class="col-sm-7" >
 
-            @Html.DropDownList("RelativeName", ViewData["memenum"] as ICollection<SelectListItem>, new { @disabled = "true" })
+            @Html.DropDownList("RelativeName", ViewData["memenum"] as ICollection<SelectListItem>, new { @id = "memenum_box", @disabled = "true" })
 
         </div>
         <div class="clearfix"></div>

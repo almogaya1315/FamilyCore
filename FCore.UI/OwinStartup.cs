@@ -34,8 +34,7 @@ namespace FCore.DAL.Identity
 
                 app.UseCookieAuthentication(new CookieAuthenticationOptions
                 {
-                    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                    
+                    AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
                 });
             }
         }

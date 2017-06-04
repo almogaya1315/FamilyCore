@@ -19,6 +19,7 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    [AllowAnonymous]
     public class AcountController : Controller
     {
         #region private data
@@ -67,10 +68,10 @@ namespace FCore.UI.Controllers
 
         // system enters here every 'verify' funcion in global.asax, 
         // when 'OwinStartup' is done & every action call from view => no 'using' needed!
-        public AcountController(UserMemberManager userManager, LoginManager loginManager) 
+        public AcountController(UserMemberManager userManager, LoginManager loginManager)
         {
             coreRepo = new FCoreRepository();
-            userRepo = new UserRepository(userManager, loginManager); 
+            userRepo = new UserRepository(userManager, loginManager);
         }
 
         [HttpGet]
@@ -81,8 +82,7 @@ namespace FCore.UI.Controllers
 
             var cookie = HttpContext.Request.Cookies["userCookie"];
             string userId = string.Empty;
-            if (cookie != null)
-                userId = cookie.Value;
+            if (cookie != null) userId = cookie.Value;
 
             if (!string.IsNullOrWhiteSpace(userId))
             {
@@ -223,7 +223,7 @@ namespace FCore.UI.Controllers
                 }
             }
             else CheckIfImageAndUpload(ProfileImagePath);
-    
+
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true });
         }
@@ -245,9 +245,10 @@ namespace FCore.UI.Controllers
                             Session["username"] = model.UserName;
                             Session["password"] = model.Password;
 
-                            ViewData["relenum"] = ConstGenerator.ChildRelTypes;
+                            model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
-                            return PartialView("AddPersonalInfo", new UserModel());
+                            ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
+                            return PartialView("AddPersonalInfo", model);
                         }
                         else SetImageFileModelState();
                     }
@@ -260,9 +261,25 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
+        public ActionResult LoadFamiliesDynamic(ICollection<SelectListItem> families)
+        {
+            return PartialView(families);
+        }
+
+        [HttpPost]
+        public ActionResult LoadFamiliesDynamic(string text)
+        {
+            var families = ConstGenerator.GetFamilies(coreRepo.GetFamiliesDynamic(text));
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new { success = true, data = families });
+
+            //return PartialView(families);
+        }
+
+        [HttpGet]
         public ActionResult LoadPersonalInfo(UserModel model)
         {
-            model.Member = coreRepo.GetFamilyMember(model.MemberId);
+            model.Member = new FamilyMemberModel();
 
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
@@ -272,10 +289,6 @@ namespace FCore.UI.Controllers
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult AddPersonalInfo(UserModel model)
         {
-            model.Member = coreRepo.GetFamilyMember(model.MemberId);
-
-            ViewData["genenum"] = ConstGenerator.GenderTypes;
-            ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
             return PartialView("AddContactInfo", model);
         }
 

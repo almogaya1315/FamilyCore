@@ -18,6 +18,7 @@ namespace FCore.Common.Interfaces
     public interface ICoreRepository : IDisposable
     {
         ICollection<FamilyModel> GetFamilies();
+        ICollection<FamilyModel> GetFamiliesDynamic(string text);
         FamilyModel GetFamily(int id);
         FamilyModel GetFamily(string name);
 

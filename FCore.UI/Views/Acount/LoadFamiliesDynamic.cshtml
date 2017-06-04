@@ -1,0 +1,28 @@
+﻿@model ICollection<SelectListItem>
+
+@Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
+
+<script>
+    $(function () {
+        var relfam = $('#famenum_box');
+        relfam.on('input', function () {
+            var text = relfam.val();
+            if (text >= 2) {
+                $.ajax({
+                    url: '/Acount/LoadFamiliesDynamic',
+                    type: 'Post',
+                    data: text,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        var data = response.data;
+                        @Model = data;
+                        var url = '@Url.Action("LoadFamiliesDynamic", "Acount", Model)';
+                        $('#famenum_div').load(url);
+                    }
+                })
+            }
+        })
+    })
+</script>
