@@ -56,7 +56,7 @@ namespace FCore.Common.Utils
             private set { }
         }
 
-        public static ICollection<SelectListItem> GetFamilies(ICollection<FamilyModel> familyModels)
+        public static ICollection<SelectListItem> GetFamilySelectListItems(ICollection<FamilyModel> familyModels)
         {
             ICollection<SelectListItem> families = new List<SelectListItem>();
             foreach (var family in familyModels)
@@ -64,9 +64,12 @@ namespace FCore.Common.Utils
             return families;
         }
 
-        public static ICollection<SelectListItem> GetMembers(ICollection<FamilyMemberModel> memberModels)
+        public static ICollection<SelectListItem> GetMemberSelectListItems(ICollection<FamilyMemberModel> memberModels)
         {
-
+            ICollection<SelectListItem> members = new List<SelectListItem>();
+            foreach (var member in memberModels)
+                members.Add(new SelectListItem() { Text = member.FirstName });
+            return members;
         }
 
         private static ICollection<string> GetChildRelTypeList()

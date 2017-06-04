@@ -247,8 +247,8 @@ namespace FCore.UI.Controllers
 
                             model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
-                            ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
-                            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative family" } };
+                            ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
+                            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative's family" } };
                             return PartialView("AddPersonalInfo", model);
                         }
                         else SetImageFileModelState();
@@ -260,31 +260,31 @@ namespace FCore.UI.Controllers
             else SetImageFileModelState();
             return PartialView(model);
         }
-
+        
         [HttpGet]
-        public ActionResult LoadFamiliesDynamic(ICollection<SelectListItem> families)
-        {
-            return PartialView(families);
-        }
-        [HttpPost]
         public ActionResult LoadFamiliesDynamic(string text)
         {
-            var families = ConstGenerator.GetFamilies(coreRepo.GetFamiliesDynamic(text));
+            var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(text));
             Session["relfam"] = families;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, data = families });
         }
+        [HttpPost]
+        public ActionResult LoadFamiliesDynamic(ICollection<SelectListItem> families)
+        {
+            return PartialView(families);
+        }
         [HttpGet]
+        public ActionResult LoadMembersDynamic(string text)
+        {
+            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((ICollection<SelectListItem>)Session["relfam"], text));
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new { success = true, data = members });
+        }
+        [HttpPost]
         public ActionResult LoadMembersDynamic(ICollection<SelectListItem> members)
         {
             return PartialView(members);
-        }
-        [HttpPost]
-        public ActionResult LoadMembersDynamic(string text)
-        {
-            var members = ConstGenerator.GetMembers(coreRepo.GetMembersDynamic((ICollection<SelectListItem>)Session["relfam"], text));
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, data = members });
         }
 
         [HttpGet]
@@ -293,7 +293,7 @@ namespace FCore.UI.Controllers
             model.Member = new FamilyMemberModel();
 
             ViewData["genenum"] = ConstGenerator.GenderTypes;
-            ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
+            ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
             ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative family" } };
             return PartialView("AddPersonalInfo", model);
         }
