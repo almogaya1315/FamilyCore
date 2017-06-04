@@ -248,7 +248,7 @@ namespace FCore.UI.Controllers
                             model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
-                            ViewData["memenum"] = new List<SelectListItem>();
+                            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative family" } };
                             return PartialView("AddPersonalInfo", model);
                         }
                         else SetImageFileModelState();
@@ -266,15 +266,25 @@ namespace FCore.UI.Controllers
         {
             return PartialView(families);
         }
-
         [HttpPost]
         public ActionResult LoadFamiliesDynamic(string text)
         {
             var families = ConstGenerator.GetFamilies(coreRepo.GetFamiliesDynamic(text));
+            Session["relfam"] = families;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, data = families });
-
-            //return PartialView(families);
+        }
+        [HttpGet]
+        public ActionResult LoadMembersDynamic(ICollection<SelectListItem> members)
+        {
+            return PartialView(members);
+        }
+        [HttpPost]
+        public ActionResult LoadMembersDynamic(string text)
+        {
+            var members = ConstGenerator.GetMembers(coreRepo.GetMembersDynamic((ICollection<SelectListItem>)Session["relfam"], text));
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new { success = true, data = members });
         }
 
         [HttpGet]
@@ -284,6 +294,7 @@ namespace FCore.UI.Controllers
 
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilies(coreRepo.GetFamilies());
+            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative family" } };
             return PartialView("AddPersonalInfo", model);
         }
 

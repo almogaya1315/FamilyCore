@@ -1,33 +1,28 @@
 ﻿@model ICollection<SelectListItem>
 
-@Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
+@Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true" })
 
 <script>
     $(function () {
-        var relfam = $('#famenum_box');
-        relfam.on('input', function () {
-            var text = relfam.val();
+        var relmem = $('#memenum_box');
+        relmem.on('input', function () {
+            var text = relmem.val();
             if (text >= 2) {
                 $.ajax({
-                    url: '/Acount/LoadFamiliesDynamic',
+                    url: '/Acount/LoadMembersDynamic',
                     type: 'Post',
                     data: text,
                     cache: false,
                     contentType: false,
                     processData: false,
                     success: function (response) {
-                        var relmem = $('#memenum_box');
-                        relmem.prop('disabled', false);
-
                         var data = response.data;
                         @Model = data;
-                        var url = '@Url.Action("LoadFamiliesDynamic", "Acount", Model)';
+                        var url = '@Url.Action("LoadMembersDynamic", "Acount", Model)';
                         $('#famenum_div').load(url);
                     }
                 })
             }
         })
     })
-
-
 </script>

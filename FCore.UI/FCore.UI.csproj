@@ -255,6 +255,7 @@
     <Content Include="Views\Shared\LoginReg_Layout.cshtml" />
     <Content Include="Views\Acount\AddPersonalInfo.cshtml" />
     <Content Include="Views\Acount\LoadFamiliesDynamic.cshtml" />
+    <Content Include="Views\Acount\LoadMembersDynamic.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

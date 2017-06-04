@@ -83,7 +83,7 @@
         </div>
         <div class="col-sm-7" >
 
-            @Html.DropDownList("memenum", ViewData["memenum"] as ICollection<SelectListItem>, new { @id = "memenum_box", @disabled = "true" })
+            @{ Html.RenderPartial("LoadMmebersDynamic", ViewData["memenum"])}
 
         </div>
         <div class="clearfix"></div>
