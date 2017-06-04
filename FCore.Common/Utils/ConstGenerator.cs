@@ -1,5 +1,6 @@
 ﻿using FCore.Common.Enums;
 using FCore.Common.Models.Families;
+using FCore.Common.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,11 @@ namespace FCore.Common.Utils
             foreach (var family in familyModels)
                 families.Add(new SelectListItem() { Text = family.Name });
             return families;
+        }
+
+        public static ICollection<SelectListItem> GetMembers(ICollection<FamilyMemberModel> memberModels)
+        {
+
         }
 
         private static ICollection<string> GetChildRelTypeList()
