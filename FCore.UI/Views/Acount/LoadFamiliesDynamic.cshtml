@@ -1,8 +1,9 @@
 ﻿@model ICollection<SelectListItem>
 
-<input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -0.2%"/>
-@Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
-
+<div class="container" style="padding-left:0">
+    <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" />
+    @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
+</div>
 
 <script>
     $(function () {
