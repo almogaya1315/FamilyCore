@@ -1,7 +1,7 @@
 ﻿// LoadFamiliesDynamic
 
-$(function () {
-    $('#relfam_droptext').on('input', function () {
+$(function LoadFamiliesDynamic() {
+    //$('#relfam_droptext').on('input', function () {
         var text = $('#relfam_droptext').val();
         if (text >= 2) {
             $.ajax({
@@ -22,15 +22,14 @@ $(function () {
                 }
             })
         }
-    })
+    //})
 })
 
 // LoadMembersDynamic
 
 $(function () {
-    var relmem = $('#relmem_droptext');
-    relmem.on('input', function () {
-        var text = relmem.val();
+    $('#relmem_droptext').on('input', function () {
+        var text = $('#relmem_droptext').val();
         if (text >= 2) {
             $.ajax({
                 url: '/Acount/LoadMembersDynamic',

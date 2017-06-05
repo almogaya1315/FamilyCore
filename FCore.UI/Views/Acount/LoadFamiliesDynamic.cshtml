@@ -1,7 +1,8 @@
 ﻿@model ICollection<SelectListItem>
 
 <div class="container" style="padding-left:0">
-    <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" onchange="LoadFamiliesDynamic"/>
+    @*@Html.TextBox("relfam_textbox", string.Empty, new { @id = "relfam_droptext", @style = "display: block; line-height: inherit; height: 20px; margin-bottom: -1px" })*@
+    <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" oninput="LoadFamiliesDynamic()"/>
     @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
 </div>
 
@@ -31,6 +32,4 @@
             }
         })
     })
-
-
 </script>*@
