@@ -1,6 +1,6 @@
 ﻿// LoadFamiliesDynamic
 
-$(function () {
+function LoadFamiliesDynamic() {
     var relfam = $('#relfam_droptext');
     relfam.on('input', function () {
         var text = relfam.val();
@@ -24,7 +24,7 @@ $(function () {
             })
         }
     })
-})
+}
 
 // LoadMembersDynamic
 
