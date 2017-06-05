@@ -1,6 +1,6 @@
 ﻿// LoadFamiliesDynamic
 
-$(function LoadFamiliesDynamic() {
+/*$(*/function LoadFamiliesDynamic() {
     //$('#relfam_droptext').on('input', function () {
         var text = $('#relfam_droptext').val();
         if (text >= 2) {
@@ -23,7 +23,7 @@ $(function LoadFamiliesDynamic() {
             })
         }
     //})
-})
+}/*)*/
 
 // LoadMembersDynamic
 
