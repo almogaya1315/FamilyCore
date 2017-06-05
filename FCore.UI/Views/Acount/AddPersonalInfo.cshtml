@@ -68,28 +68,6 @@
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.Label("Relative family")
-        </div>
-        <div id="famenum_div" class="col-sm-7">
-
-            @{ Html.RenderPartial("LoadFamiliesDynamic", ViewData["famenum"]); }
-
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
-
-        <div class="col-sm-5 col-xs-6 tital ">
-            @Html.Label("Relative name")
-        </div>
-        <div id="memenum_div" class="col-sm-7" >
-
-            @{ Html.RenderPartial("LoadMembersDynamic", ViewData["memenum"]);}
-
-        </div>
-        <div class="clearfix"></div>
-        <div class="bot-border"></div>
-
-        <div class="col-sm-5 col-xs-6 tital ">
             @Html.LabelFor(m => Model.Member.Gender)
         </div>
         <div class="col-sm-7">
@@ -116,6 +94,32 @@
         <div class="col-sm-7">
             @Html.EditorFor(m => Model.Member.BirthPlace)
             @Html.ValidationMessageFor(m => Model.Member.BirthPlace, "", new { @style = Session["validcolor"] })
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="bot-border"></div>
+        <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe; margin-top:4%">Relative info</div>
+        <div class="bot-border"></div>
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.Label("Relative family")
+        </div>
+        <div id="famenum_div" class="col-sm-7">
+
+            @{ Html.RenderPartial("LoadFamiliesDynamic", ViewData["famenum"]); }
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.Label("Relative name")
+        </div>
+        <div id="memenum_div" class="col-sm-7">
+
+            @{ Html.RenderPartial("LoadMembersDynamic", ViewData["memenum"]);}
+
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>

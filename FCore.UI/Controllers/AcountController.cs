@@ -248,7 +248,7 @@ namespace FCore.UI.Controllers
                             model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
-                            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative's family" } };
+                            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose family first" } };
                             return PartialView("AddPersonalInfo", model);
                         }
                         else SetImageFileModelState();
