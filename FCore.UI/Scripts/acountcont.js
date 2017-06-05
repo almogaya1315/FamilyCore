@@ -1,9 +1,8 @@
 ﻿// LoadFamiliesDynamic
 
-function LoadFamiliesDynamic() {
-    var relfam = $('#relfam_droptext');
-    relfam.on('input', function () {
-        var text = relfam.val();
+$(function () {
+    $('#relfam_droptext').on('input', function () {
+        var text = $('#relfam_droptext').val();
         if (text >= 2) {
             $.ajax({
                 url: '/Acount/LoadFamiliesDynamic',
@@ -24,7 +23,7 @@ function LoadFamiliesDynamic() {
             })
         }
     })
-}
+})
 
 // LoadMembersDynamic
 

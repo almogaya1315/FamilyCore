@@ -1,8 +1,7 @@
 ﻿@model ICollection<SelectListItem>
 
 <div class="container" style="padding-left:0">
-    @Html.TextBox("family", )
-    <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" oninput="LoadFamiliesDynamic"/>
+    <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" onchange="LoadFamiliesDynamic"/>
     @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box" })
 </div>
 
