@@ -1,29 +1,30 @@
 ﻿// LoadFamiliesDynamic
 
-/*$(*/function LoadFamiliesDynamic() {
-    //$('#relfam_droptext').on('input', function () {
-        var text = $('#relfam_droptext').val();
-        if (text >= 2) {
-            $.ajax({
-                url: '/Acount/LoadFamiliesDynamic',
-                type: 'Get',
-                data: text,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function () {
-                    var relmem_text = $('#relmem_droptext');
-                    relmem_text.prop('disabled', false);
-                    var relmem = $('#memenum_box');
-                    relmem.prop('disabled', false);
+function LoadFamiliesDynamic() {
+    var text = $('#relfam_droptext').val();
+    if (text.length >= 2) {
+        var boxdata = { "Text": text }
+        $.ajax({
+            url: '/Acount/LoadFamiliesDynamic',
+            type: 'Get',
+            dataType: 'json',
+            data: boxdata,
+            cache: false,
+            contentType: 'application/json; charset=utf-8',
+            processData: true,
+            success: function (data) {
+                var list = data.Families;
+                var relmem_text = $('#relmem_droptext');
+                relmem_text.prop('disabled', false);
+                var relmem = $('#memenum_box');
+                relmem.prop('disabled', false);
 
-                    var url = '@Url.Action("LoadFamiliesDynamic", "Acount")';
-                    $('#famenum_div').load(url);
-                }
-            })
-        }
-    //})
-}/*)*/
+                var url = '@Url.Action("LoadFamiliesDynamic", "Acount")';
+                $('#famenum_div').load(url);
+            }
+        })
+    }
+}
 
 // LoadMembersDynamic
 

@@ -19,6 +19,16 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    public class FamilyTextBox
+    {
+        public string Text { get; set; }
+    }
+
+    public class FamilyList
+    {
+        public ICollection<SelectListItem> Families { get; set; }
+    }
+
     [AllowAnonymous]
     public class AcountController : Controller
     {
@@ -262,12 +272,12 @@ namespace FCore.UI.Controllers
         }
         
         [HttpGet]
-        public ActionResult LoadFamiliesDynamic(string text)
+        public ActionResult LoadFamiliesDynamic(FamilyTextBox box)
         {
-            var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(text));
+            var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
             Session["relfam"] = families;
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true });
+            //Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new FamilyList { Families = families } );
         }
         [HttpPost]
         public ActionResult LoadFamiliesDynamic()
