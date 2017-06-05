@@ -1,27 +1,29 @@
 ﻿@model ICollection<SelectListItem>
 
-<input type="text" id="relmem_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" />
-@Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true" })
+<div class="container" style="padding-left:0">
+    <input type="text" id="relmem_droptext" disabled="disabled" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px" />
+    @Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true" })
+</div>
 
-<script>
-    $(function () {
-        var relmem = $('#memenum_box');
-        relmem.on('input', function () {
-            var text = relmem.val();
-            if (text >= 2) {
-                $.ajax({
-                    url: '/Acount/LoadMembersDynamic',
-                    type: 'Get',
-                    data: text,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function () {
-                        var url = '@Url.Action("LoadMembersDynamic", "Acount")';
-                        $('#memenum_div').load(url);
-                    }
-                })
-            }
+    <script>
+        $(function () {
+            var relmem = $('#relmem_droptext');
+            relmem.on('input', function () {
+                var text = relmem.val();
+                if (text >= 2) {
+                    $.ajax({
+                        url: '/Acount/LoadMembersDynamic',
+                        type: 'Get',
+                        data: text,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function () {
+                            var url = '@Url.Action("LoadMembersDynamic", "Acount")';
+                            $('#memenum_div').load(url);
+                        }
+                    })
+                }
+            })
         })
-    })
-</script>
+    </script>

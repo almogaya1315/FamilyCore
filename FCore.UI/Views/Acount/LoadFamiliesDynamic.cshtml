@@ -7,7 +7,7 @@
 
 <script>
     $(function () {
-        var relfam = $('#famenum_box');
+        var relfam = $('#relfam_droptext');
         relfam.on('input', function () {
             var text = relfam.val();
             if (text >= 2) {
@@ -19,6 +19,8 @@
                     contentType: false,
                     processData: false,
                     success: function () {
+                        var relmem_text = $('#relmem_droptext');
+                        relmem_text.prop('disabled', false);
                         var relmem = $('#memenum_box');
                         relmem.prop('disabled', false);
                         
