@@ -5,22 +5,22 @@ function LoadFamiliesDynamic() {
     if (text.length >= 2) {
         var boxdata = { "Text": text }
         $.ajax({
-            url: '/Acount/LoadFamiliesDynamic',
-            type: 'Get',
-            dataType: 'json',
+            url: '/Acount/PostLoadFamiliesDynamic',
+            type: 'Post',
+            //dataType: 'json',
             data: boxdata,
             cache: false,
-            contentType: 'application/json; charset=utf-8',
+            //contentType: 'application/json; charset=utf-8',
             processData: true,
-            success: function () { //data
-                //var list = data.Families;
+            success: function (data) {
+                var list = data.Families;
 
-                //var relmem_text = $('#relmem_droptext');
-                //relmem_text.prop('disabled', false);
-                //var relmem = $('#memenum_box');
-                //relmem.prop('disabled', false);
+                var relmem_text = $('#relmem_droptext');
+                relmem_text.prop('disabled', false);
+                var relmem = $('#memenum_box');
+                relmem.prop('disabled', false);
 
-                var url = '@Url.Action("LoadFamiliesDynamic", "Acount")';
+                var url = '/Acount/GetLoadFamiliesDynamic'; //'@Url.Action("GetLoadFamiliesDynamic", "Acount")';
                 $('#famenum_div').load(url);
             }
         })

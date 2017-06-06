@@ -275,19 +275,24 @@ namespace FCore.UI.Controllers
             public ICollection<SelectListItem> Families { get; set; }
         }
 
-        [HttpGet]
-        public ActionResult LoadFamiliesDynamic(TextBox box)
-        {
-            var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
-            Session["relfam"] = families;
-            Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, Families = families, JsonRequestBehavior.AllowGet }); //new FamilyList { Families = families } );
-        }
         [HttpPost]
-        public ActionResult LoadFamiliesDynamic()
+        public ActionResult PostLoadFamiliesDynamic(TextBox box)
         {
-            return PartialView(Session["relfam"]);
+            if (Request.IsAjaxRequest())
+            {
+                var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
+                Session["relfam"] = families;
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return Json(new { success = true, Families = families }); //new FamilyList { Families = families } );
+            }
+            else return null;
         }
+        [HttpGet]
+        public ActionResult GetLoadFamiliesDynamic()
+        {
+            return PartialView("LoadFamiliesDynamic", Session["relfam"]);
+        }
+
         [HttpGet]
         public ActionResult LoadMembersDynamic(string text)
         {
