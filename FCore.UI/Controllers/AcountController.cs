@@ -13,9 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace FCore.UI.Controllers
 {
@@ -274,13 +276,12 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult LoadFamiliesDynamic(FamilyTextBox box)
+        public ActionResult LoadFamiliesDynamic(TextBox box)
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
             Session["relfam"] = families;
             Response.StatusCode = (int)HttpStatusCode.OK;
-            //return Content()
-            return Json(new { success = true, JsonRequestBehavior.AllowGet }); //new FamilyList { Families = families } );
+            return Json(new { success = true, Families = families, JsonRequestBehavior.AllowGet }); //new FamilyList { Families = families } );
         }
         [HttpPost]
         public ActionResult LoadFamiliesDynamic()
