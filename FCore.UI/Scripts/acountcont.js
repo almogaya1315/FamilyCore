@@ -12,8 +12,8 @@ function LoadFamiliesDynamic() {
             cache: false,
             contentType: 'application/json; charset=utf-8',
             processData: true,
-            success: function (data) {
-                var list = data.Families;
+            success: function () {
+                //var list = data.Families;
                 var relmem_text = $('#relmem_droptext');
                 relmem_text.prop('disabled', false);
                 var relmem = $('#memenum_box');
