@@ -18,10 +18,13 @@ function LoadFamiliesDynamic() {
                 select.empty();
 
                 if (list.length > 0) {
+
+
                     $.each(list, function (i) {
                         var option = '<option>' + list[i].Text + '</option>';
                         select.append(option);
                     })
+                    $("#famenum_box option[value='ph']").hide();
                     select.click();
 
                     var relmem_text = $('#relmem_droptext');
@@ -29,7 +32,7 @@ function LoadFamiliesDynamic() {
                     var relmem = $('#memenum_box');
                     relmem.prop('disabled', false);
                 }
-                
+
                 //var url = '/Acount/LoadFamiliesDynamic'; 
                 //$('#famenum_div').load(url);
             }

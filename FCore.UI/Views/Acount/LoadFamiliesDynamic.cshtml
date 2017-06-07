@@ -2,8 +2,14 @@
 
 <div class="container" style="padding-left:0">
     <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px; width:15.5%" placeholder="Search" oninput="LoadFamiliesDynamic()" />
-    @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box", @placeholder = "Choose", @style = "width:15.5%" })
+    @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box", @style = "width:15.5%" })
 </div>
+
+<script>
+    $(function () {
+        $("#famenum_box option[value='0']").hide();
+    })
+</script>
 
 @*<script>
     function LoadFamiliesDynamic() {

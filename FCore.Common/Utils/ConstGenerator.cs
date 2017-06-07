@@ -59,8 +59,14 @@ namespace FCore.Common.Utils
         public static ICollection<SelectListItem> GetFamilySelectListItems(ICollection<FamilyModel> familyModels)
         {
             ICollection<SelectListItem> families = new List<SelectListItem>();
-            foreach (var family in familyModels)
-                families.Add(new SelectListItem() { Text = family.Name });
+            if (familyModels.Count > 0)
+            {
+                families.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "Choose" });
+                foreach (var family in familyModels)
+                    families.Add(new SelectListItem() { Text = family.Name });
+                var list = new SelectList(families);
+            }
+            
             return families;
         }
 
