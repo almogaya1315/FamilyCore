@@ -14,14 +14,23 @@ function LoadFamiliesDynamic() {
             processData: true,
             success: function (data) {
                 var list = data.Families;
+                var select = $('#famenum_box');
+                select.empty();
 
-                var relmem_text = $('#relmem_droptext');
-                relmem_text.prop('disabled', false);
-                var relmem = $('#memenum_box');
-                relmem.prop('disabled', false);
+                if (list.length > 0) {
+                    $.each(list, function (i) {
+                        var option = '<option>' + list[i].Text + '</option>';
+                        select.append(option);
+                    })
 
-                var url = '/Acount/LoadFamiliesDynamic'; 
-                $('#famenum_div').load(url);
+                    var relmem_text = $('#relmem_droptext');
+                    relmem_text.prop('disabled', false);
+                    var relmem = $('#memenum_box');
+                    relmem.prop('disabled', false);
+                }
+                
+                //var url = '/Acount/LoadFamiliesDynamic'; 
+                //$('#famenum_div').load(url);
             }
         })
     }
