@@ -21,7 +21,7 @@ using System.Web.UI.WebControls;
 
 namespace FCore.UI.Controllers
 {
-    
+
 
     [AllowAnonymous]
     public class AcountController : Controller
@@ -265,32 +265,18 @@ namespace FCore.UI.Controllers
             return PartialView(model);
         }
 
-        public class FamilyTextBox
-        {
-            public string Text { get; set; }
-        }
-
-        public class FamilyList
-        {
-            public ICollection<SelectListItem> Families { get; set; }
-        }
-
-        [HttpPost]
-        public ActionResult PostLoadFamiliesDynamic(TextBox box)
-        {
-            if (Request.IsAjaxRequest())
-            {
-                var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
-                Session["relfam"] = families;
-                Response.StatusCode = (int)HttpStatusCode.OK;
-                return Json(new { success = true, Families = families }); //new FamilyList { Families = families } );
-            }
-            else return null;
-        }
         [HttpGet]
-        public ActionResult GetLoadFamiliesDynamic()
+        public ActionResult LoadFamiliesDynamic()
         {
             return PartialView("LoadFamiliesDynamic", Session["relfam"]);
+        }
+        [HttpPost]
+        public ActionResult LoadFamiliesDynamic(TextBox box)
+        {
+            var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
+            Session["relfam"] = families;
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new { success = true, Families = families }); //new FamilyList { Families = families } );
         }
 
         [HttpGet]

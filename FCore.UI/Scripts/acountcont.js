@@ -5,7 +5,7 @@ function LoadFamiliesDynamic() {
     if (text.length >= 2) {
         var boxdata = { "Text": text }
         $.ajax({
-            url: '/Acount/PostLoadFamiliesDynamic',
+            url: '/Acount/LoadFamiliesDynamic',
             type: 'Post',
             //dataType: 'json',
             data: boxdata,
@@ -20,7 +20,7 @@ function LoadFamiliesDynamic() {
                 var relmem = $('#memenum_box');
                 relmem.prop('disabled', false);
 
-                var url = '/Acount/GetLoadFamiliesDynamic'; //'@Url.Action("GetLoadFamiliesDynamic", "Acount")';
+                var url = '/Acount/LoadFamiliesDynamic'; 
                 $('#famenum_div').load(url);
             }
         })
