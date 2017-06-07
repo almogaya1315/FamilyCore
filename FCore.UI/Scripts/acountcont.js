@@ -22,6 +22,7 @@ function LoadFamiliesDynamic() {
                         var option = '<option>' + list[i].Text + '</option>';
                         select.append(option);
                     })
+                    select.click();
 
                     var relmem_text = $('#relmem_droptext');
                     relmem_text.prop('disabled', false);
