@@ -36,6 +36,7 @@ function LoadFamiliesDynamic() {
                     // set relative names
                     var mem_list = data.Members;
                     var mem_select = $('#memenum_box');
+                    mem_select.empty();
 
                     var mem_option;
                     $.each(mem_list, function (i) {

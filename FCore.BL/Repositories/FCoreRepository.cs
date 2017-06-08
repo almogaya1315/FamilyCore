@@ -67,27 +67,19 @@ namespace FCore.BL.Repositories
         {
             ICollection<FamilyModel> families = new List<FamilyModel>();
             foreach (var familyName in familyNames)
-                families.Add(GetFamily(familyName.Text));
+            {
+                if (familyName.Text != "Choose" && familyName.Text != "No match")
+                    families.Add(GetFamily(familyName.Text));
+            }
             ICollection<FamilyMemberModel> members = new List<FamilyMemberModel>();
 
-            if (text == null)
+            foreach (var family in families)
             {
-                foreach (var family in families)
+                foreach (var member in family.FamilyMembers)
                 {
-                    foreach (var member in family.FamilyMembers)
-                    {
-                        members.Add(member);
-                    }
-                }
-            }
-            else
-            {
-                foreach (var family in families)
-                {
-                    foreach (var member in family.FamilyMembers)
-                    {
-                        if (member.FirstName.Contains(text)) members.Add(member);
-                    }
+                    if (text != null)
+                        if (!member.FirstName.ToLower().Contains(text.ToLower())) continue;
+                    members.Add(member);
                 }
             }
             

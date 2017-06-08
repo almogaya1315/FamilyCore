@@ -73,8 +73,14 @@ namespace FCore.Common.Utils
         public static ICollection<SelectListItem> GetMemberSelectListItems(ICollection<FamilyMemberModel> memberModels)
         {
             ICollection<SelectListItem> members = new List<SelectListItem>();
-            foreach (var member in memberModels)
-                members.Add(new SelectListItem() { Text = member.FirstName });
+            if (memberModels.Count > 0)
+            {
+                members.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "Choose" });
+                foreach (var member in memberModels)
+                    members.Add(new SelectListItem() { Text = member.FirstName });
+            }
+            else members.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "No match" });
+            
             return members;
         }
 
