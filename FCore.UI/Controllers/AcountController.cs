@@ -275,8 +275,11 @@ namespace FCore.UI.Controllers
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
             Session["relfam"] = families;
+            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(families, string.Empty));
+            Session["relmem"] = members;
+
             Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, Families = families }); 
+            return Json(new { success = true, Families = families, Members = members }); 
         }
 
         [HttpGet]

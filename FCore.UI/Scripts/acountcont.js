@@ -13,24 +13,40 @@ function LoadFamiliesDynamic() {
             //contentType: 'application/json; charset=utf-8',
             processData: true,
             success: function (data) {
-                var list = data.Families;
-                var select = $('#famenum_box');
-                select.empty();
+                var fam_list = data.Families;
+                var fam_select = $('#famenum_box');
+                fam_select.empty();
 
-                if (list.length > 0) {
-                    var option;
-                    $.each(list, function (i) {
-                        if (list[i].Value == 'ph') {
-                            option = '<option hidden>' + list[i].Text + '</option>';
+                if (fam_list.length > 0) {
+                    // set relative families
+                    var fam_option;
+                    $.each(fam_list, function (i) {
+                        if (fam_list[i].Value == 'ph') {
+                            fam_option = '<option hidden>' + fam_list[i].Text + '</option>';
                         }
                         else {
-                            var option = '<option>' + list[i].Text + '</option>';
+                            fam_option = '<option>' + fam_list[i].Text + '</option>';
                         }
-                        select.append(option);
+                        fam_select.append(fam_option);
                     })
 
                     $('#relmem_droptext').prop('disabled', false);
                     $('#memenum_box').prop('disabled', false);
+
+                    // set relative names
+                    var mem_list = data.Members;
+                    var mem_select = $('#memenum_box');
+
+                    var mem_option;
+                    $.each(mem_list, function (i) {
+                        if (mem_list[i].Value == 'ph') {
+                            mem_option = '<option hidden>' + mem_list[i].Text + '</option>';
+                        }
+                        else {
+                            mem_option = '<option>' + mem_list[i].Text + '</option>';
+                        }
+                        mem_select.append(mem_option);
+                    })
                 }
 
                 //var url = '/Acount/LoadFamiliesDynamic'; 

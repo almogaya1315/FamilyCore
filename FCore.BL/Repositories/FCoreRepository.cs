@@ -66,15 +66,31 @@ namespace FCore.BL.Repositories
         public ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> familyNames, string text)
         {
             ICollection<FamilyModel> families = new List<FamilyModel>();
-            foreach (var familyName in familyNames) families.Add(GetFamily(familyName.Text));
+            foreach (var familyName in familyNames)
+                families.Add(GetFamily(familyName.Text));
             ICollection<FamilyMemberModel> members = new List<FamilyMemberModel>();
-            foreach (var family in families)
+
+            if (text == string.Empty)
             {
-                foreach (var member in family.FamilyMembers)
+                foreach (var family in families)
                 {
-                    if (member.FirstName.Contains(text)) members.Add(member);
+                    foreach (var member in family.FamilyMembers)
+                    {
+                        members.Add(member);
+                    }
                 }
             }
+            else
+            {
+                foreach (var family in families)
+                {
+                    foreach (var member in family.FamilyMembers)
+                    {
+                        if (member.FirstName.Contains(text)) members.Add(member);
+                    }
+                }
+            }
+            
             return members;
         }
         public FamilyMemberModel GetFamilyMember(int id)
