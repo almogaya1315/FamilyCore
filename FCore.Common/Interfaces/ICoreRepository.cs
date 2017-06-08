@@ -22,7 +22,7 @@ namespace FCore.Common.Interfaces
         FamilyModel GetFamily(int id);
         FamilyModel GetFamily(string name);
 
-        ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> families, string text);
+        ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> families, string text = null);
         FamilyMemberModel GetFamilyMember(int id);
         FamilyMemberModel GetLastMemberJoined();
         FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath);

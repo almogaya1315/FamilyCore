@@ -63,14 +63,14 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetFamily(id));
         }
 
-        public ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> familyNames, string text)
+        public ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> familyNames, string text = null)
         {
             ICollection<FamilyModel> families = new List<FamilyModel>();
             foreach (var familyName in familyNames)
                 families.Add(GetFamily(familyName.Text));
             ICollection<FamilyMemberModel> members = new List<FamilyMemberModel>();
 
-            if (text == string.Empty)
+            if (text == null)
             {
                 foreach (var family in families)
                 {
