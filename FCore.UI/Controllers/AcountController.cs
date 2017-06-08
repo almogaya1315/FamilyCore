@@ -274,6 +274,7 @@ namespace FCore.UI.Controllers
         public ActionResult LoadFamiliesDynamic(TextBox box)
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
+            Session["relfam"] = families;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, Families = families }); 
         }
