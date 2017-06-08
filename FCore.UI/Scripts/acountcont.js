@@ -19,7 +19,6 @@ function LoadFamiliesDynamic() {
 
                 if (list.length > 0) {
 
-
                     $.each(list, function (i) {
                         var option = '<option>' + list[i].Text + '</option>';
                         select.append(option);
