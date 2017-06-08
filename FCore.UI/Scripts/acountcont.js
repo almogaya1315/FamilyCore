@@ -22,7 +22,6 @@ function LoadFamiliesDynamic() {
                     $.each(list, function (i) {
                         if (list[i].Value == 'ph') {
                             option = '<option hidden>' + list[i].Text + '</option>';
-                            select.append(option);
                         }
                         else {
                             var option = '<option>' + list[i].Text + '</option>';
@@ -30,10 +29,8 @@ function LoadFamiliesDynamic() {
                         select.append(option);
                     })
 
-                    var relmem_text = $('#relmem_droptext');
-                    relmem_text.prop('disabled', false);
-                    var relmem = $('#memenum_box');
-                    relmem.prop('disabled', false);
+                    $('#relmem_droptext').prop('disabled', false);
+                    $('#memenum_box').prop('disabled', false);
                 }
 
                 //var url = '/Acount/LoadFamiliesDynamic'; 
