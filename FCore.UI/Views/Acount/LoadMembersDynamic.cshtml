@@ -2,9 +2,23 @@
 
 <div class="container" style="padding-left:0">
     <input type="text" id="relmem_droptext" disabled="disabled" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px; width:15.5%" />
-    @Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true", @style = "width:15.5%" })
+    @*@Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true", @style = "width:15.5%" })*@
 
-
+    <select name="RelativeName" id="memenum_box" disabled="disabled" style="width:15.5%">
+        @{
+            foreach (SelectListItem item in Model)
+            {
+                if (item.Value == "ph")
+                {
+                    <option hidden>@item.Text</option>
+                }
+                else
+                {
+                    <option>@item.Text</option>
+                }
+            }
+        }
+    </select>
 </div>
 
     @*<script>
