@@ -70,18 +70,32 @@ namespace FCore.Common.Utils
             return families;
         }
 
-        public static ICollection<SelectListItem> GetMemberSelectListItems(ICollection<FamilyMemberModel> memberModels)
+        public static ICollection<SelectListItem> GetMemberSelectListItems(ICollection<FamilyMemberModel> memberModels = null)
         {
             ICollection<SelectListItem> members = new List<SelectListItem>();
-            if (memberModels.Count > 0)
+            if (memberModels == null)
             {
-                members.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "Choose" });
+                return SetPlaceHolder("Choose family first"); 
+            }
+            else if (memberModels.Count > 0)
+            {
+                members = SetPlaceHolder("Choose"); 
                 foreach (var member in memberModels)
                     members.Add(new SelectListItem() { Text = member.FirstName });
+                return members;
             }
-            else members.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "No match" });
-            
-            return members;
+            else return SetPlaceHolder("No match"); 
+        }
+
+        private static ICollection<SelectListItem> SetPlaceHolder(string text)
+        {
+            return new List<SelectListItem>() { new SelectListItem()
+            {
+                Value = "ph",
+                Disabled = true,
+                Selected = true,
+                Text = text
+            }};
         }
 
         private static ICollection<string> GetChildRelTypeList()

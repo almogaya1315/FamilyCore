@@ -50,7 +50,7 @@ namespace FCore.BL.Repositories
             foreach (FamilyEntity family in CoreDB.GetFamilies())
             {
                 if (family.Name.ToLower().Contains(text.ToLower()))
-                families.Add(ConvertToModel(family));
+                    families.Add(ConvertToModel(family));
             }
             return families;
         }
@@ -63,26 +63,17 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetFamily(id));
         }
 
-        public ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> familyNames, string text = null)
+        public ICollection<FamilyMemberModel> GetMembersDynamic(string familyName, string text = null)
         {
-            ICollection<FamilyModel> families = new List<FamilyModel>();
-            foreach (var familyName in familyNames)
-            {
-                if (familyName.Text != "Choose" && familyName.Text != "No match")
-                    families.Add(GetFamily(familyName.Text));
-            }
+            var family = GetFamily(familyName);
             ICollection<FamilyMemberModel> members = new List<FamilyMemberModel>();
-
-            foreach (var family in families)
+            foreach (var member in family.FamilyMembers)
             {
-                foreach (var member in family.FamilyMembers)
-                {
-                    if (text != null)
-                        if (!member.FirstName.ToLower().Contains(text.ToLower())) continue;
-                    members.Add(member);
-                }
+                if (text != null)
+                    if (!member.FirstName.ToLower().Contains(text.ToLower())) continue;
+                members.Add(member);
             }
-            
+
             return members;
         }
         public FamilyMemberModel GetFamilyMember(int id)

@@ -252,7 +252,7 @@ namespace FCore.UI.Controllers
                             model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
-                            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose family first" } };
+                            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(); 
                             return PartialView("AddPersonalInfo", model);
                         }
                         else SetImageFileModelState();
@@ -275,25 +275,25 @@ namespace FCore.UI.Controllers
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
             Session["relfam"] = families;
-            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(families));
-            Session["relmem"] = members;
+            //var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(families));
+            //Session["relmem"] = members;
 
             Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, Families = families, Members = members }); 
+            return Json(new { success = true, Families = families }); // , Members = members
         }
 
-        [HttpGet]
-        public ActionResult LoadMembersDynamic(string text)
+        //[HttpGet]
+        //public ActionResult LoadMembersDynamic()
+        //{
+        //    return PartialView(Session["relmem"]);
+        //}
+        [HttpPost]
+        public ActionResult LoadMembersDynamic(dynamic reqData)
         {
-            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((ICollection<SelectListItem>)Session["relfam"], text));
+            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData.FamilyName, reqData.Text));
             Session["relmem"] = members;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, data = members });
-        }
-        [HttpPost]
-        public ActionResult LoadMembersDynamic()
-        {
-            return PartialView(Session["relmem"]);
         }
 
         [HttpGet]
