@@ -49,7 +49,7 @@ namespace FCore.BL.Repositories
             ICollection<FamilyModel> families = new List<FamilyModel>();
             foreach (FamilyEntity family in CoreDB.GetFamilies())
             {
-                if (family.Name.Contains(text))
+                if (family.Name.ToLower().Contains(text.ToLower()))
                 families.Add(ConvertToModel(family));
             }
             return families;

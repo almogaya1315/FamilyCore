@@ -18,7 +18,6 @@ function LoadFamiliesDynamic() {
                 select.empty();
 
                 if (list.length > 0) {
-
                     var option;
                     $.each(list, function (i) {
                         if (list[i].Value == 'ph') {

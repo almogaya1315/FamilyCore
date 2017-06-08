@@ -265,16 +265,15 @@ namespace FCore.UI.Controllers
             return PartialView(model);
         }
 
-        [HttpGet]
-        public ActionResult LoadFamiliesDynamic()
-        {
-            return PartialView("LoadFamiliesDynamic", Session["relfam"]);
-        }
+        //[HttpGet]
+        //public ActionResult LoadFamiliesDynamic()
+        //{
+        //    return PartialView("LoadFamiliesDynamic", Session["relfam"]);
+        //}
         [HttpPost]
         public ActionResult LoadFamiliesDynamic(TextBox box)
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
-            Session["relfam"] = families;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, Families = families }); 
         }
