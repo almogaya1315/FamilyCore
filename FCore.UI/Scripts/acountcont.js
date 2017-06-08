@@ -1,5 +1,11 @@
 ﻿// LoadFamiliesDynamic
 
+$(function () {
+    $('#famenum_box').on('click', function () {
+        var x = $('#relfam_droptext').val();
+    })
+})
+
 function LoadFamiliesDynamic() {
     var text = $('#relfam_droptext').val();
     if (text.length >= 2) {
