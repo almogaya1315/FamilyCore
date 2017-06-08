@@ -14,7 +14,7 @@ function LoadFamiliesDynamic() {
             //contentType: 'application/json; charset=utf-8',
             processData: true,
             success: function (data) {
-                SetRelativeFamilies(fam_list, fam_select);
+                SetRelativeFamilies(data);
                 ResetRelativeNames();
 
                 //var url = '/Acount/LoadFamiliesDynamic'; 
@@ -43,27 +43,28 @@ function SetRelativeFamilies(data) {
 
 // LoadMembersDynamic
 
-$('#famenum_box').on('select', function () {
-    var familyName = $(this).find('option :selected').Text;
-    var data = { "FamilyName": familyName, "Text": "" };
+// $('#famenum_box').on('select', function () {
+function FamilyListOnChange() {
+    var familyName = $('#famenum_box option:selected').text();
+    var data = { "FamilyName": familyName, "Text": null };
 
     $('#relmem_droptext').prop('disabled', false);
     $('#memenum_box').prop('disabled', false);
     $('#relfam_droptext').val('');
 
     DynamicMemberAjaxRequest(data);
-})
+}
 
-$(function () {
-    $('#relmem_droptext').on('input', function () {
-        var text = $('#relmem_droptext').val();
-        if (text >= 2) {
-            var familyName = $('#famenum_box').find('option :selected').Text;
-            var data = { "FamilyName": familyName, "Text": text };
-            DynamicMemberAjaxRequest(data);
-        }
-    })
-})
+// $('#relmem_droptext').on('input', function () {
+function LoadMembersDynamic() {
+    var text = $('#relmem_droptext').val();
+    if (text >= 2) {
+        var familyName = $('#famenum_box option:selected').text();
+        var data = { "FamilyName": familyName, "Text": text };
+        DynamicMemberAjaxRequest(data);
+    }
+}
+
 
 function DynamicMemberAjaxRequest(data) {
     $.ajax({

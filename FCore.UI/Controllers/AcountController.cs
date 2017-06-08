@@ -5,6 +5,7 @@ using FCore.Common.Enums;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Members;
 using FCore.Common.Models.Users;
+using FCore.Common.Support;
 using FCore.Common.Utils;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -274,12 +275,8 @@ namespace FCore.UI.Controllers
         public ActionResult LoadFamiliesDynamic(TextBox box)
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
-            Session["relfam"] = families;
-            //var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(families));
-            //Session["relmem"] = members;
-
             Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, Families = families }); // , Members = members
+            return Json(new { success = true, Families = families }); 
         }
 
         //[HttpGet]
@@ -288,10 +285,9 @@ namespace FCore.UI.Controllers
         //    return PartialView(Session["relmem"]);
         //}
         [HttpPost]
-        public ActionResult LoadMembersDynamic(dynamic reqData)
+        public ActionResult LoadMembersDynamic(DynamicMemberRequestData reqData)
         {
-            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData.FamilyName, reqData.Text));
-            Session["relmem"] = members;
+            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData. FamilyName, reqData.Text));
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, data = members });
         }
