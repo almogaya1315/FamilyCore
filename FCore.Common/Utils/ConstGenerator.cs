@@ -64,8 +64,8 @@ namespace FCore.Common.Utils
                 families.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "Choose" });
                 foreach (var family in familyModels)
                     families.Add(new SelectListItem() { Text = family.Name });
-                var list = new SelectList(families);
             }
+            else families.Add(new SelectListItem() { Value = "ph", Disabled = true, Selected = true, Text = "No match" });
             
             return families;
         }

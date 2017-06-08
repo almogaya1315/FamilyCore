@@ -1,11 +1,5 @@
 ﻿// LoadFamiliesDynamic
 
-$(function () {
-    $('#famenum_box').on('click', function () {
-        var x = $('#relfam_droptext').val();
-    })
-})
-
 function LoadFamiliesDynamic() {
     var text = $('#relfam_droptext').val();
     if (text.length >= 2) {
@@ -25,13 +19,17 @@ function LoadFamiliesDynamic() {
 
                 if (list.length > 0) {
 
-
+                    var option;
                     $.each(list, function (i) {
-                        var option = '<option>' + list[i].Text + '</option>';
+                        if (list[i].Value == 'ph') {
+                            option = '<option hidden>' + list[i].Text + '</option>';
+                            select.append(option);
+                        }
+                        else {
+                            var option = '<option>' + list[i].Text + '</option>';
+                        }
                         select.append(option);
                     })
-                    $("#famenum_box option[value='ph']").hide();
-                    select.click();
 
                     var relmem_text = $('#relmem_droptext');
                     relmem_text.prop('disabled', false);
