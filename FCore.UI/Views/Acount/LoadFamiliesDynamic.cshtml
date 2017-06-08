@@ -2,40 +2,50 @@
 
 <div class="container" style="padding-left:0">
     <input type="text" id="relfam_droptext" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px; width:15.5%" placeholder="Search" oninput="LoadFamiliesDynamic()" />
-    @Html.DropDownList("RelativeFamily", Model, new { @id = "famenum_box", @style = "width:15.5%" })
+
+    <select name="RelativeFamily" id="famenum_box" style="width:15.5%">
+        @{
+            foreach (SelectListItem item in Model)
+            {
+                if (item.Value == "ph")
+                {
+                    <option hidden>@item.Text</option>
+                }
+                else
+                {
+                    <option>@item.Text</option>
+                }
+            }
+        }
+    </select>
+
 </div>
 
-<script>
-    $(function () {
-        $("#famenum_box option[value='0']").hide();
-    })
-</script>
-
 @*<script>
-    function LoadFamiliesDynamic() {
-        var text = $('#relfam_droptext').val();
-        if (text.length >= 2) {
-            var boxdata = { "Text": text }
-            $.ajax({
-                url: '/Acount/LoadFamiliesDynamic',
-                type: 'Post',
-                //dataType: 'json',
-                data: boxdata,
-                cache: false,
-                //contentType: 'application/json; charset=utf-8',
-                processData: true,
-                success: function (data) { 
-                    var list = data.Families;
+        function LoadFamiliesDynamic() {
+            var text = $('#relfam_droptext').val();
+            if (text.length >= 2) {
+                var boxdata = { "Text": text }
+                $.ajax({
+                    url: '/Acount/LoadFamiliesDynamic',
+                    type: 'Post',
+                    //dataType: 'json',
+                    data: boxdata,
+                    cache: false,
+                    //contentType: 'application/json; charset=utf-8',
+                    processData: true,
+                    success: function (data) {
+                        var list = data.Families;
 
-                    var relmem_text = $('#relmem_droptext');
-                    relmem_text.prop('disabled', false);
-                    var relmem = $('#memenum_box');
-                    relmem.prop('disabled', false);
+                        var relmem_text = $('#relmem_droptext');
+                        relmem_text.prop('disabled', false);
+                        var relmem = $('#memenum_box');
+                        relmem.prop('disabled', false);
 
-                    var url = '@Url.Action("LoadFamiliesDynamic", "Acount")';
-                    $('#famenum_div').load(url);
-                }
-            })
+                        var url = '@Url.Action("LoadFamiliesDynamic", "Acount")';
+                        $('#famenum_div').load(url);
+                    }
+                })
+            }
         }
-    }
-</script>*@
+    </script>*@

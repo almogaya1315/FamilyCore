@@ -11,6 +11,9 @@ where MigrationId = '201704302004215_perm_admin'
 select *
 from dbf.Families
 
+insert into dbf.Families 
+values('Perry')
+
 select *
 from dbf.ContactBooks
 

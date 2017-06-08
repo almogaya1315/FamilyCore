@@ -49,7 +49,7 @@ namespace FCore.BL.Repositories
             ICollection<FamilyModel> families = new List<FamilyModel>();
             foreach (FamilyEntity family in CoreDB.GetFamilies())
             {
-                if (family.Name.Contains(text))
+                if (family.Name.ToLower().Contains(text.ToLower()))
                 families.Add(ConvertToModel(family));
             }
             return families;
@@ -63,18 +63,34 @@ namespace FCore.BL.Repositories
             return ConvertToModel(CoreDB.GetFamily(id));
         }
 
-        public ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> familyNames, string text)
+        public ICollection<FamilyMemberModel> GetMembersDynamic(ICollection<SelectListItem> familyNames, string text = null)
         {
             ICollection<FamilyModel> families = new List<FamilyModel>();
-            foreach (var familyName in familyNames) families.Add(GetFamily(familyName.Text));
+            foreach (var familyName in familyNames)
+                families.Add(GetFamily(familyName.Text));
             ICollection<FamilyMemberModel> members = new List<FamilyMemberModel>();
-            foreach (var family in families)
+
+            if (text == null)
             {
-                foreach (var member in family.FamilyMembers)
+                foreach (var family in families)
                 {
-                    if (member.FirstName.Contains(text)) members.Add(member);
+                    foreach (var member in family.FamilyMembers)
+                    {
+                        members.Add(member);
+                    }
                 }
             }
+            else
+            {
+                foreach (var family in families)
+                {
+                    foreach (var member in family.FamilyMembers)
+                    {
+                        if (member.FirstName.Contains(text)) members.Add(member);
+                    }
+                }
+            }
+            
             return members;
         }
         public FamilyMemberModel GetFamilyMember(int id)
