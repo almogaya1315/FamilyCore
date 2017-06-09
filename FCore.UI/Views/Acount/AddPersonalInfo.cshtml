@@ -1,5 +1,4 @@
-﻿@model FCore.Common.Models.Users.UserModel
-
+﻿@model FCore.Common.Models.Members.FamilyMemberModel
 <div class="container">
     <div class="row bs-wizard" style="border-bottom:0; margin-left:-9%">
 
@@ -48,27 +47,27 @@
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.FirstName)
+            @Html.LabelFor(m => Model.FirstName)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.Member.FirstName)
-            @Html.ValidationMessageFor(m => Model.Member.FirstName, "", new { @style = Session["validcolor"] })
+            @Html.EditorFor(m => Model.FirstName)
+            @Html.ValidationMessage("FirstName", new { @style = Session["validcolor"] })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.LastName)
+            @Html.LabelFor(m => Model.LastName)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.Member.LastName)
-            @Html.ValidationMessageFor(m => Model.Member.LastName, "", new { @style = Session["validcolor"] })
+            @Html.EditorFor(m => Model.LastName)
+            @Html.ValidationMessage("LastName", new { @style = Session["validcolor"] })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.Gender)
+            @Html.LabelFor(m => Model.Gender)
         </div>
         <div class="col-sm-7">
 
@@ -79,21 +78,21 @@
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.BirthDate)
+            @Html.LabelFor(m => Model.BirthDate)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.Member.BirthDate)
-            @Html.ValidationMessageFor(m => Model.Member.BirthDate, "", new { @style = Session["validcolor"] + "margin-left:5%" })
+            @Html.EditorFor(m => Model.BirthDate)
+            @Html.ValidationMessage("BirthDate", new { @style = Session["validcolor"] + "margin-left:7%" })
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
         <div class="col-sm-5 col-xs-6 tital ">
-            @Html.LabelFor(m => Model.Member.BirthPlace)
+            @Html.LabelFor(m => Model.BirthPlace)
         </div>
         <div class="col-sm-7">
-            @Html.EditorFor(m => Model.Member.BirthPlace)
-            @Html.ValidationMessageFor(m => Model.Member.BirthPlace, "", new { @style = Session["validcolor"] })
+            @Html.EditorFor(m => Model.BirthPlace)
+            @Html.ValidationMessage("BirthPlace", new { @style = Session["validcolor"] })
         </div>
 
         <div class="clearfix"></div>

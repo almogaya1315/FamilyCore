@@ -71,9 +71,8 @@ namespace FCore.UI.Controllers
             }
         }
 
-        bool SetRelativeState()
+        void SetRelativeState()
         {
-            var relativePicked = false;
             if (Session["relative"] == null)
             {
                 if (Session["rel_fam"] == null)
@@ -98,9 +97,8 @@ namespace FCore.UI.Controllers
                     { coreRepo.GetFamily((string)Session["rel_fam"]) });
                 ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(new List<FamilyMemberModel>()
                     { (FamilyMemberModel)Session["relative"] });
-                relativePicked = true;
             }
-            return relativePicked;
+            ViewData["genenum"] = ConstGenerator.GenderTypes;
         }
         #endregion
 
@@ -280,14 +278,15 @@ namespace FCore.UI.Controllers
                     {
                         if (Session["HPFB_file"] != null)
                         {
-                            Session["username"] = model.UserName;
-                            Session["password"] = model.Password;
+                            //Session["username"] = model.UserName;
+                            //Session["password"] = model.Password;
+                            Session["userModel"] = model;
 
                             model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
                             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(); 
-                            return PartialView("AddPersonalInfo", model);
+                            return PartialView("AddPersonalInfo", model.Member);
                         }
                         else SetImageFileModelState();
                     }
@@ -332,10 +331,8 @@ namespace FCore.UI.Controllers
 
         // back from ci
         [HttpGet]
-        public ActionResult LoadPersonalInfo(UserModel model)
+        public ActionResult LoadPersonalInfo(FamilyMemberModel model)
         {
-            model.Member = new FamilyMemberModel();
-
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
                 { coreRepo.GetFamily((string)Session["rel_fam"]) });
@@ -345,15 +342,15 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
-        public ActionResult AddPersonalInfo(UserModel model)
+        public ActionResult AddPersonalInfo([Bind(Exclude = "Permissions,Relatives")]FamilyMemberModel model)
         {
-            var relativePicked = SetRelativeState();
+            SetRelativeState();
 
             var keys = ModelStateHelper.GetModelKeys(ModelStateSet.ForPersonalInfo);
             foreach (var key in keys) ModelState.Remove(key);
-            if (ModelState.IsValid && relativePicked)
+            if (ModelState.IsValid)
             {
-                Session["member_pi"] = model.Member;
+                Session["member_pi"] = model;
                 return PartialView("AddContactInfo", model);
             }
 

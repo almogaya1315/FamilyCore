@@ -308,6 +308,14 @@ namespace FCore.Tests.Moq
             throw new NotImplementedException();
         }
 
-        
+        public ICollection<FamilyMemberModel> GetMembersDynamic(string familyName, string text = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<FamilyMemberModel> GetFamilyMember(string family, string memberName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
