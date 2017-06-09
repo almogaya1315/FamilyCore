@@ -3,6 +3,7 @@ using FCore.BL.Identity.Managers;
 using FCore.BL.Repositories;
 using FCore.Common.Enums;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
 using FCore.Common.Models.Users;
 using FCore.Common.Support;
@@ -68,6 +69,38 @@ namespace FCore.UI.Controllers
                     ModelState.Remove("Member.ProfileImagePath");
                 }
             }
+        }
+
+        bool SetRelativeState()
+        {
+            var relativePicked = false;
+            if (Session["relative"] == null)
+            {
+                if (Session["rel_fam"] == null)
+                {
+                    ModelState.AddModelError("fam_required", "Pick relative family");
+                    ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
+                    ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
+                }
+                else
+                {
+                    ModelState.Remove("fam_required");
+                    ModelState.AddModelError("mem_required", "Pick relative name");
+                    ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
+                        { coreRepo.GetFamily((string)Session["rel_fam"]) });
+                    ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
+                }
+            }
+            else
+            {
+                ModelState.Remove("mem_required");
+                ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
+                    { coreRepo.GetFamily((string)Session["rel_fam"]) });
+                ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(new List<FamilyMemberModel>()
+                    { (FamilyMemberModel)Session["relative"] });
+                relativePicked = true;
+            }
+            return relativePicked;
         }
         #endregion
 
@@ -297,21 +330,34 @@ namespace FCore.UI.Controllers
             return Json(new { success = true });
         }
 
+        // back from ci
         [HttpGet]
         public ActionResult LoadPersonalInfo(UserModel model)
         {
             model.Member = new FamilyMemberModel();
 
             ViewData["genenum"] = ConstGenerator.GenderTypes;
-            ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
-            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
+            ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
+                { coreRepo.GetFamily((string)Session["rel_fam"]) });
+            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(new List<FamilyMemberModel>()
+                { (FamilyMemberModel)Session["relative"] });
             return PartialView("AddPersonalInfo", model);
         }
 
         [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
         public ActionResult AddPersonalInfo(UserModel model)
         {
-            return PartialView("AddContactInfo", model);
+            var relativePicked = SetRelativeState();
+
+            var keys = ModelStateHelper.GetModelKeys(ModelStateSet.ForPersonalInfo);
+            foreach (var key in keys) ModelState.Remove(key);
+            if (ModelState.IsValid && relativePicked)
+            {
+                Session["member_pi"] = model.Member;
+                return PartialView("AddContactInfo", model);
+            }
+
+            return PartialView(model);
         }
 
         // final step *** 
