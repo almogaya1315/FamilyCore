@@ -112,6 +112,7 @@ function ResetRelativeNames() {
 
 // listener to #memenum_box 'onchange'
 function AddRelativeName() {
+    $('#relmem_droptext').val('');
     var relativeName = $('#memenum_box option:selected').text();
     var data = { "FirstName": relativeName };
     $.ajax({
