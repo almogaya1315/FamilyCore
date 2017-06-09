@@ -1,7 +1,7 @@
 ﻿@model ICollection<SelectListItem>
 
 <div class="container" style="padding-left:0">
-    <input type="text" id="relmem_droptext" disabled="disabled" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px; width:15.5%" placeholder="Search" oninput="LoadMembersDynamic"/>
+    <input type="text" id="relmem_droptext" disabled="disabled" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px; width:15.5%" placeholder="Search" oninput="LoadMembersDynamic()"/>
     <select name="RelativeName" id="memenum_box" disabled="disabled" style="width:15.5%" onchange="AddRelativeName()">
         @{
             foreach (SelectListItem item in Model)

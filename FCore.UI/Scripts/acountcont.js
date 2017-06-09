@@ -58,7 +58,7 @@ function FamilyListOnChange() {
 // listener to #relmem_droptext 'oninput'
 function LoadMembersDynamic() {
     var text = $('#relmem_droptext').val();
-    if (text >= 2) {
+    if (text.length >= 2) {
         var familyName = $('#famenum_box option:selected').text();
         var data = { "FamilyName": familyName, "Text": text };
         DynamicMemberAjaxRequest(data);
