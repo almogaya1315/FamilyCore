@@ -2,9 +2,7 @@
 
 <div class="container" style="padding-left:0">
     <input type="text" id="relmem_droptext" disabled="disabled" style="display: block; line-height: inherit; height: 20px; margin-bottom: -1px; width:15.5%" placeholder="Search" oninput="LoadMembersDynamic"/>
-    @*@Html.DropDownList("RelativeName", Model, new { @id = "memenum_box", @disabled = "true", @style = "width:15.5%" })*@
-
-    <select name="RelativeName" id="memenum_box" disabled="disabled" style="width:15.5%">
+    <select name="RelativeName" id="memenum_box" disabled="disabled" style="width:15.5%" onchange="AddRelativeName()">
         @{
             foreach (SelectListItem item in Model)
             {
@@ -21,24 +19,4 @@
     </select>
 </div>
 
-    @*<script>
-        $(function () {
-            $('#relmem_droptext').on('input', function () {
-                var text = $('#relmem_droptext').val();
-                if (text >= 2) {
-                    $.ajax({
-                        url: '/Acount/LoadMembersDynamic',
-                        type: 'Get',
-                        data: text,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function () {
-                            var url = '@Url.Action("LoadMembersDynamic", "Acount")';
-                            $('#memenum_div').load(url);
-                        }
-                    })
-                }
-            })
-        })
-    </script>*@
+    

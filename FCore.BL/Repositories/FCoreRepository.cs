@@ -80,6 +80,13 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetFamilyMember(id));
         }
+        public ICollection<FamilyMemberModel> GetFamilyMember(string family, string memberName)
+        {
+            ICollection<FamilyMemberModel> members = new List<FamilyMemberModel>();
+            foreach (var member in GetFamily(family).FamilyMembers)
+                if (member.FirstName == memberName) members.Add(member);
+            return members;
+        }
         public FamilyMemberModel GetLastMemberJoined()
         {
             return ConvertToModel(CoreDB.GetLastMemberJoined());

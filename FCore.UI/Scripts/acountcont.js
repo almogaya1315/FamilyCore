@@ -43,7 +43,7 @@ function SetRelativeFamilies(data) {
 
 // LoadMembersDynamic
 
-// $('#famenum_box').on('select', function () {
+// listener to #famenum_box 'onchange'
 function FamilyListOnChange() {
     var familyName = $('#famenum_box option:selected').text();
     var data = { "FamilyName": familyName };
@@ -55,7 +55,7 @@ function FamilyListOnChange() {
     DynamicMemberAjaxRequest(data);
 }
 
-// $('#relmem_droptext').on('input', function () {
+// listener to #relmem_droptext 'oninput'
 function LoadMembersDynamic() {
     var text = $('#relmem_droptext').val();
     if (text >= 2) {
@@ -108,4 +108,16 @@ function ResetRelativeNames() {
     var placeholder = '<option disabled selected hidden>Choose family first</option>';
     $('#memenum_box').append(placeholder);
     $('#memenum_box').prop('disabled', false);
+}
+
+// listener to #memenum_box 'onchange'
+function AddRelativeName() {
+    var relativeName = $('#memenum_box option:selected').text();
+    var data = { "FirstName": relativeName };
+    $.ajax({
+        url: '/Acount/AddRelative',
+        type: 'Post',
+        data: data,
+        processData: true
+    })
 }

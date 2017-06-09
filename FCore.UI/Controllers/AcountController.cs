@@ -266,11 +266,6 @@ namespace FCore.UI.Controllers
             return PartialView(model);
         }
 
-        //[HttpGet]
-        //public ActionResult LoadFamiliesDynamic()
-        //{
-        //    return PartialView("LoadFamiliesDynamic", Session["relfam"]);
-        //}
         [HttpPost]
         public ActionResult LoadFamiliesDynamic(TextBox box)
         {
@@ -279,17 +274,27 @@ namespace FCore.UI.Controllers
             return Json(new { success = true, Families = families }); 
         }
 
-        //[HttpGet]
-        //public ActionResult LoadMembersDynamic()
-        //{
-        //    return PartialView(Session["relmem"]);
-        //}
         [HttpPost]
         public ActionResult LoadMembersDynamic(DynamicMemberRequestData reqData)
         {
             var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData. FamilyName, reqData.Text));
+            Session["rel_fam"] = reqData.FamilyName;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, Members = members });
+        }
+        [HttpPost]
+        public ActionResult AddRelative(FamilyMemberModel relative)
+        {
+            var relatives = coreRepo.GetFamilyMember((string)Session["rel_fam"], relative.FirstName); 
+            if (relatives.Count > 1)
+            {
+                // todo.. in case there is more then one member in a family that has the choosen name, 
+                //        the user will have to choose exactly which from a pop-up list
+            }
+            else Session["relative"] = relatives.FirstOrDefault();
+
+            Response.StatusCode = (int)HttpStatusCode.OK;
+            return Json(new { success = true });
         }
 
         [HttpGet]
@@ -299,7 +304,7 @@ namespace FCore.UI.Controllers
 
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
-            ViewData["memenum"] = new List<SelectListItem>() { new SelectListItem() { Text = "Choose relative family" } };
+            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
             return PartialView("AddPersonalInfo", model);
         }
 
