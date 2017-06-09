@@ -289,7 +289,7 @@ namespace FCore.UI.Controllers
         {
             var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData. FamilyName, reqData.Text));
             Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, data = members });
+            return Json(new { success = true, Members = members });
         }
 
         [HttpGet]

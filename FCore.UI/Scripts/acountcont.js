@@ -46,7 +46,7 @@ function SetRelativeFamilies(data) {
 // $('#famenum_box').on('select', function () {
 function FamilyListOnChange() {
     var familyName = $('#famenum_box option:selected').text();
-    var data = { "FamilyName": familyName, "Text": null };
+    var data = { "FamilyName": familyName };
 
     $('#relmem_droptext').prop('disabled', false);
     $('#memenum_box').prop('disabled', false);
@@ -72,7 +72,7 @@ function DynamicMemberAjaxRequest(data) {
         type: 'Post',
         data: data,
         cache: false,
-        contentType: false,
+        //contentType: false,
         processData: true,
         success: function (data) {
             SetRelativeNames(data);
