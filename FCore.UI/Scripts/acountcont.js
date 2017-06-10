@@ -8,17 +8,12 @@ function LoadFamiliesDynamic() {
         $.ajax({
             url: '/Acount/LoadFamiliesDynamic',
             type: 'Post',
-            //dataType: 'json',
             data: boxdata,
             cache: false,
-            //contentType: 'application/json; charset=utf-8',
             processData: true,
             success: function (data) {
                 SetRelativeFamilies(data);
                 ResetRelativeNames();
-
-                //var url = '/Acount/LoadFamiliesDynamic'; 
-                //$('#famenum_div').load(url);
             }
         })
     }
@@ -72,13 +67,9 @@ function DynamicMemberAjaxRequest(data) {
         type: 'Post',
         data: data,
         cache: false,
-        //contentType: false,
         processData: true,
         success: function (data) {
             SetRelativeNames(data);
-
-            //var url = '@Url.Action("LoadMembersDynamic", "Acount")';
-            //$('#memenum_div').load(url);
         }
     })
 }
