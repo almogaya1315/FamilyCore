@@ -55,8 +55,8 @@ namespace FCore.UI.Controllers
 
         void SetImageFileModelState()
         {
-            if (Session["imgClicked"] != null)
-            {
+            //if (Session["imgClicked"] != null)
+            //{
                 if (Session["HPFB_file"] == null)
                 {
                     Session["profileimage_modelstate"] = false;
@@ -68,7 +68,7 @@ namespace FCore.UI.Controllers
                     Session["profileimage_modelstate"] = null;
                     ModelState.Remove("Member.ProfileImagePath");
                 }
-            }
+            //}
         }
 
         void SetRelativeState()
@@ -134,7 +134,7 @@ namespace FCore.UI.Controllers
             return View();
         }
 
-        [HttpPost] // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost] 
         public async Task<ActionResult> LoginPage(UserModel model)
         {
             if (ModelState.IsValid)
@@ -205,7 +205,7 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost]  
         public async Task<ActionResult> ValidateUsername([Bind(Exclude = "Claims,Logins,Roles")]UserModel model)
         {
             var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForUsernameValidation);
@@ -229,7 +229,7 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost]  
         public async Task<ActionResult> ValidatePassword(UserModel model)
         {
             var passValid = await userRepo.ValidatePassword(model.Password);
@@ -246,10 +246,10 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost]  
         public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
         {
-            Session["imgClicked"] = true;
+            //Session["imgClicked"] = true;
 
             if (Session["HPFB_file"] != null)
             {
@@ -264,7 +264,7 @@ namespace FCore.UI.Controllers
             return Json(new { success = true });
         }
 
-        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost]  
         public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Member,Claims,Logins,Roles")]UserModel model)
         {
             var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
@@ -285,7 +285,8 @@ namespace FCore.UI.Controllers
                             model.Member = new FamilyMemberModel();
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
-                            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(); 
+                            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
+                            if (Session["relative"] != null) model.Member = (FamilyMemberModel)Session["relative"]; 
                             return PartialView("AddPersonalInfo", model.Member);
                         }
                         else SetImageFileModelState();
@@ -341,7 +342,7 @@ namespace FCore.UI.Controllers
             return PartialView("AddPersonalInfo", model);
         }
 
-        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost]  
         public ActionResult AddPersonalInfo([Bind(Exclude = "Permissions,Relatives")]FamilyMemberModel model)
         {
             SetRelativeState();
@@ -359,7 +360,7 @@ namespace FCore.UI.Controllers
 
         // final step *** 
 
-        [HttpPost]  // used 'using (userRepo = new UserRepository(HttpContext))' before DI
+        [HttpPost]  
         public async Task<ActionResult> CreateUser(UserModel model)
         {
             var identityResult = await userRepo.CreateNewUserAsync(model);
