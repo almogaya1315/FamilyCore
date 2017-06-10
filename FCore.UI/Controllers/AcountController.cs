@@ -3,6 +3,7 @@ using FCore.BL.Identity.Managers;
 using FCore.BL.Repositories;
 using FCore.Common.Enums;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
 using FCore.Common.Models.Users;
@@ -44,31 +45,24 @@ namespace FCore.UI.Controllers
             }
             else
             {
-                Session["valid_profileimage"] = false;
-                Session["profileimage_modelstate"] = false;
-
                 Session["HPFB_file"] = null;
                 Session["filepath"] = null;
                 Session["filename"] = null;
             }
         }
 
-        void SetImageFileModelState()
+        void SetImageFileModelState(bool nextStep)
         {
-            //if (Session["imgClicked"] != null)
-            //{
-                if (Session["HPFB_file"] == null)
-                {
-                    Session["profileimage_modelstate"] = false;
-                    ModelState.Remove("Member.ProfileImagePath");
-                    ModelState.AddModelError("Member.ProfileImagePath", "You must put in a profile picture");
-                }
-                else
-                {
-                    Session["profileimage_modelstate"] = null;
-                    ModelState.Remove("Member.ProfileImagePath");
-                }
-            //}
+            if (Session["HPFB_file"] == null && nextStep)
+            {
+                ModelState.Remove("chooseImage");
+                ModelState.AddModelError("requiredImage", "You must put in a profile picture");
+            }
+            else
+            {
+                ModelState.Remove("requiredImage");
+                ModelState.AddModelError("chooseImage", "Click avatar to choose profile picture");
+            }
         }
 
         void SetRelativeState()
@@ -134,7 +128,7 @@ namespace FCore.UI.Controllers
             return View();
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<ActionResult> LoginPage(UserModel model)
         {
             if (ModelState.IsValid)
@@ -173,6 +167,7 @@ namespace FCore.UI.Controllers
         {
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
+            ModelState.AddModelError("chooseImage", "Click avatar to choose profile picture");
             return View();
         }
 
@@ -205,7 +200,7 @@ namespace FCore.UI.Controllers
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]  
+        [HttpPost]
         public async Task<ActionResult> ValidateUsername([Bind(Exclude = "Claims,Logins,Roles")]UserModel model)
         {
             var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForUsernameValidation);
@@ -225,11 +220,11 @@ namespace FCore.UI.Controllers
                     ModelState["UserName"].Errors.Add("Allready in use");
                 }
             }
-            SetImageFileModelState();
+            SetImageFileModelState(false);
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]  
+        [HttpPost]
         public async Task<ActionResult> ValidatePassword(UserModel model)
         {
             var passValid = await userRepo.ValidatePassword(model.Password);
@@ -242,15 +237,13 @@ namespace FCore.UI.Controllers
                     ModelState.AddModelError($"Pass{i}", errors.ElementAt(i));
             }
             Session["temp_pass"] = model.Password;
-            SetImageFileModelState();
+            SetImageFileModelState(false);
             return PartialView("AddInitialInfo", model);
         }
 
-        [HttpPost]  
+        [HttpPost]
         public ActionResult ValidateProfileImage(HttpPostedFileBase ProfileImagePath)
         {
-            //Session["imgClicked"] = true;
-
             if (Session["HPFB_file"] != null)
             {
                 if (Session["HPFB_file"] != ProfileImagePath)
@@ -264,7 +257,7 @@ namespace FCore.UI.Controllers
             return Json(new { success = true });
         }
 
-        [HttpPost]  
+        [HttpPost]
         public async Task<ActionResult> AddInitialInfo([Bind(Exclude = "Member,Claims,Logins,Roles")]UserModel model)
         {
             var modelKeys = ModelStateHelper.GetModelKeys(ModelStateSet.ForInitialInfo);
@@ -286,16 +279,15 @@ namespace FCore.UI.Controllers
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
                             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
-                            if (Session["relative"] != null) model.Member = (FamilyMemberModel)Session["relative"]; 
                             return PartialView("AddPersonalInfo", model.Member);
                         }
-                        else SetImageFileModelState();
+                        else SetImageFileModelState(true);
                     }
                     else return await ValidatePassword(model);
                 }
                 else return await ValidateUsername(model);
             }
-            else SetImageFileModelState();
+            else SetImageFileModelState(true);
             return PartialView(model);
         }
 
@@ -304,13 +296,13 @@ namespace FCore.UI.Controllers
         {
             var families = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamiliesDynamic(box.Text));
             Response.StatusCode = (int)HttpStatusCode.OK;
-            return Json(new { success = true, Families = families }); 
+            return Json(new { success = true, Families = families });
         }
 
         [HttpPost]
         public ActionResult LoadMembersDynamic(DynamicMemberRequestData reqData)
         {
-            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData. FamilyName, reqData.Text));
+            var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData.FamilyName, reqData.Text));
             Session["rel_fam"] = reqData.FamilyName;
             Response.StatusCode = (int)HttpStatusCode.OK;
             return Json(new { success = true, Members = members });
@@ -318,7 +310,7 @@ namespace FCore.UI.Controllers
         [HttpPost]
         public ActionResult AddRelative(FamilyMemberModel relative)
         {
-            var relatives = coreRepo.GetFamilyMember((string)Session["rel_fam"], relative.FirstName); 
+            var relatives = coreRepo.GetFamilyMember((string)Session["rel_fam"], relative.FirstName);
             if (relatives.Count > 1)
             {
                 // todo.. in case there is more then one member in a family that has the choosen name, 
@@ -332,17 +324,17 @@ namespace FCore.UI.Controllers
 
         // back from ci
         [HttpGet]
-        public ActionResult LoadPersonalInfo(FamilyMemberModel model)
+        public ActionResult LoadPersonalInfo()
         {
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
                 { coreRepo.GetFamily((string)Session["rel_fam"]) });
             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(new List<FamilyMemberModel>()
                 { (FamilyMemberModel)Session["relative"] });
-            return PartialView("AddPersonalInfo", model);
+            return PartialView("AddPersonalInfo", Session["member_pi"]);
         }
 
-        [HttpPost]  
+        [HttpPost]
         public ActionResult AddPersonalInfo([Bind(Exclude = "Permissions,Relatives")]FamilyMemberModel model)
         {
             SetRelativeState();
@@ -352,7 +344,30 @@ namespace FCore.UI.Controllers
             if (ModelState.IsValid)
             {
                 Session["member_pi"] = model;
-                return PartialView("AddContactInfo", model);
+                ViewData["cityenum"] = ConstGenerator.Cities;
+                return PartialView("AddContactInfo", new ContactInfoModel());
+            }
+
+            return PartialView(model);
+        }
+
+        // back from ci
+        [HttpGet]
+        public ActionResult LoadContactInfo()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult AddContactInfo(ContactInfoModel model)
+        {
+            var keys = ModelStateHelper.GetModelKeys(ModelStateSet.ForContactInfo);
+            foreach (var key in keys) ModelState.Remove(key);
+
+            if (ModelState.IsValid)
+            {
+                Session["member_ci"] = model;
+                return PartialView("AddLifeStory", model);
             }
 
             return PartialView(model);
@@ -360,7 +375,7 @@ namespace FCore.UI.Controllers
 
         // final step *** 
 
-        [HttpPost]  
+        [HttpPost]
         public async Task<ActionResult> CreateUser(UserModel model)
         {
             var identityResult = await userRepo.CreateNewUserAsync(model);

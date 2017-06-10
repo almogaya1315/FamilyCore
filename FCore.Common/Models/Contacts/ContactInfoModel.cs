@@ -39,11 +39,12 @@ namespace FCore.Common.Models.Contacts
         public int? HouseNo { get; set; }
 
         [DisplayName("Phone no.")]
+        [RegularExpression("^0?(5[024])(\\-)?\\d{7}$", ErrorMessage = "Not valid")]
         public string PhoneNo { get; set; }
 
         [StringLength(50)]
         [DisplayName("E-Mail")]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Not a valid E-Mail")]
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Not valid")]
         public string Email { get; set; }
     }
 }

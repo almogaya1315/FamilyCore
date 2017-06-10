@@ -126,16 +126,10 @@
                 @{
                     if (String.IsNullOrWhiteSpace((string)Session["filename"]))
                     {
-                        if (Session["profileimage_modelstate"] == null)
-                        {
-                            <div id="message_file" style="color:#999; margin-top:3%">Click avatar to choose profile picture</div>
-                        }
-                        else
-                        {
-                            <div id="message_file" style="color:#999; margin-top:3%">
-                                @Html.ValidationMessageFor(m => Model.Member.ProfileImagePath, "", new { @style = Session["validcolor"] })
-                            </div>
-                        }
+                        <div id="message_file" style="color:#999; margin-top:3%">
+                            @Html.ValidationMessage("chooseImage") 
+                            @Html.ValidationMessage("requiredImage", new { @style = Session["validcolor"] })
+                        </div>
                     }
                     else
                     {

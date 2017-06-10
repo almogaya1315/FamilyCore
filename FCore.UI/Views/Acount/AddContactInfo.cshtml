@@ -32,10 +32,10 @@
 
 <br />
 
-@using (Ajax.BeginForm("AddContactInfo", "AddChildWizard", Model, new AjaxOptions
+@using (Ajax.BeginForm("AddContactInfo", "Acount", Model, new AjaxOptions
 {
     InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "wizard_page",
+    UpdateTargetId = "register_wizard",
     HttpMethod = "Post"
 }))
 {
@@ -48,7 +48,7 @@
     </div>
     <div class="col-sm-7">
         @Html.EditorFor(m => Model.Country, new { htmlAttributes = new { @Value = "Israel", @readonly = "readonly" } })
-        @*@Html.ValidationMessageFor(m => Model.Country)*@
+        @Html.ValidationMessage("Country")
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>
@@ -68,8 +68,7 @@
         @Html.LabelFor(m => Model.Street)
     </div>
     <div class="col-sm-7">
-        @Html.EditorFor(m => Model.Street) @*, new { htmlAttributes = new { @Value = "" } }*@
-        @Html.ValidationMessageFor(m => Model.Street)
+        @Html.EditorFor(m => Model.Street) 
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>
@@ -79,7 +78,6 @@
     </div>
     <div class="col-sm-7">
         @Html.EditorFor(m => Model.HouseNo)
-        @Html.ValidationMessageFor(m => Model.HouseNo)
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>
@@ -106,18 +104,19 @@
 
     <br />
 
-    <div >
-        <input id="back_from_ci" type="button" class="btn btn-info" value="<<  Back" style="display:inline; margin-left:2%; width:17%" onclick="BackFromPersonalInfo" />
+    <div style="margin-bottom:4%">
+        <input id="back_from_ci" type="button" class="btn btn-info" value="<<  Back" style="display:inline; margin-left:2%; width:17%" />
 
         <input class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:62%; display:inline" />
     </div>
-            }
+}
 
 <script>
     $(function () {
         $('#back_from_ci').on('click', function () {
-            var url = '@Url.Action("LoadPersonalInfo", "AddChildWizard")'
-            $('#wizard_page').load(url)
+            var url = '@Url.Action("LoadPersonalInfo", "Acount")'
+            $('#register_wizard').load(url)
         })
     })
 </script>
+
