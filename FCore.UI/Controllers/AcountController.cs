@@ -334,7 +334,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadPersonalInfo()
         {
-            ViewData["relenum"] = ConstGenerator.RelTypes;
+            ViewData["relenum"] = ConstGenerator.GetRelTypesSelectedItem((string)Session["rel"]); 
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>() { coreRepo.GetFamily((string)Session["rel_fam"]) });
             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));
@@ -368,7 +368,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadContactInfo()
         {
-            ViewData["cityenum"] = ConstGenerator.Cities;
+            ViewData["cityenum"] = ConstGenerator.GetCitiesSelectedItem((Session["member_ci"] as ContactInfoModel).City); 
             return PartialView("AddContactInfo", Session["member_ci"]);
         }
 
@@ -388,7 +388,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddLifeStory(FamilyMemberModel model)
+        public async Task<ActionResult> AddLifeStory([Bind(Exclude = ("Permissions,Relatives,ContactInfo"))]FamilyMemberModel model)
         {
             var keys = ModelStateHelper.GetModelKeys(ModelStateSet.ForLifeStory);
             foreach (var key in keys) ModelState.Remove(key);
@@ -398,20 +398,22 @@ namespace FCore.UI.Controllers
                 (Session["userModel"] as UserModel).Member = (FamilyMemberModel)Session["member_pi"];
                 (Session["userModel"] as UserModel).Member.ContactInfo = (ContactInfoModel)Session["member_ci"];
 
-                RedirectToAction("CreateUser", Session["userModel"]);
+                await CreateUser((UserModel)Session["userModel"]);
+                // RedirectToAction("CreateUser", Session["userModel"]);
             }
             return PartialView(model);
         }
 
-        [HttpPost]
         public async Task<ActionResult> CreateUser(UserModel model)
         {
+            model.Member = coreRepo.CreateMember(model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]);
             var identityResult = await userRepo.CreateNewUserAsync(model);
 
             if (identityResult.Succeeded)
             {
                 var userModel = await userRepo.GetUserByUsrenameAsync(model.UserName);
-                userModel.Member = coreRepo.CreateMember(model, model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]); 
+                userModel.Member = coreRepo.GetFamilyMember(model.Member.Id);
+                userModel.Member = coreRepo.ConnectRelatives((Session["relative"] as FamilyMemberModel), userModel.Member);
                 return PartialView("CreateSuccess", userModel);
             }
 

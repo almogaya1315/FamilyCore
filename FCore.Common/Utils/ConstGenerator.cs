@@ -101,6 +101,28 @@ namespace FCore.Common.Utils
             else return SetPlaceHolder("No match"); 
         }
 
+        public static ICollection<SelectListItem> GetRelTypesSelectedItem(string selected)
+        {
+            ICollection<SelectListItem> rels = new List<SelectListItem>();
+            foreach (string rel in Enum.GetNames(typeof(RelationshipType)))
+            {
+                if (rel == selected) rels.Add(new SelectListItem() { Text = rel, Selected = true });
+                else rels.Add(new SelectListItem() { Text = rel });
+            }
+            return rels;
+        }
+
+        public static ICollection<SelectListItem> GetCitiesSelectedItem(string selected)
+        {
+            ICollection<SelectListItem> cities = new List<SelectListItem>();
+            foreach (string city in GetCities())
+            {
+                if (city == selected) cities.Add(new SelectListItem() { Text = city, Selected = true });
+                else cities.Add(new SelectListItem() { Text = city });
+            }
+            return cities;
+        }
+
         private static ICollection<SelectListItem> SetPlaceHolder(string text)
         {
             return new List<SelectListItem>() { new SelectListItem()

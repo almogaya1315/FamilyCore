@@ -127,16 +127,9 @@
             @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
         </div>
         <div class="col-sm-7">
-            @{
-                if (Session["rel"] != null)
-                {
-                    @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>, new { @Value = Session["rel"] })
-                }
-                else
-                {
-                    @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>)
-                }
-            }
+
+            @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>)
+
         </div>
         <div class="clearfix"></div>
         <div class="bot-border"></div>

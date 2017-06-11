@@ -217,10 +217,9 @@ namespace FCore.UI.Controllers
                     //return RedirectToAction("CreateChild", Session["postedMember_final"]);
                     try
                     {
-                        var newChild = repo.CreateMember(null,
-                                                        (FamilyMemberModel)Session["postedMember_final"],
-                                                        (int)Session["creatorId"],
-                                                        (string)Session["creator_rel"]);
+                        var newChild = repo.CreateMember((FamilyMemberModel)Session["postedMember_final"],
+                                                         (int)Session["creatorId"],
+                                                         (string)Session["creator_rel"]);
                         newChild = repo.ConnectRelatives(repo.GetFamilyMember((int)Session["creatorId"]), newChild);
                         Session["newChild"] = newChild;
                     }

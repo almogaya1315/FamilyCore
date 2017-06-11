@@ -49,7 +49,7 @@ namespace FCore.Common.Utils
                 case ModelStateSet.ForContactInfo:
                     return new List<string>() { "Email" };
                 case ModelStateSet.ForLifeStory:
-                    return new List<string>() { "Id", "FamilyId", "PermissionId", "ContactInfoId", };
+                    return new List<string>() { "Id", "FamilyId", "PermissionId", "ContactInfoId", "ProfileImagePath" };
                 default:
                     throw new InvalidOperationException("The ModelStateSet passed was not implemented in switch.");
             }

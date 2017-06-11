@@ -136,26 +136,17 @@ namespace FCore.BL.Repositories
                 }
             };
         }
-        public FamilyMemberModel CreateMember(UserModel postedUser, FamilyMemberModel postedMember, int relativeId, string relationship)
+        public FamilyMemberModel CreateMember(FamilyMemberModel postedMember, int relativeId, string relationship)
         {
-            if ((bool)postedMember.IsAdult)
-            {
-                // to do.. in sigh-in feature
-                // CoreDB.CreateAdult(ConvertToEntity(postedMember));
-                return null;
-            }
-            else
-            {
-                return ConvertToModel(CoreDB.CreateChild(relativeId, ConvertToEntity(postedMember), relationship));
-            }
+            return ConvertToModel(CoreDB.CreateMember(relativeId, ConvertToEntity(postedMember), relationship));
         }
-        public FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember)
+        public FamilyMemberModel ConnectRelatives(FamilyMemberModel relative, FamilyMemberModel newMember)
         {
-            var createdCreatorRel = (RelationshipType)Enum.Parse(typeof(RelationshipType), newMember.Relatives.FirstOrDefault().Relationship);
-            foreach (var relativeModel in creator.Relatives)
+            var createdRelativeEnum = (RelationshipType)Enum.Parse(typeof(RelationshipType), newMember.Relatives.FirstOrDefault().Relationship);
+            foreach (var relativeModel in relative.Relatives)
             {
                 if (relativeModel.RelativeId == newMember.Id) continue;
-                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel);
+                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdRelativeEnum);
                 var createdRelativeModel = new RelativeModel(newMember.Id, relativeModel.RelativeId,
                                                             (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
                 {

@@ -18,6 +18,7 @@ using FCore.DAL.Entities.Families;
 using FCore.DAL.Entities;
 using FCore.DAL.Entities.Contacts;
 using FCore.BL.Repositories;
+using FCore.Common.Models.Users;
 
 namespace FCore.Tests.Moq
 {
@@ -314,6 +315,11 @@ namespace FCore.Tests.Moq
         }
 
         public ICollection<FamilyMemberModel> GetFamilyMember(string family, string memberName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public FamilyMemberModel CreateMember(UserModel postedUser, FamilyMemberModel postedMember, int relativeId, string relationship)
         {
             throw new NotImplementedException();
         }

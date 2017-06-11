@@ -79,36 +79,20 @@ namespace FCore.BL.Repositories
 
             return await Task.FromResult(userModel);
         }
-        
-        /*public IdentityUser ConvertToEntity(IdentityUser model)
+
+        public IdentityUser ConvertToEntity(IdentityUser model)
         {
-            // todo
-            throw new NotImplementedException();
+            var userEntity = new UserEntity()
+            {
+                MemberId = (model as UserModel).MemberId,
+                FamilyId = (model as UserModel).FamilyId,
+                FullName = (model as UserModel).FullName,
+                Password = (model as UserModel).Password,
+                UserName = model.UserName
+            };
 
-            //var userEntity = new UserEntity()
-            //{
-            //    MemberId = (model as UserModel).MemberId,
-            //    FamilyId = (model as UserModel).FamilyId,
-            //    FullName = (model as UserModel).FullName,
-            //    Id = model.Id,
-            //    UserName = model.UserName,
-            //    PasswordHash = model.PasswordHash,
-            //    Email = model.Email,
-            //    EmailConfirmed = model.EmailConfirmed,
-            //    PhoneNumber = model.PhoneNumber,
-            //    PhoneNumberConfirmed = model.PhoneNumberConfirmed,
-            //    SecurityStamp = model.SecurityStamp,
-            //    AccessFailedCount = model.AccessFailedCount,
-            //    LockoutEnabled = model.LockoutEnabled,
-            //    LockoutEndDateUtc = model.LockoutEndDateUtc,
-            //    TwoFactorEnabled = model.TwoFactorEnabled,
-            //};
-            //foreach (var claim in model.Claims) userEntity.Claims.Add(claim);
-            //foreach (var login in model.Logins) userEntity.Logins.Add(login);
-            //foreach (var role in model.Roles) userEntity.Roles.Add(role);
-
-            //return userEntity;
-        }*/
+            return userEntity;
+        }
 
         public FamilyModel ConvertToModel(FamilyEntity entity)
         {

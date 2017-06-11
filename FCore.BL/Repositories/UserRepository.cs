@@ -131,7 +131,8 @@ namespace FCore.BL.Repositories
         #region identityUserDB
         public async Task<IdentityResult> CreateNewUserAsync(UserModel model) 
         {
-            return await userManager.CreateAsync(new UserEntity(model.UserName), model.Password);
+            var entity = ConvertToEntity(model);
+            return await userManager.CreateAsync((UserEntity)entity);
         }
 
         public async Task<IdentityResult> ValidatePassword(string password)
