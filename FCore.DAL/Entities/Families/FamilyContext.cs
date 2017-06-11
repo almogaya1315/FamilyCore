@@ -456,7 +456,14 @@ namespace FCore.DAL.Entities.Families
             var newMember = CreateFamilyMember(postedEntity);
             FamilyMembers.Add(newMember);
             Entry(newMember).State = EntityState.Added;
-            SaveChanges();
+            try
+            {
+                SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return newMember;
         }
         FamilyMemberEntity SaveContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newMember)
