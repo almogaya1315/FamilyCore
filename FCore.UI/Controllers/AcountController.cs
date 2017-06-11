@@ -283,7 +283,7 @@ namespace FCore.UI.Controllers
                             Session["userModel"] = model;
 
                             model.Member = new FamilyMemberModel();
-                            ViewData["relenum"] = ConstGenerator.RelTypes; // Enum.GetNames(typeof(RelationshipType));
+                            ViewData["relenum"] = ConstGenerator.RelTypes; 
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
                             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
@@ -359,6 +359,8 @@ namespace FCore.UI.Controllers
                 return PartialView("AddContactInfo", new ContactInfoModel());
             }
 
+            ViewData["relenum"] = ConstGenerator.RelTypes;
+            ViewData["genenum"] = ConstGenerator.GenderTypes;
             return PartialView(model);
         }
 
