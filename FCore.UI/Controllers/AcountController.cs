@@ -283,6 +283,7 @@ namespace FCore.UI.Controllers
                             Session["userModel"] = model;
 
                             model.Member = new FamilyMemberModel();
+                            ViewData["relenum"] = ConstGenerator.RelTypes; // Enum.GetNames(typeof(RelationshipType));
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
                             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
@@ -333,6 +334,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadPersonalInfo()
         {
+            ViewData["relenum"] = ConstGenerator.RelTypes;
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>() { coreRepo.GetFamily((string)Session["rel_fam"]) });
             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));
@@ -406,7 +408,7 @@ namespace FCore.UI.Controllers
             if (identityResult.Succeeded)
             {
                 var userModel = await userRepo.GetUserByUsrenameAsync(model.UserName);
-                userModel.Member = coreRepo.CreateMember(model, model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]);
+                userModel.Member = coreRepo.CreateMember(model, model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]); // rel not functional
                 return PartialView("CreateSuccess", userModel);
             }
 

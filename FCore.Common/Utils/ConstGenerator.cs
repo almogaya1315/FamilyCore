@@ -20,6 +20,20 @@ namespace FCore.Common.Utils
             }
         }
 
+        public static ICollection<SelectListItem> RelTypes
+        {
+            get
+            {
+                ICollection<SelectListItem> rels = new List<SelectListItem>();
+                foreach (var rel in Enum.GetNames(typeof(RelationshipType)))
+                {
+                    rels.Add(new SelectListItem() { Text = rel });
+                }
+                return rels;
+            }
+            private set { }
+        }
+
         public static ICollection<SelectListItem> ChildRelTypes
         {
             get

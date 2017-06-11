@@ -123,6 +123,17 @@
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
+        <div class="col-sm-5 col-xs-6 tital ">
+            @Html.LabelFor(m => Model.Relatives.FirstOrDefault().Relationship)
+        </div>
+        <div class="col-sm-7">
+
+            @Html.DropDownList("Relationship", ViewData["relenum"] as ICollection<SelectListItem>)
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+
         <br />
 
         <div>
