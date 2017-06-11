@@ -57,9 +57,16 @@
         @Html.LabelFor(m => Model.City)
     </div>
     <div class="col-sm-7 col-xs-6 ">
-
-        @Html.DropDownList("City", ViewData["cityenum"] as ICollection<SelectListItem>)
-
+        @{
+            if (Model.City != null)
+            {
+                Html.DropDownList("City", ViewData["cityenum"] as ICollection<SelectListItem>, new { @Value = Model.City });
+            }
+            else
+            {
+                @Html.DropDownList("City", ViewData["cityenum"] as ICollection<SelectListItem>)
+            }
+        }
     </div>
     <div class="clearfix"></div>
     <div class="bot-border"></div>

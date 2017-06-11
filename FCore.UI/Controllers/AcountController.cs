@@ -331,6 +331,12 @@ namespace FCore.UI.Controllers
                 { coreRepo.GetFamily((string)Session["rel_fam"]) });
             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(new List<FamilyMemberModel>()
                 { (FamilyMemberModel)Session["relative"] });
+
+            var ph = (ViewData["famenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
+            (ViewData["famenum"] as ICollection<SelectListItem>).Remove(ph);
+            ph = (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
+            (ViewData["memenum"] as ICollection<SelectListItem>).Remove(ph);
+
             return PartialView("AddPersonalInfo", Session["member_pi"]);
         }
 
@@ -351,7 +357,7 @@ namespace FCore.UI.Controllers
             return PartialView(model);
         }
 
-        // back from ci
+        // back from ls
         [HttpGet]
         public ActionResult LoadContactInfo()
         {
@@ -368,7 +374,7 @@ namespace FCore.UI.Controllers
             if (ModelState.IsValid)
             {
                 Session["member_ci"] = model;
-                return PartialView("AddLifeStory", model);
+                return PartialView("AddLifeStory", Session["member_pi"]);
             }
 
             return PartialView(model);
