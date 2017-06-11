@@ -19,16 +19,14 @@
     </select>
     @Html.ValidationMessage("mem_required")
 
+    @* in case of 'back from ci' *@
     @if (Session["relative"] != null)
     {
-        <span onload="EnableBoxAndSelect()"></span>
+        <script>
+            $(function() {
+                $('#relmem_droptext').prop('disabled', false);
+                $('#memenum_box').prop('disabled', false);
+            })
+        </script>
     }
 </div>
-
-<script>
-    function EnableBoxAndSelect() {
-        $('#relmem_droptext').prop('disabled', false);
-        $('#memenum_box').prop('disabled', false);
-    }
-</script>
-

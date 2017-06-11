@@ -327,10 +327,8 @@ namespace FCore.UI.Controllers
         public ActionResult LoadPersonalInfo()
         {
             ViewData["genenum"] = ConstGenerator.GenderTypes;
-            ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
-                { coreRepo.GetFamily((string)Session["rel_fam"]) });
-            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));  //new List<FamilyMemberModel>()
-                //{ (FamilyMemberModel)Session["relative"] });
+            ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>() { coreRepo.GetFamily((string)Session["rel_fam"]) });
+            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));
 
             var ph = (ViewData["famenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
             (ViewData["famenum"] as ICollection<SelectListItem>).Remove(ph);
@@ -381,7 +379,12 @@ namespace FCore.UI.Controllers
             return PartialView(model);
         }
 
-        // final step *** 
+        [HttpPost]
+        public ActionResult AddLifeStory(FamilyMemberModel model)
+        {
+
+            CreateUser();
+        }
 
         [HttpPost]
         public async Task<ActionResult> CreateUser(UserModel model)
