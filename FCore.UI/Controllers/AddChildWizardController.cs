@@ -99,7 +99,7 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 // when 'back' from ci page, no member model can be passed because the ci view's model is type 'ContactInfo' 
-                if (creator == null || creator.Id == 0) 
+                if (creator == null || creator.Id == 0)
                 {
                     ViewData["relenum"] = ConstGenerator.ChildRelTypes;
                     ViewData["genenum"] = ConstGenerator.GenderTypes;
@@ -191,7 +191,7 @@ namespace FCore.UI.Controllers
                         postedMember = repo.SetContactInfo(postedMember, info);
                         Session["postedMember_ci"] = postedMember;
                     }
-                    
+
                     return PartialView("AddLifeStory", Session["postedMember_ci"]);
                 }
                 else
@@ -217,9 +217,10 @@ namespace FCore.UI.Controllers
                     //return RedirectToAction("CreateChild", Session["postedMember_final"]);
                     try
                     {
-                        var newChild = repo.CreateMember((int)Session["creatorId"], 
-                                                         (FamilyMemberModel)Session["postedMember_final"], 
-                                                         (string)Session["creator_rel"]); 
+                        var newChild = repo.CreateMember(null,
+                                                        (FamilyMemberModel)Session["postedMember_final"],
+                                                        (int)Session["creatorId"],
+                                                        (string)Session["creator_rel"]);
                         newChild = repo.ConnectRelatives(repo.GetFamilyMember((int)Session["creatorId"]), newChild);
                         Session["newChild"] = newChild;
                     }

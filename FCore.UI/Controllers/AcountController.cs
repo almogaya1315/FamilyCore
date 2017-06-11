@@ -345,7 +345,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPersonalInfo([Bind(Exclude = "Permissions,Relatives")]FamilyMemberModel model)
+        public ActionResult AddPersonalInfo([Bind(Exclude = "Permissions,Relatives")]FamilyMemberModel model, string Relationship)
         {
             SetRelativeState();
 
@@ -354,6 +354,7 @@ namespace FCore.UI.Controllers
             if (ModelState.IsValid)
             {
                 Session["member_pi"] = model;
+                Session["rel"] = Relationship;
                 ViewData["cityenum"] = ConstGenerator.Cities;
                 return PartialView("AddContactInfo", new ContactInfoModel());
             }
@@ -408,7 +409,7 @@ namespace FCore.UI.Controllers
             if (identityResult.Succeeded)
             {
                 var userModel = await userRepo.GetUserByUsrenameAsync(model.UserName);
-                userModel.Member = coreRepo.CreateMember(model, model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]); // rel not functional
+                userModel.Member = coreRepo.CreateMember(model, model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]); 
                 return PartialView("CreateSuccess", userModel);
             }
 
