@@ -329,13 +329,14 @@ namespace FCore.UI.Controllers
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>()
                 { coreRepo.GetFamily((string)Session["rel_fam"]) });
-            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(new List<FamilyMemberModel>()
-                { (FamilyMemberModel)Session["relative"] });
+            ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));  //new List<FamilyMemberModel>()
+                //{ (FamilyMemberModel)Session["relative"] });
 
             var ph = (ViewData["famenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
             (ViewData["famenum"] as ICollection<SelectListItem>).Remove(ph);
             ph = (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
             (ViewData["memenum"] as ICollection<SelectListItem>).Remove(ph);
+            (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Text == (Session["relative"] as FamilyMemberModel).FirstName).Selected = true;
 
             return PartialView("AddPersonalInfo", Session["member_pi"]);
         }
