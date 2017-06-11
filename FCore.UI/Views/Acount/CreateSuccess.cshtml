@@ -1,2 +1,23 @@
 ﻿@model FCore.Common.Models.Members.FamilyMemberModel
 
+<form>
+    <div class="clearfix" style="margin-top:5%"></div>
+    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Great!</div>
+    <div class="bot-border"></div>
+
+    <div style="margin-top:2%">
+        <div class="col-sm-12">
+            Regestration completed!
+            <br />
+                Your relarive,
+                @{ (Session["relative"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName }
+                @{ (Session["relative"] as FCore.Common.Models.Members.FamilyMemberModel).LastName },
+            will be sent a confirmation request.
+            <br />
+            After athorization, you will get an acceptence mail,
+            and will be able to log-in to 'FAMILY-CORE'.
+        </div>
+        <div class="clearfix"></div>
+        <div class="bot-border"></div>
+    </div>
+</form>
