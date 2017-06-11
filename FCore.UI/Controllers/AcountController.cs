@@ -355,7 +355,8 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadContactInfo()
         {
-            return null;
+            ViewData["cityenum"] = ConstGenerator.Cities;
+            return PartialView("AddContactInfo", Session["member_ci"]);
         }
 
         [HttpPost]
