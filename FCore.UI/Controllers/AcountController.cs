@@ -24,8 +24,6 @@ using System.Web.UI.WebControls;
 
 namespace FCore.UI.Controllers
 {
-
-
     [AllowAnonymous]
     public class AcountController : Controller
     {
@@ -93,6 +91,15 @@ namespace FCore.UI.Controllers
                     { (FamilyMemberModel)Session["relative"] });
             }
             ViewData["genenum"] = ConstGenerator.GenderTypes;
+        }
+
+        void SetDropDownListData()
+        {
+            var ph = (ViewData["famenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
+            (ViewData["famenum"] as ICollection<SelectListItem>).Remove(ph);
+            ph = (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
+            (ViewData["memenum"] as ICollection<SelectListItem>).Remove(ph);
+            (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Text == (Session["relative"] as FamilyMemberModel).FirstName).Selected = true;
         }
         #endregion
 
@@ -330,11 +337,7 @@ namespace FCore.UI.Controllers
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>() { coreRepo.GetFamily((string)Session["rel_fam"]) });
             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));
 
-            var ph = (ViewData["famenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
-            (ViewData["famenum"] as ICollection<SelectListItem>).Remove(ph);
-            ph = (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Value == "ph");
-            (ViewData["memenum"] as ICollection<SelectListItem>).Remove(ph);
-            (ViewData["memenum"] as ICollection<SelectListItem>).FirstOrDefault(i => i.Text == (Session["relative"] as FamilyMemberModel).FirstName).Selected = true;
+            SetDropDownListData();
 
             return PartialView("AddPersonalInfo", Session["member_pi"]);
         }
@@ -382,8 +385,17 @@ namespace FCore.UI.Controllers
         [HttpPost]
         public ActionResult AddLifeStory(FamilyMemberModel model)
         {
+            var keys = ModelStateHelper.GetModelKeys(ModelStateSet.ForLifeStory);
+            foreach (var key in keys) ModelState.Remove(key);
+            if (ModelState.IsValid)
+            {
+                (Session["userModel"] as UserModel).Member.About = model.About;
+                (Session["userModel"] as UserModel).Member = (FamilyMemberModel)Session["member_pi"];
+                (Session["userModel"] as UserModel).Member.ContactInfo = (ContactInfoModel)Session["member_ci"];
 
-            CreateUser();
+                RedirectToAction("CreateUser", Session["userModel"]);
+            }
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -394,9 +406,11 @@ namespace FCore.UI.Controllers
             if (identityResult.Succeeded)
             {
                 var userModel = await userRepo.GetUserByUsrenameAsync(model.UserName);
-                return RedirectToAction("CreateSuccess", "Acount", userModel);
+                userModel.Member = coreRepo.CreateMember(model, model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]);
+                return PartialView("CreateSuccess", userModel);
             }
-            return PartialView(model);
+
+            return PartialView("CreateFailure", model);
         }
     }
 }

@@ -22,6 +22,7 @@ using System.Web;
 using System.IO;
 using FCore.Common.Utils;
 using System.Web.Mvc;
+using FCore.Common.Models.Users;
 
 namespace FCore.BL.Repositories
 {
@@ -135,7 +136,7 @@ namespace FCore.BL.Repositories
                 }
             };
         }
-        public FamilyMemberModel CreateMember(int creatorId, FamilyMemberModel postedMember, string relationship)
+        public FamilyMemberModel CreateMember(UserModel postedUser, FamilyMemberModel postedMember, int relativeId, string relationship)
         {
             if ((bool)postedMember.IsAdult)
             {
@@ -145,7 +146,7 @@ namespace FCore.BL.Repositories
             }
             else
             {
-                return ConvertToModel(CoreDB.CreateChild(creatorId, ConvertToEntity(postedMember), relationship));
+                return ConvertToModel(CoreDB.CreateChild(relativeId, ConvertToEntity(postedMember), relationship));
             }
         }
         public FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember)

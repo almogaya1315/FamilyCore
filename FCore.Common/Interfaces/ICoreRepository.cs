@@ -4,6 +4,7 @@ using FCore.Common.Models.ChatGroups;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Families;
 using FCore.Common.Models.Members;
+using FCore.Common.Models.Users;
 using FCore.Common.Models.Videos;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel GetLastMemberJoined();
         FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath);
         FamilyMemberModel SetContactInfo(FamilyMemberModel posted, ContactInfoModel info);
-        FamilyMemberModel CreateMember(int creatorId, FamilyMemberModel postedMember, string relationship);
+        FamilyMemberModel CreateMember(UserModel postedUser, FamilyMemberModel postedMember, int relativeId, string relationship);
         FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember);
 
         PermissionsModel GetPermissionsModel(int id);

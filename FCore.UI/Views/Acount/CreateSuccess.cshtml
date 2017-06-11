@@ -1,4 +1,4 @@
-﻿@model FCore.Common.Models.Members.FamilyMemberModel
+﻿@model FCore.Common.Models.Users.UserModel
 
 <form>
     <div class="clearfix" style="margin-top:5%"></div>
@@ -9,7 +9,7 @@
         <div class="col-sm-12">
             Regestration completed!
             <br />
-                Your relarive,
+                Your relative,
                 @{ (Session["relative"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName }
                 @{ (Session["relative"] as FCore.Common.Models.Members.FamilyMemberModel).LastName },
             will be sent a confirmation request.
