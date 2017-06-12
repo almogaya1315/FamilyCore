@@ -319,7 +319,7 @@ namespace FCore.Tests.Moq
             throw new NotImplementedException();
         }
 
-        public FamilyMemberModel CreateMember(UserModel postedUser, FamilyMemberModel postedMember, int relativeId, string relationship)
+        public FamilyMemberModel CreateMember(FamilyMemberModel postedMember, int relativeId, string relationship)
         {
             throw new NotImplementedException();
         }

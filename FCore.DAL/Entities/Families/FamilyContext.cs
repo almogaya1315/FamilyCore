@@ -79,12 +79,9 @@ namespace FCore.DAL.Entities.Families
 
             //return Families.FirstOrDefault(f => f.Id == id);
         }
-        public FamilyEntity CreateFamily(string familyName)
+        public FamilyEntity SetFamily(string familyName)
         {
-            var family = new FamilyEntity() { Name = familyName, };
-            Families.Add(family);
-            SaveChanges();
-            return family;
+            return new FamilyEntity() { Name = familyName, };
         }
 
         public FamilyMemberEntity GetFamilyMember(int id)
@@ -177,7 +174,7 @@ namespace FCore.DAL.Entities.Families
 
             //return ContactInfoes.FirstOrDefault(i => i.Id == id);
         }
-        ContactInfoEntity SetContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
+        ContactInfoEntity SetContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newMember)
         {
             return new ContactInfoEntity()
             {
@@ -185,8 +182,8 @@ namespace FCore.DAL.Entities.Families
                 Country = postedInfo.Country,
                 Email = postedInfo.Email,
                 HouseNo = postedInfo.HouseNo,
-                MemberId = newChild.Id,
-                MemberName = $"{newChild.FirstName} {newChild.LastName}",
+                MemberId = newMember.Id,
+                MemberName = $"{newMember.FirstName} {newMember.LastName}",
                 PhoneNo = postedInfo.PhoneNo,
                 Street = postedInfo.Street
             };
@@ -222,17 +219,14 @@ namespace FCore.DAL.Entities.Families
             if (contactInfo != null) return book;
             else return null;
         }
-        public ContactBookEntity CreateContactBook(FamilyEntity family)
+        public ContactBookEntity SetContactBook(FamilyEntity family)
         {
-            var book = new ContactBookEntity()
+            return new ContactBookEntity()
             {
                 Family = family,
                 FamilyId = family.Id,
                 FamilyName = family.Name
             };
-            ContactBooks.Add(book);
-            SaveChanges();
-            return book;
         }
 
         public VideoEntity GetMostViewedVideo()
@@ -467,11 +461,11 @@ namespace FCore.DAL.Entities.Families
             SaveChanges();
             return newMember;
         }
-        FamilyMemberEntity SaveFamily(FamilyMemberEntity newMember, FamilyMemberEntity creator, bool newFamily)
+        FamilyMemberEntity SaveFamily(FamilyMemberEntity newMember, FamilyMemberEntity relative, bool newFamily)
         {
             if (newFamily)
             {
-                newMember.Family = CreateFamily(newMember.LastName);
+                newMember.Family = SetFamily(newMember.LastName);
                 Families.Add(newMember.Family);
                 newMember.Family.FamilyMembers.Add(newMember);
                 Entry(newMember.Family).State = EntityState.Added;
@@ -481,19 +475,19 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                newMember.Family = GetFamily((int)creator.FamilyId);
+                newMember.Family = GetFamily((int)relative.FamilyId);
                 newMember.Family.FamilyMembers.Add(newMember);
                 Entry(newMember.Family).State = EntityState.Modified;
-                newMember.FamilyId = creator.FamilyId;
+                newMember.FamilyId = relative.FamilyId;
                 SaveChanges();
             }
             return newMember;
         }
-        FamilyMemberEntity SaveContactBook(FamilyMemberEntity newMember, FamilyMemberEntity creator, bool newContactBook)
+        FamilyMemberEntity SaveContactBook(FamilyMemberEntity newMember, FamilyMemberEntity relative, bool newContactBook)
         {
             if (newContactBook)
             {
-                newMember.ContactInfo.ContactBook = CreateContactBook(newMember.Family);
+                newMember.ContactInfo.ContactBook = SetContactBook(newMember.Family);
                 ContactBooks.Add(newMember.ContactInfo.ContactBook);
                 Entry(newMember.ContactInfo.ContactBook).State = EntityState.Added;
                 SaveChanges();
@@ -502,7 +496,7 @@ namespace FCore.DAL.Entities.Families
             }
             else
             {
-                var contactBook = GetContactBook((int)creator.ContactInfoId, null);
+                var contactBook = GetContactBook((int)relative.ContactInfoId, null);
                 if (contactBook != null)
                 {
                     newMember.ContactInfo.ContactBook = contactBook;

@@ -2,23 +2,21 @@
 
 <form>
     <div class="clearfix" style="margin-top:5%"></div>
-    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Great!</div>
+    <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">
+        Congratulations @Model.Member.FirstName, Regestration completed!
+    </div>
     <div class="bot-border"></div>
-
-    <div style="margin-top:2%">
+    <div style="margin-top:2%; margin-bottom:5%">
         <div class="col-sm-12">
-            Congratulations @Model.FullName,
-            Regestration completed!
-            <br />
-                Your relative,
-                (@Session["relative"] as FCore.Common.Models.Members.FamilyMemberModel).FirstName
-                (@Session["relative"] as FCore.Common.Models.Members.FamilyMemberModel).LastName,
+            Your @Session["rel"], @ViewData["relativeName"],
+            <br/>
             will be sent a confirmation request.
             <br />
             After athorization, you will get an acceptence mail,
+            <br />
             and will be able to log-in to 'FAMILY-CORE'.
         </div>
         <div class="clearfix"></div>
-        <div class="bot-border"></div>
+        <div class="bot-border" style="margin-top:2%"></div>
     </div>
 </form>

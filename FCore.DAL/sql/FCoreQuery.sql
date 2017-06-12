@@ -11,25 +11,33 @@ where MigrationId = '201704302004215_perm_admin'
 select *
 from dbf.Families
 
+delete 
+from dbf.Families
+where id > 1
+
 insert into dbf.Families 
 values('Perry')
 
 select *
 from dbf.ContactBooks
 
+delete
+from dbf.ContactBooks
+where FamilyName = 'test'
+
 select *
 from dbf.ContactInfoes
 
 delete 
 from dbf.ContactInfoes
-where Id = 8
+where Id != 1
 
 select *
 from dbf.FamilyMembers
 
 delete 
 from dbf.FamilyMembers
-where Id = 1013
+where Id != 1
 
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
@@ -61,7 +69,7 @@ where Id = 1066 or Id = 1067 or Id = 1068 or Id = 1069 or Id = 1071 or Id = 1072
 
 delete 
 from dbf.Permissions
-where Id != 1073 and Id != 1074 and Id = 1070 and Id = 1075
+where Id != 1079 
 
 alter table dbf.permissions
 drop column Admin 
@@ -79,15 +87,23 @@ where id != 38 and id != 39
 select *
 from dbf.Albums
 
+delete
+from dbf.Albums
+where id > 0
+
 select *
 from dbf.images
+
+delete
+from dbf.images
+where id > 0
 
 select *
 from dbf.Relatives
 
 delete
 from dbf.Relatives
-where Id != 1 and Id != 2
+where Id != 1
 
 insert into dbf.Relatives
 values (1, 2, 'Wife')
@@ -98,7 +114,7 @@ values (2, 1, 'Husband')
 
 update dbf.Relatives
 set Relationship = 'Wife'
-where Id = 1
+where Id = 50
 
 update dbf.Relatives
 set Relationship = 'Husband'
@@ -111,23 +127,39 @@ from dbf.FamilyMembers m join dbf.Relatives r on m.Id = r.MemberId
 select *
 from dbf.ChatGroups
 
+delete
+from dbf.ChatGroups
+where Id > 0
+
 select *
 from dbf.Messages
+
+delete
+from dbf.Messages
+where Id > 0
 
 select *
 from dbf.VideoLibraries
 
+delete
+from dbf.VideoLibraries
+where Id > 0
+
 select *
 from dbf.Videos
 
---delete 
---from dbf.Relatives
---where Id > 0
+delete
+from dbf.Videos
+where Id > 0
 
---delete 
---from dbf.ContactInfoes
---where Id = 2
+delete 
+from dbf.Relatives
+where Id > 0
 
---delete
---from dbf.FamilyMembers
---where Id = 3
+delete 
+from dbf.ContactInfoes
+where Id > 0
+
+delete
+from dbf.FamilyMembers
+where Id > 1

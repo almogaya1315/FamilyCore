@@ -401,6 +401,7 @@ namespace FCore.UI.Controllers
                 var fullName = String.Format("{0} {1}", (Session["member_pi"] as FamilyMemberModel).FirstName, (Session["member_pi"] as FamilyMemberModel).LastName);
                 (Session["userModel"] as UserModel).Member.ContactInfo.MemberName = (Session["userModel"] as UserModel).FullName = fullName;
 
+
                 return await CreateUser((UserModel)Session["userModel"]);
             }
             return PartialView(model);
@@ -409,6 +410,8 @@ namespace FCore.UI.Controllers
         public async Task<ActionResult> CreateUser(UserModel model)
         {
             model.Member = coreRepo.CreateMember(model.Member, (Session["relative"] as FamilyMemberModel).Id, (string)Session["rel"]);
+            model.MemberId = model.Member.Id;
+            model.FamilyId = model.Member.FamilyId;
             var identityResult = await userRepo.CreateNewUserAsync(model);
 
             if (identityResult.Succeeded)
@@ -416,6 +419,7 @@ namespace FCore.UI.Controllers
                 var userModel = await userRepo.GetUserByUsrenameAsync(model.UserName);
                 userModel.Member = coreRepo.GetFamilyMember(model.Member.Id);
                 userModel.Member = coreRepo.ConnectRelatives((Session["relative"] as FamilyMemberModel), userModel.Member);
+                ViewData["relativeName"] = String.Format("{0}", (Session["relative"] as FamilyMemberModel).FirstName);
                 return PartialView("CreateSuccess", userModel);
             }
 

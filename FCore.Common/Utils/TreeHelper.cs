@@ -10,27 +10,33 @@ namespace FCore.Common.Utils
 {
     public static class TreeHelper
     {
-        public static string GetOppositeRelationship(RelationshipType relationship, GenderType creatorGender)
+        public static string GetOppositeRelationship(RelationshipType relationship, GenderType relativeGender)
         {
             switch (relationship)
             {
                 case RelationshipType.Daughter:
-                    return RelData.GetOppositeForChildren(creatorGender);
+                    return RelData.GetOppositeForChildren(relativeGender);
 
                 case RelationshipType.Son:
-                    return RelData.GetOppositeForChildren(creatorGender);
+                    return RelData.GetOppositeForChildren(relativeGender);
 
                 case RelationshipType.Father:
-                    return RelData.GetOppositeForParents(creatorGender);
+                    return RelData.GetOppositeForParents(relativeGender);
 
                 case RelationshipType.Mother:
-                    return RelData.GetOppositeForParents(creatorGender);
+                    return RelData.GetOppositeForParents(relativeGender);
 
                 case RelationshipType.Sister:
-                    return RelData.GetOppositeForSiblings(creatorGender);
+                    return RelData.GetOppositeForSiblings(relativeGender);
 
                 case RelationshipType.Brother:
-                    return RelData.GetOppositeForSiblings(creatorGender);
+                    return RelData.GetOppositeForSiblings(relativeGender);
+
+                case RelationshipType.Husband:
+                    return RelData.GetOppositeForSpouses(relativeGender);
+
+                case RelationshipType.Wife:
+                    return RelData.GetOppositeForSpouses(relativeGender);
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");

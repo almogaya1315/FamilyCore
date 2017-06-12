@@ -14,4 +14,4 @@ where UserName = 'Lior'
 
 delete 
 from dbo.AspNetUsers
-where UserName = 'Lior' 
+where MemberId = 25 
