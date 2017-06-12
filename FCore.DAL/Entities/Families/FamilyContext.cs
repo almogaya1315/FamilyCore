@@ -462,6 +462,7 @@ namespace FCore.DAL.Entities.Families
             }
             catch (Exception e)
             {
+                var errors = GetValidationErrors();
                 throw new Exception(e.Message);
             }
             return postedEntity;
