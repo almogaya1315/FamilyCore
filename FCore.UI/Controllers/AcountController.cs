@@ -394,8 +394,9 @@ namespace FCore.UI.Controllers
             foreach (var key in keys) ModelState.Remove(key);
             if (ModelState.IsValid)
             {
-                (Session["userModel"] as UserModel).Member.About = model.About;
                 (Session["userModel"] as UserModel).Member = (FamilyMemberModel)Session["member_pi"];
+                (Session["userModel"] as UserModel).Member.About = model.About;
+                (Session["userModel"] as UserModel).Member.ProfileImagePath = (string)Session["filepath"];
                 (Session["userModel"] as UserModel).Member.ContactInfo = (ContactInfoModel)Session["member_ci"];
 
                 await CreateUser((UserModel)Session["userModel"]);
