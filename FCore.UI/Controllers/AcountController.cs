@@ -398,6 +398,8 @@ namespace FCore.UI.Controllers
                 (Session["userModel"] as UserModel).Member.About = model.About;
                 (Session["userModel"] as UserModel).Member.ProfileImagePath = (string)Session["filepath"];
                 (Session["userModel"] as UserModel).Member.ContactInfo = (ContactInfoModel)Session["member_ci"];
+                var fullName = 
+                (Session["userModel"] as UserModel).Member.ContactInfo.MemberName = (Session["userModel"] as UserModel).FullName;
 
                 await CreateUser((UserModel)Session["userModel"]);
                 // RedirectToAction("CreateUser", Session["userModel"]);

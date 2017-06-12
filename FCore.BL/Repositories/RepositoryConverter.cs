@@ -153,7 +153,7 @@ namespace FCore.BL.Repositories
         }
 
         public ContactInfoModel ConvertToModel(ContactInfoEntity entity)
-        {
+            {
             return new ContactInfoModel()
             {
                 City = entity.City,
