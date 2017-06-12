@@ -108,19 +108,19 @@ namespace FCore.DAL.Entities.Families
 
             //return FamilyMembers.Last();
         }
-        public FamilyMemberEntity CreateFamilyMember(FamilyMemberEntity postedEntity)
-        {
-            return new FamilyMemberEntity()
-            {
-                About = postedEntity.About,
-                BirthDate = postedEntity.BirthDate,
-                BirthPlace = postedEntity.BirthPlace,
-                FirstName = postedEntity.FirstName,
-                Gender = postedEntity.Gender,
-                LastName = postedEntity.LastName,
-                ProfileImagePath = postedEntity.ProfileImagePath
-            };
-        }
+        //public FamilyMemberEntity CreateFamilyMember(FamilyMemberEntity postedEntity)
+        //{
+        //    return new FamilyMemberEntity()
+        //    {
+        //        About = postedEntity.About,
+        //        BirthDate = postedEntity.BirthDate,
+        //        BirthPlace = postedEntity.BirthPlace,
+        //        FirstName = postedEntity.FirstName,
+        //        Gender = postedEntity.Gender,
+        //        LastName = postedEntity.LastName,
+        //        ProfileImagePath = postedEntity.ProfileImagePath
+        //    };
+        //}
 
         public MemberPermissions GetPermissionsEntity(int id)
         {
@@ -453,9 +453,9 @@ namespace FCore.DAL.Entities.Families
 
         FamilyMemberEntity SaveMember(FamilyMemberEntity postedEntity)
         {
-            var newMember = CreateFamilyMember(postedEntity);
-            FamilyMembers.Add(newMember);
-            Entry(newMember).State = EntityState.Added;
+            //var newMember = CreateFamilyMember(postedEntity);
+            FamilyMembers.Add(postedEntity);
+            Entry(postedEntity).State = EntityState.Added;
             try
             {
                 SaveChanges();
@@ -464,7 +464,7 @@ namespace FCore.DAL.Entities.Families
             {
                 throw new Exception(e.Message);
             }
-            return newMember;
+            return postedEntity;
         }
         FamilyMemberEntity SaveContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newMember)
         {

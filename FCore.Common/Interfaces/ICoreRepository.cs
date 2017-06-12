@@ -30,7 +30,7 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel SetPersonalInfo(FamilyMemberModel posted, string filePath);
         FamilyMemberModel SetContactInfo(FamilyMemberModel posted, ContactInfoModel info);
         FamilyMemberModel CreateMember(FamilyMemberModel postedMember, int relativeId, string relationship);
-        FamilyMemberModel ConnectRelatives(FamilyMemberModel creator, FamilyMemberModel newMember);
+        FamilyMemberModel ConnectRelatives(FamilyMemberModel relative, FamilyMemberModel newMember);
 
         PermissionsModel GetPermissionsModel(int id);
 
@@ -47,12 +47,6 @@ namespace FCore.Common.Interfaces
         MessageModel GetMessage(int id);
 
         ContactInfoModel GetContactInfo(int id);
-
-        #region should be in supporting classes
-        //ICollection<SelectListItem> GetChildRelationshipTypes();
-        //ICollection<SelectListItem> GetGenderTypes();
-        //ICollection<SelectListItem> GetCities();
-        #endregion
 
         void UpdateUserAbout(int memberId, string about);
         void UpdateMemberProfileImage(int memberId, HttpPostedFileBase file, bool updateDatabase);
