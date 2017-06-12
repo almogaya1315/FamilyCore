@@ -401,7 +401,6 @@ namespace FCore.UI.Controllers
                 var fullName = String.Format("{0} {1}", (Session["member_pi"] as FamilyMemberModel).FirstName, (Session["member_pi"] as FamilyMemberModel).LastName);
                 (Session["userModel"] as UserModel).Member.ContactInfo.MemberName = (Session["userModel"] as UserModel).FullName = fullName;
 
-
                 return await CreateUser((UserModel)Session["userModel"]);
             }
             return PartialView(model);
