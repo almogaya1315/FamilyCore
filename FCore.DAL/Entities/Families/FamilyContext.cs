@@ -108,19 +108,19 @@ namespace FCore.DAL.Entities.Families
 
             //return FamilyMembers.Last();
         }
-        //public FamilyMemberEntity CreateFamilyMember(FamilyMemberEntity postedEntity)
-        //{
-        //    return new FamilyMemberEntity()
-        //    {
-        //        About = postedEntity.About,
-        //        BirthDate = postedEntity.BirthDate,
-        //        BirthPlace = postedEntity.BirthPlace,
-        //        FirstName = postedEntity.FirstName,
-        //        Gender = postedEntity.Gender,
-        //        LastName = postedEntity.LastName,
-        //        ProfileImagePath = postedEntity.ProfileImagePath
-        //    };
-        //}
+        FamilyMemberEntity SetFamilyMember(FamilyMemberEntity postedEntity)
+        {
+            return new FamilyMemberEntity()
+            {
+                About = postedEntity.About,
+                BirthDate = postedEntity.BirthDate,
+                BirthPlace = postedEntity.BirthPlace,
+                FirstName = postedEntity.FirstName,
+                Gender = postedEntity.Gender,
+                LastName = postedEntity.LastName,
+                ProfileImagePath = postedEntity.ProfileImagePath
+            };
+        }
 
         public MemberPermissions GetPermissionsEntity(int id)
         {
@@ -177,7 +177,7 @@ namespace FCore.DAL.Entities.Families
 
             //return ContactInfoes.FirstOrDefault(i => i.Id == id);
         }
-        public ContactInfoEntity CreateContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
+        ContactInfoEntity SetContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newChild)
         {
             return new ContactInfoEntity()
             {
@@ -453,23 +453,15 @@ namespace FCore.DAL.Entities.Families
 
         FamilyMemberEntity SaveMember(FamilyMemberEntity postedEntity)
         {
-            //var newMember = CreateFamilyMember(postedEntity);
-            FamilyMembers.Add(postedEntity);
-            Entry(postedEntity).State = EntityState.Added;
-            try
-            {
-                SaveChanges();
-            }
-            catch (Exception e)
-            {
-                var errors = GetValidationErrors();
-                throw new Exception(e.Message);
-            }
-            return postedEntity;
+            var newMember = SetFamilyMember(postedEntity);
+            FamilyMembers.Add(newMember);
+            Entry(newMember).State = EntityState.Added;
+            SaveChanges();
+            return newMember;
         }
         FamilyMemberEntity SaveContactInfo(ContactInfoEntity postedInfo, FamilyMemberEntity newMember)
         {
-            newMember.ContactInfo = CreateContactInfo(postedInfo, newMember);
+            newMember.ContactInfo = SetContactInfo(postedInfo, newMember);
             ContactInfoes.Add(newMember.ContactInfo);
             Entry(newMember.ContactInfo).State = EntityState.Added;
             SaveChanges();
