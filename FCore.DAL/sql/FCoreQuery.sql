@@ -29,7 +29,7 @@ from dbf.FamilyMembers
 
 delete 
 from dbf.FamilyMembers
-where Id = 8
+where Id = 1013
 
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
