@@ -86,7 +86,7 @@ namespace FCore.Common.Utils
                 case RelationshipType.Great_GrandMother:
                     return RelationshipType.Great_GrandChild.ToString();
 
-                case RelationshipType.Great_GrangFather:
+                case RelationshipType.Great_GrandFather:
                     return RelationshipType.Great_GrandChild.ToString();
 
                 default:
@@ -103,6 +103,12 @@ namespace FCore.Common.Utils
 
                 case RelationshipType.Father:
                     return RelData.GetRelForParents(relativeRelativeRel);
+
+                case RelationshipType.Brother:
+                    return RelData.GetRelForSiblings(relativeRelativeRel);
+
+                case RelationshipType.Sister:
+                    return RelData.GetRelForSiblings(relativeRelativeRel);
 
                 case RelationshipType.Aunt:
                     return RelData.GetRelForAuntOrUncle(relativeRelativeRel);

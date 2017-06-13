@@ -24,7 +24,7 @@ namespace FCore.Common.Enums
         Aunt,
         Cousin,
         Great_GrandChild,
-        Great_GrangFather,
+        Great_GrandFather,
         Great_GrandMother,
         Mother_in_law,
         Father_in_law,
