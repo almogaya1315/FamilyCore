@@ -69,7 +69,7 @@ where Id = 1066 or Id = 1067 or Id = 1068 or Id = 1069 or Id = 1071 or Id = 1072
 
 delete 
 from dbf.Permissions
-where Id != 1079 
+where Id != 1052 
 
 alter table dbf.permissions
 drop column Admin 
@@ -103,7 +103,7 @@ from dbf.Relatives
 
 delete
 from dbf.Relatives
-where Id != 1
+where Id > 0
 
 insert into dbf.Relatives
 values (1, 2, 'Wife')
@@ -114,7 +114,7 @@ values (2, 1, 'Husband')
 
 update dbf.Relatives
 set Relationship = 'Wife'
-where Id = 50
+where Id = 1019
 
 update dbf.Relatives
 set Relationship = 'Husband'

@@ -143,10 +143,12 @@ namespace FCore.BL.Repositories
         {
             if (!string.IsNullOrWhiteSpace(model.PasswordHash))
             {
-                var result = userManager.PasswordHasher.VerifyHashedPassword(model.PasswordHash, model.Password);
-                if (result == PasswordVerificationResult.Failed) throw new Exception(); // todo..
+                var hashResult = userManager.PasswordHasher.VerifyHashedPassword(model.PasswordHash, model.Password);
+                if (hashResult == PasswordVerificationResult.Failed) throw new Exception(); // todo..
             }
-            return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
+            var user = await userManager.FindAsync(model.UserName, model.Password);
+            var result = await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
+            return result;
         }
 
         public async Task<UserModel> GetUserByIdAsync(string id)

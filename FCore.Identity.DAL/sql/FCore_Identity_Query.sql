@@ -9,9 +9,9 @@ set Password = 'lkga1315'
 where UserName = 'Lior'
 
 update dbo.AspNetUsers
-set MemberId = 1
-where UserName = 'Lior'
+set Password = 'Lkga1315!'
+where MemberId = 1
 
 delete 
 from dbo.AspNetUsers
-where MemberId = 25 
+where MemberId = 0
