@@ -103,12 +103,18 @@ where id != 38 and id != 39
 select *
 from dbf.Albums
 
+insert into dbf.Albums
+values('First album', 12, 'Matsliah')
+
 delete
 from dbf.Albums
 where id > 0
 
 select *
 from dbf.images
+
+insert into dbf.images
+values(2, 'First image', '~/Images/first.jpg')
 
 delete
 from dbf.images
@@ -143,6 +149,9 @@ from dbf.FamilyMembers m join dbf.Relatives r on m.Id = r.MemberId
 select *
 from dbf.ChatGroups
 
+insert into dbf.ChatGroups
+values('First chat', 12, 1018)
+
 delete
 from dbf.ChatGroups
 where Id > 0
@@ -150,6 +159,9 @@ where Id > 0
 select *
 from dbf.Messages
 
+insert into dbf.Messages
+values(2, ) 
+
 delete
 from dbf.Messages
 where Id > 0
@@ -157,12 +169,18 @@ where Id > 0
 select *
 from dbf.VideoLibraries
 
+insert into dbf.VideoLibraries
+values('First library', 12, 'Matsliah')
+
 delete
 from dbf.VideoLibraries
 where Id > 0
 
 select *
 from dbf.Videos
+
+insert into dbf.Videos
+values(2, 'First video', '~/Videos/first.mp4')
 
 delete
 from dbf.Videos

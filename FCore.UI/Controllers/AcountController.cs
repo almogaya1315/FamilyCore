@@ -114,17 +114,17 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> LoginPage()
         {
-            var member = coreRepo.GetFamilyMember(1018);
-            var newUser = new UserModel()
-            {
-                FamilyId = member.FamilyId,
-                FullName = member.FirstName + " " + member.LastName,
-                MemberId = member.Id,
-                Password = "Lkga1315!",
-                UserName = "Almogaya"
-            };
-            var result = await userRepo.CreateNewUserAsync(newUser);
-            newUser = await userRepo.GetUserByUsrenameAsync(newUser.UserName);
+            //var member = coreRepo.GetFamilyMember(1018);
+            //var newUser = new UserModel()
+            //{
+            //    FamilyId = member.FamilyId,
+            //    FullName = member.FirstName + " " + member.LastName,
+            //    MemberId = member.Id,
+            //    Password = "Lkga1315!",
+            //    UserName = "Almogaya"
+            //};
+            //var result = await userRepo.CreateNewUserAsync(newUser);
+            //newUser = await userRepo.GetUserByUsrenameAsync(newUser.UserName);
 
             // *******
 
