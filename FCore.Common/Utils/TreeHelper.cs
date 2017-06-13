@@ -45,31 +45,70 @@ namespace FCore.Common.Utils
                     return RelData.GetOppositeForSiblingsInLaw(relativeGender);
 
                 case RelationshipType.Father_in_law:
-                    return RelData.GetOppositeForInLaws(relativeGender);
+                    return RelData.GetOppositeForParentsInLaws(relativeGender);
 
                 case RelationshipType.Mother_in_law:
-                    return RelData.GetOppositeForInLaws(relativeGender);
+                    return RelData.GetOppositeForParentsInLaws(relativeGender);
+
+                case RelationshipType.Son_in_law:
+                    return RelData.GetOppositeForChildrenInLaws(relativeGender);
+
+                case RelationshipType.Daughter_in_law:
+                    return RelData.GetOppositeForChildrenInLaws(relativeGender);
+
+                case RelationshipType.Aunt:
+                    return RelationshipType.Nephew.ToString();
+
+                case RelationshipType.Uncle:
+                    return RelationshipType.Nephew.ToString();
+
+                case RelationshipType.Nephew:
+                    return RelData.GetOppositeForNephew(relativeGender);
+
+                case RelationshipType.Cousin:
+                    return relationship.ToString();
+
+                case RelationshipType.Granddaughter:
+                    return RelData.GetOppositeForGrandChildren(relativeGender);
+
+                case RelationshipType.Grandson:
+                    return RelData.GetOppositeForGrandChildren(relativeGender);
+
+                case RelationshipType.Grandfather:
+                    return RelData.GetOppositeForGrandParents(relativeGender);
+
+                case RelationshipType.Grandmother:
+                    return RelData.GetOppositeForGrandParents(relativeGender);
+
+                case RelationshipType.Great_GrandChild:
+                    return RelData.GetOppositeForGreatGrandChild(relativeGender);
+
+                case RelationshipType.Great_GrandMother:
+                    return RelationshipType.Great_GrandChild.ToString();
+
+                case RelationshipType.Great_GrangFather:
+                    return RelationshipType.Great_GrandChild.ToString();
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");
             }
         }
 
-        public static string GetThirdLevelRelationship(RelativeModel creatorRelativeRel, RelationshipType createdCreatorRel)
+        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdrelativeRel)
         {
-            switch (createdCreatorRel)
+            switch (createdrelativeRel)
             {
                 case RelationshipType.Mother:
-                    return RelData.GetRelForParents(creatorRelativeRel);
+                    return RelData.GetRelForParents(relativeRelativeRel);
 
                 case RelationshipType.Father:
-                    return RelData.GetRelForParents(creatorRelativeRel);
+                    return RelData.GetRelForParents(relativeRelativeRel);
 
                 case RelationshipType.Aunt:
-                    return RelData.GetRelForAuntOrUncle(creatorRelativeRel);
+                    return RelData.GetRelForAuntOrUncle(relativeRelativeRel);
 
                 case RelationshipType.Uncle:
-                    return RelData.GetRelForAuntOrUncle(creatorRelativeRel);
+                    return RelData.GetRelForAuntOrUncle(relativeRelativeRel);
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");

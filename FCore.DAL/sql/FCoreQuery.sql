@@ -136,7 +136,7 @@ values (2, 1, 'Husband')
 
 update dbf.Relatives
 set Relationship = 'Wife'
-where Id = 1019
+where Id = 1021
 
 update dbf.Relatives
 set Relationship = 'Husband'
