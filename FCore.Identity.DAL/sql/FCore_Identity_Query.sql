@@ -14,4 +14,4 @@ where MemberId = 1
 
 delete 
 from dbo.AspNetUsers
-where MemberId = 0
+where MemberId > 0

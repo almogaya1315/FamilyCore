@@ -13,31 +13,44 @@ from dbf.Families
 
 delete 
 from dbf.Families
-where id > 1
+where id > 0
 
 insert into dbf.Families 
-values('Perry')
+values('Matsliah')
 
 select *
 from dbf.ContactBooks
+
+insert into dbf.ContactBooks
+values(12, 'Matsliah')
 
 delete
 from dbf.ContactBooks
-where FamilyName = 'test'
+where Id > 0
 
 select *
 from dbf.ContactInfoes
 
+insert into dbf.ContactInfoes
+values(8, 'Lior Matsliah', 'Israel', 'Petah-Tikva', 'Haportsim', 16, '052-3751421', 'liormatsliah1985@gmail.com', 1018)
+
 delete 
 from dbf.ContactInfoes
-where Id != 1
+where Id > 0
 
 select *
 from dbf.FamilyMembers
 
+insert into dbf.FamilyMembers
+values(12, 1055, null, 'Lior', 'Matsliah', 23/5/1985, 'Beilinson hospital, Petah-Tikva', '~\Images\Profiles\Photo0306.jpg', 'The founder of FAMILY-CORE', 'Male')
+
+update dbf.FamilyMembers
+set ContactInfoId = 1014
+where id = 1018
+
 delete 
 from dbf.FamilyMembers
-where Id != 1
+where Id > 0
 
 alter table dbf.FamilyMembers
 add Gender varchar not null default('')
@@ -63,13 +76,16 @@ where Id = 1
 select *
 from dbf.Permissions
 
+insert into dbf.Permissions
+values (0, 0, 0, 0)
+
 delete 
 from dbf.Permissions
 where Id = 1066 or Id = 1067 or Id = 1068 or Id = 1069 or Id = 1071 or Id = 1072
 
 delete 
 from dbf.Permissions
-where Id != 1052 
+where Id > 1051 
 
 alter table dbf.permissions
 drop column Admin 
