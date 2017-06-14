@@ -148,6 +148,7 @@ namespace FCore.BL.Repositories
                 if (relativeModel.RelativeId == newMember.Id) continue;
                 // yet to be tested ***
                 var secondRelGender = (GenderType)Enum.Parse(typeof(GenderType), CoreDB.GetFamilyMember(relativeModel.RelativeId).Gender);
+
                 string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdRelativeEnum, secondRelGender);
                 var createdRelativeModel = new RelativeModel(newMember.Id, relativeModel.RelativeId,
                                                             (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
