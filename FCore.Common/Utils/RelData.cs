@@ -145,37 +145,20 @@ namespace FCore.Common.Utils
         {
             switch (relativeRelativeRel)
             {
-                case RelationshipType.Wife:
-                    break;
-                case RelationshipType.Husband:
-                    break;
-                case RelationshipType.Mother:
-                    break;
-                case RelationshipType.Father:
-                    break;
-                case RelationshipType.Daughter:
-                    break;
-                case RelationshipType.Son:
-                    break;
-                case RelationshipType.Grandmother:
-                    break;
-                case RelationshipType.Grandfather:
-                    break;
-                case RelationshipType.Granddaughter:
-                    break;
-                case RelationshipType.Grandson:
-                    break;
-                case RelationshipType.Sister:
-                    break;
-                case RelationshipType.Brother:
-                    break;
-                case RelationshipType.Uncle:
-                    break;
-                case RelationshipType.Aunt:
-                    break;
-                case RelationshipType.Cousin:
-                    break;
-                case RelationshipType.Great_GrandChild:
+                // if my uncle or aunt has a wife, she is my aunt
+                case RelationshipType.Wife: return RelationshipType.Aunt.ToString();
+                case RelationshipType.Husband: return RelationshipType.Uncle.ToString();
+                case RelationshipType.Mother: return RelationshipType.Grandmother.ToString();
+                case RelationshipType.Father: return RelationshipType.Grandfather.ToString();
+                case RelationshipType.Daughter: return RelationshipType.Cousin.ToString();
+                case RelationshipType.Son: return RelationshipType.Cousin.ToString();
+                case RelationshipType.Grandmother: return RelationshipType.Great_GrandMother.ToString();
+                case RelationshipType.Grandfather: return RelationshipType.Great_GrandFather.ToString();
+                case RelationshipType.Granddaughter: return RelationshipType.Cousin.ToString();
+                case RelationshipType.Grandson: return RelationshipType.Cousin.ToString();
+                case RelationshipType.Uncle: return RelationshipType.Grandfather.ToString();
+                case RelationshipType.Aunt: return RelationshipType.Grandmother.ToString();
+                case RelationshipType.Great_GrandChild: 
                     break;
                 case RelationshipType.Great_GrandFather:
                     break;
@@ -195,8 +178,14 @@ namespace FCore.Common.Utils
                     break;
                 case RelationshipType.Nephew:
                     break;
+
+                // could also return 'Aunt'. needs to response to ui for user choice. 
+                case RelationshipType.Sister: return RelationshipType.Mother.ToString();
+                // could also return 'Uncle'. needs to response to ui for user choice. 
+                case RelationshipType.Brother: return RelationshipType.Father.ToString();
+
                 case RelationshipType.Undefined: throw new InvalidOperationException("Invalid relationship type passed to function.");
-                default: return relativeRelativeRel.ToString();
+                default: return relativeRelativeRel.ToString(); // for 'Cousin'
             }
         }
         #endregion
