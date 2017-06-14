@@ -118,8 +118,7 @@ namespace FCore.Common.Utils
                 case RelationshipType.Grandson: return RelationshipType.Nephew.ToString();
 
                 case RelationshipType.Great_GrandChild: return GetOppositeForGrandParents(secondRelGender); 
-                case RelationshipType.Undefined: throw new InvalidOperationException("Invalid relationship type passed to function.");
-                default: return relativeRelativeRel.ToString(); // for 'Great_GrandMother', 'Great_GrandFather', 'Cousin', 'Uncle', 'Aunt'
+                default: return relativeRelativeRel.ToString(); // for 'Great_GrandMother', 'Great_GrandFather', 'Cousin', 'Uncle', 'Aunt', 'Undefined'
             }
         }
 
@@ -136,12 +135,11 @@ namespace FCore.Common.Utils
                 case RelationshipType.Son_in_law: return GetOppositeForNephew(createdGender);
                 case RelationshipType.Daughter_in_law: return GetOppositeForNephew(createdGender);
 
-                case RelationshipType.Undefined: throw new InvalidOperationException("Invalid relationship type passed to function.");
                 default: return relativeRelativeRel.ToString(); // for all but the assosiated 6 cases
             }
         }
 
-        internal static string GetRelForAuntOrUncle(RelationshipType relativeRelativeRel) // not yet modified!
+        internal static string GetRelForAuntOrUncle(RelationshipType relativeRelativeRel) 
         {
             switch (relativeRelativeRel)
             {
@@ -158,34 +156,21 @@ namespace FCore.Common.Utils
                 case RelationshipType.Grandson: return RelationshipType.Cousin.ToString();
                 case RelationshipType.Uncle: return RelationshipType.Grandfather.ToString();
                 case RelationshipType.Aunt: return RelationshipType.Grandmother.ToString();
-                case RelationshipType.Great_GrandChild: 
-                    break;
-                case RelationshipType.Great_GrandFather:
-                    break;
-                case RelationshipType.Great_GrandMother:
-                    break;
-                case RelationshipType.Mother_in_law:
-                    break;
-                case RelationshipType.Father_in_law:
-                    break;
-                case RelationshipType.Sister_in_law:
-                    break;
-                case RelationshipType.Brother_in_law:
-                    break;
-                case RelationshipType.Son_in_law:
-                    break;
-                case RelationshipType.Daughter_in_law:
-                    break;
-                case RelationshipType.Nephew:
-                    break;
+                case RelationshipType.Great_GrandChild: return RelationshipType.Cousin.ToString();
+                case RelationshipType.Mother_in_law: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Father_in_law: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Sister_in_law: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Brother_in_law: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Son_in_law: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Daughter_in_law: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Nephew: return RelationshipType.Cousin.ToString();
 
                 // could also return 'Aunt'. needs to response to ui for user choice. 
                 case RelationshipType.Sister: return RelationshipType.Mother.ToString();
                 // could also return 'Uncle'. needs to response to ui for user choice. 
                 case RelationshipType.Brother: return RelationshipType.Father.ToString();
 
-                case RelationshipType.Undefined: throw new InvalidOperationException("Invalid relationship type passed to function.");
-                default: return relativeRelativeRel.ToString(); // for 'Cousin'
+                default: return relativeRelativeRel.ToString(); // for 'Cousin', 'Great_GrandFather', 'Great_GrandMother', 'Undefined'
             }
         }
         #endregion
