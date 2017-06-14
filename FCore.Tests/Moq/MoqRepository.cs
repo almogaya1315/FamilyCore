@@ -37,7 +37,8 @@ namespace FCore.Tests.Moq
             foreach (var relativeModel in creator.Relatives)
             {
                 if (relativeModel.Relative.Id == newMember.Id) continue;
-                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel);
+                var secondRelGender = (GenderType)Enum.Parse(typeof(GenderType), CoreDB.GetFamilyMember(relativeModel.RelativeId).Gender);
+                string createdRelativeRel = TreeHelper.GetThirdLevelRelationship(relativeModel, createdCreatorRel, secondRelGender);
                 newMember.Relatives.Add(new RelativeModel(newMember.Id, relativeModel.Relative.Id,
                                        (RelationshipType)Enum.Parse(typeof(RelationshipType), createdRelativeRel))
                 {

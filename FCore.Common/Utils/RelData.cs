@@ -89,41 +89,39 @@ namespace FCore.Common.Utils
         #endregion
 
         #region third level relationship
-        internal static string GetRelForParents(RelativeModel relativeRelativeRel)
+        internal static string GetRelForParents(RelationshipType relativeRelativeRel, GenderType secondRelGender)
         {
-            
-            if (relativeRelativeRel.Relationship == RelationshipType.Brother.ToString()) return RelationshipType.Uncle.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Brother_in_law.ToString()) return RelationshipType.Uncle.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Daughter.ToString()) return RelationshipType.Sister.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Father.ToString()) return RelationshipType.Grandfather.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Father_in_law.ToString()) return RelationshipType.Grandfather.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Grandfather.ToString()) return RelationshipType.Great_GrandFather.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Grandmother.ToString()) return RelationshipType.Great_GrandMother.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Husband.ToString()) return RelationshipType.Father.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Mother.ToString()) return RelationshipType.Grandmother.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Mother_in_law.ToString()) return RelationshipType.Grandmother.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Nephew.ToString()) return RelationshipType.Cousin.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Sister.ToString()) return RelationshipType.Aunt.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Sister_in_law.ToString()) return RelationshipType.Aunt.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Son.ToString()) return RelationshipType.Brother.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Wife.ToString()) return RelationshipType.Mother.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Son_in_law.ToString()) return RelationshipType.Brother_in_law.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Daughter_in_law.ToString()) return RelationshipType.Sister_in_law.ToString();
+            switch (relativeRelativeRel)
+            {
+                case RelationshipType.Brother: return RelationshipType.Uncle.ToString();
+                case RelationshipType.Brother_in_law: return RelationshipType.Uncle.ToString();
+                case RelationshipType.Daughter: return RelationshipType.Sister.ToString();
+                case RelationshipType.Father: return RelationshipType.Grandfather.ToString();
+                case RelationshipType.Father_in_law: return RelationshipType.Grandfather.ToString();
+                case RelationshipType.Grandfather: return RelationshipType.Great_GrandFather.ToString();
+                case RelationshipType.Grandmother: return RelationshipType.Great_GrandMother.ToString();
+                case RelationshipType.Husband: return RelationshipType.Father.ToString();
+                case RelationshipType.Mother: return RelationshipType.Grandmother.ToString();
+                case RelationshipType.Mother_in_law: return RelationshipType.Grandmother.ToString();
+                case RelationshipType.Nephew: return RelationshipType.Cousin.ToString();
+                case RelationshipType.Sister: return RelationshipType.Aunt.ToString();
+                case RelationshipType.Sister_in_law: return RelationshipType.Aunt.ToString();
+                case RelationshipType.Son: return RelationshipType.Brother.ToString();
+                case RelationshipType.Wife: return RelationshipType.Mother.ToString();
+                case RelationshipType.Son_in_law: return RelationshipType.Brother_in_law.ToString();
+                case RelationshipType.Daughter_in_law: return RelationshipType.Sister_in_law.ToString();
 
-            if (relativeRelativeRel.Relationship == RelationshipType.Great_GrandMother.ToString()) return relativeRelativeRel.Relationship.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Great_GrandFather.ToString()) return relativeRelativeRel.Relationship.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Cousin.ToString()) return relativeRelativeRel.Relationship.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Uncle.ToString()) return relativeRelativeRel.Relationship.ToString();
-            if (relativeRelativeRel.Relationship == RelationshipType.Aunt.ToString()) return relativeRelativeRel.Relationship.ToString();
+                // could also return 'Daughter'. needs to response to ui for user choice.
+                case RelationshipType.Granddaughter: return RelationshipType.Nephew.ToString();
+                // could also return 'Son'. needs to response to ui for user choice.
+                case RelationshipType.Grandson: return RelationshipType.Nephew.ToString();
+                // could also return 'Grandson'. needs to response to ui for user choice.
+                case RelationshipType.Great_GrandChild: return GetOppositeForGrandParents(secondRelGender); //return RelationshipType.Granddaughter.ToString();
 
-            // could also return 'Daughter'. needs to response to ui for user choice.
-            if (relativeRelativeRel.Relationship == RelationshipType.Granddaughter.ToString()) return RelationshipType.Nephew.ToString();
-            // could also return 'Son'. needs to response to ui for user choice.
-            if (relativeRelativeRel.Relationship == RelationshipType.Grandson.ToString()) return RelationshipType.Nephew.ToString();
-            // could also return 'Grandson'. needs to response to ui for user choice.
-            if (relativeRelativeRel.Relationship == RelationshipType.Great_GrandChild.ToString()) return RelationshipType.Granddaughter.ToString();
-
-            else throw new InvalidOperationException("Invalid relationship type passed to function.");
+                case RelationshipType.Undefined: throw new InvalidOperationException("Invalid relationship type passed to function.");
+                // for 'Great_GrandMother', 'Great_GrandFather', 'Cousin', 'Uncle', 'Aunt'
+                default: return relativeRelativeRel.ToString();
+            }
         }
 
         internal static string GetRelForSiblings(RelativeModel relativeRelativeRel)

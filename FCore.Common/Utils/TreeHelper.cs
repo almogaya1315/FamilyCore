@@ -94,15 +94,19 @@ namespace FCore.Common.Utils
             }
         }
 
-        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdrelativeRel)
+        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdrelativeRel, GenderType secondRelGender)
         {
             switch (createdrelativeRel)
             {
                 case RelationshipType.Mother:
-                    return RelData.GetRelForParents(relativeRelativeRel);
+                    return RelData.GetRelForParents((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), secondRelGender);
 
                 case RelationshipType.Father:
-                    return RelData.GetRelForParents(relativeRelativeRel);
+                    return RelData.GetRelForParents((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), secondRelGender);
 
                 case RelationshipType.Brother:
                     return RelData.GetRelForSiblings(relativeRelativeRel);
