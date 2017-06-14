@@ -3,6 +3,7 @@ using FCore.Common.Enums;
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Contacts;
 using FCore.Common.Models.Members;
+using FCore.Common.Models.Users;
 using FCore.Common.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    [Authorize]
     public class ConfigController : Controller
     {
         ICoreRepository repo { get; set; }
@@ -23,7 +25,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetFamilyMember(2));
+                return View(repo.GetFamilyMember((Session["cureentUser"] as UserModel).MemberId));
             }
         }
 

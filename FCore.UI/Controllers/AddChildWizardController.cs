@@ -14,6 +14,7 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    [Authorize]
     public class AddChildWizardController : Controller
     {
         ICoreRepository repo { get; set; }
