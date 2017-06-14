@@ -119,10 +119,14 @@ namespace FCore.Common.Utils
                                   .Relationship), createdGender);
 
                 case RelationshipType.Aunt:
-                    return RelData.GetRelForAuntOrUncle(relativeRelativeRel);
+                    return RelData.GetRelForAuntOrUncle((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship));
 
                 case RelationshipType.Uncle:
-                    return RelData.GetRelForAuntOrUncle(relativeRelativeRel);
+                    return RelData.GetRelForAuntOrUncle((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship));
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");
