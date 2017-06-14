@@ -94,25 +94,29 @@ namespace FCore.Common.Utils
             }
         }
 
-        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdrelativeRel, GenderType secondRelGender)
+        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdRelativeRel, GenderType createdGender, GenderType secondRelGender)
         {
-            switch (createdrelativeRel)
+            switch (createdRelativeRel)
             {
                 case RelationshipType.Mother:
-                    return RelData.GetRelForParents((RelationshipType)Enum
+                    return RelData.GetThirdRelForParents((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship), secondRelGender);
 
                 case RelationshipType.Father:
-                    return RelData.GetRelForParents((RelationshipType)Enum
+                    return RelData.GetThirdRelForParents((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship), secondRelGender);
 
                 case RelationshipType.Brother:
-                    return RelData.GetRelForSiblings(relativeRelativeRel);
+                    return RelData.GetRelForSiblings((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), createdGender);
 
                 case RelationshipType.Sister:
-                    return RelData.GetRelForSiblings(relativeRelativeRel);
+                    return RelData.GetRelForSiblings((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), createdGender);
 
                 case RelationshipType.Aunt:
                     return RelData.GetRelForAuntOrUncle(relativeRelativeRel);
