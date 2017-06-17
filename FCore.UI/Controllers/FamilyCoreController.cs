@@ -15,14 +15,13 @@ namespace FCore.UI.Controllers
     {
         ICoreRepository coreRepo { get; set; }
 
-        [Authorize]
         public ActionResult Main(UserModel userModel)
         {
             using (coreRepo = new FCoreRepository())
             {
                 if (Session["cureentUser"] != null)
                     userModel.Member = (Session["cureentUser"] as UserModel).Member;
-                else return new HttpStatusCodeResult((int)HttpStatusCode.Unauthorized);
+                else RedirectToAction("LoginPage", "Acount"); //return new HttpStatusCodeResult((int)HttpStatusCode.Unauthorized);
 
                 ViewBag.LastJoinName = coreRepo.GetLastMemberJoined().FirstName;
                 ViewBag.VideoDesc = coreRepo.GetMostViewedVideo().Description;

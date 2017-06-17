@@ -20,6 +20,7 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.UI.WebControls;
 
 namespace FCore.UI.Controllers
@@ -114,26 +115,17 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> LoginPage()
         {
-            //var member = coreRepo.GetFamilyMember(1018);
-            //var newUser = new UserModel()
-            //{
-            //    FamilyId = member.FamilyId,
-            //    FullName = member.FirstName + " " + member.LastName,
-            //    MemberId = member.Id,
-            //    Password = "Lkga1315!",
-            //    UserName = "Almogaya"
-            //};
-            //var result = await userRepo.CreateNewUserAsync(newUser);
-            //newUser = await userRepo.GetUserByUsrenameAsync(newUser.UserName);
-
-            // *******
-
             Session.Clear();
             Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
 
             var cookie = HttpContext.Request.Cookies["userCookie"];
             string userId = string.Empty;
-            if (cookie != null) userId = cookie.Value;
+            if (cookie != null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+                if (ticket.IsPersistent) userId = cookie.Value;
+                else throw new Exception(); // todo..
+            }
 
             if (!string.IsNullOrWhiteSpace(userId))
             {
@@ -166,6 +158,7 @@ namespace FCore.UI.Controllers
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
                             userCookie.Expires.AddYears(1);
+                            userCookie.Domain = "http://localhost:13297/"; // yet to be checked ***
                             HttpContext.Response.Cookies.Add(userCookie);
                         }
 
@@ -297,7 +290,7 @@ namespace FCore.UI.Controllers
                             Session["userModel"] = model;
 
                             model.Member = new FamilyMemberModel();
-                            ViewData["relenum"] = ConstGenerator.RelTypes; 
+                            ViewData["relenum"] = ConstGenerator.RelTypes;
                             ViewData["genenum"] = ConstGenerator.GenderTypes;
                             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(coreRepo.GetFamilies());
                             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems();
@@ -348,7 +341,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadPersonalInfo()
         {
-            ViewData["relenum"] = ConstGenerator.GetRelTypesSelectedItem((string)Session["rel"]); 
+            ViewData["relenum"] = ConstGenerator.GetRelTypesSelectedItem((string)Session["rel"]);
             ViewData["genenum"] = ConstGenerator.GenderTypes;
             ViewData["famenum"] = ConstGenerator.GetFamilySelectListItems(new List<FamilyModel>() { coreRepo.GetFamily((string)Session["rel_fam"]) });
             ViewData["memenum"] = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic((string)Session["rel_fam"]));
@@ -382,7 +375,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public ActionResult LoadContactInfo()
         {
-            ViewData["cityenum"] = ConstGenerator.GetCitiesSelectedItem((Session["member_ci"] as ContactInfoModel).City); 
+            ViewData["cityenum"] = ConstGenerator.GetCitiesSelectedItem((Session["member_ci"] as ContactInfoModel).City);
             return PartialView("AddContactInfo", Session["member_ci"]);
         }
 

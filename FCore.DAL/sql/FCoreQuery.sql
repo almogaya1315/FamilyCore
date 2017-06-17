@@ -104,7 +104,7 @@ select *
 from dbf.Albums
 
 insert into dbf.Albums
-values('First album', 12, 'Matsliah')
+values('First album', 1, 'Matsliah')
 
 delete
 from dbf.Albums
@@ -150,7 +150,7 @@ select *
 from dbf.ChatGroups
 
 insert into dbf.ChatGroups
-values('First chat', 12, 1018)
+values('First chat', 1, 1)
 
 delete
 from dbf.ChatGroups
@@ -160,7 +160,7 @@ select *
 from dbf.Messages
 
 insert into dbf.Messages
-values(2, ) 
+values(2, 1, 26, 'First Message') 
 
 delete
 from dbf.Messages
@@ -170,7 +170,7 @@ select *
 from dbf.VideoLibraries
 
 insert into dbf.VideoLibraries
-values('First library', 12, 'Matsliah')
+values('First library', 1, 'Matsliah')
 
 delete
 from dbf.VideoLibraries
