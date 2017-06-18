@@ -182,6 +182,9 @@ namespace FCore.UI.Controllers
         public ActionResult Logout(UserModel model)
         {
             var isLogout = userRepo.LogOut(HttpContext);
+            ModelState.Remove("UserName");
+            ModelState.Remove("Password");
+            Session["logged-out"] = true; // todo.. follow-up in LoginPage(Get)
             if (isLogout) return View("LoginPage");
             else throw new Exception("Unable to log-out.");
         }
