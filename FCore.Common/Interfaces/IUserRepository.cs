@@ -23,11 +23,6 @@ namespace FCore.Common.Interfaces
 
         IAppBuilder CreateUserManagerFromDependency(IAppBuilder app);
 
-        //IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName);
-        //IAppBuilder CreateUserStore(IAppBuilder app);
-        //IAppBuilder CreateUserManager(IAppBuilder app);
-        //IAppBuilder CreateLoginManager(IAppBuilder app);
-
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
         Task<IdentityResult> ValidatePassword(string password);
         Task<SignInStatus> PasswordLoginAsync(UserModel model);

@@ -91,44 +91,6 @@ namespace FCore.BL.Repositories
         }
         #endregion
 
-        /*#region Owin
-        public IAppBuilder CreateUserContext(IAppBuilder app, string connectionStringName)
-        {
-            return app.CreatePerOwinContext(() => new UserContext(connectionStringName));
-        }
-
-        public IAppBuilder CreateUserStore(IAppBuilder app)
-        {
-            return app.CreatePerOwinContext<UserMemberStore>((opt, cont)
-                => new UserMemberStore(cont.Get<UserContext>()));
-        }
-
-        public IAppBuilder CreateUserManager(IAppBuilder app)
-        {
-            return app.CreatePerOwinContext<UserMemberManager>((opt, cont) =>
-            {
-                userManager = new UserMemberManager(cont.Get<UserMemberStore>());
-                // userManager.UserValidator = new UserValidator<UserEntity>(userManager)
-                //     { RequireUniqueEmail = true, AllowOnlyAlphanumericUserNames = true };
-                userManager.PasswordValidator = new PasswordValidator()
-                {
-                    RequireDigit = true,
-                    RequireLowercase = true,
-                    RequireUppercase = true,
-                    RequireNonLetterOrDigit = true,
-                    RequiredLength = 5
-                };
-                return userManager;
-            });
-        }
-
-        public IAppBuilder CreateLoginManager(IAppBuilder app)
-        {
-            return app.CreatePerOwinContext<LoginManager>((opt, cont)
-                => new LoginManager(cont.Get<UserMemberManager>(), cont.Authentication));
-        }
-        #endregion*/
-
         #region identityUserDB
         public async Task<IdentityResult> CreateNewUserAsync(UserModel model) 
         {

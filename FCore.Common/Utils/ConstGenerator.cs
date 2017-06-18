@@ -12,6 +12,14 @@ namespace FCore.Common.Utils
 {
     public static class ConstGenerator
     {
+        public static string UserIdentityCookieName
+        {
+            get
+            {
+                return "FCore.Acount.userIdentityModel";
+            }
+        }
+
         public static string UserContextConnectionString
         {
             get

@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Mime;
@@ -115,7 +116,7 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> LoginPage()
         {
-            var cookie = HttpContext.Request.Cookies["userCookie"];
+            var cookie = HttpContext.Request.Cookies[ConstGenerator.UserIdentityCookieName];
             string userId = string.Empty;
             if (cookie != null)
             {
@@ -131,7 +132,7 @@ namespace FCore.UI.Controllers
                     return View("ChooseUserPage", cookieUsers);
                 }
 
-                userId = cookie.Value;
+                userId = cookie.Values.GetValues(0).FirstOrDefault();
             }
 
             if (Session["logged-out"] == null)
@@ -151,7 +152,8 @@ namespace FCore.UI.Controllers
                 }
                 Session["isCookie"] = false;
             }
-            
+            else Session["logged-out"] = null;
+
             return View();
         }
 
@@ -170,9 +172,21 @@ namespace FCore.UI.Controllers
                         // for new logged-in user
                         if (Session["isCookie"] == null || !(bool)Session["isCookie"])
                         {
-                            HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
+                            HttpCookie userCookie = new HttpCookie(ConstGenerator.UserIdentityCookieName);
+                            userCookie.Values.Add(identityUser.UserName, identityUser.Id.ToString());
                             userCookie.Expires = DateTime.Now.AddYears(1);
                             HttpContext.Response.Cookies.Add(userCookie);
+                        }
+                        else
+                        {
+                            foreach (NameValueCollection item in HttpContext.Response.Cookies[ConstGenerator.UserIdentityCookieName].Values)
+                            {
+                                if (!item.GetValues(identityUser.UserName).Contains(identityUser.Id.ToString()))
+                                {
+                                    HttpContext.Response.Cookies[ConstGenerator.UserIdentityCookieName]
+                                               .Values.Add(identityUser.UserName, identityUser.Id.ToString());
+                                }
+                            }
                         }
 
                         if (Session["currentUser"] == null)
@@ -192,11 +206,13 @@ namespace FCore.UI.Controllers
 
         public ActionResult Logout(UserModel model)
         {
-            var isLogout = userRepo.LogOut(HttpContext);
-            ModelState.Remove("UserName");
-            ModelState.Remove("Password");
-            Session["logged-out"] = true; // todo.. follow-up in LoginPage(Get)
-            if (isLogout) return RedirectToAction("LoginPage");
+            if (userRepo.LogOut(HttpContext))
+            {
+                ModelState.Remove("UserName");
+                ModelState.Remove("Password");
+                Session["logged-out"] = true;
+                return RedirectToAction("LoginPage");
+            }
             else throw new Exception("Unable to log-out.");
         }
 
