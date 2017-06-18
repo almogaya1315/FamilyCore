@@ -26,12 +26,6 @@ namespace FCore.DAL.Identity
             {
                 app = userRepo.CreateUserManagerFromDependency(app);
 
-                //string connectionStringName = ConstGenerator.UserContextConnectionString;
-                //app = userRepo.CreateUserContext(app, connectionStringName);
-                //app = userRepo.CreateUserStore(app);
-                //app = userRepo.CreateUserManager(app);
-                //app = userRepo.CreateLoginManager(app);
-
                 app.UseCookieAuthentication(new CookieAuthenticationOptions
                 {
                     AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie

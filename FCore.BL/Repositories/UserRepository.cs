@@ -21,6 +21,7 @@ using FCore.BL.Identity.Managers;
 using System.Security.Claims;
 using SimpleInjector;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace FCore.BL.Repositories
 {
@@ -148,6 +149,12 @@ namespace FCore.BL.Repositories
                 if (hashResult == PasswordVerificationResult.Failed) throw new Exception(); // todo..
             }
             return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
+        }
+
+        public async Task<LogoutAction> LogoutAsync(HttpContext context, UserModel model)
+        {
+            var authTypes = context.GetOwinContext().Authentication.GetAuthenticationTypes().Select(a => a.Properties).ToArray();
+            context.GetOwinContext().Authentication.SignOut(authTypes);
         }
 
         public async Task<UserModel> GetUserByIdAsync(string id)

@@ -179,6 +179,11 @@ namespace FCore.UI.Controllers
             return View(model);
         }
 
+        public async Task<ActionResult> Logout(UserModel model)
+        {
+            LogoutAction logoutStatus = await userRepo.LogoutAsync(HttpContext, model);
+        }
+
         public ActionResult RegisterPage()
         {
             Session.Clear();
