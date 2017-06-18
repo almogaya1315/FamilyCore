@@ -31,8 +31,8 @@ namespace FCore.Common.Interfaces
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
         Task<IdentityResult> ValidatePassword(string password);
         Task<SignInStatus> PasswordLoginAsync(UserModel model);
-        LogoutAction LogOut(HttpContextBase context);
         Task<UserModel> GetUserByIdAsync(string id);
         Task<UserModel> GetUserByUsrenameAsync(string userName);
+        bool LogOut(HttpContextBase context);
     }
 }

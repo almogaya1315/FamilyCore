@@ -181,9 +181,9 @@ namespace FCore.UI.Controllers
 
         public ActionResult Logout(UserModel model)
         {
-            LogoutAction logoutStatus = userRepo.LogOut(HttpContext);
-            if (logoutStatus == LogoutAction.Redirect) return View("LoginPage");
-            else return null;
+            var isLogout = userRepo.LogOut(HttpContext);
+            if (isLogout) return View("LoginPage");
+            else throw new Exception("Unable to log-out.");
         }
 
         public ActionResult RegisterPage()
