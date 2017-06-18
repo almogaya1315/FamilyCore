@@ -169,7 +169,7 @@ namespace FCore.UI.Controllers
                     case SignInStatus.Success:
                         var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
 
-                        // for new logged-in user
+                        // for new logged-in user, when there are no cookie values
                         if (Session["isCookie"] == null || !(bool)Session["isCookie"])
                         {
                             HttpCookie userCookie = new HttpCookie(ConstGenerator.UserIdentityCookieName);
@@ -177,9 +177,10 @@ namespace FCore.UI.Controllers
                             userCookie.Expires = DateTime.Now.AddYears(1);
                             HttpContext.Response.Cookies.Add(userCookie);
                         }
-                        else
+                        else 
                         {
-                            foreach (NameValueCollection item in HttpContext.Response.Cookies[ConstGenerator.UserIdentityCookieName].Values)
+                            var cookie = HttpContext.Request.Cookies[ConstGenerator.UserIdentityCookieName];
+                            foreach (NameValueCollection item in cookie.Values)
                             {
                                 if (!item.GetValues(identityUser.UserName).Contains(identityUser.Id.ToString()))
                                 {
