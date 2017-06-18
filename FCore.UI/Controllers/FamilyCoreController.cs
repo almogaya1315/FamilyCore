@@ -19,9 +19,9 @@ namespace FCore.UI.Controllers
         {
             using (coreRepo = new FCoreRepository())
             {
-                if (Session["cureentUser"] != null)
-                    userModel.Member = (Session["cureentUser"] as UserModel).Member;
-                else RedirectToAction("LoginPage", "Acount"); //return new HttpStatusCodeResult((int)HttpStatusCode.Unauthorized);
+                if (Session["currentUser"] != null)
+                    userModel.Member = (Session["currentUser"] as UserModel).Member;
+                else return RedirectToAction("LoginPage", "Acount"); 
 
                 ViewBag.LastJoinName = coreRepo.GetLastMemberJoined().FirstName;
                 ViewBag.VideoDesc = coreRepo.GetMostViewedVideo().Description;

@@ -152,16 +152,14 @@ namespace FCore.UI.Controllers
                         if (Session["isCookie"] == null || !(bool)Session["isCookie"])
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
-                            var experationDate = DateTime.Now.AddYears(1);
-                            userCookie.Expires.Add(experationDate);
-                            //userCookie.Domain = "http://localhost:13297/"; // yet to be checked ***
+                            userCookie.Expires = DateTime.Now.AddYears(1);
                             HttpContext.Response.Cookies.Add(userCookie);
                         }
 
-                        if (Session["cureentUser"] == null)
+                        if (Session["currentUser"] == null)
                         {
                             identityUser.Member = coreRepo.GetFamilyMember(identityUser.MemberId);
-                            Session["cureentUser"] = identityUser;
+                            Session["currentUser"] = identityUser;
                         }
 
                         return RedirectToAction("Main", "FamilyCore", identityUser);

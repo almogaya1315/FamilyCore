@@ -23,7 +23,9 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                var currentUser = Session["currentUser"];
                 Session.Clear();
+                Session["currentUser"] = currentUser;
                 Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
                 return View(repo.GetFamilyMember(creator.Id));
             }

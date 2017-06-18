@@ -25,7 +25,7 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-                return View(repo.GetFamilyMember((Session["cureentUser"] as UserModel).MemberId));
+                return View(repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId));
             }
         }
 

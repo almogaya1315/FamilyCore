@@ -1,5 +1,6 @@
 ﻿using FCore.BL.Repositories;
 using FCore.Common.Interfaces;
+using FCore.Common.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace FCore.UI.Controllers
 {
+    [Authorize]
     public class VideoController : Controller
     {
         ICoreRepository repo { get; set; }
@@ -15,6 +17,8 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                (Session["currentUser"] as UserModel).Member = repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId);
+
                 return View(repo.GetVideoLibraries());
             }
         }
@@ -23,6 +27,8 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
+                (Session["currentUser"] as UserModel).Member = repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId);
+
                 return View(repo.GetVideoLibrary(id)); 
             }
         }
