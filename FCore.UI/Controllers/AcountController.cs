@@ -115,32 +115,43 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> LoginPage()
         {
-            Session.Clear();
-            Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
-
             var cookie = HttpContext.Request.Cookies["userCookie"];
             string userId = string.Empty;
             if (cookie != null)
             {
                 if (cookie.Values.Count > 1)
                 {
-                    // todo.. 
+                    ICollection<FamilyMemberModel> cookieUsers = new List<FamilyMemberModel>();
+                    foreach (string id in cookie.Values)
+                    {
+                        var user = await userRepo.GetUserByIdAsync(id);
+                        user.Member = coreRepo.GetFamilyMember(user.MemberId);
+                        cookieUsers.Add(user.Member);
+                    }
+                    return View("ChooseCookieUser", cookieUsers);
                 }
 
                 userId = cookie.Value;
             }
 
-            if (!string.IsNullOrWhiteSpace(userId))
+            if (Session["logged-out"] == null)
             {
-                var user = await userRepo.GetUserByIdAsync(userId);
-                if (user != null)
+                Session.Clear();
+                Session["validcolor"] = ModelStateHelper.ValidationMessageColor;
+
+                if (!string.IsNullOrWhiteSpace(userId))
                 {
-                    Session["isCookie"] = true;
-                    return await LoginPage(user);
+                    var user = await userRepo.GetUserByIdAsync(userId);
+                    if (user != null)
+                    {
+                        Session["isCookie"] = true;
+                        return await LoginPage(user);
+                    }
+                    else throw new Exception(); // todo..
                 }
-                else throw new Exception(); // todo..
+                Session["isCookie"] = false;
             }
-            Session["isCookie"] = false;
+            
             return View();
         }
 
