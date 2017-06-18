@@ -120,12 +120,7 @@ namespace FCore.UI.Controllers
 
             var cookie = HttpContext.Request.Cookies["userCookie"];
             string userId = string.Empty;
-            if (cookie != null)
-            {
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
-                if (ticket.IsPersistent) userId = cookie.Value;
-                else throw new Exception(); // todo..
-            }
+            if (cookie != null) userId = cookie.Value;
 
             if (!string.IsNullOrWhiteSpace(userId))
             {
@@ -157,8 +152,9 @@ namespace FCore.UI.Controllers
                         if (Session["isCookie"] == null || !(bool)Session["isCookie"])
                         {
                             HttpCookie userCookie = new HttpCookie("userCookie", identityUser.Id);
-                            userCookie.Expires.AddYears(1);
-                            userCookie.Domain = "http://localhost:13297/"; // yet to be checked ***
+                            var experationDate = DateTime.Now.AddYears(1);
+                            userCookie.Expires.Add(experationDate);
+                            //userCookie.Domain = "http://localhost:13297/"; // yet to be checked ***
                             HttpContext.Response.Cookies.Add(userCookie);
                         }
 
