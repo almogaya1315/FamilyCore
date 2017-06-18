@@ -121,14 +121,14 @@ namespace FCore.UI.Controllers
             {
                 if (cookie.Values.Count > 1)
                 {
-                    ICollection<FamilyMemberModel> cookieUsers = new List<FamilyMemberModel>();
+                    ICollection<UserModel> cookieUsers = new List<UserModel>();
                     foreach (string id in cookie.Values)
                     {
                         var user = await userRepo.GetUserByIdAsync(id);
                         user.Member = coreRepo.GetFamilyMember(user.MemberId);
-                        cookieUsers.Add(user.Member);
+                        cookieUsers.Add(user);
                     }
-                    return View("ChooseCookieUser", cookieUsers);
+                    return View("ChooseUserPage", cookieUsers);
                 }
 
                 userId = cookie.Value;
@@ -196,7 +196,7 @@ namespace FCore.UI.Controllers
             ModelState.Remove("UserName");
             ModelState.Remove("Password");
             Session["logged-out"] = true; // todo.. follow-up in LoginPage(Get)
-            if (isLogout) return View("LoginPage");
+            if (isLogout) return RedirectToAction("LoginPage");
             else throw new Exception("Unable to log-out.");
         }
 

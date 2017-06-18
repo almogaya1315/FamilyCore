@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FCore.Common.Models.Users.UserModel>
+
+@{
+    Layout = "~/Views/Shared/LoginReg_Layout.cshtml";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="text-center">Choose user</h1>
+        </div>
+
+        <div class="modal-body">
+            @{
+                foreach (var user in Model)
+                {
+                    <div class="btn-group">
+                        <div class="form-group">
+                            <img style="display:inline" src="@Url.Content(user.Member.ProfileImagePath)"
+                                 id="profile-image" class="img-circle img-responsive" />
+                            <div>@user.UserName</div>
+                            <div>@user.Member.ContactInfo.MemberName</div>
+                            <div>@user.Member.ContactInfo.Email</div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

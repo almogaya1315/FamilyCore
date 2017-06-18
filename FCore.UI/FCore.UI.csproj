@@ -260,6 +260,7 @@
     <Content Include="Views\Acount\AddContactInfo.cshtml" />
     <Content Include="Views\Acount\AddLifeStory.cshtml" />
     <Content Include="Views\Acount\CreateSuccess.cshtml" />
+    <Content Include="Views\Acount\ChooseUserPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
