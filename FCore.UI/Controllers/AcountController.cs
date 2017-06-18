@@ -120,7 +120,15 @@ namespace FCore.UI.Controllers
 
             var cookie = HttpContext.Request.Cookies["userCookie"];
             string userId = string.Empty;
-            if (cookie != null) userId = cookie.Value;
+            if (cookie != null)
+            {
+                if (cookie.Values.Count > 1)
+                {
+                    // todo.. 
+                }
+
+                userId = cookie.Value;
+            }
 
             if (!string.IsNullOrWhiteSpace(userId))
             {
