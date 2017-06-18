@@ -8,51 +8,43 @@
     <div class="modal-content">
         <div class="modal-header">
             <h1 class="text-center">Choose user</h1>
+            <h5 class="text-center">@Html.ActionLink("Login with a different user", "LoadLoginPage")</h5>
+            <h5 class="text-center">OR</h5>
+            <h5 class="text-center">@Html.ActionLink("Register a new user", "RegisterPage")</h5>
         </div>
 
         <div class="modal-body">
             @{
                 foreach (var user in Model)
                 {
-                    <div class="well pricing-table">
-                        <div class="pricing-feature-list" style="background-color:#82caf3; border-radius:5px;padding:9%;line-height:1.1">
-                            <div class="form-group" style="display:inline">
-                                <img style="display:inline; cursor:default;margin-top: -18%; margin-left:-3%; margin-bottom: -19%; width:85px; height:85px" id="profile-image" class="img-circle"
-                                      src="@Url.Content(user.Member.ProfileImagePath)"/>
-                            </div>
+                    using (Html.BeginForm("LoginPage", "Acount", user, FormMethod.Post))
+                    {
+                        <div class="well pricing-table" id="login_div">
+                            <div class="pricing-feature-list" style="background-color:#82caf3; border-radius:5px;padding:9%;line-height:1.1">
+                                <div class="form-group" style="display:inline">
+                                    <img style="display:inline; cursor:default;margin-top: -18%; margin-left:-3%; margin-bottom: -19%; width:85px; height:85px" id="profile-image" class="img-circle"
+                                         src="@Url.Content(user.Member.ProfileImagePath)" />
+                                </div>
 
-                            <ul class="list-group" style="margin:-8%; margin-left:25%;margin-top: -11%;">
-                                <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
-                                    <span>@Html.LabelFor(model => model.FirstOrDefault().UserName)</span>
-                                    <span>@user.UserName</span>
-                                </li>
-                                <li class="list-group-item" style="background:#4386f1; border-color:#4386f1; font-size: 13px;line-height:0%;margin-bottom: -3%;margin-top: -5%;">
-                                    <span>@Html.LabelFor(model => model.FirstOrDefault().Member.ContactInfo.MemberName)</span>
-                                    <span>@user.Member.ContactInfo.MemberName</span>
-                                </li>
-                                <li class="list-group-item" style="background:#4386f1; border-color:#4386f1;font-size: 13px;;line-height:0%">
-                                    <span>@Html.LabelFor(model => model.FirstOrDefault().Member.ContactInfo.Email)</span>
-                                    <span>@user.Member.ContactInfo.Email</span>
-                                </li>
-                            </ul>
+                                <ul class="list-group" style="margin:-8%; margin-left:25%;margin-top: -11%;">
+                                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1">
+                                        <span>@Html.LabelFor(model => model.FirstOrDefault().UserName)</span>
+                                        <span>@user.UserName</span>
+                                    </li>
+                                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1; font-size: 13px;line-height:0%;margin-bottom: -3%;margin-top: -5%;">
+                                        <span>@Html.LabelFor(model => model.FirstOrDefault().Member.ContactInfo.MemberName)</span>
+                                        <span>@user.Member.ContactInfo.MemberName</span>
+                                    </li>
+                                    <li class="list-group-item" style="background:#4386f1; border-color:#4386f1;font-size: 13px;;line-height:0%">
+                                        <span>@Html.LabelFor(model => model.FirstOrDefault().Member.ContactInfo.Email)</span>
+                                        <span>@user.Member.ContactInfo.Email</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
 
-
-                    @*<div class="form-group" style="box-shadow:rgb(128, 128, 128) 0px 0px inset">
-                            <div class="form-group" style="display:inline">
-                                <img style="display:inline; cursor:default" src="@Url.Content(user.Member.ProfileImagePath)"
-                                     id="profile-image" class="img-circle" />
-                            </div>
-                            <div class="form-group" style="display:inline-grid">
-                                <span>@Html.LabelFor(model => model.FirstOrDefault().UserName)</span>
-                                <span>@user.UserName</span>
-                                <span>@Html.LabelFor(model => model.FirstOrDefault().Member.ContactInfo.MemberName)</span>
-                                <span>@user.Member.ContactInfo.MemberName</span>
-                                <span>@Html.LabelFor(model => model.FirstOrDefault().Member.ContactInfo.Email)</span>
-                                <span>@user.Member.ContactInfo.Email</span>
-                            </div>
-                        </div>*@
+                        <input id="submit_choose" type="submit" style="display:none"/>
+                    }
                 }
             }
         </div>

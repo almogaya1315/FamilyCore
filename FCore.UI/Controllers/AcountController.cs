@@ -113,6 +113,11 @@ namespace FCore.UI.Controllers
             userRepo = new UserRepository(userManager, loginManager);
         }
 
+        public ActionResult LoadLoginPage()
+        {
+            return View("LoginPage");
+        }
+
         [HttpGet]
         public async Task<ActionResult> LoginPage()
         {
@@ -143,14 +148,9 @@ namespace FCore.UI.Controllers
                 if (!string.IsNullOrWhiteSpace(userId))
                 {
                     var user = await userRepo.GetUserByIdAsync(userId);
-                    if (user != null)
-                    {
-                        Session["isCookie"] = true;
-                        return await LoginPage(user);
-                    }
+                    if (user != null) return await LoginPage(user);
                     else throw new Exception(); // todo..
                 }
-                Session["isCookie"] = false;
             }
             else Session["logged-out"] = null;
 
@@ -158,7 +158,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> LoginPage(UserModel model)
+        public async Task<ActionResult> LoginPage([Bind(Exclude = "Member,Roles,Logins,Claims")]UserModel model)
         {
             if (ModelState.IsValid)
             {
@@ -171,11 +171,9 @@ namespace FCore.UI.Controllers
 
                         HttpCookie userCookie = new HttpCookie(ConstGenerator.UserIdentityCookieName);
                         // for new logged-in user, when there are no cookie or values
-                        if (Session["isCookie"] == null || !(bool)Session["isCookie"])
-                        {
+                        if (HttpContext.Request.Cookies.Get(ConstGenerator.UserIdentityCookieName) == null)
                             userCookie.Values.Add(identityUser.UserName, identityUser.Id.ToString());
-                        }
-                        else 
+                        else
                         {
                             userCookie = HttpContext.Request.Cookies.Get(ConstGenerator.UserIdentityCookieName);
                             // if doesn't exists, add identity values to cookie, else return cookie values as is 

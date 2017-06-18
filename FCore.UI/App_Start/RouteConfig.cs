@@ -14,9 +14,15 @@ namespace FCore.UI
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "RegisterLoginPage",
+                name: "LoginPage",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Acount", action = "LoginPage", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "RegisterPage",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Acount", action = "RegisterPage", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
