@@ -151,10 +151,20 @@ namespace FCore.BL.Repositories
             return await loginManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
         }
 
-        public async Task<LogoutAction> LogoutAsync(HttpContext context, UserModel model)
+        public LogoutAction LogOut(HttpContextBase context)
         {
-            var authTypes = context.GetOwinContext().Authentication.GetAuthenticationTypes().Select(a => a.Properties).ToArray();
-            context.GetOwinContext().Authentication.SignOut(authTypes);
+            try
+            {
+                var authTypes = context.GetOwinContext().Authentication.GetAuthenticationTypes().Select(a => a.AuthenticationType).ToArray();
+                context.Request.GetOwinContext().Authentication.SignOut(authTypes);
+
+                context.Request.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Unable to log-out. {e.Message}");
+            }
+            return LogoutAction.Redirect;
         }
 
         public async Task<UserModel> GetUserByIdAsync(string id)

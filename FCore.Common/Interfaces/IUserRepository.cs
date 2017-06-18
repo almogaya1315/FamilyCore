@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace FCore.Common.Interfaces
 {
@@ -30,6 +31,7 @@ namespace FCore.Common.Interfaces
         Task<IdentityResult> CreateNewUserAsync(UserModel model);
         Task<IdentityResult> ValidatePassword(string password);
         Task<SignInStatus> PasswordLoginAsync(UserModel model);
+        LogoutAction LogOut(HttpContextBase context);
         Task<UserModel> GetUserByIdAsync(string id);
         Task<UserModel> GetUserByUsrenameAsync(string userName);
     }
