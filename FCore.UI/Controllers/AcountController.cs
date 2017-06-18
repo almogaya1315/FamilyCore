@@ -116,23 +116,23 @@ namespace FCore.UI.Controllers
         [HttpGet]
         public async Task<ActionResult> LoginPage()
         {
-            var cookie = HttpContext.Request.Cookies[ConstGenerator.UserIdentityCookieName];
+            HttpCookie userCookie = HttpContext.Request.Cookies[ConstGenerator.UserIdentityCookieName];
             string userId = string.Empty;
-            if (cookie != null)
+            if (userCookie != null)
             {
-                if (cookie.Values.Count > 1)
+                if (userCookie.Values.Count > 1)
                 {
                     ICollection<UserModel> cookieUsers = new List<UserModel>();
-                    foreach (string id in cookie.Values)
+                    foreach (string username in userCookie.Values)
                     {
-                        var user = await userRepo.GetUserByIdAsync(id);
+                        var user = await userRepo.GetUserByUsrenameAsync(username);
                         user.Member = coreRepo.GetFamilyMember(user.MemberId);
                         cookieUsers.Add(user);
                     }
                     return View("ChooseUserPage", cookieUsers);
                 }
 
-                userId = cookie.Values.GetValues(0).FirstOrDefault();
+                userId = userCookie.Values.GetValues(0).FirstOrDefault();
             }
 
             if (Session["logged-out"] == null)
@@ -169,28 +169,25 @@ namespace FCore.UI.Controllers
                     case SignInStatus.Success:
                         var identityUser = await userRepo.GetUserByUsrenameAsync(model.UserName);
 
-                        // for new logged-in user, when there are no cookie values
+                        HttpCookie userCookie = new HttpCookie(ConstGenerator.UserIdentityCookieName);
+                        // for new logged-in user, when there are no cookie or values
                         if (Session["isCookie"] == null || !(bool)Session["isCookie"])
                         {
-                            HttpCookie userCookie = new HttpCookie(ConstGenerator.UserIdentityCookieName);
                             userCookie.Values.Add(identityUser.UserName, identityUser.Id.ToString());
-                            userCookie.Expires = DateTime.Now.AddYears(1);
-                            HttpContext.Response.Cookies.Add(userCookie);
                         }
                         else 
                         {
-                            var cookie = HttpContext.Request.Cookies[ConstGenerator.UserIdentityCookieName];
-                            foreach (NameValueCollection item in cookie.Values)
+                            userCookie = HttpContext.Request.Cookies.Get(ConstGenerator.UserIdentityCookieName);
+                            // if doesn't exists, add identity values to cookie, else return cookie values as is 
+                            if (!userCookie.Values.AllKeys.Contains(identityUser.UserName))
                             {
-                                if (!item.GetValues(identityUser.UserName).Contains(identityUser.Id.ToString()))
-                                {
-                                    HttpContext.Response.Cookies[ConstGenerator.UserIdentityCookieName]
-                                               .Values.Add(identityUser.UserName, identityUser.Id.ToString());
-                                }
+                                userCookie.Values.Add(identityUser.UserName, identityUser.Id.ToString());
                             }
                         }
+                        userCookie.Expires = DateTime.Now.AddYears(1);
+                        HttpContext.Response.Cookies.Add(userCookie);
 
-                        if (Session["currentUser"] == null)
+                        if (Session["currentUser"] == null || (Session["currentUser"] as UserModel).Id != identityUser.Id)
                         {
                             identityUser.Member = coreRepo.GetFamilyMember(identityUser.MemberId);
                             Session["currentUser"] = identityUser;
