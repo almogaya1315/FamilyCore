@@ -219,6 +219,39 @@ namespace FCore.Common.Utils
                 default: return relativeRelativeRel.ToString(); // for 'Great_GrandChild', 'Undefined'
             }
         }
+
+        internal static string GetThirdRelForSpouses(RelationshipType relativeRelativeRel)
+        {
+            switch (relativeRelativeRel)
+            {
+                // if my husband or wife have a wife, she is undefined
+                case RelationshipType.Wife: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Husband: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Mother: return RelationshipType.Mother_in_law.ToString();
+                case RelationshipType.Father: return RelationshipType.Father_in_law.ToString();
+                case RelationshipType.Sister: return RelationshipType.Sister_in_law.ToString();
+                case RelationshipType.Brother: return RelationshipType.Brother_in_law.ToString();
+                case RelationshipType.Uncle: return RelationshipType.In_law.ToString();
+                case RelationshipType.Aunt: return RelationshipType.In_law.ToString();
+                case RelationshipType.Cousin: return RelationshipType.In_law.ToString();
+                case RelationshipType.Mother_in_law: return RelationshipType.Mother.ToString();
+                case RelationshipType.Father_in_law: return RelationshipType.Father.ToString();
+                case RelationshipType.Sister_in_law: return RelationshipType.Sister.ToString();
+                case RelationshipType.Brother_in_law: return RelationshipType.Brother.ToString();
+                case RelationshipType.Son_in_law: return RelationshipType.Son.ToString();
+                case RelationshipType.Daughter_in_law: return RelationshipType.Daughter.ToString();
+                case RelationshipType.Divorcee: return RelationshipType.Undefined.ToString();
+
+                // could also be 'Daughter in-law'. needs to response to ui for user choice. 
+                case RelationshipType.Daughter: return relativeRelativeRel.ToString();
+                // could also be 'Son in-law'. needs to response to ui for user choice. 
+                case RelationshipType.Son: return relativeRelativeRel.ToString();
+                // could also be 'Aunt', 'Cousin', 'Mother_in_law', 'Father_in_law'. needs to response to ui for user choice. 
+                case RelationshipType.In_law: return RelationshipType.Uncle.ToString();
+                // for 'Grandmother', 'Grandfather', 'Granddaughter', 'Grandson', 'Great_GrandChild', 'Great_GrandFather', 'Great_GrandMother', 'Nephew', 'Undefined' 
+                default: return relativeRelativeRel.ToString(); 
+            }
+        }
         #endregion
     }
 }

@@ -35,6 +35,12 @@ namespace FCore.Common.Utils
                 ICollection<SelectListItem> rels = new List<SelectListItem>();
                 foreach (var rel in Enum.GetNames(typeof(RelationshipType)))
                 {
+                    if (rel.Contains("_"))
+                    {
+                        string r = rel.Replace('_', ' ');
+                        rels.Add(new SelectListItem() { Text = r });
+                        continue;
+                    }
                     rels.Add(new SelectListItem() { Text = rel });
                 }
                 return rels;
