@@ -117,7 +117,7 @@ namespace FCore.Common.Utils
                 // could also return 'Son'. needs to response to ui for user choice.
                 case RelationshipType.Grandson: return RelationshipType.Nephew.ToString();
 
-                case RelationshipType.Great_GrandChild: return GetOppositeForGrandParents(secondRelGender); 
+                case RelationshipType.Great_GrandChild: return GetOppositeForGrandParents(secondRelGender);
                 default: return relativeRelativeRel.ToString(); // for 'Great_GrandMother', 'Great_GrandFather', 'Cousin', 'Uncle', 'Aunt', 'Undefined'
             }
         }
@@ -130,7 +130,7 @@ namespace FCore.Common.Utils
                 case RelationshipType.Husband: return RelationshipType.Brother_in_law.ToString();
                 case RelationshipType.Wife: return RelationshipType.Sister_in_law.ToString();
 
-                case RelationshipType.Son: return GetOppositeForNephew(createdGender); 
+                case RelationshipType.Son: return GetOppositeForNephew(createdGender);
                 case RelationshipType.Daughter: return GetOppositeForNephew(createdGender);
                 case RelationshipType.Son_in_law: return GetOppositeForNephew(createdGender);
                 case RelationshipType.Daughter_in_law: return GetOppositeForNephew(createdGender);
@@ -139,7 +139,7 @@ namespace FCore.Common.Utils
             }
         }
 
-        internal static string GetThirdRelForAuntOrUncle(RelationshipType relativeRelativeRel) 
+        internal static string GetThirdRelForAuntOrUncle(RelationshipType relativeRelativeRel)
         {
             switch (relativeRelativeRel)
             {
@@ -249,72 +249,52 @@ namespace FCore.Common.Utils
                 // could also be 'Aunt', 'Cousin', 'Mother_in_law', 'Father_in_law'. needs to response to ui for user choice. 
                 case RelationshipType.In_law: return RelationshipType.Uncle.ToString();
                 // for 'Grandmother', 'Grandfather', 'Granddaughter', 'Grandson', 'Great_GrandChild', 'Great_GrandFather', 'Great_GrandMother', 'Nephew', 'Undefined' 
-                default: return relativeRelativeRel.ToString(); 
+                default: return relativeRelativeRel.ToString();
             }
         }
 
-        internal static string GetThirdRelForGrandParents(RelationshipType relativeRelativeRel)
+        internal static string GetThirdRelForGrandParents(RelationshipType relativeRelativeRel, GenderType secondRelGender)
         {
             switch (relativeRelativeRel)
             {
                 // if my grandmother or grandfather have a wife, she is Grandmother 
                 case RelationshipType.Wife: return RelationshipType.Grandmother.ToString();
-                case RelationshipType.Husband:
-                    break;
-                case RelationshipType.Mother:
-                    break;
-                case RelationshipType.Father:
-                    break;
-                case RelationshipType.Daughter:
-                    break;
-                case RelationshipType.Son:
-                    break;
-                case RelationshipType.Grandmother:
-                    break;
-                case RelationshipType.Grandfather:
-                    break;
-                case RelationshipType.Granddaughter:
-                    break;
-                case RelationshipType.Grandson:
-                    break;
-                case RelationshipType.Sister:
-                    break;
-                case RelationshipType.Brother:
-                    break;
-                case RelationshipType.Uncle:
-                    break;
-                case RelationshipType.Aunt:
-                    break;
-                case RelationshipType.Cousin:
-                    break;
-                case RelationshipType.Great_GrandChild:
-                    break;
-                case RelationshipType.Great_GrandFather:
-                    break;
-                case RelationshipType.Great_GrandMother:
-                    break;
-                case RelationshipType.Mother_in_law:
-                    break;
-                case RelationshipType.Father_in_law:
-                    break;
-                case RelationshipType.Sister_in_law:
-                    break;
-                case RelationshipType.Brother_in_law:
-                    break;
-                case RelationshipType.Son_in_law:
-                    break;
-                case RelationshipType.Daughter_in_law:
-                    break;
-                case RelationshipType.Nephew:
-                    break;
-                case RelationshipType.Divorcee:
-                    break;
-                case RelationshipType.In_law:
-                    break;
-                case RelationshipType.Undefined:
-                    break;
-                default:
-                    break;
+                case RelationshipType.Husband: return RelationshipType.Grandfather.ToString();
+                case RelationshipType.Mother: return RelationshipType.Great_GrandMother.ToString();
+                case RelationshipType.Father: return RelationshipType.Great_GrandFather.ToString();
+                case RelationshipType.Grandmother: return RelationshipType.Great_GrandMother.ToString();
+                case RelationshipType.Grandfather: return RelationshipType.Great_GrandFather.ToString();
+                case RelationshipType.Sister: return RelationshipType.Grandmother.ToString();
+                case RelationshipType.Brother: return RelationshipType.Grandfather.ToString();
+                case RelationshipType.Uncle: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Aunt: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Great_GrandFather: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Great_GrandMother: return RelationshipType.Undefined.ToString();
+                case RelationshipType.Mother_in_law: return RelationshipType.Great_GrandMother.ToString();
+                case RelationshipType.Father_in_law: return RelationshipType.Great_GrandFather.ToString();
+                case RelationshipType.Sister_in_law: return RelationshipType.Great_GrandMother.ToString();
+                case RelationshipType.Brother_in_law: return RelationshipType.Great_GrandFather.ToString();
+                case RelationshipType.In_law: return RelationshipType.Undefined.ToString();
+
+                case RelationshipType.Cousin: return GetOppositeForGrandParents(secondRelGender);
+                case RelationshipType.Nephew: return GetOppositeForNephew(secondRelGender);
+
+                // could also be 'Aunt'. needs to response to ui for user choice. 
+                case RelationshipType.Daughter: return RelationshipType.Mother.ToString();
+                // could also be 'Uncle'. needs to responde to ui for user choice.
+                case RelationshipType.Son: return RelationshipType.Father.ToString();
+                // could also be 'Cousin'. needs to responde to ui for user choice.
+                case RelationshipType.Granddaughter: return RelationshipType.Sister.ToString();
+                case RelationshipType.Grandson: return RelationshipType.Brother.ToString();
+                // could also be 'Daughter', 'Nephew', 'Cousin'. needs to responde to ui for user choice.
+                case RelationshipType.Great_GrandChild: return RelationshipType.Son.ToString();
+                // could also be 'Uncle'. needs to responde to ui for user choice.
+                case RelationshipType.Son_in_law: return RelationshipType.Father.ToString();
+                // could also be 'Aunt'. needs to responde to ui for user choice.
+                case RelationshipType.Daughter_in_law: return RelationshipType.Mother.ToString();
+                // could also be 'Undefined'. needs to responde to ui for user choice.
+                case RelationshipType.Divorcee: return RelationshipType.Grandfather.ToString();
+                default: return relativeRelativeRel.ToString();
             }
         }
         #endregion
