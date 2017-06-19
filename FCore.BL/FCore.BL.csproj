@@ -128,7 +128,7 @@
     <Compile Include="Repositories\RepositoryConverter.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Identity\Stores\UserMemberStore.cs" />
-    <Compile Include="Identity\UserMemberManager.cs" />
+    <Compile Include="Identity\Managers\UserMemberManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.Common\FCore.Common.csproj">

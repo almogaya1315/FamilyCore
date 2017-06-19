@@ -305,12 +305,6 @@ namespace FCore.Tests.Moq
             throw new NotImplementedException();
         }
 
-        // for debug
-        public void DeletePreviousCreatedMember()
-        {
-            throw new NotImplementedException();
-        }
-
         public ICollection<FamilyMemberModel> GetMembersDynamic(string familyName, string text = null)
         {
             throw new NotImplementedException();
@@ -322,6 +316,11 @@ namespace FCore.Tests.Moq
         }
 
         public FamilyMemberModel CreateMember(FamilyMemberModel postedMember, int relativeId, string relationship)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDictionary<FamilyMemberModel, ICollection<string>> VerifyMultipleRels(FamilyMemberModel relative, string relationship)
         {
             throw new NotImplementedException();
         }

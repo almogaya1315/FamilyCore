@@ -149,7 +149,7 @@
     <Compile Include="Models\Videos\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRepositoryConverter.cs" />
-    <Compile Include="Support\DynamicMemberRequestData.cs" />
+    <Compile Include="Support\DynamicMember.cs" />
     <Compile Include="Utils\ConstGenerator.cs" />
     <Compile Include="Utils\InputHelper.cs" />
     <Compile Include="Utils\ModelStateHelper.cs" />

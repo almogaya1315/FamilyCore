@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FCore.BL.Identity
+namespace FCore.BL.Identity.Managers
 {
     public class UserMemberManager : UserManager<UserEntity, string>
     {

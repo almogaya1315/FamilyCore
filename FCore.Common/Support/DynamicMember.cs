@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FCore.Common.Support
 {
-    public class DynamicMemberRequestData
+    public class DynamicMember
     {
         public string FamilyName { get; set; }
         public string Text { get; set; }

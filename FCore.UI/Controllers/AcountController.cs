@@ -348,7 +348,7 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoadMembersDynamic(DynamicMemberRequestData reqData)
+        public ActionResult LoadMembersDynamic(DynamicMember reqData)
         {
             var members = ConstGenerator.GetMemberSelectListItems(coreRepo.GetMembersDynamic(reqData.FamilyName, reqData.Text));
             Session["rel_fam"] = reqData.FamilyName;
@@ -362,7 +362,7 @@ namespace FCore.UI.Controllers
             if (relatives.Count > 1)
             {
                 // todo.. in case there is more then one member in a family that has the choosen name, 
-                //        the user will have to choose exactly which from a pop-up list
+                //        the user will have to choose exactly which from a detailed members pop-up list
             }
             else Session["relative"] = relatives.FirstOrDefault();
 
@@ -395,6 +395,18 @@ namespace FCore.UI.Controllers
             {
                 Session["member_pi"] = model;
                 Session["rel"] = Relationship;
+
+                // todo..
+                //if (Session["relOpt"] == null || !(bool)Session["relOpt"])
+                //{
+                //    var relOpt = coreRepo.VerifyMultipleRels((FamilyMemberModel)Session["relative"], (string)Session["rel"]);
+                //    if (relOpt.Count > 0)
+                //    {
+                //        Session["relOpt"] = relOpt;
+                //        return PartialView("ChooseRelOptions", relOpt);
+                //    }
+                //}
+
                 ViewData["cityenum"] = ConstGenerator.Cities;
                 return PartialView("AddContactInfo", new ContactInfoModel());
             }

@@ -160,6 +160,10 @@ namespace FCore.BL.Repositories
             }
             return newMember;
         }
+        public IDictionary<FamilyMemberModel, ICollection<string>> VerifyMultipleRels(FamilyMemberModel relative, string relationship)
+        {
+            return null;
+        }
 
         public PermissionsModel GetPermissionsModel(int id)
         {

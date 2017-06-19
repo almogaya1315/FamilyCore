@@ -31,6 +31,7 @@ namespace FCore.Common.Interfaces
         FamilyMemberModel SetContactInfo(FamilyMemberModel posted, ContactInfoModel info);
         FamilyMemberModel CreateMember(FamilyMemberModel postedMember, int relativeId, string relationship);
         FamilyMemberModel ConnectRelatives(FamilyMemberModel relative, FamilyMemberModel newMember);
+        IDictionary<FamilyMemberModel, ICollection<string>> VerifyMultipleRels(FamilyMemberModel relative, string relationship);
 
         PermissionsModel GetPermissionsModel(int id);
 
