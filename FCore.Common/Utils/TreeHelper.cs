@@ -94,7 +94,8 @@ namespace FCore.Common.Utils
             }
         }
 
-        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdRelativeRel, GenderType createdGender, GenderType secondRelGender)
+        public static string GetThirdLevelRelationship(RelativeModel relativeRelativeRel, RelationshipType createdRelativeRel,
+                                                       GenderType createdGender, GenderType secondRelGender)
         {
             switch (createdRelativeRel)
             {
@@ -109,24 +110,34 @@ namespace FCore.Common.Utils
                                   .Relationship), secondRelGender);
 
                 case RelationshipType.Brother:
-                    return RelData.GetRelForSiblings((RelationshipType)Enum
+                    return RelData.GetThirdRelForSiblings((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship), createdGender);
 
                 case RelationshipType.Sister:
-                    return RelData.GetRelForSiblings((RelationshipType)Enum
+                    return RelData.GetThirdRelForSiblings((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship), createdGender);
 
                 case RelationshipType.Aunt:
-                    return RelData.GetRelForAuntOrUncle((RelationshipType)Enum
+                    return RelData.GetThirdRelForAuntOrUncle((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship));
 
                 case RelationshipType.Uncle:
-                    return RelData.GetRelForAuntOrUncle((RelationshipType)Enum
+                    return RelData.GetThirdRelForAuntOrUncle((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship));
+
+                case RelationshipType.Son:
+                    return RelData.GetThirdRelForChildren((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), secondRelGender);
+
+                case RelationshipType.Daughter:
+                    return RelData.GetThirdRelForChildren((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), secondRelGender);
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");

@@ -320,8 +320,6 @@ namespace FCore.UI.Controllers
                     {
                         if (Session["HPFB_file"] != null)
                         {
-                            //Session["username"] = model.UserName;
-                            //Session["password"] = model.Password;
                             Session["userModel"] = model;
 
                             model.Member = new FamilyMemberModel();

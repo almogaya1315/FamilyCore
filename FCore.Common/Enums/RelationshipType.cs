@@ -33,6 +33,8 @@ namespace FCore.Common.Enums
         Son_in_law,
         Daughter_in_law,
         Nephew,
+        Divorcee,
+        In_law,
         Undefined
     }
 }
