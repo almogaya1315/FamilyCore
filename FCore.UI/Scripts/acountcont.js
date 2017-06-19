@@ -115,9 +115,8 @@ function AddRelativeName() {
 }
 
 // submit 'choose user' form
-$(function () {
-    $('#login_div').on('click', function () {
-        $('#submit_choose').click();
-    })
-})
+function SubmitChooseUserForm(submitId) {
+    $(submitId).click();
+}
+
 

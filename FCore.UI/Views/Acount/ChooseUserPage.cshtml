@@ -19,7 +19,7 @@
                 {
                     using (Html.BeginForm("LoginPage", "Acount", user, FormMethod.Post))
                     {
-                        <div class="well pricing-table" id="login_div">
+                        <div class="well pricing-table" onclick="SubmitChooseUserForm(@user.UserName)">
                             <div class="pricing-feature-list" style="background-color:#82caf3; border-radius:5px;padding:9%;line-height:1.1">
                                 <div class="form-group" style="display:inline">
                                     <img style="display:inline; cursor:default;margin-top: -18%; margin-left:-3%; margin-bottom: -19%; width:85px; height:85px" id="profile-image" class="img-circle"
@@ -43,7 +43,7 @@
                             </div>
                         </div>
 
-                        <input id="submit_choose" type="submit" style="display:none"/>
+                        <input id="@user.UserName" type="submit" style="display:none"/>
                     }
                 }
             }
