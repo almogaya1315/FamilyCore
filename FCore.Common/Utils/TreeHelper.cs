@@ -159,6 +159,16 @@ namespace FCore.Common.Utils
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship), secondRelGender);
 
+                case RelationshipType.Grandson:
+                    return RelData.GetThirdRelForGrandChildren((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship));
+
+                case RelationshipType.Granddaughter:
+                    return RelData.GetThirdRelForGrandChildren((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship));
+
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");
             }
