@@ -347,13 +347,9 @@ namespace FCore.Common.Utils
             {
                 // if my brother in-law or sister in-law has a wife, she is my sister in-law
                 case RelationshipType.Wife: return RelationshipType.Sister_in_law.ToString();
-                    break;
-                case RelationshipType.Husband:
-                    break;
-                case RelationshipType.Mother:
-                    break;
-                case RelationshipType.Father:
-                    break;
+                case RelationshipType.Husband: return RelationshipType.Brother_in_law.ToString();
+                case RelationshipType.Mother: return RelationshipType.Mother_in_law.ToString();
+                case RelationshipType.Father: return RelationshipType.Father_in_law.ToString();
                 case RelationshipType.Daughter:
                     break;
                 case RelationshipType.Son:
