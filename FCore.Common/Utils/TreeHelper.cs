@@ -45,16 +45,16 @@ namespace FCore.Common.Utils
                     return RelData.GetOppositeForSiblingsInLaw(relativeGender);
 
                 case RelationshipType.Father_in_law:
-                    return RelData.GetOppositeForParentsInLaws(relativeGender);
+                    return RelData.GetOppositeForParentsInLaw(relativeGender);
 
                 case RelationshipType.Mother_in_law:
-                    return RelData.GetOppositeForParentsInLaws(relativeGender);
+                    return RelData.GetOppositeForParentsInLaw(relativeGender);
 
                 case RelationshipType.Son_in_law:
-                    return RelData.GetOppositeForChildrenInLaws(relativeGender);
+                    return RelData.GetOppositeForChildrenInLaw(relativeGender);
 
                 case RelationshipType.Daughter_in_law:
-                    return RelData.GetOppositeForChildrenInLaws(relativeGender);
+                    return RelData.GetOppositeForChildrenInLaw(relativeGender);
 
                 case RelationshipType.Aunt:
                     return RelationshipType.Nephew.ToString();
@@ -162,10 +162,20 @@ namespace FCore.Common.Utils
                 case RelationshipType.Grandson:
                     return RelData.GetThirdRelForGrandChildren((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
-                                  .Relationship));
+                                  .Relationship), createdGender, secondRelGender);
 
                 case RelationshipType.Granddaughter:
                     return RelData.GetThirdRelForGrandChildren((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship), createdGender, secondRelGender);
+
+                case RelationshipType.Brother_in_law:
+                    return RelData.GetThirdRelForSiblingsInLaw((RelationshipType)Enum
+                                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                                  .Relationship));
+
+                case RelationshipType.Sister_in_law:
+                    return RelData.GetThirdRelForSiblingsInLaw((RelationshipType)Enum
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship));
 

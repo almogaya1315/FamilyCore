@@ -45,14 +45,14 @@ namespace FCore.Common.Utils
             else throw new InvalidOperationException("Invalid gender type passed to function.");
         }
 
-        internal static string GetOppositeForParentsInLaws(GenderType inLawGender)
+        internal static string GetOppositeForParentsInLaw(GenderType inLawGender)
         {
             if (inLawGender == GenderType.Male) return RelationshipType.Son_in_law.ToString();
             else if (inLawGender == GenderType.Female) return RelationshipType.Daughter_in_law.ToString();
             else throw new InvalidOperationException("Invalid gender type passed to function.");
         }
 
-        internal static string GetOppositeForChildrenInLaws(GenderType inLawGender)
+        internal static string GetOppositeForChildrenInLaw(GenderType inLawGender)
         {
             if (inLawGender == GenderType.Male) return RelationshipType.Father_in_law.ToString();
             else if (inLawGender == GenderType.Female) return RelationshipType.Mother_in_law.ToString();
@@ -338,6 +338,72 @@ namespace FCore.Common.Utils
                 case RelationshipType.Great_GrandMother: return RelationshipType.Mother.ToString();
                 // for 'Great_GrandChild', 'Undefined'
                 default: return relativeRelativeRel.ToString(); 
+            }
+        }
+
+        internal static string GetThirdRelForSiblingsInLaw(RelationshipType relativeRelativeRel)
+        {
+            switch (relativeRelativeRel)
+            {
+                // if my brother in-law or sister in-law has a wife, she is my sister in-law
+                case RelationshipType.Wife: return RelationshipType.Sister_in_law.ToString();
+                    break;
+                case RelationshipType.Husband:
+                    break;
+                case RelationshipType.Mother:
+                    break;
+                case RelationshipType.Father:
+                    break;
+                case RelationshipType.Daughter:
+                    break;
+                case RelationshipType.Son:
+                    break;
+                case RelationshipType.Grandmother:
+                    break;
+                case RelationshipType.Grandfather:
+                    break;
+                case RelationshipType.Granddaughter:
+                    break;
+                case RelationshipType.Grandson:
+                    break;
+                case RelationshipType.Sister:
+                    break;
+                case RelationshipType.Brother:
+                    break;
+                case RelationshipType.Uncle:
+                    break;
+                case RelationshipType.Aunt:
+                    break;
+                case RelationshipType.Cousin:
+                    break;
+                case RelationshipType.Great_GrandChild:
+                    break;
+                case RelationshipType.Great_GrandFather:
+                    break;
+                case RelationshipType.Great_GrandMother:
+                    break;
+                case RelationshipType.Mother_in_law:
+                    break;
+                case RelationshipType.Father_in_law:
+                    break;
+                case RelationshipType.Sister_in_law:
+                    break;
+                case RelationshipType.Brother_in_law:
+                    break;
+                case RelationshipType.Son_in_law:
+                    break;
+                case RelationshipType.Daughter_in_law:
+                    break;
+                case RelationshipType.Nephew:
+                    break;
+                case RelationshipType.Divorcee:
+                    break;
+                case RelationshipType.In_law:
+                    break;
+                case RelationshipType.Undefined:
+                    break;
+                default:
+                    break;
             }
         }
         #endregion
