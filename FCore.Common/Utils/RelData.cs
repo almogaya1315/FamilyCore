@@ -386,17 +386,9 @@ namespace FCore.Common.Utils
             {
                 // if my mother in-law or father in-law have a wife, she is my mother in-law
                 case RelationshipType.Wife: return RelationshipType.Mother_in_law.ToString();
-                    break;
-                case RelationshipType.Husband:
-                    break;
-                case RelationshipType.Mother:
-                    break;
-                case RelationshipType.Father:
-                    break;
-                case RelationshipType.Daughter:
-                    break;
-                case RelationshipType.Son:
-                    break;
+                case RelationshipType.Husband: return RelationshipType.Father_in_law.ToString();
+                case RelationshipType.Mother: return RelationshipType.In_law.ToString();
+                case RelationshipType.Father: return RelationshipType.In_law.ToString();
                 case RelationshipType.Grandmother:
                     break;
                 case RelationshipType.Grandfather:
@@ -441,6 +433,12 @@ namespace FCore.Common.Utils
                     break;
                 case RelationshipType.Undefined:
                     break;
+
+                // could also be 'sister in-law'. needs to respond to ui for user choice.
+                case RelationshipType.Daughter: return RelationshipType.Wife.ToString();
+                // could also be 'brother in-law'. needs to respond to ui for user choice.
+                case RelationshipType.Son: return RelationshipType.Husband.ToString();
+
                 default:
                     break;
             }
