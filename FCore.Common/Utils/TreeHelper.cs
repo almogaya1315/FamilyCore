@@ -179,25 +179,25 @@ namespace FCore.Common.Utils
                                   .Parse(typeof(RelationshipType), relativeRelativeRel
                                   .Relationship), secondRelGender);
 
-                case RelationshipType.Mother_in_law:
-                    return RelData.GetThirdRelForParentInLaw((RelationshipType)Enum
-                                  .Parse(typeof(RelationshipType), relativeRelativeRel
-                                  .Relationship));
+                //case RelationshipType.Mother_in_law:
+                //    return RelData.GetThirdRelForParentInLaw((RelationshipType)Enum
+                //                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                //                  .Relationship));
 
-                case RelationshipType.Father_in_law:
-                    return RelData.GetThirdRelForParentInLaw((RelationshipType)Enum
-                                  .Parse(typeof(RelationshipType), relativeRelativeRel
-                                  .Relationship));
+                //case RelationshipType.Father_in_law:
+                //    return RelData.GetThirdRelForParentInLaw((RelationshipType)Enum
+                //                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                //                  .Relationship));
 
-                case RelationshipType.Son_in_law:
-                    return RelData.GetThirdRelForChildrenInLaw((RelationshipType)Enum
-                                  .Parse(typeof(RelationshipType), relativeRelativeRel
-                                  .Relationship));
+                //case RelationshipType.Son_in_law:
+                //    return RelData.GetThirdRelForChildrenInLaw((RelationshipType)Enum
+                //                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                //                  .Relationship));
 
-                case RelationshipType.Daughter_in_law:
-                    return RelData.GetThirdRelForChildrenInLaw((RelationshipType)Enum
-                                  .Parse(typeof(RelationshipType), relativeRelativeRel
-                                  .Relationship));
+                //case RelationshipType.Daughter_in_law:
+                //    return RelData.GetThirdRelForChildrenInLaw((RelationshipType)Enum
+                //                  .Parse(typeof(RelationshipType), relativeRelativeRel
+                //                  .Relationship));
 
                 default:
                     throw new InvalidOperationException("Invalid relationship type passed to function.");

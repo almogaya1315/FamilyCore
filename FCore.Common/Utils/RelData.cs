@@ -380,134 +380,134 @@ namespace FCore.Common.Utils
             }
         }
 
-        internal static string GetThirdRelForParentInLaw(RelationshipType relativeRelativeRel)
-        {
-            switch (relativeRelativeRel)
-            {
-                // if my mother in-law or father in-law have a wife, she is my mother in-law
-                case RelationshipType.Wife: return RelationshipType.Mother_in_law.ToString();
-                case RelationshipType.Husband: return RelationshipType.Father_in_law.ToString();
-                case RelationshipType.Mother: return RelationshipType.In_law.ToString();
-                case RelationshipType.Father: return RelationshipType.In_law.ToString();
-                case RelationshipType.Grandmother:
-                    break;
-                case RelationshipType.Grandfather:
-                    break;
-                case RelationshipType.Granddaughter:
-                    break;
-                case RelationshipType.Grandson:
-                    break;
-                case RelationshipType.Sister:
-                    break;
-                case RelationshipType.Brother:
-                    break;
-                case RelationshipType.Uncle:
-                    break;
-                case RelationshipType.Aunt:
-                    break;
-                case RelationshipType.Cousin:
-                    break;
-                case RelationshipType.Great_GrandChild:
-                    break;
-                case RelationshipType.Great_GrandFather:
-                    break;
-                case RelationshipType.Great_GrandMother:
-                    break;
-                case RelationshipType.Mother_in_law:
-                    break;
-                case RelationshipType.Father_in_law:
-                    break;
-                case RelationshipType.Sister_in_law:
-                    break;
-                case RelationshipType.Brother_in_law:
-                    break;
-                case RelationshipType.Son_in_law:
-                    break;
-                case RelationshipType.Daughter_in_law:
-                    break;
-                case RelationshipType.Nephew:
-                    break;
-                case RelationshipType.Divorcee:
-                    break;
-                case RelationshipType.In_law:
-                    break;
-                case RelationshipType.Undefined:
-                    break;
+        //internal static string GetThirdRelForParentInLaw(RelationshipType relativeRelativeRel)
+        //{
+        //    switch (relativeRelativeRel)
+        //    {
+        //        // if my mother in-law or father in-law have a wife, she is my mother in-law
+        //        case RelationshipType.Wife: return RelationshipType.Mother_in_law.ToString();
+        //        case RelationshipType.Husband: return RelationshipType.Father_in_law.ToString();
+        //        case RelationshipType.Mother: return RelationshipType.In_law.ToString();
+        //        case RelationshipType.Father: return RelationshipType.In_law.ToString();
+        //        case RelationshipType.Grandmother:
+        //            break;
+        //        case RelationshipType.Grandfather:
+        //            break;
+        //        case RelationshipType.Granddaughter:
+        //            break;
+        //        case RelationshipType.Grandson:
+        //            break;
+        //        case RelationshipType.Sister:
+        //            break;
+        //        case RelationshipType.Brother:
+        //            break;
+        //        case RelationshipType.Uncle:
+        //            break;
+        //        case RelationshipType.Aunt:
+        //            break;
+        //        case RelationshipType.Cousin:
+        //            break;
+        //        case RelationshipType.Great_GrandChild:
+        //            break;
+        //        case RelationshipType.Great_GrandFather:
+        //            break;
+        //        case RelationshipType.Great_GrandMother:
+        //            break;
+        //        case RelationshipType.Mother_in_law:
+        //            break;
+        //        case RelationshipType.Father_in_law:
+        //            break;
+        //        case RelationshipType.Sister_in_law:
+        //            break;
+        //        case RelationshipType.Brother_in_law:
+        //            break;
+        //        case RelationshipType.Son_in_law:
+        //            break;
+        //        case RelationshipType.Daughter_in_law:
+        //            break;
+        //        case RelationshipType.Nephew:
+        //            break;
+        //        case RelationshipType.Divorcee:
+        //            break;
+        //        case RelationshipType.In_law:
+        //            break;
+        //        case RelationshipType.Undefined:
+        //            break;
 
-                // could also be 'sister in-law'. needs to respond to ui for user choice.
-                case RelationshipType.Daughter: return RelationshipType.Wife.ToString();
-                // could also be 'brother in-law'. needs to respond to ui for user choice.
-                case RelationshipType.Son: return RelationshipType.Husband.ToString();
+        //        // could also be 'sister in-law'. needs to respond to ui for user choice.
+        //        case RelationshipType.Daughter: return RelationshipType.Wife.ToString();
+        //        // could also be 'brother in-law'. needs to respond to ui for user choice.
+        //        case RelationshipType.Son: return RelationshipType.Husband.ToString();
 
-                default:
-                    break;
-            }
-        }
+        //        default:
+        //            break;
+        //    }
+        //}
 
-        internal static string GetThirdRelForChildrenInLaw(RelationshipType relativeRelativeRel)
-        {
-            switch (relativeRelativeRel)
-            {
-                case RelationshipType.Wife:
-                    break;
-                case RelationshipType.Husband:
-                    break;
-                case RelationshipType.Mother:
-                    break;
-                case RelationshipType.Father:
-                    break;
-                case RelationshipType.Daughter:
-                    break;
-                case RelationshipType.Son:
-                    break;
-                case RelationshipType.Grandmother:
-                    break;
-                case RelationshipType.Grandfather:
-                    break;
-                case RelationshipType.Granddaughter:
-                    break;
-                case RelationshipType.Grandson:
-                    break;
-                case RelationshipType.Sister:
-                    break;
-                case RelationshipType.Brother:
-                    break;
-                case RelationshipType.Uncle:
-                    break;
-                case RelationshipType.Aunt:
-                    break;
-                case RelationshipType.Cousin:
-                    break;
-                case RelationshipType.Great_GrandChild:
-                    break;
-                case RelationshipType.Great_GrandFather:
-                    break;
-                case RelationshipType.Great_GrandMother:
-                    break;
-                case RelationshipType.Mother_in_law:
-                    break;
-                case RelationshipType.Father_in_law:
-                    break;
-                case RelationshipType.Sister_in_law:
-                    break;
-                case RelationshipType.Brother_in_law:
-                    break;
-                case RelationshipType.Son_in_law:
-                    break;
-                case RelationshipType.Daughter_in_law:
-                    break;
-                case RelationshipType.Nephew:
-                    break;
-                case RelationshipType.Divorcee:
-                    break;
-                case RelationshipType.In_law:
-                    break;
-                case RelationshipType.Undefined:
-                    break;
-                default:
-                    break;
-            }
-        }
+        //internal static string GetThirdRelForChildrenInLaw(RelationshipType relativeRelativeRel)
+        //{
+        //    switch (relativeRelativeRel)
+        //    {
+        //        case RelationshipType.Wife:
+        //            break;
+        //        case RelationshipType.Husband:
+        //            break;
+        //        case RelationshipType.Mother:
+        //            break;
+        //        case RelationshipType.Father:
+        //            break;
+        //        case RelationshipType.Daughter:
+        //            break;
+        //        case RelationshipType.Son:
+        //            break;
+        //        case RelationshipType.Grandmother:
+        //            break;
+        //        case RelationshipType.Grandfather:
+        //            break;
+        //        case RelationshipType.Granddaughter:
+        //            break;
+        //        case RelationshipType.Grandson:
+        //            break;
+        //        case RelationshipType.Sister:
+        //            break;
+        //        case RelationshipType.Brother:
+        //            break;
+        //        case RelationshipType.Uncle:
+        //            break;
+        //        case RelationshipType.Aunt:
+        //            break;
+        //        case RelationshipType.Cousin:
+        //            break;
+        //        case RelationshipType.Great_GrandChild:
+        //            break;
+        //        case RelationshipType.Great_GrandFather:
+        //            break;
+        //        case RelationshipType.Great_GrandMother:
+        //            break;
+        //        case RelationshipType.Mother_in_law:
+        //            break;
+        //        case RelationshipType.Father_in_law:
+        //            break;
+        //        case RelationshipType.Sister_in_law:
+        //            break;
+        //        case RelationshipType.Brother_in_law:
+        //            break;
+        //        case RelationshipType.Son_in_law:
+        //            break;
+        //        case RelationshipType.Daughter_in_law:
+        //            break;
+        //        case RelationshipType.Nephew:
+        //            break;
+        //        case RelationshipType.Divorcee:
+        //            break;
+        //        case RelationshipType.In_law:
+        //            break;
+        //        case RelationshipType.Undefined:
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
         #endregion
     }
 }

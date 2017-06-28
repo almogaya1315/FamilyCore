@@ -15,11 +15,11 @@
 
             <div class="modal-body">
                 <div class="form-group">
-                    @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Username" })
+                    @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Username", @title = "Username", @required = "required" })
                     @Html.ValidationMessageFor(u => Model.UserName)
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Password" })
+                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Password", @title = "Password", @required = "required" })
                     @Html.ValidationMessageFor(u => Model.Password)
                 </div>
                 <div class="form-group">
