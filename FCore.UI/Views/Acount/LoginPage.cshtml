@@ -7,7 +7,7 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h1 class="text-center">Welcome</h1>
+            <h1 class="text-center" style="text-shadow:2px 2px 2px #000">Welcome</h1>
         </div>
         @using (Html.BeginForm("LoginPage", "Acount", FormMethod.Post))
         {
@@ -15,11 +15,11 @@
 
             <div class="modal-body">
                 <div class="form-group">
-                    @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Username" })
+                    @Html.TextBoxFor(u => Model.UserName, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Username", @required = "required" })
                     @Html.ValidationMessageFor(u => Model.UserName)
                 </div>
                 <div class="form-group">
-                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Password" })
+                    @Html.PasswordFor(u => Model.Password, new { @class = "form-control input-lg", @style = "max-width:100%", @placeholder = "Password", @required = "required" })
                     @Html.ValidationMessageFor(u => Model.Password)
                 </div>
                 <div class="form-group">

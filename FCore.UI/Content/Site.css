@@ -1,6 +1,23 @@
-﻿body {
+﻿@charset 'utf-8';
+
+@font-face{
+    font-family: Heathergreen;
+    src: url(../fonts/Heathergreen.otf);
+}
+
+::selection, -moz-selection {
+    background-color: #8eaaee
+}
+
+input.data:required{
+    background-color: #ff0000
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+
+    font-family: Heathergreen
 }
 
 /* Set padding to keep content from hitting the edges */
