@@ -59,7 +59,13 @@
             @Html.LabelFor(m => Model.UserName)
         </div>
         <div class="col-sm-7">
-            @Html.TextBoxFor(m => Model.UserName, new { @id = "username_box" })
+            @Html.TextBoxFor(m => Model.UserName, new
+       {
+           @id = "username_box",
+           @required = "required",
+           @title = "Pick a user name",
+           @autofocus = "autofocus"
+       })
             @Html.ValidationMessageFor(m => Model.UserName)
         </div>
 
@@ -83,11 +89,22 @@
         <div class="col-sm-7">
             @if (Model == null)
             {
-                @Html.PasswordFor(m => Model.Password, new { @id = "password_box" })
+                @Html.PasswordFor(m => Model.Password, new
+                {
+                    @id = "password_box",
+                    @required = "required",
+                    @title = "Pick a password",
+                })
             }
             else
             {
-                @Html.PasswordFor(m => Model.Password, new { @id = "password_box", @value = Model.Password })
+                @Html.PasswordFor(m => Model.Password, new
+                {
+                    @id = "password_box",
+                    @value = Model.Password,
+                    @required = "required",
+                    @title = "Pick a password",
+                })
             }
             @Html.ValidationMessageFor(m => Model.Password)
         </div>
@@ -113,12 +130,12 @@
                     @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
                         {
                             <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                                 id="profile-image-defualt" class="img-circle img-responsive" />
+                                 id="profile-image-defualt" class="img-circle img-responsive" title="Your profile picture"/>
                         }
                         else
                         {
                             <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
-                                 id="profile-image" class="img-circle img-responsive" />
+                                 id="profile-image" class="img-circle img-responsive" title="Your profile picture"/>
                         }
                     }
                 </div>
@@ -127,7 +144,7 @@
                     if (String.IsNullOrWhiteSpace((string)Session["filename"]))
                     {
                         <div id="message_file" style="color:#999; margin-top:3%">
-                            @Html.ValidationMessage("chooseImage") 
+                            @Html.ValidationMessage("chooseImage")
                             @Html.ValidationMessage("requiredImage", new { @style = Session["validcolor"] })
                         </div>
                     }
@@ -142,7 +159,7 @@
 
         <input id="form_image_submit" type="submit" style="display:none" />
 
-    }
+                    }
 
     @using (Ajax.BeginForm("AddInitialInfo", "Acount", Model, new AjaxOptions
     {
@@ -154,15 +171,15 @@
         <div class="clearfix"></div>
         <div class="bot-border"></div>
 
-        @Html.HiddenFor(m => Model.UserName, new { id = "next_hidden_username"})
+        @Html.HiddenFor(m => Model.UserName, new { id = "next_hidden_username" })
         @Html.HiddenFor(m => Model.Password, new { id = "next_hidden_password" })
         @Html.HiddenFor(m => Model.Member.ProfileImagePath, new { id = "next_hidden_image" })
 
-            <div class="form-group">
-                <div style="margin-bottom:5%">
-                    <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
-                </div>
+        <div class="form-group">
+            <div style="margin-bottom:5%">
+                <input id="input_btn_profile" class="btn btn-info" type="submit" value="Next step  >>" style="margin-left:81%; margin-top:5%" />
             </div>
+        </div>
     }
 
 </div>
