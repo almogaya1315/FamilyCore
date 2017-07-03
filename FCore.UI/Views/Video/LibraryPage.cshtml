@@ -86,12 +86,13 @@
 </nav>
 
 <div style="margin-top:5%">
-    <table style="width:95%; margin-top:-2%">
+    <table style="width:100%; margin-top:-2%">
         @{
             foreach (var video in Model.Videos)
             {
                 <tr><td><br /></td></tr>
                 <tr style="border-bottom:1px solid #0094ff">
+
                     <td>
                         @*<span>
                             @{ Html.RenderPartial("videoDesc") }
@@ -99,23 +100,24 @@
                         @video.Description
                     </td>
                     <td>
-                        @Html.ActionLink("Edit description", "EditDesc", "Video", new { @style = "margin:-200%"})
+                        @Html.ActionLink("Edit description", "EditDesc", "Video", new { @style = "margin:-300%"})
                     </td>
+
                     <td>
                         @Html.ActionLink("Delete video", "DeleteVideo", "Video", 
-                            new { @style = "position:absolute; margin-top:-1%;margin-left:-9%"})
+                            new { @style = "position:absolute; margin-top:-1%;margin-left:-17%"})
                     </td>
                 </tr>
                 <tr><td><br /></td></tr>
                 <tr>
                     <td>
-                        <video controls style="max-width:150%; width:109.2%">
+                        <video controls style="max-width:150%; width:100%">
                             <source src="@Url.Content(video.Path)" type="video/mp4" />
                             This browser does not support HTML5!
                         </video>
                     </td>
                 </tr>
-                <tr style="border-top:1px solid #0094ff; border-width:3px"><td><br /></td></tr>    
+                <tr><td style="border-top:1px solid #0094ff; border-width:3px"><br /></td></tr>    
             }
         }
     </table>
