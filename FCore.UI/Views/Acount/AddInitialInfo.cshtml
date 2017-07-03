@@ -50,7 +50,7 @@
         OnSuccess = "SetUsernameBox"
     }, new { id = "form_username" }))
     {
-        <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe;">Initial info</div>
+        <div style="margin-left:2%; font-weight:bold; font-size:x-large; color:#6fadbe">Initial info</div>
         <div class="clearfix"></div>
 
         <div class="bot-border"></div>
@@ -130,12 +130,12 @@
                     @{if (String.IsNullOrWhiteSpace((string)Session["filepath"]))
                         {
                             <img style="display:inline" src="@Url.Content("~/Images/Defualt/profile_defualt.jpg")"
-                                 id="profile-image-defualt" class="img-circle img-responsive" title="Your profile picture"/>
+                                 id="profile-image-defualt" class="img-circle img-responsive" title="Your profile picture" />
                         }
                         else
                         {
                             <img style="display:inline" src="@Url.Content((string)Session["filepath"])"
-                                 id="profile-image" class="img-circle img-responsive" title="Your profile picture"/>
+                                 id="profile-image" class="img-circle img-responsive" title="Your profile picture" />
                         }
                     }
                 </div>

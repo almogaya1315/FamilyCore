@@ -7,7 +7,7 @@
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h1 class="text-center">Welcome</h1>
+            <h1 class="text-center" style="text-shadow:5px 5px 8px #000">Welcome</h1>
         </div>
         @using (Html.BeginForm("LoginPage", "Acount", FormMethod.Post))
         {
@@ -21,7 +21,8 @@
                    @style = "max-width:100%",
                    @placeholder = "Username",
                    @title = "Username",
-                   @required = "required"
+                   @required = "required",
+                   @autofocus = "autofocus"
                })
                     @Html.ValidationMessageFor(u => Model.UserName)
                 </div>
