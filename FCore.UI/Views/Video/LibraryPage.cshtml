@@ -78,16 +78,29 @@
     </div>
 }
 
+<nav class="nav">
+    @Html.ActionLink("Add video", "AddVideo", "Video", new { @class = "btn btn-info", @style = "line-height:0.5px; width:75%; max-width:100%; margin-left:10%; margin-bottom:5%",  })
+    <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:-4%"></div>
+</nav>
 
-<div>
-    <table class="table">
+<div style="margin-top:5%">
+    <table style="width:95%; margin-top:-2%">
         @{
             foreach (var video in Model.Videos)
             {
                 <tr><td><br /></td></tr>
                 <tr style="border-bottom:1px solid #0094ff">
                     <td>
+                        @*<span>
+                            @{ Html.RenderPartial("videoDesc") }
+                        </span>*@
                         @video.Description
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit desctiption", "EditDesc")
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete video", "DeleteVideo")
                     </td>
                 </tr>
                 <tr><td><br /></td></tr>
@@ -99,7 +112,8 @@
                         </video>
                     </td>
                 </tr>
-                <tr><td><br /></td></tr>    
+                <tr style="margin-top:5%"><td></td></tr>
+                <tr style="border-top:1px solid #0094ff"><td><br /></td></tr>    
             }
         }
     </table>

@@ -32,5 +32,10 @@ namespace FCore.UI.Controllers
                 return View(repo.GetVideoLibrary(id)); 
             }
         }
+
+        public ActionResult AddVideo()
+        {
+            return View();
+        }
     }
 }
