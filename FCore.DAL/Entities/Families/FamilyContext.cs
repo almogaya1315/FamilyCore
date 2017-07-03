@@ -280,6 +280,22 @@ namespace FCore.DAL.Entities.Families
             //return Messages.FirstOrDefault(m => m.Id == id);
         }
 
+        public VideoEntity UpdateVideoDesc(int videoId, string newDesc)
+        {
+            var video = Videos.FirstOrDefault(v => v.Id == videoId);
+            if (video == null) throw new Exception($"Id #{videoId} was not found in DB.");
+            video.Description = newDesc;
+            try
+            {
+                SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(e.Message); 
+            }
+            return video;
+        }
+
         public void UpdateUserAbout(FamilyMemberEntity entity, string about)
         {
             FamilyMemberEntity toUpdate = null;

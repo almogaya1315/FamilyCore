@@ -324,5 +324,10 @@ namespace FCore.Tests.Moq
         {
             throw new NotImplementedException();
         }
+
+        public VideoModel UpdateVideoDesc(int videoId, string newDesc)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

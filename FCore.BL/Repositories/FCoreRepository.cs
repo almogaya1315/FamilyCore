@@ -187,6 +187,10 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.GetMostViewedVideo());
         }
+        public VideoModel UpdateVideoDesc(int videoId, string newDesc)
+        {
+            return ConvertToModel(CoreDB.UpdateVideoDesc(videoId, newDesc));
+        }
 
         public ICollection<AlbumModel> GetAlbums()
         {

@@ -263,6 +263,8 @@
     <Content Include="Views\Acount\AddLifeStory.cshtml" />
     <Content Include="Views\Acount\CreateSuccess.cshtml" />
     <Content Include="Views\Acount\ChooseUserPage.cshtml" />
+    <Content Include="Views\Video\VideoDesc.cshtml" />
+    <Content Include="Views\Video\EditVideoDesc.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

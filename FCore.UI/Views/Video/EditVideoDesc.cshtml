@@ -1,0 +1,17 @@
+﻿@model FCore.Common.Models.Videos.VideoModel
+
+@using (Ajax.BeginForm("EditVideoDesc", "Video", Model.Id, new AjaxOptions()
+{
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "videoDescContent"
+}))
+{
+    <td>
+        @Html.EditorFor(m => Model.Description, new { @required = "required", @name = "newDesc" })
+    </td>
+    <td>
+        @*@Html.ActionLink("Save", "EditDescprition", "Video", Model.Id, new { @style = "margin:-300%" })*@
+        <input type="submit" value="Save" style="margin:-300%"/>
+    </td>
+}

@@ -1,0 +1,16 @@
+﻿@model FCore.Common.Models.Videos.VideoModel
+
+<td>
+    @Model.Description
+</td>
+<td>
+    @*@Html.ActionLink("Edit description", "EditDesc", "Video", new { @style = "margin:-300%" })*@
+    <a style = "margin:-300%" onclick="loadEditOnClick()">Edit description</a>
+</td>
+
+<script>
+    function loadEditOnClick(){
+        var url = '@Url.Action("EditVideoDesc", Model)';
+        $('#videoDescContent').load(url);
+    }
+</script>

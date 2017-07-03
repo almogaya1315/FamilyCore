@@ -91,24 +91,25 @@
             foreach (var video in Model.Videos)
             {
                 <tr><td><br /></td></tr>
-                <tr style="border-bottom:1px solid #0094ff">
+                <tr>
+                    <content id="videoDescContent">
+                        @{ Html.RenderPartial("VideoDesc", video); }
+                    </content>
 
-                    <td>
-                        @*<span>
-                            @{ Html.RenderPartial("videoDesc") }
-                        </span>*@
+                    @*<td>
                         @video.Description
                     </td>
                     <td>
                         @Html.ActionLink("Edit description", "EditDesc", "Video", new { @style = "margin:-300%"})
-                    </td>
+                    </td>*@
+
 
                     <td>
                         @Html.ActionLink("Delete video", "DeleteVideo", "Video", 
-                            new { @style = "position:absolute; margin-top:-1%;margin-left:-17%"})
+                            new { @style = "position:absolute; margin-top:-1%;margin-left:-16.7%"})
                     </td>
                 </tr>
-                <tr><td><br /></td></tr>
+                <tr><td style="border-top:1px solid #0094ff"><br /></td></tr>
                 <tr>
                     <td>
                         <video controls style="max-width:150%; width:100%">
