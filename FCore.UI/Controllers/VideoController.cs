@@ -49,10 +49,13 @@ namespace FCore.UI.Controllers
         [HttpPost]
         public ActionResult EditVideoDesc(int id, string newDesc)
         {
-            if (id == default(int)) throw new Exception("Parameter 'id' was not passed to server correctly.");
-            if (newDesc == string.Empty) return PartialView();
-            var video = repo.UpdateVideoDesc(id, newDesc); // todo.. return validation status
-            return PartialView("VideoDesc", video);
+            using (repo = new FCoreRepository())
+            {
+                if (id == default(int)) throw new Exception("Parameter 'id' was not passed to server correctly.");
+                if (newDesc == string.Empty) return PartialView();
+                var video = repo.UpdateVideoDesc(id, newDesc); // todo.. return validation status
+                return PartialView("VideoDesc", video);
+            }
         }
     }
 }

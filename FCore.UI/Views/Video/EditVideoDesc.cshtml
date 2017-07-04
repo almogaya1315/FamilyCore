@@ -4,14 +4,13 @@
 {
     HttpMethod = "Post",
     InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "videoDescContent"
+    UpdateTargetId = "videoDescDiv-" + Model.Id.ToString()
 }))
 {
-    <td>
-        @Html.EditorFor(m => Model.Description, new { @required = "required", @name = "newDesc" })
-    </td>
-    <td>
-        @*@Html.ActionLink("Save", "EditDescprition", "Video", Model.Id, new { @style = "margin:-300%" })*@
-        <input type="submit" value="Save" style="margin:-300%"/>
-    </td>
+    <span>
+        <input type="text" placeholder="@Model.Description" autofocus required name="newDesc" style="cursor:text; max-width:200%; width:60%; line-height:5px; border:0px; margin-bottom:0.2%; background-color:#75c1f7"/>
+    </span>
+    <span>
+        <input class="btn pull-right" type="submit" value="Save" style="line-height:6px; background-color:#75c1f7"/>
+    </span>
 }

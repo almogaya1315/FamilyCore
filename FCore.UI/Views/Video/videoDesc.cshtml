@@ -4,22 +4,24 @@
 {
     HttpMethod = "Get",
     InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "videoDescContent"
+    UpdateTargetId = "videoDescDiv-" + Model.Id.ToString()
 }))
 {
-    <td>
+    <span>
         @Model.Description
-    </td>
-    <td>
-        @*@Html.ActionLink("Edit description", "EditDesc", "Video", new { @style = "margin:-300%" })*@
-        @*<a style="margin:-300%" onclick="loadEditOnClick()">Edit description</a>*@
-        <input type="submit" value="Edit description" style="margin:-300%" />
-    </td>
+    </span>
+    <span>
+        <input class="btn pull-right" type="submit" value="Edit description" style="line-height:5px; margin-right:11%; background-color:#75c1f7"/>
+    </span>
+    <span>
+        @Html.ActionLink("Delete video", "DeleteVideo", "Video",
+            new { @style = "margin-right:-26%; color:chocolate", @class = "pull-right" } )
+    </span>
 }
 
 @*<script>
-    function loadEditOnClick(){
-        var url = '@Url.Action("EditVideoDesc", Model)';
-        $('#videoDescContent').load(url);
-    }
-</script>*@
+        function loadEditOnClick(){
+            var url = '@Url.Action("EditVideoDesc", Model)';
+            $('#videoDescContent').load(url);
+        }
+    </script>*@
