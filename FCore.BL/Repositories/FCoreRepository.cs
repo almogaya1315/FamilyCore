@@ -191,6 +191,12 @@ namespace FCore.BL.Repositories
         {
             return ConvertToModel(CoreDB.UpdateVideoDesc(videoId, newDesc));
         }
+        public void DeleteVideo(VideoModel video, out int libraryId)
+        {
+            CoreDB.DeleteVideo(video.Id, out libraryId);
+
+            // todo.. remove actual video file
+        }
 
         public ICollection<AlbumModel> GetAlbums()
         {

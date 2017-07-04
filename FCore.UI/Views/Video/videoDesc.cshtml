@@ -14,7 +14,7 @@
         <input class="btn pull-right" type="submit" value="Edit description" style="line-height:5px; margin-right:11%; background-color:#75c1f7"/>
     </span>
     <span>
-        @Html.ActionLink("Delete video", "DeleteVideo", "Video",
-            new { @style = "margin-right:-26%; color:chocolate", @class = "pull-right" } )
+        @Html.ActionLink("Delete video", "DeleteVideo", "Video", Model,
+            new { @style = "margin-right:-26%; color:chocolate", @class = "pull-right" })
     </span>
 }

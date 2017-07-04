@@ -43,9 +43,11 @@ namespace FCore.Common.Interfaces
         VideoLibraryModel GetVideoLibrary(int id);
         VideoModel GetMostViewedVideo();
         VideoModel UpdateVideoDesc(int videoId, string newDesc);
+        void DeleteVideo(VideoModel video, out int libraryId);
 
         ICollection<ChatGroupModel> GetChatGroups();
         ChatGroupModel GetChatGroup(int id);
+        
         MessageModel GetMessage(int id);
 
         ContactInfoModel GetContactInfo(int id);

@@ -30,7 +30,7 @@ namespace FCore.UI.Controllers
             {
                 (Session["currentUser"] as UserModel).Member = repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId);
 
-                return View(repo.GetVideoLibrary(id)); 
+                return View("LibraryPage", repo.GetVideoLibrary(id)); 
             }
         }
 
@@ -53,8 +53,19 @@ namespace FCore.UI.Controllers
             {
                 if (id == default(int)) throw new Exception("Parameter 'id' was not passed to server correctly.");
                 if (newDesc == string.Empty) return PartialView();
-                var video = repo.UpdateVideoDesc(id, newDesc); // todo.. return validation status
+                var video = repo.UpdateVideoDesc(id, newDesc); 
                 return PartialView("VideoDesc", video);
+            }
+        }
+
+        public ActionResult DeleteVideo(VideoModel video)
+        {
+            using (repo = new FCoreRepository())
+            {
+                int libraryId = default(int);
+                repo.DeleteVideo(video, out libraryId);
+                return LibraryPage(libraryId);
+                //return RedirectToAction("LibraryPage", libraryId);
             }
         }
     }

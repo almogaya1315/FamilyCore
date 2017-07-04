@@ -295,6 +295,24 @@ namespace FCore.DAL.Entities.Families
             }
             return video;
         }
+        public void DeleteVideo(int id, out int libraryId)
+        {
+            var video = Videos.FirstOrDefault(v => v.Id == id);
+            if (video != null)
+            {
+                libraryId = video.Libraryid;
+                Videos.Remove(video);
+                try
+                {
+                    SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message);
+                }
+            }
+            else libraryId = 0;
+        }
 
         public void UpdateUserAbout(FamilyMemberEntity entity, string about)
         {
