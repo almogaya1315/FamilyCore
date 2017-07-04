@@ -34,21 +34,21 @@ textarea {
 }
 
 /* video library 'add' button */
-.circle-button {
-    line-height:50px; 
-    width:120px;
-    height:120px; 
+.custom-button {
+    line-height:6px; 
+    width:170px;
+    height:60px; 
     max-width:100%; 
-    margin-left:40%; 
+    margin-left:72.5%; 
     margin-bottom:5%; 
-    border-radius:50%;
+    border-radius:3px;
 
     color: #fff;
     background-color: #4386f1;
-    padding: 3%;
+    padding: 2%;
     transition: all 0.4s ease-in-out;
 
-    display: inline-block;
+    display: inline;
     font-size: 14px;
     font-weight: 400;
     text-align: center;
@@ -62,16 +62,15 @@ textarea {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-    border: 3px solid #5bc0de;
+    border: 5px solid #4386f1;
 }
 
-.circle-button:hover {
+.custom-button:hover {
     color: #fff;
     background-color: #4386f1 ;
     border-color: #5bc0de;
-    border-width:7px;
+    border-width:5px;
     text-decoration:none;
     font-size:14px;
     text-shadow:3px -3px 1px #5bc0de;
-    
 }

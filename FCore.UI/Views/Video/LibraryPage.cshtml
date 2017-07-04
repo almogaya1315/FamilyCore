@@ -78,13 +78,13 @@
     </div>
 }
 
-<div style="font-size:25px; margin-left:25%">The @Model.FamilyName family video library</div>
-
 <nav class="nav" style="margin-top:5%">
 
-    @Html.ActionLink("Add video", "AddVideo", "Video", new { @class = "circle-button" })
+    <div style="font-size:25px; margin-left:10%; position:absolute">The @Model.FamilyName family video library</div>
 
-    <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:-4%"></div>
+    @Html.ActionLink("Add video", "AddVideo", "Video", new { @class = "custom-button" })
+
+    <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:3%"></div>
 </nav>
 
 <div style="margin-top:5%">
