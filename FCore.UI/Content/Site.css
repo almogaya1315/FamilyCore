@@ -1,23 +1,22 @@
 ﻿@charset 'utf-8';
 
-@font-face{
+@font-face {
     font-family: Heathergreen;
     src: url(../fonts/Heathergreen.otf);
 }
 
 ::selection, -moz-selection {
-    background-color: #8eaaee
+    background-color: #8eaaee;
 }
 
-input.data:required{
-    background-color: #ff0000
+input.data:required {
+    background-color: #ff0000;
 }
 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-
-    font-family: Heathergreen
+    font-family: Heathergreen;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -35,19 +34,17 @@ textarea {
 
 /* video library 'add' button */
 .custom-button {
-    line-height:6px; 
-    width:170px;
-    height:60px; 
-    max-width:100%; 
-    margin-left:72.5%; 
-    margin-bottom:5%; 
-    border-radius:3px;
-
+    line-height: 6px;
+    width: 170px;
+    height: 60px;
+    max-width: 100%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    border-radius: 3px;
     color: #fff;
     background-color: #4386f1;
-    padding: 2%;
+    padding: 1%;
     transition: all 0.4s ease-in-out;
-
     display: inline;
     font-size: 14px;
     font-weight: 400;
@@ -65,12 +62,53 @@ textarea {
     border: 5px solid #4386f1;
 }
 
-.custom-button:hover {
-    color: #fff;
-    background-color: #4386f1 ;
-    border-color: #5bc0de;
-    border-width:5px;
-    text-decoration:none;
-    font-size:14px;
-    text-shadow:3px -3px 1px #5bc0de;
+    .custom-button:hover {
+        color: #fff;
+        background-color: #4386f1;
+        border-color: #5bc0de;
+        border-width: 5px;
+        text-decoration: none;
+        font-size: 14px;
+        text-shadow: 3px -3px 1px #5bc0de;
+    }
+
+.custom-search {
+    display: inline;
+}
+
+.search-form {
+    display: inline;
+}
+
+.search-btn {
+    display: inline;
+    font-size: 16px;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    line-height: 40px;
+    position: absolute;
+    margin-top: -1.2%;
+    margin-left: 9%;
+    border-color: #4386f1;
+    border-radius: 3px;
+    background-color: #4386f1;
+    width: 75px;
+    color: white;
+}
+
+.search-input {
+    padding: 0.4%;
+    font-size: 18px;
+    position: absolute;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    margin-left: 17.2%;
+    margin-top: -1.2%;
+    line-height: 35.2px;
+    border-color: #4386f1;
+    border-radius: 3px;
+    width: 396px;
+    max-width: 1800px;
 }
