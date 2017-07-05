@@ -15,6 +15,14 @@
     </span>
     <span>
         @Html.ActionLink("Delete video", "DeleteVideo", "Video", Model,
-            new { @style = "margin-right:-26%; color:chocolate", @class = "pull-right" })
+            new { @id = "del_video", @style = "margin-right:-26%; color:chocolate", @class = "pull-right" })
     </span>
 }
+
+<script>
+    (function () {
+        $('#del_video').on('click', function () {
+            confirm("Are you sure?");
+        })
+    })
+</script>
