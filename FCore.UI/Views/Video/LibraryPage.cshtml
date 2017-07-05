@@ -82,12 +82,12 @@
     <div style="font-size:25px; margin-left:10%; position:absolute">The @Model.FamilyName family video library</div>
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
     @Html.ActionLink("Add video", "AddVideo", "Video", new { @class = "custom-button" })
-    <div class="custom-search" >
-       @using (Html.BeginForm("SearchVideo", "Video", FormMethod.Get, new { @class = "search-form"}))
-       {
-           <input type="submit" value="Search" class="search-btn" />
-           <input autofocus type="text" placeholder="by description" class="search-input"/>
-       }
+    <div class="custom-search">
+        @using (Html.BeginForm("SearchVideo", "Video", FormMethod.Get, new { @class = "search-form" }))
+        {
+            <input type="submit" value="Search" class="search-btn" />
+            <input autofocus type="text" placeholder="by description" class="search-input" />
+        }
     </div>
 </nav>
 
@@ -112,7 +112,15 @@
                 </div>
 
                 <div style="border-top:1px solid #0094ff; border-width:3px"><br /></div>
-                            }
+                        }
         }
     </article>
 </div>
+
+<script>
+    function confirmDelete(e) {
+        if (!confirm("Are you sure?")) {
+            e.preventDefault();
+        }
+    }
+</script>

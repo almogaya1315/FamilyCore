@@ -11,18 +11,10 @@
         @Model.Description
     </span>
     <span>
-        <input class="btn pull-right" type="submit" value="Edit description" style="line-height:5px; margin-right:11%; background-color:#75c1f7"/>
+        <input class="btn pull-right" type="submit" value="Edit description" style="line-height:5px; margin-right:11%; background-color:#75c1f7" />
     </span>
     <span>
         @Html.ActionLink("Delete video", "DeleteVideo", "Video", Model,
-            new { @id = "del_video", @style = "margin-right:-26%; color:chocolate", @class = "pull-right" })
+            new { @onclick = "confirmDelete(this)", @style = "margin-right:-26%; color:chocolate", @class = "pull-right" }) @*  @id = "delVideo", *@
     </span>
 }
-
-<script>
-    (function () {
-        $('#del_video').on('click', function () {
-            confirm("Are you sure?");
-        })
-    })
-</script>
