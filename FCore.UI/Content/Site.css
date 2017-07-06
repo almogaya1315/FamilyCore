@@ -170,15 +170,38 @@ textarea {
 .edit-flex-item {
     order: 2;
     align-self: flex-end;
-    align-self: flex-end;
 }
 
-    .edit-flex-item input {
-        background-color: #75c1f7;
-        line-height: 10px;
-        margin-bottom:1px;
-        color:white
-    }
+.edit-flex-item input {
+    background-color: #75c1f7;
+    line-height: 10px;
+    margin-bottom:1px;
+    color:white
+}
+
+.text-input-flex-item{
+    flex-grow: 1
+}
+
+.text-input-flex-item input{
+    width: 400px;
+    max-width: 500px;
+    float: left;
+    line-height: 6px;
+    border: 2px solid #75c1f7;
+    border-radius: 3px;
+}
+
+.save-desc-flex-item {
+   align-self:flex-end 
+}
+
+.save-desc-flex-item input{
+    background-color: #75c1f7;
+    line-height: 10px;
+    margin-bottom:1px;
+    color:white;
+}
 
 .del-flex-item {
     order: 3;
