@@ -85,7 +85,7 @@
     <div class="custom-search">
         @using (Html.BeginForm("SearchVideo", "Video", FormMethod.Get, new { @class = "search-form" }))
         {
-            <div class="flex-container">
+            <div class="flex-container" style="width:95%">
                 <div class="flex-item add-video-flex-item">
                     <em>
                         @Html.ActionLink("Add video", "AddVideo", "Video") @*, new { @class = "custom-button" }*@
@@ -93,7 +93,7 @@
                 </div>
                 <div class="flex-item search-btn-flex-item">
                     <em>
-                        <input type="submit" value="Search"/> @*class="search-btn"*@
+                        <input type="submit" value="Search" /> @*class="search-btn"*@
                     </em>
                 </div>
                 <div class="flex-item search-input-flex-item">
