@@ -15,14 +15,14 @@
 
         <div class="flex-item edit-flex-item">
             <em>
-                <input class="btn pull-right" type="submit" value="Edit description" style="background-color:#75c1f7" />
+                <input class="btn" type="submit" value="Edit description" style="background-color:#75c1f7; line-height: 10px;" />
             </em>
         </div>
 
         <div class="flex-item del-flex-item">
             <em>
                 @Html.ActionLink("Delete video", "DeleteVideo", "Video", Model,
-                    new { @onclick = "confirmDelete(this)", @style = "margin-right:-26%; color:chocolate", @class = "pull-right" }) @*  @id = "delVideo", *@
+                    new { @onclick = "confirmDelete(this)", @style = "text-decoration:none; color:chocolate" }) @*  @id = "delVideo", *@
             </em>
         </div>
 

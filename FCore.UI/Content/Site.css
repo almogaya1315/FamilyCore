@@ -115,7 +115,7 @@ textarea {
 /* flex */
 .flex-container{
     display: flex;
-	border:solid 4px #000;
+    flex-direction:row;
 }
 
 .flex-item{
@@ -125,15 +125,23 @@ textarea {
 }
 
 .desc-flex-item{
-    order:1
+    order:1;
+    align-self:flex-start;
+    width:72%;
+    text-align:left;
+    
 }
 
 .edit-flex-item{
     order:2;
+    align-self:flex-end;
+    margin-bottom:1px
 }
 
 .del-flex-item{
-    order:3
+    order:3;
+    align-self:flex-end;
+    margin-left:1%
 }
 
 .flex-item:first-child {
