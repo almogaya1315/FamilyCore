@@ -82,23 +82,23 @@
     <div style="font-size:25px; margin-left:10%; position:absolute">The @Model.FamilyName family video library</div>
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
     
-    <div class="custom-search">
-        @using (Html.BeginForm("SearchVideo", "Video", FormMethod.Get, new { @class = "search-form" }))
+    <div class="video-search-panel">
+        @using (Html.BeginForm("SearchVideo", "Video", FormMethod.Get, new { @class = "add-search-form" }))
         {
-            <div class="flex-container" style="width:95%">
+            <div class="flex-container" style="width:75%; margin-left:10%">
                 <div class="flex-item add-video-flex-item">
                     <em>
-                        @Html.ActionLink("Add video", "AddVideo", "Video") @*, new { @class = "custom-button" }*@
+                        @Html.ActionLink("Add video", "AddVideo", "Video", new { @class = "add-video-button" })
                     </em>
                 </div>
                 <div class="flex-item search-btn-flex-item">
                     <em>
-                        <input type="submit" value="Search" /> @*class="search-btn"*@
+                        <input type="submit" value="Search" class="search-btn" style="background-color:#75c1f7"/> 
                     </em>
                 </div>
                 <div class="flex-item search-input-flex-item">
                     <em>
-                        <input autofocus type="text" placeholder="by description" /> @*class="search-input" *@
+                        <input autofocus type="text" placeholder="by description" class="search-input" /> 
                     </em>
                 </div>
             </div>

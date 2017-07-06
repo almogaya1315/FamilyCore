@@ -33,8 +33,18 @@ textarea {
 }
 
 /* video library 'add' button */
-.custom-button {
-    line-height: 6px;
+.add-video-button {
+    border: 2px solid #75c1f7;
+    background-color: #75c1f7;
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    float: left;
+    line-height: 19.5px;
+    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+
+    /*line-height: 6px;
     width: 170px;
     height: 60px;
     max-width: 100%;
@@ -59,28 +69,37 @@ textarea {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-    border: 3px solid #4386f1;
+    border: 3px solid #4386f1;*/
 }
 
-.custom-button:hover {
-    color: #fff;
+    .add-video-button:hover {
+        /*color: #fff;
     background-color: #4386f1;
     border-color: #ef4a7c;
     border-width: 3px;
     text-decoration: none;
-    font-size: 14px;
-}
+    font-size: 14px;*/
+    }
 
-.custom-search {
+.video-search-panel {
     display: inline;
 }
 
-.search-form {
+.add-search-form {
     display: inline;
 }
 
 .search-btn {
-    display: inline;
+    border: 2px solid #75c1f7;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    line-height: 27px;
+    float: right;
+    color: white;
+    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+
+    /*display: inline;
     font-size: 16px;
     border-bottom: 1px solid;
     border-left: 1px solid;
@@ -93,20 +112,28 @@ textarea {
     border-radius: 3px;
     background-color: #4386f1;
     width: 75px;
-    color: white;
+    color: white;*/
 }
 
-.search-btn :hover{
-    color: #fff;
+    .search-btn :hover {
+        /*color: #fff;
     background-color: #4386f1;
     border-color: #ef4a7c;
     border-width: 3px;
     text-decoration: none;
-    font-size: 14px;
-}
+    font-size: 14px;*/
+    }
 
 .search-input {
-    padding: 0.4%;
+    float: left;
+    height: 33px;
+    border: 2px solid #75c1f7;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    width: 350px;
+    max-width: 350px;
+
+    /*padding: 0.4%;
     font-size: 18px;
     position: absolute;
     border-bottom: 1px solid;
@@ -118,78 +145,77 @@ textarea {
     border-color: #4386f1;
     border-radius: 3px;
     width: 396px;
-    max-width: 1800px;
+    max-width: 1800px;*/
 }
 
 /* flex */
-.flex-container{
+.flex-container {
     display: flex;
-    flex-direction:row;
-    border:1px solid
+    flex-direction: row;
 }
 
-.flex-item{
+.flex-item {
     color: #000;
-	font-size: 1.2em;
-	text-align: center;
-    border:1px solid
+    font-size: 1.2em;
+    text-align: center;
 }
 
-.desc-flex-item{
-    order:1;
-    align-self:flex-end;
-    width:71.5%;
-    text-align:left;
-    
+.desc-flex-item {
+    order: 1;
+    align-self: flex-end;
+    width: 71.5%;
+    text-align: left;
 }
 
-.edit-flex-item{
-    order:2;
-    align-self:flex-end;
-    align-self:flex-end
+.edit-flex-item {
+    order: 2;
+    align-self: flex-end;
+    align-self: flex-end;
 }
 
-.edit-flex-item input{
-    background-color:#75c1f7; 
-    line-height: 10px
+    .edit-flex-item input {
+        background-color: #75c1f7;
+        line-height: 10px;
+        margin-bottom:1px;
+        color:white
+    }
+
+.del-flex-item {
+    order: 3;
+    align-self: flex-end;
+    margin-left: 1%;
 }
 
-.del-flex-item{
-    order:3;
-    align-self:flex-end;
-    margin-left:1%
+#delVideo:hover {
+    text-decoration: none;
+    color: brown;
 }
 
-#delVideo:hover{
-    text-decoration:none;
-    color:brown
-}
-
-.del-flex-item a{
-    text-decoration:none;
-    color:chocolate
+.del-flex-item a {
+    text-decoration: none;
+    color: chocolate;
 }
 
 .flex-item:first-child {
-	/*background-color: #A62E5C;*/
+    /*background-color: #A62E5C;*/
 }
 
 .flex-item:nth-child(2) {
-	/*background-color: #9BC850;*/
+    /*background-color: #9BC850;*/
 }
 
 .flex-item:nth-child(3) {
-	/*background-color: #675BA7;*/
+    /*background-color: #675BA7;*/
 }
 
-.add-video-flex-item{
-    flex-grow:1
+.add-video-flex-item {
+    flex-grow: 1;
 }
 
-.search-btn-flex-item{
-    flex-grow:1
+.search-btn-flex-item {
+    flex-grow: 1;
 }
 
-.search-input-flex-item{
-    flex-grow:3
+.search-input-flex-item {
+
 }
