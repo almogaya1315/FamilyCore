@@ -111,3 +111,39 @@ textarea {
     width: 396px;
     max-width: 1800px;
 }
+
+/* flex */
+.flex-container{
+    display: flex;
+	border:solid 4px #000;
+}
+
+.flex-item{
+    color: #000;
+	font-size: 1.2em;
+	text-align: center;
+}
+
+.desc-flex-item{
+    order:1
+}
+
+.edit-flex-item{
+    order:2;
+}
+
+.del-flex-item{
+    order:3
+}
+
+.flex-item:first-child {
+	/*background-color: #A62E5C;*/
+}
+
+.flex-item:nth-child(2) {
+	/*background-color: #9BC850;*/
+}
+
+.flex-item:nth-child(3) {
+	/*background-color: #675BA7;*/
+}

@@ -7,14 +7,24 @@
     UpdateTargetId = "videoDescDiv-" + Model.Id.ToString()
 }))
 {
-    <span>
-        @Model.Description
-    </span>
-    <span>
-        <input class="btn pull-right" type="submit" value="Edit description" style="line-height:5px; margin-right:11%; background-color:#75c1f7" />
-    </span>
-    <span>
-        @Html.ActionLink("Delete video", "DeleteVideo", "Video", Model,
-            new { @onclick = "confirmDelete(this)", @style = "margin-right:-26%; color:chocolate", @class = "pull-right" }) @*  @id = "delVideo", *@
-    </span>
+    <div class="flex-container">
+
+        <div class="flex-item desc-flex-item">
+            <em>@Model.Description</em>
+        </div>
+
+        <div class="flex-item edit-flex-item">
+            <em>
+                <input class="btn pull-right" type="submit" value="Edit description" style="background-color:#75c1f7" />
+            </em>
+        </div>
+
+        <div class="flex-item del-flex-item">
+            <em>
+                @Html.ActionLink("Delete video", "DeleteVideo", "Video", Model,
+                    new { @onclick = "confirmDelete(this)", @style = "margin-right:-26%; color:chocolate", @class = "pull-right" }) @*  @id = "delVideo", *@
+            </em>
+        </div>
+
+    </div>
 }
