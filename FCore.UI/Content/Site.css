@@ -116,18 +116,20 @@ textarea {
 .flex-container{
     display: flex;
     flex-direction:row;
+    border:1px solid
 }
 
 .flex-item{
     color: #000;
 	font-size: 1.2em;
 	text-align: center;
+    border:1px solid
 }
 
 .desc-flex-item{
     order:1;
-    align-self:flex-start;
-    width:72%;
+    align-self:flex-end;
+    width:71.5%;
     text-align:left;
     
 }
@@ -135,13 +137,28 @@ textarea {
 .edit-flex-item{
     order:2;
     align-self:flex-end;
-    margin-bottom:1px
+    align-self:flex-end
+}
+
+.edit-flex-item input{
+    background-color:#75c1f7; 
+    line-height: 10px
 }
 
 .del-flex-item{
     order:3;
     align-self:flex-end;
     margin-left:1%
+}
+
+#delVideo:hover{
+    text-decoration:none;
+    color:brown
+}
+
+.del-flex-item a{
+    text-decoration:none;
+    color:chocolate
 }
 
 .flex-item:first-child {
@@ -154,4 +171,16 @@ textarea {
 
 .flex-item:nth-child(3) {
 	/*background-color: #675BA7;*/
+}
+
+.add-video-flex-item{
+
+}
+
+.search-btn-flex-item{
+
+}
+
+.search-input-flex-item{
+
 }
