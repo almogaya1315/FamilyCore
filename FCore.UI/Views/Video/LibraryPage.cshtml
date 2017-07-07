@@ -83,17 +83,20 @@
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
     
     <div class="video-search-panel">
-        @using (Html.BeginForm("SearchVideo", "Video", FormMethod.Get, new { @class = "add-search-form" }))
+        @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post, 
+            new { @class = "add-search-form", enctype = "multipart/form-data" }))
         {
             <div class="flex-container" style="width:75%; margin-left:10%">
                 <div class="flex-item add-video-flex-item">
                     <em>
-                        @Html.ActionLink("Add video", "AddVideo", "Video", new { @class = "add-video-button" })
+                        <input id="add-video" name="videoFile" type="file" onchange="clickSubmitAddVideo()" value="Add video" style="display:none"/>
+                        <input type="button" onclick="clickAddVideo()" value="Add video" class="add-video-button"/>
+                        <input id="submit-add-video" type="submit" style="display:none"/>
                     </em>
                 </div>
                 <div class="flex-item search-btn-flex-item">
                     <em>
-                        <input type="submit" value="Search" class="search-btn" style="background-color:#75c1f7"/> 
+                        <input type="button" value="Search" class="search-btn" style="background-color:#75c1f7"/> 
                     </em>
                 </div>
                 <div class="flex-item search-input-flex-item">
@@ -137,5 +140,13 @@
         if (!confirm("Are you sure?")) {
             event.preventDefault();
         }
+    }
+
+    function clickAddVideo() {
+        $('#add-video').click();
+    }
+
+    function clickSubmitAddVideo() {
+        $('#submit-add-video').click();
     }
 </script>

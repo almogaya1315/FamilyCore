@@ -34,8 +34,15 @@ namespace FCore.UI.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult AddVideo()
         {
+            //if (videoFile == null) throw new NullReferenceException();
+            //if (videoFile.ContentType != )
+            //{
+
+            //}
+
             return View();
         }
 
