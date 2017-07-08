@@ -197,6 +197,10 @@ namespace FCore.BL.Repositories
 
             // todo.. remove actual video file
         }
+        public void SaveVideo(string filePath, int libId)
+        {
+            CoreDB.SaveVideo(filePath, libId);
+        }
 
         public ICollection<AlbumModel> GetAlbums()
         {

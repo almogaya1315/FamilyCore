@@ -313,6 +313,22 @@ namespace FCore.DAL.Entities.Families
             }
             else libraryId = 0;
         }
+        public void SaveVideo(string filePath, int libId)
+        {
+            var library = VideoLibraries.FirstOrDefault(vl => vl.Id == libId);
+            var video = new VideoEntity()
+            {
+                Libraryid = libId,
+                Description = "Description not yet set. Press Edit button to do so.",
+                Path = filePath,
+                Library = library
+            };
+            library.Videos.Add(video);
+            Videos.Add(library.Videos.Last());
+            Entry(video).State = EntityState.Added;
+            Entry(library).State = EntityState.Modified;
+            SaveChanges();
+        }
 
         public void UpdateUserAbout(FamilyMemberEntity entity, string about)
         {

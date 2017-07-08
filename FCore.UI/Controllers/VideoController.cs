@@ -31,7 +31,7 @@ namespace FCore.UI.Controllers
             {
                 (Session["currentUser"] as UserModel).Member = repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId);
 
-                return View("LibraryPage", repo.GetVideoLibrary(id));
+                return View("LibraryPage", repo.GetVideoLibrary(id).Videos.Reverse());
             }
         }
 
@@ -42,8 +42,8 @@ namespace FCore.UI.Controllers
             if (videoFile.ContentType.Contains("video"))
             {
                 if (ModelState["videoType"] != null) ModelState.Remove("videoType");
-                //InputHelper.UploadVideo(videoFile);
-                //repo.SaveVideo(InputHelper.GetFilePath(videoFile), libId);
+                InputHelper.UploadVideo(videoFile, libId);
+                repo.SaveVideo(InputHelper.GetFilePath(videoFile, libId), libId);
             }
             else
             {
