@@ -329,5 +329,10 @@ namespace FCore.Tests.Moq
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteVideo(VideoModel video, out int libraryId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

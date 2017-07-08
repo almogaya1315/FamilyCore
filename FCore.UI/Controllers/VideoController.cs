@@ -2,6 +2,7 @@
 using FCore.Common.Interfaces;
 using FCore.Common.Models.Users;
 using FCore.Common.Models.Videos;
+using FCore.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,13 +36,20 @@ namespace FCore.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddVideo()
+        public ActionResult AddVideo(HttpPostedFileBase videoFile, int libId)
         {
-            //if (videoFile == null) throw new NullReferenceException();
-            //if (videoFile.ContentType != )
-            //{
-
-            //}
+            if (videoFile == null) throw new NullReferenceException();
+            if (videoFile.ContentType.Contains("video"))
+            {
+                if (ModelState["videoType"] != null) ModelState.Remove("videoType");
+                //InputHelper.UploadVideo(videoFile);
+                //repo.SaveVideo(InputHelper.GetFilePath(videoFile), libId);
+            }
+            else
+            {
+                ModelState.AddModelError("videoType", "The target file is not type video");
+                return View("LibraryPage", repo.GetVideoLibrary(libId));
+            }
 
             return View();
         }

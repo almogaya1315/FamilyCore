@@ -83,15 +83,17 @@
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
     
     <div class="video-search-panel">
-        @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post, 
-            new { @class = "add-search-form", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("AddVideo", "Video", Model.Id, FormMethod.Post,
+            new { @class = "add-search-form", enctype = "multipart/form-data", libId = Model.Id }))
         {
             <div class="flex-container" style="width:75%; margin-left:10%">
                 <div class="flex-item add-video-flex-item">
                     <em>
+                        <input type="hidden" value="@Model.Id" name="libId">
                         <input id="add-video" name="videoFile" type="file" onchange="clickSubmitAddVideo()" value="Add video" style="display:none"/>
                         <input type="button" onclick="clickAddVideo()" value="Add video" class="add-video-button"/>
                         <input id="submit-add-video" type="submit" style="display:none"/>
+                        @Html.ValidationMessage("videoType", new { @class = ""}, "span")
                     </em>
                 </div>
                 <div class="flex-item search-btn-flex-item">
