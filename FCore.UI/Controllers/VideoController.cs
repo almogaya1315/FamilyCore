@@ -31,7 +31,9 @@ namespace FCore.UI.Controllers
             {
                 (Session["currentUser"] as UserModel).Member = repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId);
 
-                return View("LibraryPage", repo.GetVideoLibrary(id).Videos.Reverse());
+                var library = repo.GetVideoLibrary(id);
+                library.Videos = library.Videos.Reverse().ToList();
+                return View("LibraryPage", library);
             }
         }
 

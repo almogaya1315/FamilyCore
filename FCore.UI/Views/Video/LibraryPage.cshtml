@@ -83,8 +83,8 @@
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
     
     <div class="video-search-panel">
-        @using (Html.BeginForm("AddVideo", "Video", Model.Id, FormMethod.Post,
-            new { @class = "add-search-form", enctype = "multipart/form-data", libId = Model.Id }))
+        @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post,
+            new { @class = "add-search-form", enctype = "multipart/form-data" }))
         {
             <div class="flex-container" style="width:75%; margin-left:10%">
                 <div class="flex-item add-video-flex-item">
