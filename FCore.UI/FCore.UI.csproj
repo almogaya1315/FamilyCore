@@ -181,6 +181,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="fonts\Heathergreen.otf" />
+    <Content Include="Content\site_less.less" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\acountcont.js" />
     <Content Include="Scripts\bootstrap.js" />
