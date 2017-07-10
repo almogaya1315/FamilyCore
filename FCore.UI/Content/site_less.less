@@ -1,4 +1,6 @@
-﻿@charset 'utf-8';
+﻿@import "Site.css";
+
+@charset 'utf-8';
 @border-default: 2px solid #75c1f7;
 
 @font-face {
@@ -48,7 +50,7 @@ input, select, textarea {
     transition: all 0.6s ease-in-out;
     cursor: pointer;
 
-    hover {
+    &:hover {
         color: #fff;
         background-color: #4386f1;
         border-color: #ef4a7c;
@@ -76,7 +78,7 @@ input, select, textarea {
     transition: all 0.6s ease-in-out;
     cursor: pointer;
 
-    hover {
+    &:hover {
         color: #fff;
         background-color: #4386f1;
         border-color: #ef4a7c;
@@ -120,6 +122,13 @@ input, select, textarea {
     background-color: #675BA7;
 }*/
 
+.input-style(@color: #75c1f7) {
+    background-color: @color;
+    line-height: 10px;
+    margin-bottom: 1px;
+    color: white;
+}
+
 .desc-flex-item {
     order: 1;
     align-self: flex-end;
@@ -132,10 +141,7 @@ input, select, textarea {
     align-self: flex-end;
 
     input {
-        background-color: #75c1f7;
-        line-height: 10px;
-        margin-bottom: 1px;
-        color: white;
+        .input-style();
     }
 }
 
@@ -156,10 +162,7 @@ input, select, textarea {
     align-self: flex-end;
 
     input {
-        background-color: #75c1f7;
-        line-height: 10px;
-        margin-bottom: 1px;
-        color: white;
+        .input-style();
     }
 }
 
@@ -197,5 +200,4 @@ input, select, textarea {
 }
 
 .search-input-flex-item {
-
 }
