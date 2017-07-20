@@ -36,6 +36,8 @@ namespace FCore.Common.Utils
         {
             string video = Path.GetFileName(file.FileName);
             string path = Path.Combine(HttpContext.Current.Server.MapPath($"~/Videos/libId#{libId}/"), video);
+            string folderPath = path.Replace("\\" + file.FileName, string.Empty);
+            Directory.CreateDirectory(folderPath);
             file.SaveAs(path);
         }
     }

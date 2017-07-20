@@ -319,13 +319,15 @@ namespace FCore.DAL.Entities.Families
             var video = new VideoEntity()
             {
                 Libraryid = libId,
-                Description = "Description not yet set. Press Edit button to do so.",
+                Description = "Description not set. Press Edit to do so.",
                 Path = filePath,
                 Library = library
             };
-            library.Videos.Add(video);
-            Videos.Add(library.Videos.Last());
+            Videos.Add(video);
             Entry(video).State = EntityState.Added;
+            SaveChanges();
+
+            library.Videos.Add(video);
             Entry(library).State = EntityState.Modified;
             SaveChanges();
         }

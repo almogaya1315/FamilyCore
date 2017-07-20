@@ -334,5 +334,10 @@ namespace FCore.Tests.Moq
         {
             throw new NotImplementedException();
         }
+
+        public void SaveVideo(string filePath, int libId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

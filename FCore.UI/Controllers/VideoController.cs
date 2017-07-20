@@ -40,20 +40,23 @@ namespace FCore.UI.Controllers
         [HttpPost]
         public ActionResult AddVideo(HttpPostedFileBase videoFile, int libId)
         {
-            if (videoFile == null) throw new NullReferenceException();
-            if (videoFile.ContentType.Contains("video"))
+            using (repo = new FCoreRepository())
             {
-                if (ModelState["videoType"] != null) ModelState.Remove("videoType");
-                InputHelper.UploadVideo(videoFile, libId);
-                repo.SaveVideo(InputHelper.GetFilePath(videoFile, libId), libId);
-            }
-            else
-            {
-                ModelState.AddModelError("videoType", "The target file is not type video");
-                return View("LibraryPage", repo.GetVideoLibrary(libId));
-            }
+                if (videoFile == null) throw new NullReferenceException();
+                if (videoFile.ContentType.Contains("video"))
+                {
+                    if (ModelState["videoType"] != null) ModelState.Remove("videoType");
+                    InputHelper.UploadVideo(videoFile, libId);
+                    repo.SaveVideo(InputHelper.GetFilePath(videoFile, libId), libId);
+                }
+                else
+                {
+                    ModelState.AddModelError("videoType", "The target file is not type video");
+                    return View("LibraryPage", repo.GetVideoLibrary(libId));
+                }
 
-            return View();
+                return LibraryPage(libId); 
+            }
         }
 
         [HttpGet]
