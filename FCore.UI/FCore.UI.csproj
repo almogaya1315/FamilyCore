@@ -283,6 +283,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Audio\" />
     <Folder Include="Images\Profiles\" />
+    <Folder Include="Videos\libId2\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FCore.BL\FCore.BL.csproj">

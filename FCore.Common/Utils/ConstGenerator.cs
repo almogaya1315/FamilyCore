@@ -28,6 +28,22 @@ namespace FCore.Common.Utils
             }
         }
 
+        public static string VideoPath
+        {
+            get
+            {
+                return "~/Videos/libId";
+            }
+        }
+
+        public static string ImagePath
+        {
+            get
+            {
+                return "~/Images/Profiles/";
+            }
+        }
+
         public static ICollection<SelectListItem> RelTypes
         {
             get
