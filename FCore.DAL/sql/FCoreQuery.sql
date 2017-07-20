@@ -180,7 +180,7 @@ select *
 from dbf.Videos
 
 insert into dbf.Videos
-values(2, 'Video3', '~/Videos/SampleVideo_1280x720_1mb.mp4')
+values(2, 'Video3', '~/Videos/libId2/MOV00290.MP4')
 
 delete
 from dbf.Videos

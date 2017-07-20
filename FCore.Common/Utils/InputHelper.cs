@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FCore.Common.Models.Videos;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,6 +40,15 @@ namespace FCore.Common.Utils
             string folderPath = path.Replace("\\" + file.FileName, string.Empty);
             Directory.CreateDirectory(folderPath);
             file.SaveAs(path);
+        }
+
+        public static void DeleteVideo(VideoModel video, int libId)
+        {
+            string path = Path.Combine(HttpContext.Current.Server.MapPath($"{video.Path}"));
+            File.Delete(path);
+            string folderPath = Path.Combine(HttpContext.Current.Server.MapPath($"{ConstGenerator.VideoPath}{libId}"));
+            if (Directory.GetFiles(folderPath).Count() == 0)
+                Directory.Delete(folderPath);
         }
     }
 }

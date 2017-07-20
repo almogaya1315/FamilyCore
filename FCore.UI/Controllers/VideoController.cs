@@ -84,6 +84,7 @@ namespace FCore.UI.Controllers
             {
                 int libraryId = default(int);
                 repo.DeleteVideo(video, out libraryId);
+                InputHelper.DeleteVideo(video, libraryId);
                 return LibraryPage(libraryId);
                 //return RedirectToAction("LibraryPage", libraryId);
             }
