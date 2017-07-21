@@ -1,0 +1,5 @@
+﻿.grid-container{
+    display:grid;
+    grid-columns:15em 2em 15em 2em 15em;
+    grid-rows:10em 5em 10em;
+}

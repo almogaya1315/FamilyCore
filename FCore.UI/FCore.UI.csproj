@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\registerLoginPageSheet.css" />
+    <Content Include="Content\video-grid.css" />
     <Content Include="Content\wizardSheet.css" />
     <Content Include="Images\Defualt\profile_defualt.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -192,6 +193,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ChatPageScript.js" />
     <Content Include="Scripts\configcont.js" />
+    <Content Include="Scripts\CSS.supports.js" />
+    <Content Include="Scripts\cssparser.js" />
     <Content Include="Scripts\expressive.annotations.validate.js" />
     <Content Include="Scripts\expressive.annotations.validate.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -209,6 +212,8 @@
     <Content Include="Scripts\less-1.5.1.js" />
     <Content Include="Scripts\less-1.5.1.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\scalejs.layout-cssgrid-0.2.7.150.js" />
+    <Content Include="Scripts\scalejs.layout-cssgrid-0.2.7.150.min.js" />
     <Content Include="Scripts\SecurityPageScript.js" />
     <Content Include="Scripts\UserAboutScript.js" />
     <Content Include="Web.config" />
