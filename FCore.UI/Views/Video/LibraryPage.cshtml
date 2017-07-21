@@ -172,11 +172,9 @@
                 url: url,
                 data: data,
                 processData: true,
-                success: function(data){
-
-                }
+                success: displayShowAllBtn(data)
             });
-            $.get(url, data, displayShowAllBtn(data));
+            //$.get(url, data, displayShowAllBtn(data));
         }
         else {
             $('#search-input').val("");
