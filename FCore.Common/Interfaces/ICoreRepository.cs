@@ -41,6 +41,8 @@ namespace FCore.Common.Interfaces
 
         ICollection<VideoLibraryModel> GetVideoLibraries();
         VideoLibraryModel GetVideoLibrary(int id);
+
+        ICollection<VideoModel> GetVideoByDescription(int libId, string searchText);
         VideoModel GetMostViewedVideo();
         VideoModel UpdateVideoDesc(int videoId, string newDesc);
         void DeleteVideo(VideoModel video, out int libraryId);

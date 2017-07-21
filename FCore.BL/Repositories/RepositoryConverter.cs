@@ -270,14 +270,16 @@ namespace FCore.BL.Repositories
 
         public VideoLibraryModel ConvertToModel(VideoLibraryEntity entity)
         {
-            return new VideoLibraryModel()
+            var library = new VideoLibraryModel()
             {
                 FamilyId = entity.FamilyId,
                 FamilyName = entity.FamilyName,
                 Id = entity.Id,
-                Name = entity.Name,
-                Videos = entity.Videos.Select(v => ConvertToModel(v)).ToList()
+                Name = entity.Name
             };
+            if (entity.VideosCount > 0)
+                library.Videos = entity.Videos.Select(v => ConvertToModel(v)).ToList();
+            return library;
         }
         public VideoLibraryEntity ConvertToEntity(VideoLibraryModel model)
         {

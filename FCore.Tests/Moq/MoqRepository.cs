@@ -339,5 +339,10 @@ namespace FCore.Tests.Moq
         {
             throw new NotImplementedException();
         }
+
+        public ICollection<VideoModel> GetVideoByDescription(int libId, string searchText)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

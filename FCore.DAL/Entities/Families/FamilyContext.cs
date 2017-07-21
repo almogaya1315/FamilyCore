@@ -254,6 +254,16 @@ namespace FCore.DAL.Entities.Families
                 libraries.Add(library);
             return libraries;
         }
+        public ICollection<VideoEntity> GetVideoByDescription(int libId, string searchText)
+        {
+            ICollection<VideoEntity> videos = new List<VideoEntity>();
+            var library = VideoLibraries.SingleOrDefault(v => v.Id == libId);
+            if (library == null) throw new NullReferenceException("The library ID passed from the client wasn't found in DB.");
+            foreach (var video in library.Videos)
+                if (video.Description.Contains(searchText))
+                    videos.Add(video);
+            return videos;
+        }
 
         public ICollection<ChatGroupEntity> GetChatGroups()
         {

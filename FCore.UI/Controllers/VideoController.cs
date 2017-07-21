@@ -30,9 +30,32 @@ namespace FCore.UI.Controllers
             using (repo = new FCoreRepository())
             {
                 (Session["currentUser"] as UserModel).Member = repo.GetFamilyMember((Session["currentUser"] as UserModel).MemberId);
+                Session["current-Lib-Id"] = id;
 
                 var library = repo.GetVideoLibrary(id);
-                library.Videos = library.Videos.Reverse().ToList();
+                if (library.VideosCount > 0)
+                {
+                    library.Videos = library.Videos.Reverse().ToList();
+                    ModelState.Remove("searchNull");
+                }
+                else ModelState.AddModelError("searchNull", "No videos available!");
+                return View(library);
+            }
+        }
+
+        public ActionResult SearchedLibraryPage(ICollection<VideoModel> videos)
+        {
+            using (repo = new FCoreRepository())
+            {
+                var library = new VideoLibraryModel();
+                if (videos.Count == 0)
+                    ModelState.AddModelError("searchNull", "No matches!");
+                else
+                {
+                    library.Id = (int)Session["current-Lib-Id"];
+                    library.Videos = videos;
+                    ModelState.Remove("searchNull");
+                }
                 return View("LibraryPage", library);
             }
         }
@@ -56,6 +79,17 @@ namespace FCore.UI.Controllers
                 }
 
                 return LibraryPage(libId); 
+            }
+        }
+
+        [HttpGet]
+        public ActionResult SearchVideoByDsec(int libId, string searchText)
+        {
+            using (repo = new FCoreRepository())
+            {
+                var id = (int)Session["current-Lib-Id"];
+                var videos = repo.GetVideoByDescription(id, searchText);
+                return SearchedLibraryPage(videos); // RedirectToAction("SearchedLibraryPage", videos);
             }
         }
 
