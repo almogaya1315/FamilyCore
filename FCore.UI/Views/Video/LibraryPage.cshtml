@@ -168,6 +168,14 @@
         if (searchText && searchText.length > 1) {
             var url = '@Url.Action("SearchVideoByDsec", "Video")';
             var data = { libId: @Model.Id, searchText: searchText };
+            $.ajax({
+                url: url,
+                data: data,
+                processData: true,
+                success: function(data){
+
+                }
+            });
             $.get(url, data, displayShowAllBtn(data));
         }
         else {
