@@ -81,29 +81,29 @@
 <nav class="nav" style="margin-top:5%">
     <div style="font-size:25px; margin-left:10%; position:absolute">The @Model.FamilyName family video library</div>
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
-    
+
     <div class="video-search-panel">
         @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post,
-            new { @class = "add-search-form", enctype = "multipart/form-data" }))
+                new { @class = "add-search-form", enctype = "multipart/form-data" }))
         {
             <div class="flex-container" style="width:75%; margin-left:10%">
                 <div class="flex-item add-video-flex-item">
                     <em>
                         <input type="hidden" value="@Model.Id" name="libId">
-                        <input id="add-video" name="videoFile" type="file" onchange="clickSubmitAddVideo()" value="Add video" style="display:none"/>
-                        <input type="button" onclick="clickAddVideo()" value="Add video" class="add-video-button"/>
-                        <input id="submit-add-video" type="submit" style="display:none"/>
-                        @Html.ValidationMessage("videoType", new { @class = ""}, "span")
+                        <input id="add-video" name="videoFile" type="file" onchange="clickSubmitAddVideo()" value="Add video" style="display:none" />
+                        <input type="button" onclick="clickAddVideo()" value="Add video" class="add-video-button" />
+                        <input id="submit-add-video" type="submit" style="display:none" />
+                        @Html.ValidationMessage("videoType", new { @class = "" }, "span")
                     </em>
                 </div>
                 <div class="flex-item search-btn-flex-item">
                     <em>
-                        <input type="button" value="Search" class="search-btn" style="background-color:#75c1f7"/> 
+                        <input type="button" value="Search" class="search-btn" style="background-color:#75c1f7" />
                     </em>
                 </div>
                 <div class="flex-item search-input-flex-item">
                     <em>
-                        <input autofocus type="text" placeholder="by description" class="search-input" /> 
+                        <input autofocus type="text" placeholder="by description" class="search-input" />
                     </em>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                 <div style="border-top:1px solid #0094ff"><br /></div>
 
                 <div>
-                    <video controls style="max-width:150%; width:100%">
+                    <video controls style="max-width:150%; width:100%" title="@video.Description">
                         <source src="@Url.Content(video.Path)" type="video/mp4" />
                         This browser does not support HTML5!
                     </video>
