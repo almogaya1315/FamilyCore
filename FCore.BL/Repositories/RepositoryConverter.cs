@@ -255,13 +255,17 @@ namespace FCore.BL.Repositories
 
         public VideoModel ConvertToModel(VideoEntity entity)
         {
-            return new VideoModel()
+            if (entity != null)
             {
-                Description = entity.Description,
-                Id = entity.Id,
-                Libraryid = entity.Libraryid,
-                Path = entity.Path
-            };
+                return new VideoModel()
+                {
+                    Description = entity.Description,
+                    Id = entity.Id,
+                    Libraryid = entity.Libraryid,
+                    Path = entity.Path
+                };
+            }
+            else return null;
         }
         public VideoEntity ConvertToEntity(VideoModel model)
         {

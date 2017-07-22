@@ -39,7 +39,7 @@ namespace FCore.UI.Controllers
                     ModelState.Remove("searchNull");
                 }
                 else ModelState.AddModelError("searchNull", "No videos available!");
-                return View(library);
+                return View("LibraryPage", library);
             }
         }
 
@@ -89,7 +89,7 @@ namespace FCore.UI.Controllers
             {
                 var id = (int)Session["current-Lib-Id"];
                 var videos = repo.GetVideoByDescription(id, searchText);
-                return SearchedLibraryPage(videos); // RedirectToAction("SearchedLibraryPage", videos);
+                return SearchedLibraryPage(videos); 
             }
         }
 
@@ -120,7 +120,6 @@ namespace FCore.UI.Controllers
                 repo.DeleteVideo(video, out libraryId);
                 InputHelper.DeleteVideo(video, libraryId);
                 return LibraryPage(libraryId);
-                //return RedirectToAction("LibraryPage", libraryId);
             }
         }
     }

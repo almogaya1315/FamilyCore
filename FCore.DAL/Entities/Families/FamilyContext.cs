@@ -231,6 +231,11 @@ namespace FCore.DAL.Entities.Families
 
         public VideoEntity GetMostViewedVideo()
         {
+            if (Videos.Count() == 0)
+                return new VideoEntity()
+                {
+                    Description = "No results"
+                };
             foreach (VideoEntity video in Videos)
             {
                 return video; // needs to have an 'entries' value in entity
@@ -301,7 +306,7 @@ namespace FCore.DAL.Entities.Families
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException(e.Message); 
+                throw new InvalidOperationException(e.Message);
             }
             return video;
         }
