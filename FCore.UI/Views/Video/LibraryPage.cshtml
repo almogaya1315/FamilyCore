@@ -83,10 +83,10 @@
     <div style="border-bottom:1px solid #0094ff;width:75%; max-width:100%; margin-left:10%; margin-bottom:5%;margin-top:5%"></div>
 
     <div class="video-search-panel">
-        @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post,
-                        new { @class = "add-search-form", enctype = "multipart/form-data" }))
-        {
-            <div class="flex-container" style="width:75%; margin-left:10%">
+        <div class="flex-container" style="width:75%; margin-left:10%">
+            @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post,
+                                new { @class = "add-search-form", enctype = "multipart/form-data" }))
+            {
                 <div class="flex-item add-video-flex-item">
                     <em>
                         <input type="hidden" value="@Model.Id" name="libId">
@@ -96,18 +96,29 @@
                         @Html.ValidationMessage("videoType", new { @class = "" }, "span")
                     </em>
                 </div>
+            }
+
+            @using (Ajax.BeginForm("SearchVideoByDsec", "Video", Model.Id,
+                    new AjaxOptions
+                    {
+                        HttpMethod = "GET",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "video-catalog-div"
+                    }, new { @style = "width:100%" }))
+            {
                 <div class="flex-item search-btn-flex-item">
                     <em>
                         <input type="button" value="Search" class="search-btn" style="background-color:#75c1f7" onclick="submitSearch()" />
+                        <input type="submit" id="submit-search" style="display:none"/>
                     </em>
                 </div>
-                <div class="flex-item search-input-flex-item">
-                    <em>
-                        <input id="search-input" autofocus type="text" placeholder="by description" class="search-input" name="searchText" />
-                    </em>
-                </div>
-            </div>
-        }
+                    <div class="flex-item search-input-flex-item">
+                        <em>
+                            <input id="search-input" autofocus type="text" placeholder="by description" class="search-input" name="searchText" />
+                        </em>
+                    </div>
+            }
+        </div>
     </div>
 </nav>
 
@@ -115,37 +126,40 @@
 
     </div>*@
 
-<div style="margin-top:15%">
-    <article style="width:95%; margin-top:-2%">
-        @{
-            if (Model.VideosCount > 0)
-            {
-                foreach (var video in Model.Videos)
+<div id="video-catalog-div" style="margin-top:15%">
+
+    @{ Html.RenderPartial("VideoCatalog", Model); }
+
+    @*<article style="width:95%; margin-top:-2%">
+            @{
+                if (Model.VideosCount > 0)
                 {
-                    <br />
+                    foreach (var video in Model.Videos)
+                    {
+                        <br />
 
-                    <div id='videoDescDiv-@video.Id'>
-                        @{ Html.RenderPartial("VideoDesc", video); }
-                    </div>
+                        <div id='videoDescDiv-@video.Id'>
+                            @{ Html.RenderPartial("VideoDesc", video); }
+                        </div>
 
-                    <div style="border-top:1px solid #0094ff"><br /></div>
+                        <div style="border-top:1px solid #0094ff"><br /></div>
 
-                    <div>
-                        <video controls style="max-width:150%; width:100%" title="@video.Description">
-                            <source src="@Url.Content(video.Path)" type="video/mp4" />
-                            This browser does not support HTML5!
-                        </video>
-                    </div>
+                        <div>
+                            <video controls style="max-width:150%; width:100%" title="@video.Description">
+                                <source src="@Url.Content(video.Path)" type="video/mp4" />
+                                This browser does not support HTML5!
+                            </video>
+                        </div>
 
-                    <div style="border-top:1px solid #0094ff; border-width:3px"><br /></div>
+                        <div style="border-top:1px solid #0094ff; border-width:3px"><br /></div>
+                    }
                 }
+                @Html.ValidationMessage("searchNull");
+                <div id="div-btn-show-all" hidden>
+                    <input type="button" value="Show all" onclick="GetAllVideos()"/>
+                </div>
             }
-            @Html.ValidationMessage("searchNull");
-            <div id="div-btn-show-all" hidden>
-                <input type="button" value="Show all" onclick="GetAllVideos()"/>
-            </div>
-        }
-    </article>
+        </article>*@
 </div>
 
 <script>
@@ -166,14 +180,15 @@
     function submitSearch() {
         var searchText = $('#search-input').val();
         if (searchText && searchText.length > 1) {
-            var url = '@Url.Action("SearchVideoByDsec", "Video")';
+            $('#submit-search').click();
+            @*var url = '@Url.Action("SearchVideoByDsec", "Video")';
             var data = { libId: @Model.Id, searchText: searchText };
             $.ajax({
                 url: url,
                 data: data,
                 processData: true,
-                success: displayShowAllBtn(data)
-            });
+                success: toggleShowAllBtn(data.library)
+            });*@
             //$.get(url, data, displayShowAllBtn(data));
         }
         else {
@@ -182,8 +197,13 @@
         }
     }
 
-    function displayShowAllBtn(data) {
-        if (data.VideosCount == 0) {
+    @*function loadSearchedLibrary(data){
+        var url = '@Url.Action("", "Video", data.library)'
+        $('#video-catalog-div').load()
+    }*@
+
+    function toggleShowAllBtn(library) {
+        if (!library) {
             $('#div-btn-show-all').attr('hidden', false);
         } else {
             $('#div-btn-show-all').attr('hidden', true);

@@ -43,23 +43,6 @@ namespace FCore.UI.Controllers
             }
         }
 
-        public ActionResult SearchedLibraryPage(ICollection<VideoModel> videos)
-        {
-            using (repo = new FCoreRepository())
-            {
-                var library = new VideoLibraryModel();
-                if (videos.Count == 0)
-                    ModelState.AddModelError("searchNull", "No matches!");
-                else
-                {
-                    library.Id = (int)Session["current-Lib-Id"];
-                    library.Videos = videos;
-                    ModelState.Remove("searchNull");
-                }
-                return View("LibraryPage", library);
-            }
-        }
-
         [HttpPost]
         public ActionResult AddVideo(HttpPostedFileBase videoFile, int libId)
         {
@@ -89,9 +72,39 @@ namespace FCore.UI.Controllers
             {
                 var id = (int)Session["current-Lib-Id"];
                 var videos = repo.GetVideoByDescription(id, searchText);
-                return SearchedLibraryPage(videos); 
+                var library = new VideoLibraryModel();
+                if (videos.Count == 0)
+                    ModelState.AddModelError("searchNull", "No matches!");
+                else
+                {
+                    library.Id = (int)Session["current-Lib-Id"];
+                    library.Videos = videos;
+                    ModelState.Remove("searchNull");
+                }
+                //return Json(new { success = true, data = library });
+                return PartialView("VideoVatalog", library);
+
+                //return SearchedLibraryPage(videos); 
             }
         }
+
+        //public ActionResult SearchedLibraryPage(ICollection<VideoModel> videos)
+        //{
+        //    using (repo = new FCoreRepository())
+        //    {
+        //        var library = new VideoLibraryModel();
+        //        if (videos.Count == 0)
+        //            ModelState.AddModelError("searchNull", "No matches!");
+        //        else
+        //        {
+        //            library.Id = (int)Session["current-Lib-Id"];
+        //            library.Videos = videos;
+        //            ModelState.Remove("searchNull");
+        //        }
+        //        //return Json(new { success = true, data = library });
+        //        return PartialView("VideoVatalog", library);
+        //    }
+        //}
 
         [HttpGet]
         public ActionResult EditVideoDesc(VideoModel video)
