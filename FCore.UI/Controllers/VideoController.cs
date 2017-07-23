@@ -39,6 +39,7 @@ namespace FCore.UI.Controllers
                     ModelState.Remove("searchNull");
                 }
                 else ModelState.AddModelError("searchNull", "No videos available!");
+                ViewData["last-action-search"] = null;
                 return View("LibraryPage", library);
             }
         }
@@ -74,37 +75,20 @@ namespace FCore.UI.Controllers
                 var videos = repo.GetVideoByDescription(libId, searchText);
                 var library = new VideoLibraryModel();
                 if (videos.Count == 0)
+                {
                     ModelState.AddModelError("searchNull", "No matches!");
+                    ViewData["last-action-search"] = true;
+                }
                 else
                 {
                     library.Id = (int)Session["current-Lib-Id"];
                     library.Videos = videos;
                     ModelState.Remove("searchNull");
+                    ViewData["last-action-search"] = null;
                 }
-                //return Json(new { success = true, data = library });
                 return PartialView("VideoCatalog", library);
-
-                //return SearchedLibraryPage(videos); 
             }
         }
-
-        //public ActionResult SearchedLibraryPage(ICollection<VideoModel> videos)
-        //{
-        //    using (repo = new FCoreRepository())
-        //    {
-        //        var library = new VideoLibraryModel();
-        //        if (videos.Count == 0)
-        //            ModelState.AddModelError("searchNull", "No matches!");
-        //        else
-        //        {
-        //            library.Id = (int)Session["current-Lib-Id"];
-        //            library.Videos = videos;
-        //            ModelState.Remove("searchNull");
-        //        }
-        //        //return Json(new { success = true, data = library });
-        //        return PartialView("VideoVatalog", library);
-        //    }
-        //}
 
         [HttpGet]
         public ActionResult EditVideoDesc(VideoModel video)

@@ -26,10 +26,13 @@
         }
         else
         {
-            @Html.ValidationMessage("searchNull");
-            <div id="div-btn-show-all">
-                <input type="button" value="Show all" onclick="GetAllVideos()" />
-            </div>
+            @Html.ValidationMessage("searchNull", new { @class = "video-catalog-valid"});
+            if (ViewData["last-action-search"] != null)
+            {
+                <div id="div-btn-show-all">
+                    @Html.ActionLink("Show all", "LibraryPage", "Video", new { @id = Session["current-Lib-Id"] }, new { @class = "btn show-all-videos" })
+                </div>
+            }
         }
     }
 </article>
