@@ -1,32 +1,35 @@
 ﻿@model FCore.Common.Models.Videos.VideoLibraryModel
 
 <article style="width:95%; margin-top:-2%">
-        @{
-            if (Model.VideosCount > 0)
+    @{
+        if (Model.VideosCount > 0)
+        {
+            foreach (var video in Model.Videos)
             {
-                foreach (var video in Model.Videos)
-                {
-                    <br />
+                <br />
 
-                    <div id='videoDescDiv-@video.Id'>
-                        @{ Html.RenderPartial("VideoDesc", video); }
-                    </div>
+                <div id='videoDescDiv-@video.Id'>
+                    @{ Html.RenderPartial("VideoDesc", video); }
+                </div>
 
-                    <div style="border-top:1px solid #0094ff"><br /></div>
+                <div style="border-top:1px solid #0094ff"><br /></div>
 
-                    <div>
-                        <video controls style="max-width:150%; width:100%" title="@video.Description">
-                            <source src="@Url.Content(video.Path)" type="video/mp4" />
-                            This browser does not support HTML5!
-                        </video>
-                    </div>
+                <div>
+                    <video controls style="max-width:150%; width:100%" title="@video.Description">
+                        <source src="@Url.Content(video.Path)" type="video/mp4" />
+                        This browser does not support HTML5!
+                    </video>
+                </div>
 
-                    <div style="border-top:1px solid #0094ff; border-width:3px"><br /></div>
-                }
+                <div style="border-top:1px solid #0094ff; border-width:3px"><br /></div>
             }
+        }
+        else
+        {
             @Html.ValidationMessage("searchNull");
-            <div id="div-btn-show-all" hidden>
-                <input type="button" value="Show all" onclick="GetAllVideos()"/>
+            <div id="div-btn-show-all">
+                <input type="button" value="Show all" onclick="GetAllVideos()" />
             </div>
         }
-    </article>
+    }
+</article>

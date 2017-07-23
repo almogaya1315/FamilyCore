@@ -66,12 +66,12 @@ namespace FCore.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchVideoByDsec(int libId, string searchText)
+        public ActionResult SearchVideoByDsec(string searchText) // int Id, 
         {
             using (repo = new FCoreRepository())
             {
-                var id = (int)Session["current-Lib-Id"];
-                var videos = repo.GetVideoByDescription(id, searchText);
+                var libId = (int)Session["current-Lib-Id"];
+                var videos = repo.GetVideoByDescription(libId, searchText);
                 var library = new VideoLibraryModel();
                 if (videos.Count == 0)
                     ModelState.AddModelError("searchNull", "No matches!");
@@ -82,7 +82,7 @@ namespace FCore.UI.Controllers
                     ModelState.Remove("searchNull");
                 }
                 //return Json(new { success = true, data = library });
-                return PartialView("VideoVatalog", library);
+                return PartialView("VideoCatalog", library);
 
                 //return SearchedLibraryPage(videos); 
             }
