@@ -30,9 +30,19 @@ namespace FCore.BL.Repositories
     {
         FamilyContext CoreDB { get; set; }
 
+        DapperContext dapperContext { get; set; }
+
         public FCoreRepository() : base(new FamilyContext())
         {
             CoreDB = new FamilyContext();
+        }
+
+        public bool AddVideo(VideoModel model)
+        {
+            using (dapperContext = new DapperContext())
+            {
+                return dapperContext.AddVideo(ConvertToEntity(model));
+            }
         }
 
         #region IRepository

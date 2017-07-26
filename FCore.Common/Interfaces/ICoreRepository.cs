@@ -18,6 +18,8 @@ namespace FCore.Common.Interfaces
 {
     public interface ICoreRepository : IDisposable
     {
+        bool AddVideo(VideoModel model);
+
         ICollection<FamilyModel> GetFamilies();
         ICollection<FamilyModel> GetFamiliesDynamic(string text);
         FamilyModel GetFamily(int id);
