@@ -269,7 +269,12 @@ namespace FCore.BL.Repositories
         }
         public VideoEntity ConvertToEntity(VideoModel model)
         {
-            throw new NotImplementedException();
+            return new VideoEntity()
+            {
+                Libraryid = model.Libraryid,
+                Description = model.Description,
+                Path = model.Path
+            };
         }
 
         public VideoLibraryModel ConvertToModel(VideoLibraryEntity entity)

@@ -29,7 +29,7 @@ namespace FCore.DAL.Entities.Families
                             path = entity.Path
                         }, commandType: CommandType.StoredProcedure);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return false;
                 }

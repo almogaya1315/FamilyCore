@@ -49,22 +49,19 @@ namespace FCore.UI.Controllers
         {
             using (repo = new FCoreRepository())
             {
-
-
                 if (videoFile == null) throw new NullReferenceException();
                 if (videoFile.ContentType.Contains("video"))
                 {
                     if (ModelState["videoType"] != null) ModelState.Remove("videoType");
                     InputHelper.UploadVideo(videoFile, libId);
-                    repo.SaveVideo(InputHelper.GetFilePath(videoFile, libId), libId);
+                    //repo.SaveVideo(InputHelper.GetFilePath(videoFile, libId), libId);
 
-                    var video = new VideoModel()
+                    repo.AddVideo(new VideoModel()
                     {
                         Libraryid = libId,
-                        Description = "NA",
+                        Description = "N/A",
                         Path = InputHelper.GetFilePath(videoFile, libId)
-                    };
-                    repo.AddVideo(video);
+                    });
                 }
                 else
                 {
