@@ -344,5 +344,10 @@ namespace FCore.Tests.Moq
         {
             throw new NotImplementedException();
         }
+
+        public bool AddVideo(VideoModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
